@@ -3,7 +3,7 @@ package edu.uns.galaxian.client;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-import edu.uns.galaxian.Juego;
+import edu.uns.galaxian.juego.Juego;
 
 public class HtmlLauncher extends GwtApplication {
 

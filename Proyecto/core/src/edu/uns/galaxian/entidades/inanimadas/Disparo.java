@@ -1,4 +1,4 @@
-package Inanimadas;
+package edu.uns.galaxian.entidades.inanimadas;
 
 public class Disparo {
 
@@ -6,8 +6,8 @@ public class Disparo {
 	private float velocidad;
 	
 	/**
-	 * Devuelve el daño asociado al disparo.
-	 * @return Daño que provoca el disparo.
+	 * Devuelve el daï¿½o asociado al disparo.
+	 * @return Daï¿½o que provoca el disparo.
 	 */
 	public float getDamage() {
 		return damage;

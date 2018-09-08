@@ -1,4 +1,4 @@
-package Controladores;
+package edu.uns.galaxian.controladores;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 

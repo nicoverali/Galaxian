@@ -1,4 +1,4 @@
-package Entidades;
+package edu.uns.galaxian.entidades;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -6,14 +6,14 @@ import com.badlogic.gdx.math.Vector2;
 public interface Entidad {
 	
 	/**
-	 * Setea la posición del jugador con la nuevaPos pasada como parametro.
-	 * @param nuevaPos Nueva posición de jugador.
+	 * Setea la posiciï¿½n del jugador con la nuevaPos pasada como parametro.
+	 * @param nuevaPos Nueva posiciï¿½n de jugador.
 	 * @return
 	 */
 	public Vector2 setPosicion(Vector2 nuevaPos);
 	
 	/**
-	 * Devuelve la posición actual de la entidad en el mapa.
+	 * Devuelve la posiciï¿½n actual de la entidad en el mapa.
 	 * @return Posicion actual de la entidad.
 	 */
 	public Vector2 getPosicion();
@@ -25,7 +25,7 @@ public interface Entidad {
 	public void dibujar(SpriteBatch batch);
 	
 	/**
-	 * Actualiza la posición del jugador en el mapa.
+	 * Actualiza la posiciï¿½n del jugador en el mapa.
 	 */
 	public void actualizar();
 	

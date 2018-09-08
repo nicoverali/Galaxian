@@ -1,4 +1,4 @@
-package edu.uns.galaxian;
+package edu.uns.galaxian.juego;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;

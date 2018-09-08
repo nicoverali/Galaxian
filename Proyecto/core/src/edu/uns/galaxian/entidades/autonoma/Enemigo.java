@@ -1,9 +1,9 @@
-package Autonoma;
+package edu.uns.galaxian.entidades.autonoma;
 
 import java.util.List;
-import Equipamiento.*;
-import Inanimadas.*;
-import Controladores.ControladorEnemigo;
+import edu.uns.galaxian.entidades.equipamiento.*;
+import edu.uns.galaxian.entidades.inanimadas.*;
+import edu.uns.galaxian.controladores.ControladorEnemigo;
 
 public class Enemigo {
 
@@ -11,8 +11,8 @@ public class Enemigo {
 	private Arma arma;
 	
 	/**
-	 * Setea el arma del enemigo con la nueva pasada como parámetro.
-	 * @param nuevaArma Nueva arma que tendrá el enemigo.
+	 * Setea el arma del enemigo con la nueva pasada como parï¿½metro.
+	 * @param nuevaArma Nueva arma que tendrï¿½ el enemigo.
 	 */
 	public void setArma(Arma nuevaArma) {
 		arma = nuevaArma;

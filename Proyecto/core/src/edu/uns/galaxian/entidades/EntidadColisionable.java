@@ -1,5 +1,5 @@
-package Entidades;
-import Colision.Colisionable;
+package edu.uns.galaxian.entidades;
+import edu.uns.galaxian.colision.Colisionable;
 
 public interface EntidadColisionable extends Entidad, Colisionable{
 
@@ -28,7 +28,7 @@ public interface EntidadColisionable extends Entidad, Colisionable{
 	public void setVida(int nuevaVida);
 	
 	/**
-	 * Setea la vida de la entidad al máximo permitido.
+	 * Setea la vida de la entidad al mï¿½ximo permitido.
 	 */
 	public void setVidaAlMaximo();
 	
