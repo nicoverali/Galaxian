@@ -6,8 +6,8 @@ public class Disparo {
 	private float velocidad;
 	
 	/**
-	 * Devuelve el da�o asociado al disparo.
-	 * @return Da�o que provoca el disparo.
+	 * Devuelve el danio asociado al disparo.
+	 * @return Danio que provoca el disparo.
 	 */
 	public float getDamage() {
 		return damage;
