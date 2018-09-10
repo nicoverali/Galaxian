@@ -1,28 +1,31 @@
 package edu.uns.galaxian.entidades.jugador;
 
-import java.util.List;
-
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.entidades.EntidadColisionable;
 import edu.uns.galaxian.entidades.equipamiento.Arma;
 import edu.uns.galaxian.entidades.equipamiento.Escudo;
-import edu.uns.galaxian.entidades.inanimadas.Disparo;
+import edu.uns.galaxian.juego.Nivel;
+import org.json.JSONObject;
 
-public class Jugador {
+public class Jugador implements EntidadColisionable {
+
+	private static final int TAMANIO_NAVE = 64;
  
 	private Arma arma;
 	private Escudo escudo;
 	private ProcesadorInput input;
 	private float velocidadMaxima;
-	private CargadorNivel nivel;
+	private int vidaMaxima;
+	private int vida;
+	private Vector2 posicion;
+	private Nivel nivel;
 	
-	public Jugador(){}
-	
-	/**
-	 * Devuelve un nuevo disparo realizado por el jugador.
-	 * @return Disparo realizado por el jugador.
-	 */
-	public List<Disparo> disparar() {
-		return arma.disparar();
+	public Jugador(JSONObject config, int xPos, int yPos, Nivel nivel){
+		posicion = new Vector2(xPos, yPos);
+		this.nivel = nivel;
+		// TODO Utilizar el objeto config para setear vida, velocidad maxima, arma, escudo, etc.
 	}
 	
 	/**
@@ -30,7 +33,7 @@ public class Jugador {
 	 * @param nuevaArma Nueva arma que tendria el jugador.
 	 */
 	public void setArma (Arma nuevaArma) {
-		arma=nuevaArma;
+		arma = nuevaArma;
 	}
 	
 	/**
@@ -43,10 +46,10 @@ public class Jugador {
 	
 	/**
 	 * Setea el escudo al jugador con el nuevo escudo pasado como parametro.
-	 * @param nuevaEscudo nuevo escudo que tendria el jugado.
+	 * @param nuevoEscudo nuevo escudo que tendria el jugado.
 	 */
 	public void setEsdcudo(Escudo nuevoEscudo) {
-		escudo=nuevoEscudo;
+		escudo = nuevoEscudo;
 	}
 	
 	/**
@@ -59,10 +62,63 @@ public class Jugador {
 	
 	/**
 	 * Setea el procesador al jugador con el nuevo procesador pasado como parametro.
-	 * @param ProcesadorInput nuevo procesador que tendria el jugado.
+	 * @param procesadorInput nuevo procesador que tendria el jugado.
 	 */
 	public void setProcesadorInput(ProcesadorInput procesadorInput) {
-		input=procesadorInput;
+		input = procesadorInput;
 	}
-	
+
+	// Implementacion de metodos abstractos
+
+	@Override
+	public Vector2 getPosicion() {
+		return posicion.cpy();
+	}
+
+	@Override
+	public Vector2 setPosicion(Vector2 posicion) {
+		Vector2 temp = this.posicion;
+		this.posicion = posicion;
+		return temp;
+	}
+
+	@Override
+	public int getAlto() {
+		return TAMANIO_NAVE;
+	}
+
+	@Override
+	public int getAncho() {
+		return TAMANIO_NAVE;
+	}
+
+	@Override
+	public int getVida() {
+		return vida;
+	}
+
+	@Override
+	public void setVida(int vida) {
+		this.vida = vida;
+	}
+
+	@Override
+	public void setVidaAlMaximo() {
+		vida = vidaMaxima;
+	}
+
+	@Override
+	public void actualizar() {
+		posicion.add(velocidadMaxima * input.getXAxis() * Gdx.graphics.getDeltaTime(), 0);
+	}
+
+	@Override
+	public void dibujar(SpriteBatch batch) {
+		// TODO Dibujarse a si mismo utilizando una textura o similar
+	}
+
+	@Override
+	public void eliminar() {
+		// TODO Eliminar texturas
+	}
 }

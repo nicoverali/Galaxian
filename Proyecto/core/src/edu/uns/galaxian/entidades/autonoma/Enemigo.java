@@ -4,8 +4,8 @@ import java.util.List;
 import edu.uns.galaxian.entidades.equipamiento.*;
 import edu.uns.galaxian.entidades.inanimadas.*;
 import edu.uns.galaxian.controladores.ControladorEnemigo;
-
-public class Enemigo {
+// TODO Implementar metodos heredados
+public class Enemigo implements EntidadAutonoma{
 
 	private ControladorEnemigo controlador;
 	private Arma arma;
@@ -33,4 +33,8 @@ public class Enemigo {
 	public List<Disparo> disparar() {
 		return arma.disparar();
 	}
+
+	// Implementacion de metodos abstractos
+
+	public
 }
