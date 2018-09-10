@@ -1,5 +1,6 @@
 package edu.uns.galaxian.controladores;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.entidades.autonoma.Enemigo;
@@ -23,21 +24,50 @@ public class ControladorEnemigo implements ControladorEntidad {
         // Crear formacion de enemigos
         JSONArray formacion = config.getJSONArray("formacion");
         enemigos = new ArrayList<>(formacion.length());
-        for(int i = 0; i < formacion.length(); i++){
+        for(int i = 0; i < formacion.length(); i++) {
             JSONArray fila = formacion.getJSONArray(i);
             List<Enemigo> filaLista = new ArrayList<Enemigo>(fila.length());
             for(int j = 0; j < fila.length(); j++){
                 // TODO Los enemigos deben depender de la informacion provista, ademas se deben colocar en distintas posiciones
-                Enemigo enemigo = new Enemigo(100,100,64,64,5);
+                Enemigo enemigo = new Enemigo(getPosX(fila.length(),j),getPosY(i),5);
+                // TODO setear la IA al enemigo
                 filaLista.add(enemigo);
             }
             enemigos.add(filaLista);
         }
     }
+    
+    private int getPosX(int cantidadNaves, int j) {
+    	int medio = Gdx.graphics.getWidth() / 2;
+    	int margen = 10;
+    	int resultado = 0;
+    	int espacioOcupado;
+    	int espacioSobrante;
+    	
+    	if(cantidadNaves%2==0) {
+    		espacioOcupado = (cantidadNaves/2 * Enemigo.getAnchoMaxEnemigo()) + (cantidadNaves/2 * margen);
+    	}
+    	else {
+    		espacioOcupado = (cantidadNaves/2 * Enemigo.getAnchoMaxEnemigo()) + (cantidadNaves/2 * margen + Enemigo.getAnchoMaxEnemigo()/2);
+    	}
+    	
+    	espacioSobrante = medio - espacioOcupado;
+    	int aux = 0;
+		for(int i=0; i<=j; i++) {
+			aux += Enemigo.getAnchoMaxEnemigo() + margen;
+		}
+		resultado = aux - margen - (Enemigo.getAnchoMaxEnemigo()/2) + espacioSobrante;
+    	
+    	return resultado;
+    }
+    
+    public int getPosY(int numeroFila) {
+    	int margen = 0;
+    	return Gdx.graphics.getHeight() - (numeroFila+1)*Enemigo.getAltoMaxEnemigo() - margen;
+    }
 
     public Vector2 getPosicionJugador(){
         return jugador.getPosicion();
-        // TODO Asi se agrega un 
     }
 
     @Override
@@ -54,7 +84,7 @@ public class ControladorEnemigo implements ControladorEntidad {
     public void dibujar(SpriteBatch batch) {
         for(List<Enemigo> fila : enemigos){
             for(Enemigo enemigo : fila){
-                // TODO Se debe dibujar al enemigo {enemigo.dibujar(batch)}
+                enemigo.dibujar(batch);
             }
         }
     }

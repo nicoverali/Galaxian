@@ -30,7 +30,6 @@ public class Juego extends Game {
 		niveles = cargarDatosDelJuego();
 
 		// Crear nivel correspondiente
-		// TODO Deberiamos definir la estructura del archivo JSON para saber exactamente que key buscar
 		JSONObject configuracionDelNivel = niveles.getJSONObject(datosGuardados.getInt(DatosGuardadosKeys.NIVEL_ALCANZADO.getKey())-1);
 		setScreen(new Nivel(configuracionDelNivel, this));
 	}
