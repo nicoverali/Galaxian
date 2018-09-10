@@ -6,15 +6,15 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import edu.uns.galaxian.juego.exceptions.NonExistentGameDataException;
+import edu.uns.galaxian.juego.keys.DatosGuardadosKeys;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Juego extends Game {
-	// Constantes para archivo de datos guardados
+	// Direccion de los datos guardados
 	private static final String DATOS_GUARDADOS_PATH = "./files/save_data.json";
-	private static final String NIVEL_ALCANZADO = "nivelAlcanzado";
 
-	// Constantes para archivo de datos del juego
+	// Direccion de los datos del juego
 	private static final String DATOS_DEL_JUEGO_PATH = "./files/game_data.json";
 
 	private SpriteBatch batch;
@@ -31,7 +31,7 @@ public class Juego extends Game {
 
 		// Crear nivel correspondiente
 		// TODO Deberiamos definir la estructura del archivo JSON para saber exactamente que key buscar
-		JSONObject configuracionDelNivel = niveles.getJSONObject(datosGuardados.getInt(NIVEL_ALCANZADO)-1);
+		JSONObject configuracionDelNivel = niveles.getJSONObject(datosGuardados.getInt(DatosGuardadosKeys.NIVEL_ALCANZADO.getKey())-1);
 		setScreen(new Nivel(configuracionDelNivel, this));
 	}
 
@@ -79,7 +79,7 @@ public class Juego extends Game {
 		else{
 			// Se crea un objeto con nuevos datos y luego es persistido en memoria
 			datos = new JSONObject();
-			datos.put(NIVEL_ALCANZADO, 1);
+			datos.put(DatosGuardadosKeys.NIVEL_ALCANZADO.getKey(), 1);
 			path.writeString(datos.toString(), false);
 		}
 

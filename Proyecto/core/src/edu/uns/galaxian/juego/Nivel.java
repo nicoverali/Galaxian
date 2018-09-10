@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import edu.uns.galaxian.controladores.ControladorEnemigo;
 import edu.uns.galaxian.controladores.ControladorEntidad;
 import edu.uns.galaxian.entidades.jugador.Jugador;
+import edu.uns.galaxian.juego.keys.GameDataKeys;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -25,11 +26,11 @@ public class Nivel extends ScreenAdapter {
         this.controladores = new ArrayList<>();
 
         // Inicializar jugador
-        JSONObject configJugador = configNivel.getJSONObject("jugador");
+        JSONObject configJugador = configNivel.getJSONObject(GameDataKeys.NIVEL_JUGADOR.getKey());
         jugador = new Jugador( Gdx.graphics.getWidth()/2, 30, 64, configJugador, this);
 
         // Inicializar controladores
-        JSONObject configControladores = configNivel.getJSONObject("controladores");
+        JSONObject configControladores = configNivel.getJSONObject(GameDataKeys.NIVEL_CONTROLADORES.getKey());
         inicializarControladores(jugador, configControladores);
     }
 
@@ -68,8 +69,8 @@ public class Nivel extends ScreenAdapter {
         JSONObject configControladorActual;
         while(keys.hasNext()){
             keyActual = keys.next();
-            switch (keyActual){
-                case "controladorEnemigo":{
+            switch (GameDataKeys.buscarPorKey(keyActual)){
+                case CONTROLADOR_ENEMIGO:{
                     configControladorActual = config.getJSONObject(keyActual);
                     ControladorEnemigo controladorEnemigo = new ControladorEnemigo(configControladorActual, jugador);
                     controladores.add(controladorEnemigo);
