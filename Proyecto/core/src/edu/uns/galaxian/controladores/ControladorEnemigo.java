@@ -22,13 +22,13 @@ public class ControladorEnemigo implements ControladorEntidad {
 
         // Crear formacion de enemigos
         JSONArray formacion = config.getJSONArray("formacion");
-        enemigos = new ArrayList<List<Enemigo>>(formacion.length());
+        enemigos = new ArrayList<>(formacion.length());
         for(int i = 0; i < formacion.length(); i++){
             JSONArray fila = formacion.getJSONArray(i);
             List<Enemigo> filaLista = new ArrayList<Enemigo>(fila.length());
             for(int j = 0; j < fila.length(); j++){
                 // TODO Los enemigos deben depender de la informacion provista, ademas se deben colocar en distintas posiciones
-                Enemigo enemigo = new Enemigo();
+                Enemigo enemigo = new Enemigo(100,100,64,64,5);
                 filaLista.add(enemigo);
             }
             enemigos.add(filaLista);

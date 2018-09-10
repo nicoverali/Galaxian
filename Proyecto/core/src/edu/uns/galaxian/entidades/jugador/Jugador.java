@@ -9,21 +9,18 @@ import edu.uns.galaxian.entidades.equipamiento.Escudo;
 import edu.uns.galaxian.juego.Nivel;
 import org.json.JSONObject;
 
-public class Jugador implements EntidadColisionable {
+public class Jugador extends EntidadColisionable {
 
 	private static final int TAMANIO_NAVE = 64;
  
 	private Arma arma;
 	private Escudo escudo;
 	private ProcesadorInput input;
-	private float velocidadMaxima;
-	private int vidaMaxima;
-	private int vida;
-	private Vector2 posicion;
+	private int velocidadMaxima;
 	private Nivel nivel;
 	
-	public Jugador(JSONObject config, int xPos, int yPos, Nivel nivel){
-		posicion = new Vector2(xPos, yPos);
+	public Jugador(int xPos, int yPos, int tamano, JSONObject config, Nivel nivel){
+	    super(xPos, yPos, tamano, tamano, config.getInt("vidaMaxima"));
 		this.nivel = nivel;
 		// TODO Utilizar el objeto config para setear vida, velocidad maxima, arma, escudo, etc.
 	}
@@ -69,44 +66,6 @@ public class Jugador implements EntidadColisionable {
 	}
 
 	// Implementacion de metodos abstractos
-
-	@Override
-	public Vector2 getPosicion() {
-		return posicion.cpy();
-	}
-
-	@Override
-	public Vector2 setPosicion(Vector2 posicion) {
-		Vector2 temp = this.posicion;
-		this.posicion = posicion;
-		return temp;
-	}
-
-	@Override
-	public int getAlto() {
-		return TAMANIO_NAVE;
-	}
-
-	@Override
-	public int getAncho() {
-		return TAMANIO_NAVE;
-	}
-
-	@Override
-	public int getVida() {
-		return vida;
-	}
-
-	@Override
-	public void setVida(int vida) {
-		this.vida = vida;
-	}
-
-	@Override
-	public void setVidaAlMaximo() {
-		vida = vidaMaxima;
-	}
-
 	@Override
 	public void actualizar() {
 		posicion.add(velocidadMaxima * input.getXAxis() * Gdx.graphics.getDeltaTime(), 0);

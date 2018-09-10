@@ -1,0 +1,54 @@
+[
+  {
+    "tipo":"combate",
+    "jugador":{
+      "vidaMaxima":300,
+      "velocidadMaxima":200,
+      "arma":"normal",
+      "escudo":"null"
+    },
+    "controladores": {
+      "controladorEnemigo": {
+        "formacion": [
+          [
+            "kamikaze",
+            "kamikaze",
+            "armado",
+            "kamikaze",
+            "kamikaze"
+          ],
+          [
+            "armado",
+            "kamikaze",
+            "armado",
+            "kamikaze",
+            "armado",
+            "kamikaze"
+          ],
+          [
+            "armado",
+            "armado",
+            "armado",
+            "armado",
+            "armado",
+            "armado"
+          ]
+        ],
+        "enemigos": {
+          "kamikaze": {
+            "vidaMaxima": 150,
+            "velocidadMaxima": 100,
+            "arma": "null",
+            "modo": "aleatorio"
+          },
+          "armado": {
+            "vidaMaxima": 250,
+            "velocidadMaxima": 50,
+            "arma": "disparoDoble",
+            "modo": "aleatorio"
+          }
+        }
+      }
+    }
+  }
+]
