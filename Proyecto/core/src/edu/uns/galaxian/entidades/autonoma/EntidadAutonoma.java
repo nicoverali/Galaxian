@@ -3,7 +3,7 @@ package edu.uns.galaxian.entidades.autonoma;
 import edu.uns.galaxian.entidades.*;
 import edu.uns.galaxian.entidades.autonoma.ia.*;
 
-public abstract class EntidadAutonoma extends EntidadColisionable {
+public abstract class EntidadAutonoma extends EntidadViva {
 
 	private InteligenciaArtificial inteligencia;
 

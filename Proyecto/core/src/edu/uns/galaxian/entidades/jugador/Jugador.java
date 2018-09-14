@@ -4,15 +4,18 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.entidades.EntidadColisionable;
+import edu.uns.galaxian.entidades.EntidadViva;
 import edu.uns.galaxian.entidades.equipamiento.Arma;
 import edu.uns.galaxian.entidades.equipamiento.Escudo;
+import edu.uns.galaxian.entidades.inanimadas.Disparo;
 import edu.uns.galaxian.juego.Nivel;
 import org.json.JSONObject;
 
-public class Jugador extends EntidadColisionable {
+public class Jugador extends EntidadViva {
 
 	private static final int TAMANIO_NAVE = 64;
  
+	private Disparo disparoJugador;
 	private Arma arma;
 	private Escudo escudo;
 	private ProcesadorInput input;
@@ -22,6 +25,7 @@ public class Jugador extends EntidadColisionable {
 	public Jugador(int xPos, int yPos, int tamano, JSONObject config, Nivel nivel){
 	    super(xPos, yPos, tamano, tamano, config.getInt("vidaMaxima"));
 		this.nivel = nivel;
+		disparoJugador=null;
 		// TODO Utilizar el objeto config para setear vida, velocidad maxima, arma, escudo, etc.
 	}
 	
