@@ -5,8 +5,11 @@ import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+
 import edu.uns.galaxian.entidades.equipamiento.*;
 import edu.uns.galaxian.entidades.inanimadas.*;
+import edu.uns.galaxian.colision.Colisionador;
 import edu.uns.galaxian.controladores.ControladorEnemigo;
 public class Enemigo extends EntidadAutonoma{
 	
@@ -23,6 +26,8 @@ public class Enemigo extends EntidadAutonoma{
         super(xPos, yPos, ALTO_MAX, ANCHO_MAX, vidaMaxima);
         this.textura = new Texture(Gdx.files.internal("enemigos/enemyBlack2.png"));
     }
+    
+    public 
 
     /**
 	 * Setea el arma del enemigo con la nueva pasada como par�metro.
@@ -73,4 +78,20 @@ public class Enemigo extends EntidadAutonoma{
     public void eliminar() {
 
     }
+    
+    //TODO implementar bien lo de abajo
+    public int getAlto() {
+    	return ALTO_MAX;
+    }
+    
+	public int getAncho() {
+		return ANCHO_MAX;
+	}
+	
+	public Vector2 getVector() { 
+		return new Vector2(0,0);
+	}
+	public Colisionador getColisionador(){
+		return (Colisionador) this; 
+	}
 }

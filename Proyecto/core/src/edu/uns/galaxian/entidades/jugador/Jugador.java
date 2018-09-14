@@ -3,6 +3,8 @@ package edu.uns.galaxian.entidades.jugador;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+
+import edu.uns.galaxian.colision.Colisionador;
 import edu.uns.galaxian.entidades.EntidadColisionable;
 import edu.uns.galaxian.entidades.EntidadViva;
 import edu.uns.galaxian.entidades.equipamiento.Arma;
@@ -83,5 +85,21 @@ public class Jugador extends EntidadViva {
 	@Override
 	public void eliminar() {
 		// TODO Eliminar texturas
+	}
+	
+	 //TODO implementar bien lo de abajo
+    public int getAlto() {
+    	return TAMANIO_NAVE;
+    }
+    
+	public int getAncho() {
+		return TAMANIO_NAVE;
+	}
+	
+	public Vector2 getVector() { 
+		return new Vector2(0,0);
+	}
+	public Colisionador getColisionador(){
+		return (Colisionador) this; 
 	}
 }
