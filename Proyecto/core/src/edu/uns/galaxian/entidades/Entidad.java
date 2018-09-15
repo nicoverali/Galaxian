@@ -6,9 +6,35 @@ import com.badlogic.gdx.math.Vector2;
 public abstract  class Entidad {
 
 	protected Vector2 posicion;
+	protected float factorEscala;
 
+	/**
+	 * Crea una nueva entidad con la posicion y el factor de escala dados.
+	 * @param xPos Posicion en X de la entidad
+	 * @param yPos Posicion en Y de la entidad
+	 * @param factorEscala Factor de escala de la entidad
+	 */
+	public Entidad(int xPos, int yPos, float factorEscala){
+		this.posicion = new Vector2(xPos, yPos);
+		this.factorEscala = Math.abs(factorEscala);
+	}
+
+	/**
+	 * Crea una nueva entidad con la posicion dada. El factor de escala sera 1.
+	 * @param xPos Posicion en X de la entidad
+	 * @param yPos Posicion en Y de la entidad
+	 */
 	public Entidad(int xPos, int yPos){
 		posicion = new Vector2(xPos, yPos);
+		factorEscala = 1;
+	}
+
+	/**
+	 * Crea una nueva entidad con una posicion por defecto y el factor de escala asignado a 1
+	 */
+	public Entidad(){
+		posicion = Vector2.Zero;
+		factorEscala = 1;
 	}
 
 	/**
@@ -41,10 +67,18 @@ public abstract  class Entidad {
 	public Vector2 getPosicion(){
 		return posicion.cpy();
 	}
+
+	/**
+	 * Setea el factor de escala de la entidad.
+	 * @param factorEscala Nuevo factor de escala
+	 */
+	public void setFactorEscala(float factorEscala){
+		this.factorEscala = Math.abs(factorEscala);
+	}
 	
 	/**
 	 * Dibuja la entidad en el mapa.
-	 * @param batch
+	 * @param batch Batch que se utilizara para dibujar la entidad
 	 */
 	public abstract void dibujar(SpriteBatch batch);
 	
