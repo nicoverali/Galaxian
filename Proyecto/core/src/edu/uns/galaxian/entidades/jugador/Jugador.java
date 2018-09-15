@@ -1,36 +1,88 @@
 package edu.uns.galaxian.entidades.jugador;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
-
-import edu.uns.galaxian.colision.Colisionador;
-import edu.uns.galaxian.entidades.EntidadColisionable;
 import edu.uns.galaxian.entidades.EntidadViva;
 import edu.uns.galaxian.entidades.equipamiento.Arma;
+import edu.uns.galaxian.entidades.equipamiento.ArmaComun;
 import edu.uns.galaxian.entidades.equipamiento.Escudo;
-import edu.uns.galaxian.entidades.inanimadas.Disparo;
-import edu.uns.galaxian.juego.Nivel;
-import org.json.JSONObject;
+import edu.uns.galaxian.entidades.inanimadas.DisparoJugador;
+import edu.uns.galaxian.util.enums.Color;
 
-public class Jugador extends EntidadViva {
+/**
+ * Esta clase representa a una entidad controlable por el usuario.
+ * Posee distintos equipamientos que utilizara para combatir. Debido a la cantidad
+ * de configuraciones que posee, se utiliza una clase JugadorAbstractBuilder a partir de la cual
+ * se puede instanciar esta clase.
+ */
+public abstract class Jugador extends EntidadViva {
 
-	private static final int TAMANIO_NAVE = 64;
- 
-	private Disparo disparoJugador;
-	private Arma arma;
-	private Escudo escudo;
-	private ProcesadorInput input;
-	private int velocidadMaxima;
-	private Nivel nivel;
-	
-	public Jugador(int xPos, int yPos, int tamano, JSONObject config, Nivel nivel){
-	    super(xPos, yPos, tamano, tamano, config.getInt("vidaMaxima"));
-		this.nivel = nivel;
-		disparoJugador=null;
-		// TODO Utilizar el objeto config para setear vida, velocidad maxima, arma, escudo, etc.
+	protected static final DisparoJugador DISPARO_JUGADOR = new DisparoJugador();
+	private static final int VIDA_MAXIMA = 100; // Debe ser reemplazado
+
+	protected Arma arma;
+	protected Escudo escudo;
+	protected ProcesadorInput input;
+	protected Color color;
+
+	/**
+	 * Crea un nuevo jugador obteniendo todos sus atributos a partir del builder recibido.
+	 */
+	protected Jugador(JugadorAbstractBuilder builder) {
+		super(builder.xPos, builder.yPos, builder.factorEscala, VIDA_MAXIMA);
+		arma = builder.arma;
+		escudo = builder.escudo;
+		input = builder.input;
+		color = builder.color;
 	}
-	
+
+	/**
+	 * Posee metodos de configuracion que permiten crear un Jugador con distintos atributos
+	 */
+	public static abstract class JugadorAbstractBuilder {
+		// Configuracion por defecto
+		int xPos = 0;
+		int yPos = 0;
+		float factorEscala = 1;
+		Arma arma = new ArmaComun();
+		Escudo escudo;
+		ProcesadorInput input;
+		Color color = Color.AZUL;
+
+		// Build abstracto
+		public abstract Jugador build();
+
+		// Metodos
+		public JugadorAbstractBuilder setArma(Arma arma){
+			this.arma = arma;
+			return this;
+		}
+
+		public JugadorAbstractBuilder setEscudo(Escudo escudo){
+			this.escudo = escudo;
+			return this;
+		}
+
+		public JugadorAbstractBuilder setProcesadorInput(ProcesadorInput input){
+			this.input = input;
+			return this;
+		}
+
+		public JugadorAbstractBuilder setPosicion(int xPos, int yPos){
+			this.xPos = xPos;
+			this.yPos = yPos;
+			return this;
+		}
+
+		public JugadorAbstractBuilder setFactorEscala(float factorEscala){
+			this.factorEscala = factorEscala;
+			return this;
+		}
+
+		public JugadorAbstractBuilder setColor(Color color){
+			this.color = color;
+			return this;
+		}
+	}
+
 	/**
 	 * Setea el arma del jugador con la nueva pasada como parametro.
 	 * @param nuevaArma Nueva arma que tendria el jugador.
@@ -51,7 +103,7 @@ public class Jugador extends EntidadViva {
 	 * Setea el escudo al jugador con el nuevo escudo pasado como parametro.
 	 * @param nuevoEscudo nuevo escudo que tendria el jugado.
 	 */
-	public void setEsdcudo(Escudo nuevoEscudo) {
+	public void setEscudo(Escudo nuevoEscudo) {
 		escudo = nuevoEscudo;
 	}
 	
@@ -64,42 +116,10 @@ public class Jugador extends EntidadViva {
 	}
 	
 	/**
-	 * Setea el procesador al jugador con el nuevo procesador pasado como parametro.
-	 * @param procesadorInput nuevo procesador que tendria el jugado.
+	 * Cambia el procesador de input del jugador con el nuevo procesador pasado como parametro.
+	 * @param procesadorInput Nuevo procesador que tendria el jugado.
 	 */
 	public void setProcesadorInput(ProcesadorInput procesadorInput) {
 		input = procesadorInput;
-	}
-
-	// Implementacion de metodos abstractos
-	@Override
-	public void actualizar() {
-		posicion.add(velocidadMaxima * input.getXAxis() * Gdx.graphics.getDeltaTime(), 0);
-	}
-
-	@Override
-	public void dibujar(SpriteBatch batch) {
-		// TODO Dibujarse a si mismo utilizando una textura o similar
-	}
-
-	@Override
-	public void eliminar() {
-		// TODO Eliminar texturas
-	}
-	
-	 //TODO implementar bien lo de abajo
-    public int getAlto() {
-    	return TAMANIO_NAVE;
-    }
-    
-	public int getAncho() {
-		return TAMANIO_NAVE;
-	}
-	
-	public Vector2 getVector() { 
-		return new Vector2(0,0);
-	}
-	public Colisionador getColisionador(){
-		return (Colisionador) this; 
 	}
 }
