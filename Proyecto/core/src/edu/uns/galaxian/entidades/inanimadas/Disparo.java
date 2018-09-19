@@ -1,5 +1,6 @@
 package edu.uns.galaxian.entidades.inanimadas;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -15,6 +16,10 @@ public class Disparo extends EntidadColisionable  {
 	private Texture textura;
 	private Colisionador colisionadorDisparo;
 	
+	// TODO estos atributos debrian estar aqui realmente?
+	private int ancho;
+	private int alto;
+	
 	public Disparo() {
 		damage=0;
 		velocidad=0;
@@ -22,11 +27,13 @@ public class Disparo extends EntidadColisionable  {
 		textura=null;
 	}
 	
-	public Disparo(int damage, int velocidad, int factor) {
+	public Disparo(int damage, int velocidad, int factor, Texture textura) {
 		this.damage = damage;
 		this.velocidad = velocidad;
 		direccion = new Vector2(0,0);
-		textura=null;
+		this.textura=textura;
+		this.alto = (int) Math.floor(textura.getHeight() * factorEscala);
+	    this.ancho = (int) Math.floor(textura.getWidth() * factorEscala);
 	}
 	
 	public Disparo(int damage, int velocidad, Vector2 direccion, Texture textura){
@@ -76,7 +83,9 @@ public class Disparo extends EntidadColisionable  {
 	 * @return copia del disparo
 	 */
 	public Disparo clonar() {
-		return new Disparo (damage, velocidad, direccion, textura);
+		Disparo nuevo = new Disparo (damage, velocidad, direccion, textura);
+		nuevo.setPosicion(posicion);
+		return nuevo;
 	}
 	
 	public void setColisionador(Colisionador colisionador) {
@@ -85,38 +94,38 @@ public class Disparo extends EntidadColisionable  {
 
 	@Override
 	public Colisionador getColisionador() {
-		// TODO Auto-generated method stub
-		return null;
+		return colisionadorDisparo;
 	}
 
 	@Override
 	public int getAlto() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 30;
 	}
 
 	@Override
 	public int getAncho() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 30;
 	}
 
 	@Override
 	public void dibujar(SpriteBatch batch) {
-		// TODO Auto-generated method stub
-		
+		// TODO ver tamaño del disparo (se modifico solo para graficar, despues se debe borrar el -5)
+		batch.draw(textura, posicion.x-getAncho()/2, posicion.y-getAlto()/2, getAncho()-5, getAlto()-5);
 	}
 
 	@Override
 	public void actualizar() {
-		// TODO Auto-generated method stub
-		
+		posicion.add(direccion.x, direccion.y*velocidad*Gdx.graphics.getDeltaTime());
 	}
 
 	@Override
 	public void eliminar() {
-		// TODO Auto-generated method stub
-		
+		textura.dispose();
+	}
+
+	@Override
+	public void aceptarColision(EntidadColisionable entidad) {
+		entidad.aceptarColision(this);
 	}
 	
 }

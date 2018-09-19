@@ -6,28 +6,23 @@ import edu.uns.galaxian.entidades.jugador.Jugador;
 
 public class ColisionadorDisparoEnemigo implements Colisionador {
 
-	@Override
+	/**
+	 * Se resta al jugador un porcentaje de su vida, que depende de la fuerza de disparo del enemigo.
+	 */
 	public void colisionarConJugador(Jugador jugador) {
-		// TODO Auto-generated method stub
-		
+		//  TODO falta determinar como obtener el daño del disparo
 	}
+	
+	public void colisionarConDisparoJugador(Disparo disparo) {}
 
-	@Override
-	public void colisionarConEnemigo(Enemigo enemigo) {
-		// TODO Auto-generated method stub
-		
-	}
+	/**
+	 * Cuando un disparo enemigo colisiona con un enemigo no hay ningun efecto
+	 */
+	public void colisionarConEnemigo(Enemigo enemigo) {}
 
-	@Override
-	public void colisionarConDisparoJugador(Disparo disparo) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void colisionarConDisparoEnemigo(Disparo disparo) {
-		// TODO Auto-generated method stub
-		
-	}
+	/**
+	 * Si un disparo enemigo colisiona con un disparo enemigo, ambos siguen su trayectoria sin destruirse
+	 */
+	public void colisionarConDisparoEnemigo(Disparo disparo) {}
 
 }

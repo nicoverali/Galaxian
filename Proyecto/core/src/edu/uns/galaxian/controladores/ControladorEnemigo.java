@@ -3,6 +3,8 @@ package edu.uns.galaxian.controladores;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+
+import edu.uns.galaxian.colision.DetectorDeColisiones;
 import edu.uns.galaxian.entidades.autonoma.Enemigo;
 import edu.uns.galaxian.entidades.autonoma.EnemigoComun;
 import edu.uns.galaxian.entidades.jugador.Jugador;
@@ -18,8 +20,10 @@ public class ControladorEnemigo implements ControladorEntidad {
 
     private List<List<Enemigo>> enemigos;
     private Jugador jugador;
+    private DetectorDeColisiones detector;
 
-    public ControladorEnemigo(JSONObject config, Jugador jugador){
+    public ControladorEnemigo(JSONObject config, Jugador jugador, DetectorDeColisiones detector){
+    	this.detector = detector;
         this.jugador = jugador;
 
         // Crear formacion de enemigos
@@ -32,6 +36,7 @@ public class ControladorEnemigo implements ControladorEntidad {
                 // TODO Los enemigos deben depender de la informacion provista, ademas se deben colocar en distintas posiciones
                 Enemigo enemigo = new EnemigoComun(getPosX(fila.length(),j),getPosY(i),5);
                 // TODO setear la IA al enemigo
+                detector.registrarEntidadColisionable(enemigo);
                 filaLista.add(enemigo);
             }
             enemigos.add(filaLista);
@@ -40,7 +45,7 @@ public class ControladorEnemigo implements ControladorEntidad {
     
     private int getPosX(int cantidadNaves, int j) {
     	int medio = Gdx.graphics.getWidth() / 2;
-    	int margen = 10;
+    	int margen = 25;
     	int resultado = 0;
     	int espacioOcupado;
     	int espacioSobrante;
@@ -89,4 +94,9 @@ public class ControladorEnemigo implements ControladorEntidad {
             }
         }
     }
+
+	@Override
+	public void setDetectorColisiones(DetectorDeColisiones detector) {
+		this.detector = detector;
+	}
 }

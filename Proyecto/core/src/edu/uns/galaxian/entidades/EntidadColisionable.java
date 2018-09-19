@@ -40,6 +40,8 @@ public abstract class EntidadColisionable extends Entidad implements Colisionabl
 	 * @return Ancho de la entidad en pixeles.
 	 */
 	public abstract int getAncho();
+
+	public abstract void aceptarColision(EntidadColisionable entidad);
 	
 	
 	

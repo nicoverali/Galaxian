@@ -4,10 +4,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+import edu.uns.galaxian.colision.DetectorDeColisiones;
+import edu.uns.galaxian.controladores.ControladorDisparo;
 import edu.uns.galaxian.controladores.ControladorEnemigo;
 import edu.uns.galaxian.controladores.ControladorEntidad;
+import edu.uns.galaxian.entidades.jugador.InputKeyboard;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 import edu.uns.galaxian.entidades.jugador.NaveLiviana;
+import edu.uns.galaxian.entidades.jugador.ProcesadorInput;
 import edu.uns.galaxian.escenario.Background;
 import edu.uns.galaxian.juego.keys.GameDataKeys;
 import org.json.JSONObject;
@@ -22,6 +27,7 @@ public class Nivel extends ScreenAdapter {
     private Jugador jugador;
     private Background background;
     private Collection<ControladorEntidad> controladores;
+    DetectorDeColisiones detector;
 
     // Constructor
     public Nivel(JSONObject configNivel, Juego juego){
@@ -30,14 +36,30 @@ public class Nivel extends ScreenAdapter {
 
         // Inicializar jugador
         //JSONObject configJugador = configNivel.getJSONObject(GameDataKeys.NIVEL_JUGADOR.getKey());
-        jugador = new NaveLiviana( Gdx.graphics.getWidth()/2, 5, 1, this);
+        jugador = new NaveLiviana( Gdx.graphics.getWidth()/2, 40, 1, this);
 
         // Inicializar escenario
         background = new Background();
 
         // Inicializar controladores
+        
+        detector = new DetectorDeColisiones();
+        
         JSONObject configControladores = configNivel.getJSONObject(GameDataKeys.NIVEL_CONTROLADORES.getKey());
         inicializarControladores(jugador, configControladores);
+        
+        // TODO por el momento seteamos el controlador de disparos al jugador
+        ControladorDisparo controladorDisparos = new ControladorDisparo();
+        jugador.setControladorDisparo(controladorDisparos);
+        controladores.add(controladorDisparos);
+        
+        ProcesadorInput input = new InputKeyboard();
+        jugador.setProcesadorInput(input);
+    
+        for(ControladorEntidad c : controladores) {
+        	c.setDetectorColisiones(detector);
+        }
+        
     }
 
 
@@ -62,6 +84,9 @@ public class Nivel extends ScreenAdapter {
 
         // Dibujar jugador
         jugador.dibujar(batch);
+        jugador.actualizar();
+        
+        detector.verificarColisiones();
 
         // Finalizar proceso de dibujado
         batch.end();
@@ -89,10 +114,11 @@ public class Nivel extends ScreenAdapter {
             switch (GameDataKeys.buscarPorKey(keyActual)){
                 case CONTROLADOR_ENEMIGO:{
                     configControladorActual = config.getJSONObject(keyActual);
-                    ControladorEnemigo controladorEnemigo = new ControladorEnemigo(configControladorActual, jugador);
+                    ControladorEnemigo controladorEnemigo = new ControladorEnemigo(configControladorActual, jugador,detector);
                     controladores.add(controladorEnemigo);
                 }
             }
         }
     }
+    
 }

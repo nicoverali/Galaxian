@@ -6,7 +6,7 @@ public interface ProcesadorInput {
 	 * Devuelve la posicion del eje X
 	 * @return posicion eje X
 	 */
-	public float getXAxis();
+	public int getXAxis();
 	
 	/*
 	 * Devuelve si se acciono la tecla disparar

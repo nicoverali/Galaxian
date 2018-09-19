@@ -21,7 +21,7 @@ public abstract class Enemigo extends EntidadAutonoma{
 
 	private ControladorEnemigo controlador;
 	private Arma arma;
-	private Colisionador colisionadorDisparoEnemigo;
+	protected Colisionador colisionadorDisparoEnemigo;
 
     public Enemigo(int xPos, int yPos, int vidaMaxima) {
         super(xPos, yPos, FACTOR_ESCALA, vidaMaxima);
@@ -72,7 +72,7 @@ public abstract class Enemigo extends EntidadAutonoma{
 
     @Override
     public void eliminar() {
-
+    	textura.dispose();
     }
     
     //TODO implementar bien lo de abajo
@@ -81,7 +81,7 @@ public abstract class Enemigo extends EntidadAutonoma{
 		return new Vector2(0,0);
 	}
 	public Colisionador getColisionador(){
-		return (Colisionador) this; 
+		return colisionadorDisparoEnemigo; 
 	}
 
 	public int getColisionDamage() {
@@ -90,12 +90,10 @@ public abstract class Enemigo extends EntidadAutonoma{
 	}
 
 	public static int getAnchoMaxEnemigo() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 40;
 	}
 
 	public static int getAltoMaxEnemigo() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 40;
 	}
 }

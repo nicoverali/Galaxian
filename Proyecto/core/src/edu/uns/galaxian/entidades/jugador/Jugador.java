@@ -1,5 +1,6 @@
 package edu.uns.galaxian.entidades.jugador;
 
+import edu.uns.galaxian.controladores.ControladorDisparo;
 import edu.uns.galaxian.entidades.EntidadViva;
 import edu.uns.galaxian.entidades.equipamiento.Arma;
 import edu.uns.galaxian.entidades.equipamiento.ArmaComun;
@@ -58,4 +59,7 @@ public abstract class Jugador extends EntidadViva {
 	public void setProcesadorInput(ProcesadorInput procesadorInput) {
 		input = procesadorInput;
 	}
+	
+	public abstract void setControladorDisparo(ControladorDisparo c);
+	
 }
