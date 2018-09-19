@@ -13,6 +13,7 @@ public class Disparo extends EntidadColisionable  {
 	private int velocidad;
 	private Vector2 direccion;
 	private Texture textura;
+	private Colisionador colisionadorDisparo;
 	
 	public Disparo() {
 		damage=0;
@@ -21,10 +22,10 @@ public class Disparo extends EntidadColisionable  {
 		textura=null;
 	}
 	
-	public Disparo(Vector2 direccion) {
-		damage=0;
-		velocidad=0;
-		this.direccion=direccion;
+	public Disparo(int damage, int velocidad, int factor) {
+		this.damage = damage;
+		this.velocidad = velocidad;
+		direccion = new Vector2(0,0);
 		textura=null;
 	}
 	
@@ -76,6 +77,10 @@ public class Disparo extends EntidadColisionable  {
 	 */
 	public Disparo clonar() {
 		return new Disparo (damage, velocidad, direccion, textura);
+	}
+	
+	public void setColisionador(Colisionador colisionador) {
+		colisionadorDisparo = colisionador;
 	}
 
 	@Override
