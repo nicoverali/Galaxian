@@ -7,8 +7,8 @@ public abstract class EntidadAutonoma extends EntidadViva {
 
 	private InteligenciaArtificial inteligencia;
 
-	public EntidadAutonoma(int xPos, int yPos, int alto, int ancho, int vidaMaxima) {
-		super(xPos, yPos, alto, ancho, vidaMaxima);
+	public EntidadAutonoma(int xPos, int yPos, int factorEscala, int vidaMaxima) {
+		super(xPos, yPos, factorEscala, vidaMaxima);
 	}
 
 	/**

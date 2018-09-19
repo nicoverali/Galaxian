@@ -10,28 +10,28 @@ import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.entidades.equipamiento.*;
 import edu.uns.galaxian.entidades.inanimadas.*;
 import edu.uns.galaxian.colision.Colisionador;
+import edu.uns.galaxian.colision.ColisionadorDisparoEnemigo;
 import edu.uns.galaxian.controladores.ControladorEnemigo;
-public class Enemigo extends EntidadAutonoma{
+public abstract class Enemigo extends EntidadAutonoma{
 	
 	// TODO El atributo ancho y alto varia de acuerdo a el tipo de enemigo.
-	private static final int ANCHO_MAX = 64;
-	private static final int ALTO_MAX = 64;
+	private static final int FACTOR_ESCALA = 64;
 	
 	private Texture textura;
 
 	private ControladorEnemigo controlador;
 	private Arma arma;
+	private Colisionador colisionadorDisparoEnemigo;
 
     public Enemigo(int xPos, int yPos, int vidaMaxima) {
-        super(xPos, yPos, ALTO_MAX, ANCHO_MAX, vidaMaxima);
+        super(xPos, yPos, FACTOR_ESCALA, vidaMaxima);
         this.textura = new Texture(Gdx.files.internal("enemigos/enemyBlack2.png"));
+        colisionadorDisparoEnemigo = new ColisionadorDisparoEnemigo();
     }
-    
-    public 
 
     /**
 	 * Setea el arma del enemigo con la nueva pasada como par�metro.
-	 * @param nuevaArma Nueva arma que tendr� el enemigo.
+	 * @param nuevaArma Nueva arma que tendra el enemigo.
 	 */
 	public void setArma(Arma nuevaArma) {
 		arma = nuevaArma;
@@ -50,15 +50,11 @@ public class Enemigo extends EntidadAutonoma{
 	 * @return Disparo realizado por el enemigo.
 	 */
 	public List<Disparo> disparar() {
-		return arma.disparar();
+		return arma.disparar((int)posicion.x, (int)posicion.y, new Vector2(0,-1), colisionadorDisparoEnemigo);
 	}
 	
-	public static int getAnchoMaxEnemigo() {
-		return ANCHO_MAX;
-	}
-	
-	public static int getAltoMaxEnemigo() {
-		return ALTO_MAX;
+	public static int getFactorEscala() {
+		return FACTOR_ESCALA;
 	}
 	
 
@@ -80,18 +76,26 @@ public class Enemigo extends EntidadAutonoma{
     }
     
     //TODO implementar bien lo de abajo
-    public int getAlto() {
-    	return ALTO_MAX;
-    }
-    
-	public int getAncho() {
-		return ANCHO_MAX;
-	}
 	
 	public Vector2 getVector() { 
 		return new Vector2(0,0);
 	}
 	public Colisionador getColisionador(){
 		return (Colisionador) this; 
+	}
+
+	public int getColisionDamage() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public static int getAnchoMaxEnemigo() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public static int getAltoMaxEnemigo() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

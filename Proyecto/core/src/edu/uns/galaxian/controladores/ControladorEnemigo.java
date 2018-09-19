@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.entidades.autonoma.Enemigo;
+import edu.uns.galaxian.entidades.autonoma.EnemigoComun;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -29,7 +30,7 @@ public class ControladorEnemigo implements ControladorEntidad {
             List<Enemigo> filaLista = new ArrayList<Enemigo>(fila.length());
             for(int j = 0; j < fila.length(); j++){
                 // TODO Los enemigos deben depender de la informacion provista, ademas se deben colocar en distintas posiciones
-                Enemigo enemigo = new Enemigo(getPosX(fila.length(),j),getPosY(i),5);
+                Enemigo enemigo = new EnemigoComun(getPosX(fila.length(),j),getPosY(i),5);
                 // TODO setear la IA al enemigo
                 filaLista.add(enemigo);
             }

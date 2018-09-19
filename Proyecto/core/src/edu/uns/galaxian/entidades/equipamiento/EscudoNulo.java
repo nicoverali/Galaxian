@@ -1,15 +1,19 @@
 package edu.uns.galaxian.entidades.equipamiento;
 
 import edu.uns.galaxian.entidades.autonoma.Enemigo;
-import edu.uns.galaxian.entidades.jugador.Jugador;
+import edu.uns.galaxian.entidades.inanimadas.Disparo;
 
-public class EscudoNulo extends Escudo{
- 
-	public int proteger(Enemigo enemigo) {
-		return enemigo.getColisionDamage();
+public class EscudoNulo implements Escudo{
+
+	@Override
+	public float proteger(Enemigo enemigo) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
-	
-	public int proteger(Jugador jugador) {
-		return jugador.getColisionDamage();
+
+	@Override
+	public float proteger(Disparo disparo) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

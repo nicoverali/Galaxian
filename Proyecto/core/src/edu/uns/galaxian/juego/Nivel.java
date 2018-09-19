@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import edu.uns.galaxian.controladores.ControladorEnemigo;
 import edu.uns.galaxian.controladores.ControladorEntidad;
 import edu.uns.galaxian.entidades.jugador.Jugador;
+import edu.uns.galaxian.entidades.jugador.NaveLiviana;
 import edu.uns.galaxian.escenario.Background;
 import edu.uns.galaxian.juego.keys.GameDataKeys;
 import org.json.JSONObject;
@@ -28,8 +29,8 @@ public class Nivel extends ScreenAdapter {
         this.controladores = new ArrayList<>();
 
         // Inicializar jugador
-        JSONObject configJugador = configNivel.getJSONObject(GameDataKeys.NIVEL_JUGADOR.getKey());
-        jugador = new Jugador( Gdx.graphics.getWidth()/2, 60, 64, configJugador, this);
+        //JSONObject configJugador = configNivel.getJSONObject(GameDataKeys.NIVEL_JUGADOR.getKey());
+        jugador = new NaveLiviana( Gdx.graphics.getWidth()/2, 5, 1, this);
 
         // Inicializar escenario
         background = new Background();

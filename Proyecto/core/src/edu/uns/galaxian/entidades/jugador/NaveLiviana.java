@@ -1,9 +1,12 @@
 package edu.uns.galaxian.entidades.jugador;
 
+import org.json.JSONObject;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import edu.uns.galaxian.colision.Colisionador;
+import edu.uns.galaxian.juego.Nivel;
 
 public class NaveLiviana extends Jugador {
 
@@ -16,21 +19,14 @@ public class NaveLiviana extends Jugador {
     private int ancho;
 
     // Constructor
-    private NaveLiviana(Builder builder) {
-        super(builder);
-        this.textura = new Texture(Gdx.files.internal(String.format(DIR_TEXTURA, builder.color.name())));
-        this.alto = (int) Math.floor(textura.getHeight() * builder.factorEscala);
-        this.ancho = (int) Math.floor(textura.getWidth() * builder.factorEscala);
+    public NaveLiviana(int i, int j, int factorEscala, Nivel nivel) {
+    	super(i,j,factorEscala,VIDA_MAXIMA);
+        this.textura = new Texture(Gdx.files.internal(String.format(DIR_TEXTURA)));
+        this.alto = (int) Math.floor(textura.getHeight() * factorEscala);
+        this.ancho = (int) Math.floor(textura.getWidth() * factorEscala);
     }
 
-    // Implementacion del JugadorAbstractBuilder de Jugador para este tipo de Jugador
-    public static class Builder extends JugadorAbstractBuilder {
-        public NaveLiviana build(){
-            return new NaveLiviana(this);
-        }
-    }
-
-    // Implementacion de metodos abstractos
+	// Implementacion de metodos abstractos
     @Override
     public int getAlto() {
         return alto;

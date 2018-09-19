@@ -1,11 +1,13 @@
-spackage edu.uns.galaxian.entidades.inanimadas;
+package edu.uns.galaxian.entidades.inanimadas;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 import edu.uns.galaxian.colision.Colisionador;
+import edu.uns.galaxian.entidades.EntidadColisionable;
 
-public class Disparo extends EntidadColisionable implements Colisionador  {
+public class Disparo extends EntidadColisionable  {
 
 	private int damage;
 	private int velocidad;
@@ -74,6 +76,42 @@ public class Disparo extends EntidadColisionable implements Colisionador  {
 	 */
 	public Disparo clonar() {
 		return new Disparo (damage, velocidad, direccion, textura);
+	}
+
+	@Override
+	public Colisionador getColisionador() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getAlto() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getAncho() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void dibujar(SpriteBatch batch) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actualizar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void eliminar() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
