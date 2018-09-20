@@ -11,6 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ControladorEnemigo implements ControladorEntidad {
@@ -18,12 +19,14 @@ public class ControladorEnemigo implements ControladorEntidad {
     private static final int TAMANIO_NAVES = 64;
 
     private List<List<Enemigo>> enemigos;
+    private List<Enemigo> listaEliminar;
     private Jugador jugador;
     private DetectorDeColisiones detector;
 
     public ControladorEnemigo(JSONObject config, Jugador jugador, DetectorDeColisiones detector){
     	this.detector = detector;
         this.jugador = jugador;
+        listaEliminar = new LinkedList<Enemigo>();
 
         // Crear formacion de enemigos
         JSONArray formacion = config.getJSONArray("formacion");
@@ -79,12 +82,29 @@ public class ControladorEnemigo implements ControladorEntidad {
     @Override
     public void actualizarEstado() {
         // TODO Este metodo debe decidir cuando un enemigo sale de la formacion
-        for(List<Enemigo> fila : enemigos){
-            for(Enemigo enemigo : fila){
+    	for(int fila=0; fila<enemigos.size(); fila++) {
+    		List<Enemigo> aux = enemigos.get(fila);
+    		for(int enemigo=0; enemigo<aux.size(); enemigo++) {
+    			Enemigo e = aux.get(enemigo);
                 // TODO Se debe actualizar el enemigo
-                detector.verificarYResolverColisiones(enemigo);
+                detector.verificarYResolverColisiones(e);
             }
-        }
+    	}
+    	
+    	for(Enemigo eliminado : listaEliminar) {
+    		boolean encontre = false;
+    		for(int i=0; i<enemigos.size() && !encontre; i++) {
+    			List<Enemigo> fila = enemigos.get(i);
+    			for(int j=0; j<fila.size() && !encontre ;j++) {
+    				if(fila.get(j)==eliminado) {
+    					encontre = true;
+    					fila.remove(eliminado);
+    					detector.eliminarEntidad(eliminado);
+    				}
+    			}
+    		}
+		}
+    	listaEliminar = new LinkedList<Enemigo>();
     }
 
     @Override
@@ -102,14 +122,6 @@ public class ControladorEnemigo implements ControladorEntidad {
 	}
 	
 	public void deregistrar(Enemigo enemy) {
-		for(List<Enemigo> list : enemigos) {
-			for(Enemigo e : list) {
-				if(e==enemy) {
-					list.remove(e);
-					break;
-				}
-			}
-		}
-		detector.eliminarEntidad(enemy);
+		listaEliminar.add(enemy);
 	}
 }

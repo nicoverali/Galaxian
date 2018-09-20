@@ -31,7 +31,6 @@ public class EnemigoComun extends Enemigo {
 	@Override
 	public void aceptarColision(Colisionador colisionador) {
 		colisionador.colisionarConEnemigo(this);
-		posicion.set(new Vector2(0,0)); // TODO solo es para mostrar graficamente las colisiones
 	}
 
 }

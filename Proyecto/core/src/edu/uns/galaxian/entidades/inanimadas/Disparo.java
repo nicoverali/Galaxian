@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
+import edu.uns.galaxian.controladores.ControladorDisparo;
 import edu.uns.galaxian.entidades.EntidadColisionable;
 
 public class Disparo extends EntidadColisionable  {
@@ -14,6 +15,7 @@ public class Disparo extends EntidadColisionable  {
 	private Vector2 direccion;
 	private Texture textura;
 	private Colisionador colisionadorDisparo;
+	private ControladorDisparo controlador;
 
 	// TODO estos atributos debrian estar aqui realmente?
 	private int ancho;
@@ -86,6 +88,10 @@ public class Disparo extends EntidadColisionable  {
 		nuevo.setPosicion(posicion);
 		return nuevo;
 	}
+	
+	public void setControladorDisparo(ControladorDisparo c) {
+		controlador = c;
+	}
 
 	public void setColisionador(Colisionador colisionador) {
 		colisionadorDisparo = colisionador;
@@ -120,7 +126,8 @@ public class Disparo extends EntidadColisionable  {
 
 	@Override
 	public void eliminar() {
-		textura.dispose();
+		controlador.deregistrar(this);
+    	//textura.dispose();
 	}
 
 	@Override

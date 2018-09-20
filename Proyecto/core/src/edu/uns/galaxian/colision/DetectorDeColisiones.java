@@ -39,7 +39,8 @@ public class DetectorDeColisiones {
 	 * @param referencia Objeto colisionable del cual se verifican las colisiones
 	 */
 	public void verificarYResolverColisiones(Colisionable referencia) {
-		for(Colisionable otraColisionable : colisionables) {
+		for(int i=0; i<colisionables.size(); i++) {
+			Colisionable otraColisionable = colisionables.get(i);
 			int x = (int) referencia.getPosicion().x;
 			int y = (int) referencia.getPosicion().y;
 			int ancho = referencia.getAncho();
