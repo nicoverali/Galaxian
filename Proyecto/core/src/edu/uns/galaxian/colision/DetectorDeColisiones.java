@@ -4,41 +4,50 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import edu.uns.galaxian.entidades.EntidadColisionable;
-
 public class DetectorDeColisiones {
 
-	private List<EntidadColisionable> colisionables;
-	
+	private List<Colisionable> colisionables;
+
 	public DetectorDeColisiones() {
-		colisionables = new LinkedList<EntidadColisionable>();
+		colisionables = new LinkedList<>();
 	}
-	
-	public void registrarEntidadColisionable(EntidadColisionable nueva) {
-		colisionables.add(nueva);
+
+	/**
+	 * Registra un nuevo colisionable
+	 * @param col Colsionable a registrar
+	 */
+	public void registrarColisionable(Colisionable col) {
+		colisionables.add(col);
 	}
-	
-	public void eliminarEntidad(EntidadColisionable eliminar) {
-		Iterator<EntidadColisionable> it = colisionables.iterator();
+
+	/**
+	 * Elimina un colisionable de la coleccion de colisionables registrados
+	 * @param col Colisionable a eliminar
+	 */
+	public void eliminarColisionable(Colisionable col) {
+		Iterator<Colisionable> it = colisionables.iterator();
 		while(it.hasNext()) {
-			EntidadColisionable aux = it.next();
-			if(aux==eliminar)  colisionables.remove(aux);
+			Colisionable aux = it.next();
+			if(aux== col)  colisionables.remove(aux);
 		}
 	}
-	
-	public void verificarColisiones() {
-		for(EntidadColisionable entidad1 : colisionables) {
-			for(EntidadColisionable entidad2 : colisionables) {
-				int x = (int) entidad1.getPosicion().x;
-				int y = (int) entidad1.getPosicion().y;
-				int ancho = entidad1.getAncho();
-				int alto = entidad1.getAlto();
-				if(entidad2.getPosicion().x <= x+(ancho/2) && entidad2.getPosicion().x >= x-(ancho/2) 
-				   && entidad2.getPosicion().y <= y+(alto/2) && entidad2.getPosicion().y >= y-(alto/2) && entidad1!=entidad2) {
-					entidad1.aceptarColision(entidad2);
-				}
+
+	/**
+	 * A partir del colisionable previsto, se verifica la existencia de alguna colision con este colisionable.
+	 * En caso de haber una colision, esta se resuelve.
+	 * @param referencia Objeto colisionable del cual se verifican las colisiones
+	 */
+	public void verificarYResolverColisiones(Colisionable referencia) {
+		for(Colisionable otraColisionable : colisionables) {
+			int x = (int) referencia.getPosicion().x;
+			int y = (int) referencia.getPosicion().y;
+			int ancho = referencia.getAncho();
+			int alto = referencia.getAlto();
+			if(otraColisionable.getPosicion().x <= x+(ancho/2) && otraColisionable.getPosicion().x >= x-(ancho/2)
+					&& otraColisionable.getPosicion().y <= y+(alto/2) && otraColisionable.getPosicion().y >= y-(alto/2) && referencia != otraColisionable) {
+				referencia.aceptarColision(otraColisionable.getColisionador());
+				otraColisionable.aceptarColision(referencia.getColisionador());
 			}
 		}
 	}
-	
 }

@@ -3,7 +3,6 @@ package edu.uns.galaxian.controladores;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-
 import edu.uns.galaxian.colision.DetectorDeColisiones;
 import edu.uns.galaxian.entidades.autonoma.Enemigo;
 import edu.uns.galaxian.entidades.autonoma.EnemigoComun;
@@ -36,37 +35,37 @@ public class ControladorEnemigo implements ControladorEntidad {
                 // TODO Los enemigos deben depender de la informacion provista, ademas se deben colocar en distintas posiciones
                 Enemigo enemigo = new EnemigoComun(getPosX(fila.length(),j),getPosY(i),5);
                 // TODO setear la IA al enemigo
-                detector.registrarEntidadColisionable(enemigo);
+                detector.registrarColisionable(enemigo);
                 filaLista.add(enemigo);
             }
             enemigos.add(filaLista);
         }
     }
-    
+
     private int getPosX(int cantidadNaves, int j) {
     	int medio = Gdx.graphics.getWidth() / 2;
     	int margen = 25;
     	int resultado = 0;
     	int espacioOcupado;
     	int espacioSobrante;
-    	
+
     	if(cantidadNaves%2==0) {
     		espacioOcupado = (cantidadNaves/2 * Enemigo.getAnchoMaxEnemigo()) + (cantidadNaves/2 * margen);
     	}
     	else {
     		espacioOcupado = (cantidadNaves/2 * Enemigo.getAnchoMaxEnemigo()) + (cantidadNaves/2 * margen + Enemigo.getAnchoMaxEnemigo()/2);
     	}
-    	
+
     	espacioSobrante = medio - espacioOcupado;
     	int aux = 0;
 		for(int i=0; i<=j; i++) {
 			aux += Enemigo.getAnchoMaxEnemigo() + margen;
 		}
 		resultado = aux - margen - (Enemigo.getAnchoMaxEnemigo()/2) + espacioSobrante;
-    	
+
     	return resultado;
     }
-    
+
     public int getPosY(int numeroFila) {
     	int margen = 0;
     	return Gdx.graphics.getHeight() - (numeroFila+1)*Enemigo.getAltoMaxEnemigo() - margen;
@@ -82,6 +81,7 @@ public class ControladorEnemigo implements ControladorEntidad {
         for(List<Enemigo> fila : enemigos){
             for(Enemigo enemigo : fila){
                 // TODO Se debe actualizar el enemigo
+                detector.verificarYResolverColisiones(enemigo);
             }
         }
     }

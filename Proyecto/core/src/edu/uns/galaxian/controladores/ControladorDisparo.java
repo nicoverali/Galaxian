@@ -9,23 +9,23 @@ import edu.uns.galaxian.colision.DetectorDeColisiones;
 import edu.uns.galaxian.entidades.inanimadas.Disparo;
 
 public class ControladorDisparo implements ControladorEntidad {
-    
-private List<Disparo> disparos;
-private DetectorDeColisiones detector;
-	
+
+	private List<Disparo> disparos;
+	private DetectorDeColisiones detector;
+
 	public ControladorDisparo() {
-		disparos = new LinkedList<Disparo>();
+		disparos = new LinkedList<>();
 	}
-	
+
 	public void actualizarEstado() {
 		for(Disparo d : disparos) {
 			d.actualizar();
 		}
 	}
-	
-	public void agregarDisparo(Disparo d) {
-		disparos.add(d);
-		detector.registrarEntidadColisionable(d);
+
+	public void agregarDisparo(Disparo disparo) {
+		disparos.add(disparo);
+		detector.registrarColisionable(disparo);
 	}
 
 	public void dibujar(SpriteBatch batch) {
@@ -37,5 +37,4 @@ private DetectorDeColisiones detector;
 	public void setDetectorColisiones(DetectorDeColisiones detector) {
 		this.detector = detector;
 	}
-	
 }

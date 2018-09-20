@@ -7,7 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
-import edu.uns.galaxian.colision.Colisionador;
+import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.entidades.inanimadas.Disparo;
 
 public class ArmaComun implements Arma {

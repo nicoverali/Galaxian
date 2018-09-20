@@ -9,8 +9,8 @@ import com.badlogic.gdx.math.Vector2;
 
 import edu.uns.galaxian.entidades.equipamiento.*;
 import edu.uns.galaxian.entidades.inanimadas.*;
-import edu.uns.galaxian.colision.Colisionador;
-import edu.uns.galaxian.colision.ColisionadorDisparoEnemigo;
+import edu.uns.galaxian.colision.colisionadores.Colisionador;
+import edu.uns.galaxian.colision.colisionadores.ColisionadorDisparoEnemigo;
 import edu.uns.galaxian.controladores.ControladorEnemigo;
 public abstract class Enemigo extends EntidadAutonoma{
 	
