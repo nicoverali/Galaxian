@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import edu.uns.galaxian.colision.DetectorDeColisiones;
 import edu.uns.galaxian.controladores.ControladorDisparo;
 import edu.uns.galaxian.controladores.ControladorEnemigo;
@@ -42,24 +41,24 @@ public class Nivel extends ScreenAdapter {
         background = new Background();
 
         // Inicializar controladores
-        
+
         detector = new DetectorDeColisiones();
-        
+
         JSONObject configControladores = configNivel.getJSONObject(GameDataKeys.NIVEL_CONTROLADORES.getKey());
         inicializarControladores(jugador, configControladores);
-        
+
         // TODO por el momento seteamos el controlador de disparos al jugador
         ControladorDisparo controladorDisparos = new ControladorDisparo();
         jugador.setControladorDisparo(controladorDisparos);
         controladores.add(controladorDisparos);
-        
+
         ProcesadorInput input = new InputKeyboard();
         jugador.setProcesadorInput(input);
-    
+
         for(ControladorEntidad c : controladores) {
         	c.setDetectorColisiones(detector);
         }
-        
+
     }
 
 
@@ -83,15 +82,11 @@ public class Nivel extends ScreenAdapter {
         }
 
         // Dibujar jugador
-        jugador.dibujar(batch);
         jugador.actualizar();
-        
-        detector.verificarColisiones();
+        jugador.dibujar(batch);
 
         // Finalizar proceso de dibujado
         batch.end();
-
-
     }
 
     @Override
@@ -120,5 +115,4 @@ public class Nivel extends ScreenAdapter {
             }
         }
     }
-    
 }
