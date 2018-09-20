@@ -19,11 +19,16 @@ public class DetectorDeColisiones {
 	}
 	
 	public void eliminarEntidad(EntidadColisionable eliminar) {
-		Iterator<EntidadColisionable> it = colisionables.iterator();
-		while(it.hasNext()) {
-			EntidadColisionable aux = it.next();
-			if(aux==eliminar)  colisionables.remove(aux);
+		/*boolean encontre = false;
+		for(int i=0; i<colisionables.size() && !encontre; i++) {
+			if(colisionables.get(i).equals(eliminar)) {
+				encontre = true;
+			}
 		}
+		if(encontre) {
+			colisionables.remove(eliminar);
+			System.out.println("elimine");
+		}*/
 	}
 	
 	public void verificarColisiones() {
@@ -35,7 +40,7 @@ public class DetectorDeColisiones {
 				int alto = entidad1.getAlto();
 				if(entidad2.getPosicion().x <= x+(ancho/2) && entidad2.getPosicion().x >= x-(ancho/2) 
 				   && entidad2.getPosicion().y <= y+(alto/2) && entidad2.getPosicion().y >= y-(alto/2) && entidad1!=entidad2) {
-					entidad1.aceptarColision(entidad2);
+				entidad1.aceptarColision(entidad2);
 				}
 			}
 		}

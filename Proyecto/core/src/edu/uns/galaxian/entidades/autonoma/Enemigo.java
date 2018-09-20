@@ -25,7 +25,7 @@ public abstract class Enemigo extends EntidadAutonoma{
 
     public Enemigo(int xPos, int yPos, int vidaMaxima) {
         super(xPos, yPos, FACTOR_ESCALA, vidaMaxima);
-        this.textura = new Texture(Gdx.files.internal("enemigos/enemyBlack2.png"));
+        this.textura = new Texture(Gdx.files.internal("enemigos/enemyRed3.png"));
         colisionadorDisparoEnemigo = new ColisionadorDisparoEnemigo();
     }
 
@@ -72,7 +72,12 @@ public abstract class Enemigo extends EntidadAutonoma{
 
     @Override
     public void eliminar() {
+    	controlador.deregistrar(this);
     	textura.dispose();
+    }
+    
+    public void setControladorEnemigo(ControladorEnemigo c) {
+    	controlador = c;
     }
     
     //TODO implementar bien lo de abajo

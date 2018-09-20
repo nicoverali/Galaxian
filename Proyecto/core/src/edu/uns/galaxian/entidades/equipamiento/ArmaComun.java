@@ -15,7 +15,7 @@ public class ArmaComun implements Arma {
 	private static final int DAMAGE=15;
 	private static final int VELOCIDAD=150;
 	private static final int FACTOR_ESCALA=1;
-	private static Texture textura = new Texture(Gdx.files.internal(String.format("./jugador/VERDE/navePesada.png")));
+	private static Texture textura = new Texture(Gdx.files.internal(String.format("./Disparo/laserGreen11.png")));
 	private static final Disparo prototipo = new Disparo(DAMAGE,VELOCIDAD,FACTOR_ESCALA,textura);
 
 	public List<Disparo> disparar(int xPos, int yxPos, Vector2 direccion, Colisionador colisionador) {

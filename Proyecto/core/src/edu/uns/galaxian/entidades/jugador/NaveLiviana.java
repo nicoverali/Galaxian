@@ -76,7 +76,7 @@ public class NaveLiviana extends Jugador {
     
     @Override
     public void dibujar(SpriteBatch batch) {
-		batch.draw(textura, posicion.x-getAncho()/2, posicion.y-getAlto()/2, getAncho(), getAlto());
+		batch.draw(textura, posicion.x-getAncho()/2, posicion.y-getAlto()/2, getAncho()-10, getAlto()-10);
     }
     @Override
     public void eliminar() {

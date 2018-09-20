@@ -110,7 +110,7 @@ public class Disparo extends EntidadColisionable  {
 	@Override
 	public void dibujar(SpriteBatch batch) {
 		// TODO ver tamaño del disparo (se modifico solo para graficar, despues se debe borrar el -5)
-		batch.draw(textura, posicion.x-getAncho()/2, posicion.y-getAlto()/2, getAncho()-5, getAlto()-5);
+		batch.draw(textura, posicion.x-((getAncho()-10)/2), posicion.y-getAlto()/2, getAncho()-20, getAlto()-6);
 	}
 
 	@Override

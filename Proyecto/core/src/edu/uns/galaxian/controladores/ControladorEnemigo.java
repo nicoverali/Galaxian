@@ -35,6 +35,7 @@ public class ControladorEnemigo implements ControladorEntidad {
             for(int j = 0; j < fila.length(); j++){
                 // TODO Los enemigos deben depender de la informacion provista, ademas se deben colocar en distintas posiciones
                 Enemigo enemigo = new EnemigoComun(getPosX(fila.length(),j),getPosY(i),5);
+                enemigo.setControladorEnemigo(this);
                 // TODO setear la IA al enemigo
                 detector.registrarEntidadColisionable(enemigo);
                 filaLista.add(enemigo);
@@ -98,5 +99,17 @@ public class ControladorEnemigo implements ControladorEntidad {
 	@Override
 	public void setDetectorColisiones(DetectorDeColisiones detector) {
 		this.detector = detector;
+	}
+	
+	public void deregistrar(Enemigo enemy) {
+		for(List<Enemigo> list : enemigos) {
+			for(Enemigo e : list) {
+				if(e==enemy) {
+					list.remove(e);
+					break;
+				}
+			}
+		}
+		detector.eliminarEntidad(enemy);
 	}
 }
