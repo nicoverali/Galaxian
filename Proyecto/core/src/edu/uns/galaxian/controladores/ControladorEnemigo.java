@@ -66,7 +66,7 @@ public class ControladorEnemigo implements ControladorEntidad {
     	return resultado;
     }
 
-    public int getPosY(int numeroFila) {
+    private int getPosY(int numeroFila) {
     	int margen = 0;
     	return Gdx.graphics.getHeight() - (numeroFila+1)*Enemigo.getAltoMaxEnemigo() - margen;
     }

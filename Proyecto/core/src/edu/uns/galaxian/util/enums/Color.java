@@ -6,5 +6,6 @@ package edu.uns.galaxian.util.enums;
 public enum Color {
     ROJO,
     VERDE,
-    AZUL
+    AZUL,
+    BORDO
 }
