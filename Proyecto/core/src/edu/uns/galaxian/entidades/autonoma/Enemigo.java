@@ -2,7 +2,6 @@ package edu.uns.galaxian.entidades.autonoma;
 
 import java.util.List;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -10,95 +9,91 @@ import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.entidades.equipamiento.*;
 import edu.uns.galaxian.entidades.inanimadas.*;
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
-import edu.uns.galaxian.colision.colisionadores.ColisionadorDisparoEnemigo;
+import edu.uns.galaxian.colision.colisionadores.ColisionadorEnemigo;
 import edu.uns.galaxian.controladores.ControladorEnemigo;
-public abstract class Enemigo extends EntidadAutonoma{
-	
-	// TODO El atributo ancho y alto varia de acuerdo a el tipo de enemigo.
-	private static final int FACTOR_ESCALA = 64;
-	
-	private Texture textura;
 
-	private ControladorEnemigo controlador;
+public class Enemigo extends EntidadAutonoma{
+	
+	private static final int FACTOR_ESCALA = 1;
+	
 	private Arma arma;
-	protected Colisionador colisionadorDisparoEnemigo;
+	private int alto;
+	private int ancho;
 
-    public Enemigo(int xPos, int yPos, int vidaMaxima) {
+	private Texture textura;
+	private ControladorEnemigo controladorEnemigo;
+	private ColisionadorEnemigo colisionador;
+
+    public Enemigo(int xPos, int yPos, int vidaMaxima, Texture textura) {
         super(xPos, yPos, FACTOR_ESCALA, vidaMaxima);
-        this.textura = new Texture(Gdx.files.internal("enemigos/enemyRed3.png"));
-        colisionadorDisparoEnemigo = new ColisionadorDisparoEnemigo();
+        this.textura = textura;
+        this.alto = (int) Math.floor(textura.getHeight() * factorEscala)-55;
+        this.ancho = (int) Math.floor(textura.getWidth() * factorEscala)-65;
+        colisionador = new ColisionadorEnemigo(this);
     }
 
-    /**
-	 * Setea el arma del enemigo con la nueva pasada como par�metro.
-	 * @param nuevaArma Nueva arma que tendra el enemigo.
-	 */
-	public void setArma(Arma nuevaArma) {
-		arma = nuevaArma;
-	}
-	
-	/**
-	 * Devuelve el arma que el enemigo posee actualmente.
-	 * @return Arma que posee el enemigo.
-	 */
-	public Arma getArma() {
-		return arma;
-	}
-	
-	/**
-	 * Devuelve un nuevo disparo realizado por el enemigo.
-	 * @return Disparo realizado por el enemigo.
-	 */
-	public List<Disparo> disparar() {
-		return arma.disparar((int)posicion.x, (int)posicion.y, new Vector2(0,-1), colisionadorDisparoEnemigo);
-	}
-	
-	public static int getFactorEscala() {
-		return FACTOR_ESCALA;
-	}
-	
-
 	// Implementacion de metodos abstractos
-    // TODO Implementar metodos
-    @Override
+
     public void actualizar() {
 
     }
 
-    @Override
     public void dibujar(SpriteBatch batch) {
     	batch.draw(textura, posicion.x-getAncho()/2, posicion.y-getAlto()/2, getAncho(), getAlto());
     }
+    
+    public void restarVida(int vidaARestar) throws IllegalArgumentException {
+    	if(vidaARestar < 0){
+			throw new IllegalArgumentException("La vida que se quiere restar no puede ser negativa.");
+		}
+		setVida(Math.max(0, getVida() - vidaARestar));
+    }
 
-    @Override
     public void eliminar() {
-    	controlador.deregistrar(this);
+    	controladorEnemigo.deregistrar(this);
     	textura.dispose();
     }
     
-    public void setControladorEnemigo(ControladorEnemigo c) {
-    	controlador = c;
+    // METODOS Y CONSULTAS
+    
+    public List<Disparo> disparar() {
+		return arma.disparar((int)posicion.x, (int)posicion.y, new Vector2(0,-1));
+	}
+    
+    public Arma getArma() {
+    	return arma;
     }
     
-    //TODO implementar bien lo de abajo
-	
-	public Vector2 getVector() { 
-		return new Vector2(0,0);
-	}
+    public static int getFactorEscala() {
+    	return FACTOR_ESCALA;
+    }
+    
+    public int getColisionDamage() {
+    	return 0;
+    }
+    
+    public int getAlto() {
+    	return alto;
+    }
+    
+    public int getAncho() {
+    	return ancho;
+    }
+    
+    public void setArma(Arma nuevaArma) {
+    	arma = nuevaArma;
+    }
+    
+    public void setControladorEnemigo(ControladorEnemigo c) {
+    	controladorEnemigo = c;
+    }
+    
 	public Colisionador getColisionador(){
-		return colisionadorDisparoEnemigo; 
+		return colisionador;
 	}
-
-	public int getColisionDamage() {
-		// TODO Auto-generated method stub
-		return 0;
+	
+	public void aceptarColision(Colisionador colisionador) {
+		colisionador.colisionarConEnemigo(this);
 	}
-
-	public static int getAnchoMaxEnemigo() {
-		return 40;
-	}
-
-	public static int getAltoMaxEnemigo() {
-		return 40;
-	}
+	
 }

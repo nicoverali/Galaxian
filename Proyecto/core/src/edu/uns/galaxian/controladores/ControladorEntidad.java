@@ -2,7 +2,7 @@ package edu.uns.galaxian.controladores;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import edu.uns.galaxian.colision.DetectorDeColisiones;
+import edu.uns.galaxian.colision.DetectorColision;
 
 public interface ControladorEntidad {
 
@@ -16,7 +16,7 @@ public interface ControladorEntidad {
 	 * @param batch
 	 */
 	public void dibujar(SpriteBatch batch);
-
-	public void setDetectorColisiones(DetectorDeColisiones detector);
+	
+	public void setDetectorColisiones(DetectorColision d);
 	
 }

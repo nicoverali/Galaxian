@@ -8,12 +8,11 @@ import java.util.List;
 import java.util.Random;
 
 public class Background {
-    // Atributos
+	
     private static final int NUMERO_ESTRELLAS = 150;
     private List<float[]> estrellas;
     private ShapeRenderer renderer;
 
-    // Constructor
     public Background(){
         // Inicializar renderer
         renderer = new ShapeRenderer();

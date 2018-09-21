@@ -1,7 +1,8 @@
 package edu.uns.galaxian.colision.colisionadores;
 
 import edu.uns.galaxian.entidades.autonoma.Enemigo;
-import edu.uns.galaxian.entidades.inanimadas.Disparo;
+import edu.uns.galaxian.entidades.inanimadas.DisparoEnemigo;
+import edu.uns.galaxian.entidades.inanimadas.DisparoJugador;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
 public class ColisionadorEnemigo implements Colisionador<Enemigo> {
@@ -12,23 +13,21 @@ public class ColisionadorEnemigo implements Colisionador<Enemigo> {
 		this.objetoFuente = objetoFuente;
 	}
 
-	@Override
 	public void colisionarConJugador(Jugador jugador) {
 		jugador.restarVida(objetoFuente.getColisionDamage());
 	}
 
-	@Override
 	public void colisionarConEnemigo(Enemigo enemigo) {
-		// La colision entre enemigos no produce ningun efecto
+		// La colision entre enemigos no produce ningun efecto.
 	}
 
-	@Override
-	public void colisionarConDisparo(Disparo disparo) {
-		// TODO La colision con un disparo no produce ningun efecto por el momento
+	public void colisionarConDisparoJugador(DisparoJugador disparo) {
+		objetoFuente.restarVida(disparo.getDamage());
+		disparo.eliminar();
 	}
-
-	public void setObjetoFuente(Enemigo objetoFuente){
-		this.objetoFuente = objetoFuente;
+	
+	public void colisionarConDisparoEnemigo(DisparoEnemigo disparo) {
+		// Un disparo enemigo no afecta al enemigo.
 	}
 
 }

@@ -5,15 +5,14 @@ import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import edu.uns.galaxian.colision.DetectorDeColisiones;
-import edu.uns.galaxian.entidades.autonoma.Enemigo;
+import edu.uns.galaxian.colision.DetectorColision;
 import edu.uns.galaxian.entidades.inanimadas.Disparo;
 
 public class ControladorDisparo implements ControladorEntidad {
 
 	private List<Disparo> disparos;
 	private List<Disparo> listaEliminar;
-	private DetectorDeColisiones detector;
+	private DetectorColision detector;
 
 	public ControladorDisparo() {
 		disparos = new LinkedList<>();
@@ -25,6 +24,8 @@ public class ControladorDisparo implements ControladorEntidad {
 		for(Disparo d : listaEliminar) {
 			detector.eliminarEntidad(d);
 		}
+		
+		listaEliminar = new LinkedList<Disparo>();
 		
 		for(Disparo d : disparos) {
 			d.actualizar();
@@ -42,9 +43,9 @@ public class ControladorDisparo implements ControladorEntidad {
 			d.dibujar(batch);
 		}
 	}
-
-	public void setDetectorColisiones(DetectorDeColisiones detector) {
-		this.detector = detector;
+	
+	public void setDetectorColisiones(DetectorColision d) {
+		detector = d;
 	}
 	
 	public void deregistrar(Disparo disparo) {
@@ -56,4 +57,5 @@ public class ControladorDisparo implements ControladorEntidad {
 		}
 		listaEliminar.add(disparo);
 	}
+	
 }

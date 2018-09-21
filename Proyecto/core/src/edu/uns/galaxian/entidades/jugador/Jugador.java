@@ -3,13 +3,10 @@ package edu.uns.galaxian.entidades.jugador;
 import edu.uns.galaxian.controladores.ControladorDisparo;
 import edu.uns.galaxian.entidades.EntidadViva;
 import edu.uns.galaxian.entidades.equipamiento.Arma;
-import edu.uns.galaxian.entidades.equipamiento.ArmaComun;
 import edu.uns.galaxian.entidades.equipamiento.Escudo;
 import edu.uns.galaxian.util.enums.Color;
 
 public abstract class Jugador extends EntidadViva {
-
-	private static final int VIDA_MAXIMA = 100; // Debe ser reemplazado
 
 	protected Arma arma;
 	protected Escudo escudo;

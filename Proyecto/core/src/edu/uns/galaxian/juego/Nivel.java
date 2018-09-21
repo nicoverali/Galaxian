@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import edu.uns.galaxian.colision.DetectorDeColisiones;
+import edu.uns.galaxian.colision.DetectorColision;
 import edu.uns.galaxian.controladores.ControladorDisparo;
 import edu.uns.galaxian.controladores.ControladorEnemigo;
 import edu.uns.galaxian.controladores.ControladorEntidad;
@@ -25,10 +25,9 @@ public class Nivel extends ScreenAdapter {
     private Juego juego;
     private Jugador jugador;
     private Background background;
+    private DetectorColision detector;
     private Collection<ControladorEntidad> controladores;
-    DetectorDeColisiones detector;
 
-    // Constructor
     public Nivel(JSONObject configNivel, Juego juego){
         this.juego = juego;
         this.controladores = new ArrayList<>();
@@ -42,7 +41,7 @@ public class Nivel extends ScreenAdapter {
 
         // Inicializar controladores
 
-        detector = new DetectorDeColisiones();
+        detector = new DetectorColision();
 
         JSONObject configControladores = configNivel.getJSONObject(GameDataKeys.NIVEL_CONTROLADORES.getKey());
         inicializarControladores(jugador, configControladores);

@@ -1,27 +1,33 @@
 package edu.uns.galaxian.colision.colisionadores;
 
 import edu.uns.galaxian.entidades.autonoma.Enemigo;
-import edu.uns.galaxian.entidades.inanimadas.Disparo;
+import edu.uns.galaxian.entidades.inanimadas.DisparoEnemigo;
+import edu.uns.galaxian.entidades.inanimadas.DisparoJugador;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
-public class ColisionadorDisparoEnemigo implements Colisionador<Disparo> {
+public class ColisionadorDisparoEnemigo implements Colisionador<DisparoEnemigo> {
 
-	private Disparo objetoFuente;
+	private DisparoEnemigo objetoFuente;
+	
+	public ColisionadorDisparoEnemigo(DisparoEnemigo objetoFuente) {
+		this.objetoFuente = objetoFuente;
+	}
 
 	public void colisionarConJugador(Jugador jugador) {
 		jugador.restarVida(objetoFuente.getDamage());
+		objetoFuente.eliminar();
 	}
 
 	public void colisionarConEnemigo(Enemigo enemigo) {
-		// Un disparo enemigo no afecta a un enemigo
+		// Un disparo enemigo no afecta a un enemigo.
 	}
 
-	public void colisionarConDisparo(Disparo disparo) {
-		// Un disparo no afecta a otro disparo
+	public void colisionarConDisparoJugador(DisparoJugador disparo) {
+		// TODO Decidir si un disparo Jugador puede afectar a un enemigo.
 	}
-
-	public void setObjetoFuente(Disparo objetoFuente){
-		this.objetoFuente = objetoFuente;
+	
+	public void colisionarConDisparoEnemigo(DisparoEnemigo disparo) {
+		// Un disparo enemigo no afecta a otro disparo enemigo.
 	}
 
 }

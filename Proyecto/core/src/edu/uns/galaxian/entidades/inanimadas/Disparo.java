@@ -8,13 +8,12 @@ import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.controladores.ControladorDisparo;
 import edu.uns.galaxian.entidades.EntidadColisionable;
 
-public class Disparo extends EntidadColisionable  {
+public abstract class Disparo extends EntidadColisionable  {
 
 	private int damage;
 	private int velocidad;
 	private Vector2 direccion;
 	private Texture textura;
-	private Colisionador colisionadorDisparo;
 	private ControladorDisparo controlador;
 
 	// TODO estos atributos debrian estar aqui realmente?
@@ -22,116 +21,103 @@ public class Disparo extends EntidadColisionable  {
 	private int alto;
 
 	public Disparo() {
+		super(0,0,1);
 		damage=0;
 		velocidad=0;
 		direccion=null;
 		textura=null;
 	}
 
-	public Disparo(int damage, int velocidad, int factor, Texture textura) {
+	public Disparo(int damage, int velocidad, float factor, Texture textura) {
+		super(0,0,factor);
 		this.damage = damage;
 		this.velocidad = velocidad;
-		direccion = new Vector2(0,0);
-		this.textura=textura;
-		this.alto = (int) Math.floor(textura.getHeight() * factorEscala);
+		this.direccion = new Vector2(0,0);
+		this.textura = textura;
+		this.alto = (int) Math.floor(textura.getHeight() * factorEscala)-30;
 	    this.ancho = (int) Math.floor(textura.getWidth() * factorEscala);
 	}
 
 	public Disparo(int damage, int velocidad, Vector2 direccion, Texture textura){
+		super(0,0,1);
 		this.damage= damage;
 		this.velocidad= velocidad;
 		this.direccion= direccion;
 		this.textura=textura;
+		this.alto = (int) Math.floor(textura.getHeight() * factorEscala);
+	    this.ancho = (int) Math.floor(textura.getWidth() * factorEscala);
 	}
-	/**
-	 * Devuelve el danio asociado al disparo.
-	 * @return Danio que provoca el disparo.
-	 */
+	
+	// METODOS ABSTRACTOS
+	
+	public abstract Disparo clonar();
+	
+	public abstract void aceptarColision(Colisionador colisionador);
+	
+	public abstract Colisionador getColisionador();
+	
+	
+	// METODOS Y CONSULTAS
+	
 	public int getDamage() {
 		return damage;
 	}
 
-	/**
-	 * Setea el danio nuevo
-	 */
+	public int getVelocidad() {
+		return velocidad;
+	}
+	
+	public int getAlto() {
+		return alto;
+	}
+	
+	public int getAncho() {
+		return ancho;
+	}
+	
+	public float getFactor() {
+		return factorEscala;
+	}
+	
+	public Vector2 getDireccion() {
+		return direccion;
+	}
+	
+	public Texture getTextura() {
+		return textura;
+	}
+	
 	public void setDamage( int damage) {
 		this.damage=damage;
 	}
 
-	/**
-	 * Setea la velocidad nueva
-	 */
 	public void setVelocidad(int velocidad) {
 		this.velocidad=velocidad;
 	}
 
-	/**
-	 * Setea la direccion nueva
-	 */
 	public void setDireccion(Vector2 v) {
 		direccion= v;
 	}
 
-	/**
-	 * Setea la textura nueva
-	 */
 	public void setTextura(Texture textura) {
 		this.textura=textura;
 	}
 
-	/**
-	 * Retorna una copia del disparo con sus atributos
-	 * @return copia del disparo
-	 */
-	public Disparo clonar() {
-		Disparo nuevo = new Disparo (damage, velocidad, direccion, textura);
-		nuevo.setPosicion(posicion);
-		return nuevo;
-	}
-	
 	public void setControladorDisparo(ControladorDisparo c) {
 		controlador = c;
 	}
 
-	public void setColisionador(Colisionador colisionador) {
-		colisionadorDisparo = colisionador;
-	}
-
-	@Override
-	public Colisionador getColisionador() {
-		colisionadorDisparo.setObjetoFuente(this);
-		return colisionadorDisparo;
-	}
-
-	@Override
-	public int getAlto() {
-		return 30;
-	}
-
-	@Override
-	public int getAncho() {
-		return 30;
-	}
-
-	@Override
 	public void dibujar(SpriteBatch batch) {
-		// TODO ver tama�o del disparo (se modifico solo para graficar, despues se debe borrar el -5)
-		batch.draw(textura, posicion.x-((getAncho()-10)/2), posicion.y-getAlto()/2, getAncho()-20, getAlto()-6);
+		batch.draw(textura, posicion.x-(getAncho()/2), posicion.y-(getAlto()/2), getAncho(), getAlto());
 	}
 
-	@Override
 	public void actualizar() {
 		posicion.add(direccion.x, direccion.y*velocidad*Gdx.graphics.getDeltaTime());
 	}
 
-	@Override
 	public void eliminar() {
 		controlador.deregistrar(this);
     	//textura.dispose();
 	}
-
-	@Override
-	public void aceptarColision(Colisionador colisionador) {
-		colisionador.colisionarConDisparo(this);
-	}
+	
 }

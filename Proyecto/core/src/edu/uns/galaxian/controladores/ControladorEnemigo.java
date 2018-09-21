@@ -3,9 +3,10 @@ package edu.uns.galaxian.controladores;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import edu.uns.galaxian.colision.DetectorDeColisiones;
+import edu.uns.galaxian.colision.DetectorColision;
 import edu.uns.galaxian.entidades.autonoma.Enemigo;
-import edu.uns.galaxian.entidades.autonoma.EnemigoComun;
+import edu.uns.galaxian.entidades.autonoma.FabricaEnemigos;
+import edu.uns.galaxian.entidades.autonoma.FabricaEstandar;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -16,17 +17,21 @@ import java.util.List;
 
 public class ControladorEnemigo implements ControladorEntidad {
 
-    private static final int TAMANIO_NAVES = 64;
+    private static final int TAMANIO_NAVES = 40;
 
     private List<List<Enemigo>> enemigos;
     private List<Enemigo> listaEliminar;
     private Jugador jugador;
-    private DetectorDeColisiones detector;
+    private DetectorColision detector;
 
-    public ControladorEnemigo(JSONObject config, Jugador jugador, DetectorDeColisiones detector){
+    public ControladorEnemigo(JSONObject config, Jugador jugador, DetectorColision detector){
     	this.detector = detector;
         this.jugador = jugador;
+        this.detector = detector;
         listaEliminar = new LinkedList<Enemigo>();
+        
+        // TODO Por ahora el controladorEnemigo creara la fabrica de enemigos, mas adelante veremos que el nivel sea quien la cree
+        FabricaEnemigos fabrica = new FabricaEstandar();
 
         // Crear formacion de enemigos
         JSONArray formacion = config.getJSONArray("formacion");
@@ -36,7 +41,7 @@ public class ControladorEnemigo implements ControladorEntidad {
             List<Enemigo> filaLista = new ArrayList<Enemigo>(fila.length());
             for(int j = 0; j < fila.length(); j++){
                 // TODO Los enemigos deben depender de la informacion provista, ademas se deben colocar en distintas posiciones
-                Enemigo enemigo = new EnemigoComun(getPosX(fila.length(),j),getPosY(i),5);
+                Enemigo enemigo = fabrica.getEnemigoComun(getPosX(fila.length(),j),getPosY(i));
                 enemigo.setControladorEnemigo(this);
                 // TODO setear la IA al enemigo
                 detector.registrarColisionable(enemigo);
@@ -47,32 +52,32 @@ public class ControladorEnemigo implements ControladorEntidad {
     }
 
     private int getPosX(int cantidadNaves, int j) {
-    	int medio = Gdx.graphics.getWidth() / 2;
+    	int mitadPantalla = Gdx.graphics.getWidth() / 2;
     	int margen = 25;
     	int resultado = 0;
     	int espacioOcupado;
     	int espacioSobrante;
 
     	if(cantidadNaves%2==0) {
-    		espacioOcupado = (cantidadNaves/2 * Enemigo.getAnchoMaxEnemigo()) + (cantidadNaves/2 * margen);
+    		espacioOcupado = (cantidadNaves/2 * TAMANIO_NAVES) + (cantidadNaves/2 * margen);
     	}
     	else {
-    		espacioOcupado = (cantidadNaves/2 * Enemigo.getAnchoMaxEnemigo()) + (cantidadNaves/2 * margen + Enemigo.getAnchoMaxEnemigo()/2);
+    		espacioOcupado = (cantidadNaves/2 * TAMANIO_NAVES) + (cantidadNaves/2 * margen + TAMANIO_NAVES/2);
     	}
 
-    	espacioSobrante = medio - espacioOcupado;
+    	espacioSobrante = mitadPantalla - espacioOcupado;
     	int aux = 0;
 		for(int i=0; i<=j; i++) {
-			aux += Enemigo.getAnchoMaxEnemigo() + margen;
+			aux += TAMANIO_NAVES + margen;
 		}
-		resultado = aux - margen - (Enemigo.getAnchoMaxEnemigo()/2) + espacioSobrante;
+		resultado = aux - margen - (TAMANIO_NAVES/2) + espacioSobrante;
 
     	return resultado;
     }
 
     private int getPosY(int numeroFila) {
-    	int margen = 0;
-    	return Gdx.graphics.getHeight() - (numeroFila+1)*Enemigo.getAltoMaxEnemigo() - margen;
+    	int margen = 10;
+    	return Gdx.graphics.getHeight() - (numeroFila+1)*TAMANIO_NAVES - margen;
     }
 
     public Vector2 getPosicionJugador(){
@@ -106,8 +111,11 @@ public class ControladorEnemigo implements ControladorEntidad {
 		}
     	listaEliminar = new LinkedList<Enemigo>();
     }
+    
+    public void setDetectorColisiones(DetectorColision d) {
+    	detector = d;
+    }
 
-    @Override
     public void dibujar(SpriteBatch batch) {
         for(List<Enemigo> fila : enemigos){
             for(Enemigo enemigo : fila){
@@ -115,11 +123,6 @@ public class ControladorEnemigo implements ControladorEntidad {
             }
         }
     }
-
-	@Override
-	public void setDetectorColisiones(DetectorDeColisiones detector) {
-		this.detector = detector;
-	}
 	
 	public void deregistrar(Enemigo enemy) {
 		listaEliminar.add(enemy);

@@ -51,19 +51,6 @@ public abstract class EntidadViva extends EntidadColisionable{
 		this.vida = vida;
 	}
 
-	/**
-	 * Resta a la vida actual de la entidad, la cantidad de vida recibida. Si al restar la vida,
-	 * esta resulta ser menor que 0 entonces la vida se setea a 0, es decir, la vida resultante nunca
-	 * puede ser negativa.
-	 * @param vidaARestar Cantidad de vida que se desea restar
-	 * @throws IllegalArgumentException Si la vida recibida es negativa
-	 */
-	public void restarVida(int vidaARestar) throws IllegalArgumentException{
-		if(vidaARestar < 0){
-			throw new IllegalArgumentException("La vida que se quiere restar no puede ser negativa.");
-		}
-		this.vida = Math.max(0, this.vida - vidaARestar);
-	}
 
 	/**
 	 * Devuelve la vida actual de la entidad.
@@ -80,4 +67,14 @@ public abstract class EntidadViva extends EntidadColisionable{
 	public void setVidaAlMaximo(){
 		vida = vidaMaxima;
 	}
+	
+	/**
+	 * Resta a la vida actual de la entidad, la cantidad de vida recibida. Si al restar la vida,
+	 * esta resulta ser menor que 0 entonces la vida se setea a 0, es decir, la vida resultante nunca
+	 * puede ser negativa.
+	 * @param vidaARestar Cantidad de vida que se desea restar
+	 * @throws IllegalArgumentException Si la vida recibida es negativa
+	 */
+	public abstract void restarVida(int vidaARestar) throws IllegalArgumentException;
+	
 }

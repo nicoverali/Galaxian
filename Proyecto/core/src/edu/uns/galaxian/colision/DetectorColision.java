@@ -1,14 +1,13 @@
 package edu.uns.galaxian.colision;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class DetectorDeColisiones {
+public class DetectorColision {
 
 	private List<Colisionable> colisionables;
 
-	public DetectorDeColisiones() {
+	public DetectorColision() {
 		colisionables = new LinkedList<>();
 	}
 
@@ -25,11 +24,8 @@ public class DetectorDeColisiones {
 		for(int i=0; i<colisionables.size() && !encontre; i++) {
 			if(colisionables.get(i).equals(eliminar)) {
 				encontre = true;
+				colisionables.remove(eliminar);
 			}
-		}
-		if(encontre) {
-			colisionables.remove(eliminar);
-			System.out.println("elimine");
 		}
 	}
 
@@ -46,9 +42,8 @@ public class DetectorDeColisiones {
 			int ancho = referencia.getAncho();
 			int alto = referencia.getAlto();
 			if(otraColisionable.getPosicion().x <= x+(ancho/2) && otraColisionable.getPosicion().x >= x-(ancho/2)
-					&& otraColisionable.getPosicion().y <= y+(alto/2) && otraColisionable.getPosicion().y >= y-(alto/2) && referencia != otraColisionable) {
+			&& otraColisionable.getPosicion().y <= y+(alto/2) && otraColisionable.getPosicion().y >= y-(alto/2) && referencia != otraColisionable) {
 				referencia.aceptarColision(otraColisionable.getColisionador());
-				otraColisionable.aceptarColision(referencia.getColisionador());
 			}
 		}
 	}

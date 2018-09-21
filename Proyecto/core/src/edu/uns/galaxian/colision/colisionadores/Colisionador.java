@@ -1,10 +1,11 @@
 package edu.uns.galaxian.colision.colisionadores;
 
 import edu.uns.galaxian.entidades.autonoma.Enemigo;
-import edu.uns.galaxian.entidades.inanimadas.Disparo;
+import edu.uns.galaxian.entidades.inanimadas.DisparoEnemigo;
+import edu.uns.galaxian.entidades.inanimadas.DisparoJugador;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
-public interface Colisionador<T>{
+public interface Colisionador<T> {
 
 	/**
 	 * Comportamiento al momento de colisionar con un Jugador
@@ -22,11 +23,12 @@ public interface Colisionador<T>{
 	 * Comportamiento al momento de colisionar con un Disparo
 	 * @param disparo Disparo con el que se colisiono
 	 */
-	public void colisionarConDisparo(Disparo disparo);
-
+	public void colisionarConDisparoJugador(DisparoJugador disparo);
+	
 	/**
-	 * Setea el objeto fuente con el que trabajara el colisionador.
-	 * @param objetoFuente Objeto fuente del colisionador
+	 * Comportamiento al momento de colisionar con un Disparo
+	 * @param disparo Disparo con el que se colisiono
 	 */
-	public void setObjetoFuente(T objetoFuente);
+	public void colisionarConDisparoEnemigo(DisparoEnemigo disparo);
+
 }

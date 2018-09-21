@@ -1,12 +1,14 @@
 package edu.uns.galaxian.entidades.equipamiento;
 
-public class FabricaDeArmas {
+import edu.uns.galaxian.entidades.inanimadas.Disparo;
+
+public class FabricaArmas {
 
 	private Arma armaComun;
 	private Arma armaDisparoDoble;
 	
-	public Arma getArmaComun() {
-		Arma nueva = (armaComun==null)? new ArmaComun() : armaComun;
+	public Arma getArmaComun(Disparo modelo) {
+		Arma nueva = (armaComun==null)? new ArmaComun(modelo) : armaComun;
 		return nueva;
 	}
 	
