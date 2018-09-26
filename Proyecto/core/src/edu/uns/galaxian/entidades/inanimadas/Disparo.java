@@ -4,87 +4,58 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.controladores.ControladorDisparo;
 import edu.uns.galaxian.entidades.EntidadColisionable;
 
 public abstract class Disparo extends EntidadColisionable  {
 
-	private int damage;
-	private int velocidad;
-	private Vector2 direccion;
-	private Texture textura;
+	protected int damage;
+	protected int velocidad;
+	protected Vector2 direccion;
+	protected Texture textura;
 	private ControladorDisparo controlador;
 
-	// TODO estos atributos debrian estar aqui realmente?
-	private int ancho;
-	private int alto;
-
 	public Disparo() {
-		super(0,0,1);
-		damage=0;
-		velocidad=0;
-		direccion=null;
-		textura=null;
-	}
-
-	public Disparo(int damage, int velocidad, float factor, Texture textura) {
-		super(0,0,factor);
-		this.damage = damage;
-		this.velocidad = velocidad;
-		this.direccion = new Vector2(0,0);
-		this.textura = textura;
-		this.alto = (int) Math.floor(textura.getHeight() * factorEscala)-30;
-	    this.ancho = (int) Math.floor(textura.getWidth() * factorEscala);
+		super(0, 0, 1);
+		damage = 0;
+		velocidad = 0;
+		direccion = Vector2.Zero;
+		textura = null;
 	}
 
 	public Disparo(int damage, int velocidad, Vector2 direccion, Texture textura){
 		super(0,0,1);
-		this.damage= damage;
-		this.velocidad= velocidad;
-		this.direccion= direccion;
-		this.textura=textura;
-		this.alto = (int) Math.floor(textura.getHeight() * factorEscala);
-	    this.ancho = (int) Math.floor(textura.getWidth() * factorEscala);
+		this.damage = damage;
+		this.velocidad = velocidad;
+		this.direccion = direccion;
+		this.textura = textura;
+	}
+
+	public Disparo(int damage, int velocidad, float factor, Vector2 direccion, Texture textura, ControladorDisparo controlador) {
+		super(0,0,factor);
+		this.damage = damage;
+		this.velocidad = velocidad;
+		this.direccion = direccion;
+		this.textura = textura;
+		this.controlador = controlador;
 	}
 	
 	// METODOS ABSTRACTOS
 	
 	public abstract Disparo clonar();
 	
-	public abstract void aceptarColision(Colisionador colisionador);
-	
-	public abstract Colisionador getColisionador();
-	
-	
 	// METODOS Y CONSULTAS
 	
 	public int getDamage() {
 		return damage;
 	}
-
-	public int getVelocidad() {
-		return velocidad;
-	}
 	
 	public int getAlto() {
-		return alto;
+		return (int) Math.floor(textura.getHeight() * factorEscala);
 	}
 	
 	public int getAncho() {
-		return ancho;
-	}
-	
-	public float getFactor() {
-		return factorEscala;
-	}
-	
-	public Vector2 getDireccion() {
-		return direccion;
-	}
-	
-	public Texture getTextura() {
-		return textura;
+		return (int) Math.floor(textura.getWidth() * factorEscala);
 	}
 	
 	public void setDamage( int damage) {

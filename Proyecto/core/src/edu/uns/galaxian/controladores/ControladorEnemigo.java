@@ -4,9 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.colision.DetectorColision;
-import edu.uns.galaxian.entidades.autonoma.Enemigo;
-import edu.uns.galaxian.entidades.autonoma.FabricaEnemigos;
-import edu.uns.galaxian.entidades.autonoma.FabricaEstandar;
+import edu.uns.galaxian.entidades.autonoma.enemigo.Enemigo;
+import edu.uns.galaxian.entidades.autonoma.enemigo.FabricaEnemigos;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -87,12 +86,10 @@ public class ControladorEnemigo implements ControladorEntidad {
     @Override
     public void actualizarEstado() {
         // TODO Este metodo debe decidir cuando un enemigo sale de la formacion
-    	for(int fila=0; fila<enemigos.size(); fila++) {
-    		List<Enemigo> aux = enemigos.get(fila);
-    		for(int enemigo=0; enemigo<aux.size(); enemigo++) {
-    			Enemigo e = aux.get(enemigo);
+    	for(List<Enemigo> fila : enemigos) {
+    		for(Enemigo enemigo : fila) {
                 // TODO Se debe actualizar el enemigo
-                detector.verificarYResolverColisiones(e);
+                detector.verificarYResolverColisiones(enemigo);
             }
     	}
     	
@@ -109,7 +106,7 @@ public class ControladorEnemigo implements ControladorEntidad {
     			}
     		}
 		}
-    	listaEliminar = new LinkedList<Enemigo>();
+    	listaEliminar = new LinkedList<>();
     }
     
     public void setDetectorColisiones(DetectorColision d) {

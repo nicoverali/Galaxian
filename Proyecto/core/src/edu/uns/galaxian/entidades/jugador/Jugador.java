@@ -7,11 +7,13 @@ import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorJugador;
 import edu.uns.galaxian.entidades.EntidadViva;
-import edu.uns.galaxian.entidades.equipamiento.Arma;
-import edu.uns.galaxian.entidades.equipamiento.ArmaComun;
-import edu.uns.galaxian.entidades.equipamiento.Escudo;
-import edu.uns.galaxian.entidades.equipamiento.EscudoNulo;
+import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
+import edu.uns.galaxian.entidades.equipamiento.armas.ArmaComun;
+import edu.uns.galaxian.entidades.equipamiento.escudos.Escudo;
+import edu.uns.galaxian.entidades.equipamiento.escudos.EscudoNulo;
 import edu.uns.galaxian.entidades.inanimadas.DisparoJugador;
+import edu.uns.galaxian.entidades.jugador.input.ProcesadorInput;
+import edu.uns.galaxian.entidades.jugador.nave.NaveJugador;
 
 public class Jugador extends EntidadViva {
 
@@ -21,11 +23,14 @@ public class Jugador extends EntidadViva {
 	private ProcesadorInput input;
 	private ColisionadorJugador colisionador;
 
-	
+
+	// Constructores	
+
 	public Jugador(int xPos, int yPos, float factorEscala, NaveJugador nave, Arma arma, Escudo escudo, ProcesadorInput input) {
 		super(xPos, yPos, factorEscala, nave.getVidaMax());
 		this.nave = nave;
 		this.arma = arma;
+		this.arma.setDisparoModelo(new DisparoJugador());
 		this.escudo = escudo;
 		this.input = input;
 		colisionador = new ColisionadorJugador(this);
@@ -39,12 +44,15 @@ public class Jugador extends EntidadViva {
 		this(xPos, yPos, 1, nave, new ArmaComun(new DisparoJugador()), new EscudoNulo(), input);
 	}
 
+	// Metodos
+
 	/**
 	 * Setea el arma del jugador con la nueva pasada como parametro.
 	 * @param nuevaArma Nueva arma que tendria el jugador.
 	 */
 	public void setArma (Arma nuevaArma) {
 		arma = nuevaArma;
+		arma.setDisparoModelo(new DisparoJugador());
 	}
 	
 	/**
@@ -80,6 +88,7 @@ public class Jugador extends EntidadViva {
 	}
 	
 	// Implementacion de metodos
+	
 	public int getAlto(){
 		return (int) Math.ceil(nave.getAlto() * factorEscala);
 	}
@@ -105,9 +114,13 @@ public class Jugador extends EntidadViva {
 	}
 
 	public void actualizar(){
-		int nuevaPosEnX = (int) (getPosicion().x + nave.getVelocidad() * Gdx.graphics.getDeltaTime());
+		int nuevaPosEnX = (int) (getPosicion().x + nave.getVelocidad() * Gdx.graphics.getDeltaTime() * input.getXAxis());
 		if(jugadorEstaDentroDePantalla(nuevaPosEnX)){
 			setPosicion(nuevaPosEnX, (int)getPosicion().y);
+		}
+
+		if(input.sePresionoDisparar()){
+			arma.disparar((int) posicion.x, (int) posicion.y, new Vector2(0,1));
 		}
 	}
 

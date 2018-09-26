@@ -1,6 +1,6 @@
-package edu.uns.galaxian.entidades.equipamiento;
+package edu.uns.galaxian.entidades.equipamiento.escudos;
 
-import edu.uns.galaxian.entidades.autonoma.Enemigo;
+import edu.uns.galaxian.entidades.autonoma.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.inanimadas.Disparo;
 
 public class EscudoNulo implements Escudo{

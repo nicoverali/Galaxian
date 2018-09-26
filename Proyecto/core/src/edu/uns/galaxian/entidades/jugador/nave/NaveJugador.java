@@ -1,4 +1,4 @@
-package edu.uns.galaxian.entidades.jugador;
+package edu.uns.galaxian.entidades.jugador.nave;
 
 import com.badlogic.gdx.graphics.Texture;
 

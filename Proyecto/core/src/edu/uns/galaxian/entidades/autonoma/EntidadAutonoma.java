@@ -5,10 +5,20 @@ import edu.uns.galaxian.entidades.autonoma.ia.*;
 
 public abstract class EntidadAutonoma extends EntidadViva {
 
-	private InteligenciaArtificial inteligencia;
+	protected InteligenciaArtificial inteligencia;
 
-	public EntidadAutonoma(int xPos, int yPos, int factorEscala, int vidaMaxima) {
+	// TODO En los metodos que no reciben ia, podria setearse una ia de tipo Nula, en vez de null.
+	public EntidadAutonoma(int xPos, int yPos, float factorEscala, int vidaMaxima, InteligenciaArtificial ia) {
 		super(xPos, yPos, factorEscala, vidaMaxima);
+		inteligencia = ia;
+	}
+
+	public EntidadAutonoma(int xPos, int yPos, float factorEscala, int vidaMaxima){
+		super(xPos, yPos, factorEscala, vidaMaxima);
+	}
+
+	public EntidadAutonoma(int xPos, int yPos, int vidaMaxima){
+		super(xPos, yPos, 1, vidaMaxima);
 	}
 
 	/**

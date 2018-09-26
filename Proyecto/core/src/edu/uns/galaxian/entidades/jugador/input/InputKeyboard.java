@@ -1,4 +1,4 @@
-package edu.uns.galaxian.entidades.jugador;
+package edu.uns.galaxian.entidades.jugador.input;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;

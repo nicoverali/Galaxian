@@ -75,6 +75,11 @@ public abstract class EntidadViva extends EntidadColisionable{
 	 * @param vidaARestar Cantidad de vida que se desea restar
 	 * @throws IllegalArgumentException Si la vida recibida es negativa
 	 */
-	public abstract void restarVida(int vidaARestar) throws IllegalArgumentException;
+	public void restarVida(int vidaARestar) throws IllegalArgumentException{
+		if(vidaARestar < 0){
+			throw new IllegalArgumentException("La vida que se quiere restar no puede ser negativa.");
+		}
+		setVida(Math.max(0, getVida() - vidaARestar));
+	}
 	
 }
