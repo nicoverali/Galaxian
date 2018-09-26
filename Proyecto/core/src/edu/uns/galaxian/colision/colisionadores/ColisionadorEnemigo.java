@@ -23,7 +23,9 @@ public class ColisionadorEnemigo implements Colisionador<Enemigo> {
 
 	public void colisionarConDisparoJugador(DisparoJugador disparo) {
 		objetoFuente.restarVida(disparo.getDamage());
-		disparo.eliminar();
+		if(objetoFuente.getVida() == 0){
+			objetoFuente.eliminar();
+		}
 	}
 	
 	public void colisionarConDisparoEnemigo(DisparoEnemigo disparo) {

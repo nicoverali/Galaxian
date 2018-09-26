@@ -14,8 +14,6 @@ public class ColisionadorDisparoJugador implements Colisionador<DisparoJugador> 
 	}
 
 	public void colisionarConEnemigo(Enemigo enemigo) {
-		enemigo.restarVida(objetoFuente.getDamage());
-		enemigo.eliminar(); // TODO solo es para ver graficamente la colision.
 		objetoFuente.eliminar();
 	}
 

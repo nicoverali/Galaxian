@@ -35,15 +35,15 @@ public class DetectorColision {
 	 * @param referencia Objeto colisionable del cual se verifican las colisiones
 	 */
 	public void verificarYResolverColisiones(Colisionable referencia) {
-		for(int i=0; i<colisionables.size(); i++) {
-			Colisionable otraColisionable = colisionables.get(i);
+		for (Colisionable otroColisionable : colisionables){
 			int x = (int) referencia.getPosicion().x;
 			int y = (int) referencia.getPosicion().y;
 			int ancho = referencia.getAncho();
 			int alto = referencia.getAlto();
-			if(otraColisionable.getPosicion().x <= x+(ancho/2) && otraColisionable.getPosicion().x >= x-(ancho/2)
-			&& otraColisionable.getPosicion().y <= y+(alto/2) && otraColisionable.getPosicion().y >= y-(alto/2) && referencia != otraColisionable) {
-				referencia.aceptarColision(otraColisionable.getColisionador());
+			if(otroColisionable.getPosicion().x <= x+(ancho/2) && otroColisionable.getPosicion().x >= x-(ancho/2)
+			&& otroColisionable.getPosicion().y <= y+(alto/2) && otroColisionable.getPosicion().y >= y-(alto/2) && referencia != otroColisionable) {
+				referencia.aceptarColision(otroColisionable.getColisionador());
+				otroColisionable.aceptarColision(referencia.getColisionador());
 			}
 		}
 	}
