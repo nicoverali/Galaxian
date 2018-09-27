@@ -1,103 +1,124 @@
 package edu.uns.galaxian.juego.config;
 
+import edu.uns.galaxian.entidades.jugador.input.InputKeyboard;
+import edu.uns.galaxian.entidades.jugador.nave.NaveJugador;
+import edu.uns.galaxian.entidades.jugador.nave.NaveLiviana;
+import edu.uns.galaxian.juego.config.keys.GameDataKey;
 import edu.uns.galaxian.juego.exceptions.NonExistentGameDataException;
+import edu.uns.galaxian.util.enums.Color;
+import edu.uns.galaxian.util.io.GSONNonFieldTypeAdapter;
 import edu.uns.galaxian.util.io.IOManager;
 import edu.uns.galaxian.juego.config.keys.SaveDataKey;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.IOException;
+
+import com.google.gson.*;
 
 
 public class AdministradorDatos {
 
-    // Direccion a archivos
-    private static final String SAVE_DATA_DIR = "./files/save_data.json";
-    private static final String SAVE_DATA_MD5_DIR = "./files/save_data.h";
-    private static final String GAME_DATA_DIR = "./files/game_data.json";
+    private JsonObject datosDeUsuario;
+    private JsonArray datosDelJuego;
+    private NaveJugador naveJugador;
 
-    private JSONObject saveData;
-    private JSONArray gameData;
-
-    private AdministradorDatos(){
-        cargarDatosGuardados();
+    // Constructor
+    public AdministradorDatos(){
+        cargarDatosDeUsuario();
         cargarDatosDelJuego();
+
+        TypeAdapterFactory naveAdapter = new GSONNonFieldTypeAdapter(NaveJugador.class, new Class[]{Color.class}, new Object[]{Color.AZUL});
+        Gson gson = new GsonBuilder().registerTypeAdapterFactory(naveAdapter).create();
+        naveJugador = gson.fromJson(datosDeUsuario.getAsJsonObject(SaveDataKey.NAVE_JUGADOR.key()), NaveJugador.class);
     }
 
-    // Holder
-    private static class HolderInstanciaAdministrador{
-        private static final AdministradorDatos INSTANCE = new AdministradorDatos();
+
+    // Metodos
+    /**
+     * Retorna la cantidad de niveles que hay en el juego.
+     * @return Cantidad de niveles en el juego
+     */
+    public int getCantidadNiveles(){
+        return datosDelJuego.size();
     }
 
-    // Pedido de instancia
-    public static AdministradorDatos getInstance(){
-        return HolderInstanciaAdministrador.INSTANCE;
+    /**
+     * Retorna el maximo nivel alcanzado por el usuario.
+     * @return Maximo nivel alcanzado por el usuario
+     */
+    public int getNivelAlcanzado(){
+        return datosDeUsuario.get(SaveDataKey.NIVEL_ALCANZADO.key()).getAsInt();
     }
 
-    // Metodos de escritura
-    private boolean guardarDatos(){
-        IOManager io = IOManager.getInstace();
-        String contenido = saveData.toString();
+    /**
+     * Actualiza el maximo nivel alcanzado por el usuario. Retorna verdadero en caso de 
+     * que los datos se hayan salvado con exito, o falso en caso contrario.
+     * @param nivel Nuevo nivel alcanzado por el usuario
+     * @return Verdadero si los datos se salvaron exitosamente
+     * @throws ArrayIndexOutOfBoundsException Si el nuevo nivel es menor a 1 o no existe
+     */
+    public boolean setNivelAlcanzado(int nivel) throws IndexOutOfBoundsException{
+        verificarNivel(nivel);
+        datosDeUsuario.addProperty(SaveDataKey.NIVEL_ALCANZADO.key(), nivel);
+        return guardarDatosDeUsuario();
+    }
+
+    /**
+     * Retorn el objeto de configuracion del nivel pedido.
+     * @param nivel Nivel
+     * @return  Archivo de configuracion del nivel
+     * @throws IndexOutOfBoundsException Si el nivel es menor a 1 o no existe
+     */
+    public ConfigNivel getConfiguracionNivel(int nivel) throws IndexOutOfBoundsException{
+        verificarNivel(nivel);
+        JsonObject nivelJson = datosDelJuego.get(nivel-1).getAsJsonObject();
+        return new ConfigNivel(nivelJson, naveJugador);
+    }
+
+    // Metodo privados
+    private void cargarDatosDeUsuario(){
+        IOManager io = IOManager.getInstance();
+        JsonParser parser = new JsonParser();
         try{
-            io.escribirArchivoComoString(SAVE_DATA_DIR, contenido, false);
-            io.marcarSoloLectura(SAVE_DATA_DIR);
+            String jsonString = io.leerArchivo(SaveDataKey.DIR_ARCHIVO, true);
+            datosDeUsuario = parser.parse(jsonString).getAsJsonObject();
+        }catch (IOException e){
+            TypeAdapterFactory genericAdapter = new GSONNonFieldTypeAdapter();
+            Gson gson = new GsonBuilder().registerTypeAdapterFactory(genericAdapter).create();
+            JsonElement naveJugadorJson = gson.toJsonTree(new NaveLiviana(Color.AZUL), NaveJugador.class);
+            datosDeUsuario = new JsonObject();
+            datosDeUsuario.addProperty(SaveDataKey.NIVEL_ALCANZADO.key(), 1);
+            datosDeUsuario.add(SaveDataKey.NAVE_JUGADOR.key(), naveJugadorJson);
+            guardarDatosDeUsuario();
+        }
+    }
 
-            io.escribirArchivoComoString(SAVE_DATA_MD5_DIR, io.obtenerMD5Hex(contenido), false);
-            io.marcarSoloLectura(SAVE_DATA_MD5_DIR);
-            io.ocultarArchivo(SAVE_DATA_MD5_DIR);
+    private void cargarDatosDelJuego(){
+        IOManager io = IOManager.getInstance();
+        JsonParser parser = new JsonParser();
+        try{
+            datosDelJuego = parser.parse(io.leerArchivo(GameDataKey.DIR_ARCHIVO, true)).getAsJsonArray();
+        }catch (IOException e){
+            throw new NonExistentGameDataException("Los config del juego no existen o estan corruptos.",e);
+        }
+    }
+
+    private boolean guardarDatosDeUsuario(){
+        IOManager io = IOManager.getInstance();
+        String contenido = datosDeUsuario.toString();
+        try{
+            io.escribirArchivoComoString(SaveDataKey.DIR_ARCHIVO, contenido, false);
         }catch (IOException e){
             return false;
         }
         return true;
     }
 
-    // Metodos de inicializacion
-    // TODO Verificar integridad de ambos archivos
-    private boolean cargarDatosGuardados(){
-        IOManager io = IOManager.getInstace();
-        // Cargar arhivo de config guardados
-        try{
-            io.leerArchivo(SAVE_DATA_DIR, true);
-        }catch (IOException primExcepcion){
-            // Se crea un objeto con nuevos config y luego es persistido en memoria
-            saveData = new JSONObject();
-            saveData.put(SaveDataKey.NIVEL_ALCANZADO.key(), 1);
-            if(!guardarDatos()){
-                return false;
-            }
+    private void verificarNivel(int nivel) throws IndexOutOfBoundsException{
+        if(nivel < 1) {
+            throw new ArrayIndexOutOfBoundsException("El nivel no puede ser negativo ni cero.");
         }
-        return true;
-    }
-    private void cargarDatosDelJuego(){
-        IOManager io = IOManager.getInstace();
-        try{
-            gameData = new JSONArray(io.leerArchivo(GAME_DATA_DIR, true));
-        }catch (IOException e){
-            throw new NonExistentGameDataException("Los config del juego no existen o estan corruptos.",e);
+        if(nivel > datosDelJuego.size()){
+            throw new ArrayIndexOutOfBoundsException("Este nivel no existe.");
         }
     }
-
-    // Metodos publicos
-    public int getCantidadNiveles(){
-        return gameData.length();
-    }
-
-    public int getNivelAlcanzado(){
-        return saveData.getInt(SaveDataKey.NIVEL_ALCANZADO.key());
-    }
-
-    public boolean setNivelAlcanzado(int nivel) throws ArrayIndexOutOfBoundsException{
-        if(nivel < 1) throw new ArrayIndexOutOfBoundsException("El componentes no puede ser negativo ni cero.");
-        if(nivel > gameData.length()) throw new ArrayIndexOutOfBoundsException("Este componentes no existe.");
-
-        saveData.put(SaveDataKey.NIVEL_ALCANZADO.key(), nivel);
-        return guardarDatos();
-    }
-
-    /*public ConfigNivel getConfiguracionNivel(int nivel) throws ArrayIndexOutOfBoundsException{
-        if(nivel < 1) throw new ArrayIndexOutOfBoundsException("El componentes no puede ser negativo ni cero.");
-        if(nivel > gameData.length()) throw new ArrayIndexOutOfBoundsException("Este componentes no existe.");
-
-        return new ConfigNivel(gameData.getJSONObject(nivel-1));
-    }*/
 }

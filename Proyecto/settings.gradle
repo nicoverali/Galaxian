@@ -1,1 +1,2 @@
-include 'desktop', 'core', 'html'
+include 'desktop', 'core', 'html', 'level_maker'
+
