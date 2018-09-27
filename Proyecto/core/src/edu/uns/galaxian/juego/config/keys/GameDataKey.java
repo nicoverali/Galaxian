@@ -3,22 +3,20 @@ package edu.uns.galaxian.juego.config.keys;
 import java.util.HashMap;
 
 public enum GameDataKey {
+
     // Enums
     NIVEL_TIPO("tipo"),
-    NIVEL_JUGADOR("jugador"),
-    NIVEL_CONTROLADORES("controladores"),
-    CONTROLADOR_ENEMIGO("controladorEnemigo"),
-    FORMACION("formacion"),
-    ENEMIGOS("enemigos"),
-    ENEMIGOS_KAMIKAZE("kamikaze"),
-    ENEMIGOS_ARMADO("armado"),
-    VIDA_MAXIMA("vidaMaxima"),
-    VELOCIDAD_MAXIMA("velocidadMaxima"),
+    JUGADOR("jugador"),
     ARMA("arma"),
     ESCUDO("escudo"),
-    INTELIGENCIA("inteligencia"),
-    MODO_ENEMIGO("modo");
+    INPUT("procesadorInput"),
+    NAVE_JUGADOR("naveJugador"),
+    FABRICA_ENEMIGOS("fabricaEnemigos"),
+    CONTROLADORES("controladores"),
+    CONTROLADOR_ENEMIGO("controladorEnemigo");
 
+    // Direccion del archivo
+    public static final String DIR_ARCHIVO = "./files/game_data.json";
 
     // Clave guardada por cada enum
     private String key;

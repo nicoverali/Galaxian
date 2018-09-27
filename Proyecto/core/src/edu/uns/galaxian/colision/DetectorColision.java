@@ -40,11 +40,15 @@ public class DetectorColision {
 			int y = (int) referencia.getPosicion().y;
 			int ancho = referencia.getAncho();
 			int alto = referencia.getAlto();
-			if(otroColisionable.getPosicion().x <= x+(ancho/2) && otroColisionable.getPosicion().x >= x-(ancho/2)
-			&& otroColisionable.getPosicion().y <= y+(alto/2) && otroColisionable.getPosicion().y >= y-(alto/2) && referencia != otroColisionable) {
+			if(referencia != otroColisionable && colisionaron(referencia, otroColisionable)) {
 				referencia.aceptarColision(otroColisionable.getColisionador());
 				otroColisionable.aceptarColision(referencia.getColisionador());
 			}
 		}
+	}
+
+	private boolean colisionaron(Colisionable A, Colisionable B){
+		return (Math.abs(A.getPosicion().x - B.getPosicion().x)<=(A.getAncho() + B.getAncho())/2
+				&& Math.abs(A.getPosicion().y - B.getPosicion().y)<=(A.getAlto() + B.getAlto())/2);
 	}
 }

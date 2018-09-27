@@ -7,8 +7,7 @@ import edu.uns.galaxian.colision.DetectorColision;
 import edu.uns.galaxian.entidades.autonoma.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.autonoma.enemigo.FabricaEnemigos;
 import edu.uns.galaxian.entidades.jugador.Jugador;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import edu.uns.galaxian.entidades.autonoma.enemigo.TipoEnemigo;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -23,30 +22,28 @@ public class ControladorEnemigo implements ControladorEntidad {
     private Jugador jugador;
     private DetectorColision detector;
 
-    public ControladorEnemigo(JSONObject config, Jugador jugador, DetectorColision detector){
+    public ControladorEnemigo(FabricaEnemigos fabrica, List<List<TipoEnemigo>> formacion, Jugador jugador, DetectorColision detector){
     	this.detector = detector;
         this.jugador = jugador;
-        this.detector = detector;
-        listaEliminar = new LinkedList<Enemigo>();
-        
-        // TODO Por ahora el controladorEnemigo creara la fabrica de enemigos, mas adelante veremos que el nivel sea quien la cree
-        FabricaEnemigos fabrica = new FabricaEstandar();
+        listaEliminar = new LinkedList<>();
 
         // Crear formacion de enemigos
-        JSONArray formacion = config.getJSONArray("formacion");
-        enemigos = new ArrayList<>(formacion.length());
-        for(int i = 0; i < formacion.length(); i++) {
-            JSONArray fila = formacion.getJSONArray(i);
-            List<Enemigo> filaLista = new ArrayList<Enemigo>(fila.length());
-            for(int j = 0; j < fila.length(); j++){
-                // TODO Los enemigos deben depender de la informacion provista, ademas se deben colocar en distintas posiciones
-                Enemigo enemigo = fabrica.getEnemigoComun(getPosX(fila.length(),j),getPosY(i));
+        enemigos = new ArrayList<>(formacion.size());
+        int numFila = 0;
+        int numColumna = 0;
+        for(List<TipoEnemigo> fila : formacion) {
+            List<Enemigo> filaDeEnemigos = new ArrayList<>(fila.size());
+            for(TipoEnemigo tipoEnemigo : fila){
+                Enemigo enemigo = crearEnemigoCorrespondiente(tipoEnemigo, fabrica, getPosX(fila.size(), numColumna), getPosY(numFila));
                 enemigo.setControladorEnemigo(this);
                 // TODO setear la IA al enemigo
                 detector.registrarColisionable(enemigo);
-                filaLista.add(enemigo);
+                filaDeEnemigos.add(enemigo);
+                numColumna++;
             }
-            enemigos.add(filaLista);
+            enemigos.add(filaDeEnemigos);
+            numFila++;
+            numColumna = 0;
         }
     }
 
@@ -77,6 +74,18 @@ public class ControladorEnemigo implements ControladorEntidad {
     private int getPosY(int numeroFila) {
     	int margen = 10;
     	return Gdx.graphics.getHeight() - (numeroFila+1)*TAMANIO_NAVES - margen;
+    }
+
+    private Enemigo crearEnemigoCorrespondiente(TipoEnemigo tipoEnemigo, FabricaEnemigos fabrica, int xPos, int yPos){
+        Enemigo nuevoEnemigo = null;
+        switch (tipoEnemigo){
+            case KAMIKAZE: { nuevoEnemigo = fabrica.getKamikaze(xPos, yPos); break; }
+            case KAMIKAZE_ALEATORIO: { nuevoEnemigo = fabrica.getKamikazeAleatorio(xPos, yPos); break;}
+            case KAMIKAZE_MIXTO:{ nuevoEnemigo = fabrica.getKamikazeMixto(xPos, yPos); break; }
+            case ARMADO: { nuevoEnemigo = fabrica.getArmado(xPos, yPos); break; }
+            case ARMADO_DEBIL:{ nuevoEnemigo = fabrica.getArmadoDebil(xPos, yPos); break; }
+        }
+        return nuevoEnemigo;
     }
 
     public Vector2 getPosicionJugador(){

@@ -62,11 +62,11 @@ public class Enemigo extends EntidadAutonoma {
     }
     
     public int getAlto() {
-    	return (int) Math.floor(textura.getHeight() * factorEscala);
+    	return (int) Math.ceil(textura.getHeight() * factorEscala);
     }
     
     public int getAncho() {
-    	return (int) Math.floor(textura.getWidth() * factorEscala);
+    	return (int) Math.ceil(textura.getWidth() * factorEscala);
     }
     
     public void setArma(Arma nuevaArma) {

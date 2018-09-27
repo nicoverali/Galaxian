@@ -3,7 +3,11 @@ package edu.uns.galaxian.juego.config.keys;
 public enum SaveDataKey {
 
     // Enums
-    NIVEL_ALCANZADO("nivelAlcanzado");
+    NIVEL_ALCANZADO("nivelAlcanzado"),
+    NAVE_JUGADOR("naveJugador");
+
+    // Direccion del archivo
+    public static final String DIR_ARCHIVO = "./files/save_data.json";
 
     // Clave guardada por cada enum
     private String key;

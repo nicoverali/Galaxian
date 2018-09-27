@@ -12,8 +12,10 @@ import edu.uns.galaxian.entidades.equipamiento.armas.ArmaComun;
 import edu.uns.galaxian.entidades.equipamiento.escudos.Escudo;
 import edu.uns.galaxian.entidades.equipamiento.escudos.EscudoNulo;
 import edu.uns.galaxian.entidades.inanimadas.DisparoJugador;
+import edu.uns.galaxian.entidades.jugador.input.InputKeyboard;
 import edu.uns.galaxian.entidades.jugador.input.ProcesadorInput;
 import edu.uns.galaxian.entidades.jugador.nave.NaveJugador;
+import edu.uns.galaxian.juego.Nivel;
 
 public class Jugador extends EntidadViva {
 
@@ -22,26 +24,26 @@ public class Jugador extends EntidadViva {
 	private Escudo escudo;
 	private ProcesadorInput input;
 	private ColisionadorJugador colisionador;
-
+	private Nivel nivel;
 
 	// Constructores	
-
-	public Jugador(int xPos, int yPos, float factorEscala, NaveJugador nave, Arma arma, Escudo escudo, ProcesadorInput input) {
+	public Jugador(int xPos, int yPos, float factorEscala, Nivel nivel, NaveJugador nave, Arma arma, Escudo escudo) {
 		super(xPos, yPos, factorEscala, nave.getVidaMax());
+		this.nivel = nivel;
 		this.nave = nave;
 		this.arma = arma;
 		this.arma.setDisparoModelo(new DisparoJugador());
 		this.escudo = escudo;
-		this.input = input;
 		colisionador = new ColisionadorJugador(this);
+		input = new InputKeyboard();
 	}
 
-	public Jugador(int xPos, int yPos, float factorEscala, NaveJugador nave, ProcesadorInput input){
-		this(xPos, yPos, factorEscala, nave, new ArmaComun(new DisparoJugador()), new EscudoNulo(), input);
+	public Jugador(int xPos, int yPos, float factorEscala, Nivel nivel, NaveJugador nave){
+		this(xPos, yPos, factorEscala, nivel, nave, new ArmaComun(new DisparoJugador()), new EscudoNulo());
 	}
 
-	public Jugador(int xPos, int yPos, NaveJugador nave, ProcesadorInput input){
-		this(xPos, yPos, 1, nave, new ArmaComun(new DisparoJugador()), new EscudoNulo(), input);
+	public Jugador(int xPos, int yPos, Nivel nivel, NaveJugador nave){
+		this(xPos, yPos, 1, nivel, nave, new ArmaComun(new DisparoJugador()), new EscudoNulo());
 	}
 
 	// Metodos
@@ -78,17 +80,8 @@ public class Jugador extends EntidadViva {
 	public Escudo getEscudo() {
 		return escudo;
 	}
-	
-	/**
-	 * Cambia el procesador de input del jugador con el nuevo procesador pasado como parametro.
-	 * @param procesadorInput Nuevo procesador que tendria el jugado.
-	 */
-	public void setProcesadorInput(ProcesadorInput procesadorInput) {
-		input = procesadorInput;
-	}
-	
+
 	// Implementacion de metodos
-	
 	public int getAlto(){
 		return (int) Math.ceil(nave.getAlto() * factorEscala);
 	}
@@ -114,19 +107,20 @@ public class Jugador extends EntidadViva {
 	}
 
 	public void actualizar(){
-		int nuevaPosEnX = (int) (getPosicion().x + nave.getVelocidad() * Gdx.graphics.getDeltaTime() * input.getXAxis());
-		if(jugadorEstaDentroDePantalla(nuevaPosEnX)){
-			setPosicion(nuevaPosEnX, (int)getPosicion().y);
-		}
+		posicion.add((int)(input.getXAxis() * nave.getVelocidad() * Gdx.graphics.getDeltaTime()), 0);
+		// Evitar que se salga de la pantalla
+		int radio = this.getAncho()/2;
+		if(posicion.x + radio > Gdx.graphics.getWidth()) posicion.x = Gdx.graphics.getWidth();
+		if(posicion.x - radio < 0) posicion.x = 0;
 
 		if(input.sePresionoDisparar()){
-			arma.disparar((int) posicion.x, (int) posicion.y, new Vector2(0,1));
+			nivel.agregarDisparo(arma.disparar((int)posicion.x, (int)posicion.y, new Vector2(0,1)));
 		}
 	}
 
 	public void dibujar(SpriteBatch batch){
 		Vector2 pos = getPosicion();
-		batch.draw(nave.getTextura(), pos.x, pos.y, getAncho(), getAlto());
+		batch.draw(nave.getTextura(), pos.x - getAncho()/2, pos.y - getAlto()/2, getAncho(), getAlto());
 	}
 
 	public void eliminar(){

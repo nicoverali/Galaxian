@@ -14,7 +14,8 @@ public class ControladorDisparo implements ControladorEntidad {
 	private List<Disparo> listaEliminar;
 	private DetectorColision detector;
 
-	public ControladorDisparo() {
+	public ControladorDisparo(DetectorColision detector) {
+		this.detector = detector;
 		disparos = new LinkedList<>();
 		listaEliminar = new LinkedList<>();
 	}
@@ -25,7 +26,7 @@ public class ControladorDisparo implements ControladorEntidad {
 			detector.eliminarEntidad(d);
 		}
 		
-		listaEliminar = new LinkedList<Disparo>();
+		listaEliminar = new LinkedList<>();
 		
 		for(Disparo d : disparos) {
 			d.actualizar();
@@ -43,11 +44,7 @@ public class ControladorDisparo implements ControladorEntidad {
 			d.dibujar(batch);
 		}
 	}
-	
-	public void setDetectorColisiones(DetectorColision d) {
-		detector = d;
-	}
-	
+
 	public void deregistrar(Disparo disparo) {
 		for(Disparo d : disparos) {
 			if(d==disparo) {

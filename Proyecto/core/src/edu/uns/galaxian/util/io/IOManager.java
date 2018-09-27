@@ -25,7 +25,7 @@ public class IOManager {
      * Retorna una instancia de IOManager
      * @return Instancia de IOManager
      */
-    public static IOManager getInstace(){
+    public static IOManager getInstance(){
         return IOManagerHolder.INSTANCE;
     }
 
