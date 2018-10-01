@@ -6,67 +6,52 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
+import edu.uns.galaxian.entidades.EntidadViva;
+import edu.uns.galaxian.entidades.autonoma.Autonomo;
 import edu.uns.galaxian.entidades.autonoma.EntidadAutonoma;
 import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaArtificial;
 import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
 import edu.uns.galaxian.entidades.equipamiento.armas.ArmaComun;
 import edu.uns.galaxian.entidades.inanimadas.*;
+import edu.uns.galaxian.entidades.status.StatusMutableVida;
+import edu.uns.galaxian.nave.NaveEnemigo;
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorEnemigo;
 import edu.uns.galaxian.controladores.ControladorEnemigo;
 
-public class Enemigo extends EntidadAutonoma {
+public class Enemigo implements EntidadViva, Autonomo  {
 	
-	private Arma arma;
-    private Texture textura;
-    private int colisionDamage;
+	private NaveEnemigo nave;
+	private StatusMutableVida estado;
+	
 	private ControladorEnemigo controladorEnemigo;
-	private ColisionadorEnemigo colisionador = new ColisionadorEnemigo(this);
+	private ColisionadorEnemigo colisionador;
 
-    public Enemigo(int xPos, int yPos, float factorEscala, int vidaMaxima, Texture textura, int colisionDamage, Arma arma, InteligenciaArtificial ia) {
-        super(xPos, yPos, factorEscala, vidaMaxima, ia);
-        this.textura = textura;
-        this.colisionDamage = colisionDamage;
-    }
+	public Enemigo(int xPos, int yPos, NaveEnemigo nave)
+	{
+		estado= new StatusMutableVida(new Vector2(xPos,yPos),nave.getRotacionInicial() ,nave.getVidaMax());
+		colisionador = new ColisionadorEnemigo(this);
+		this.nave=nave;
+	}
 
-    public Enemigo(int xPos, int yPos, int vidaMaxima, Texture textura, int colisionDamage, Arma arma, InteligenciaArtificial ia){
-        super(xPos, yPos, 1, vidaMaxima, ia);
-        this.textura = textura;
-        this.arma = arma;
-        this.arma.setDisparoModelo(new DisparoEnemigo());
-        this.colisionDamage = colisionDamage;
-    }
-
-    public Enemigo(int xPos, int yPos, int vidaMaxima, Texture textura, int colisionDamage, InteligenciaArtificial ia){
-        super(xPos, yPos, 1, vidaMaxima, ia);
-        this.textura = textura;
-        this.arma = new ArmaComun(new DisparoEnemigo());
-        this.colisionDamage = colisionDamage;
-    }
-
-    public Enemigo(int xPos, int yPos, int vidaMaxima, int colisionDamage, Texture texture){
-        super(xPos, yPos, 1, vidaMaxima);
-        this.textura = texture;
-        this.arma = new ArmaComun(new DisparoEnemigo());
-        this.colisionDamage = colisionDamage;
-    }
     
     // Metodos y consultas
     
     public List<Disparo> disparar() {
-		return arma.disparar((int)posicion.x, (int)posicion.y, new Vector2(0,-1));
+    	Vector2 posicion = estado.getPosicion();
+		return nave.getArma().disparar(posicion.x, posicion.y, estado.getVelocidad().nor());
 	}
     
     public int getColisionDamage() {
-    	return colisionDamage;
+    	return nave.getDamage();
     }
     
-    public int getAlto() {
+    public float getAlto() {
     	return (int) Math.ceil(textura.getHeight() * factorEscala);
     }
     
-    public int getAncho() {
-    	return (int) Math.ceil(textura.getWidth() * factorEscala);
+    public float getAncho() {
+    	return nave.get;
     }
     
     public void setArma(Arma nuevaArma) {
