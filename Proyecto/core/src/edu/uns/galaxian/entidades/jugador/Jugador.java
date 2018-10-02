@@ -6,55 +6,43 @@ import com.badlogic.gdx.math.Vector2;
 
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorJugador;
+import edu.uns.galaxian.controladores.ControladorDisparo;
 import edu.uns.galaxian.entidades.EntidadViva;
 import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
-import edu.uns.galaxian.entidades.equipamiento.armas.ArmaComun;
 import edu.uns.galaxian.entidades.equipamiento.escudos.Escudo;
-import edu.uns.galaxian.entidades.equipamiento.escudos.EscudoNulo;
-import edu.uns.galaxian.entidades.inanimadas.DisparoJugador;
 import edu.uns.galaxian.entidades.jugador.input.InputKeyboard;
 import edu.uns.galaxian.entidades.jugador.input.ProcesadorInput;
-import edu.uns.galaxian.entidades.jugador.nave.NaveJugador;
+import edu.uns.galaxian.entidades.status.StatusMutableVida;
+import edu.uns.galaxian.entidades.status.StatusVida;
 import edu.uns.galaxian.juego.Nivel;
+import edu.uns.galaxian.nave.jugador.NaveJugador;
 
-public class Jugador extends EntidadViva {
+public class Jugador implements EntidadViva {
 
+	private StatusMutableVida status;
 	private NaveJugador nave;
-	private Arma arma;
-	private Escudo escudo;
 	private ProcesadorInput input;
-	private ColisionadorJugador colisionador;
 	private Nivel nivel;
+	private ControladorDisparo controladorDisparo;
+	private ColisionadorJugador colisionador;
 
 	// Constructores	
-	public Jugador(int xPos, int yPos, float factorEscala, Nivel nivel, NaveJugador nave, Arma arma, Escudo escudo) {
-		super(xPos, yPos, factorEscala, nave.getVidaMax());
-		this.nivel = nivel;
+	public Jugador(float xPos, float yPos, NaveJugador nave, Nivel nivel, ControladorDisparo controladorDisparo) {
 		this.nave = nave;
-		this.arma = arma;
-		this.arma.setDisparoModelo(new DisparoJugador());
-		this.escudo = escudo;
+		this.nivel = nivel;
+		this.controladorDisparo = controladorDisparo;
+
+		status = new StatusMutableVida(new Vector2(xPos, yPos), nave.getRotacionInicial(), nave.getVidaMax());
 		colisionador = new ColisionadorJugador(this);
 		input = new InputKeyboard();
 	}
 
-	public Jugador(int xPos, int yPos, float factorEscala, Nivel nivel, NaveJugador nave){
-		this(xPos, yPos, factorEscala, nivel, nave, new ArmaComun(new DisparoJugador()), new EscudoNulo());
-	}
-
-	public Jugador(int xPos, int yPos, Nivel nivel, NaveJugador nave){
-		this(xPos, yPos, 1, nivel, nave, new ArmaComun(new DisparoJugador()), new EscudoNulo());
-	}
-
-	// Metodos
-
 	/**
 	 * Setea el arma del jugador con la nueva pasada como parametro.
-	 * @param nuevaArma Nueva arma que tendria el jugador.
+	 * @param nuevaArma Nueva arma que tendra el jugador.
 	 */
 	public void setArma (Arma nuevaArma) {
-		arma = nuevaArma;
-		arma.setDisparoModelo(new DisparoJugador());
+		nave.setArma(nuevaArma);
 	}
 	
 	/**
@@ -62,15 +50,15 @@ public class Jugador extends EntidadViva {
 	 * @return Arma que posee el jugador.
 	 */
 	public Arma getArma() {
-		return arma;
+		return nave.getArma();
 	}
 	
 	/**
 	 * Setea el escudo al jugador con el nuevo escudo pasado como parametro.
-	 * @param nuevoEscudo nuevo escudo que tendria el jugado.
+	 * @param nuevoEscudo Nuevo escudo que tendra el jugado.
 	 */
 	public void setEscudo(Escudo nuevoEscudo) {
-		escudo = nuevoEscudo;
+		nave.setEscudo(nuevoEscudo);
 	}
 	
 	/**
@@ -78,24 +66,54 @@ public class Jugador extends EntidadViva {
 	 * @return Escudo que posee el jugador.
 	 */
 	public Escudo getEscudo() {
-		return escudo;
+		return nave.getEscudo();
 	}
 
-	// Implementacion de metodos
-	public int getAlto(){
-		return (int) Math.ceil(nave.getAlto() * factorEscala);
+	public StatusVida getStatus(){
+		return status;
+	}
+
+	public float getAlto(){
+		return nave.getAlto();
 	}
 	
-	public int getAncho(){
-		return (int) Math.ceil(nave.getAncho() * factorEscala);
+	public float getAncho(){
+		return nave.getAncho();
+	}
+
+	public Vector2 getPosicion(){
+		return status.getPosicion();
 	}
 
 	public void restarVida(int vidaARestar) throws IllegalArgumentException{
 		if(vidaARestar < 0){
 			throw new IllegalArgumentException("La vida a restar no puede ser negativa.");
 		}
-		int nuevaVida = Math.max(0, this.getVida() - vidaARestar);
-		this.setVida(nuevaVida);
+		int nuevaVida = status.getVida() - vidaARestar;
+		status.setVida(Math.max(0, nuevaVida));
+	}
+
+	public void setVidaAlMaximo(){
+		status.setVida(nave.getVidaMax());
+	}
+
+
+	public void actualizar(float delta){
+		Vector2 nuevaPosicion = status.getPosicion().add(input.getXAxis() * nave.getVelocidadMax() * delta, 0);
+		if(posicionDentroDePantalla(nuevaPosicion)){
+			status.setPosicion(nuevaPosicion);
+		}
+		if(input.sePresionoDisparar()){
+			controladorDisparo.agregarDisparos(nave.disparar(status.getPosicion(), status.getRotacion()));
+		}
+	}
+
+	public void dibujar(SpriteBatch batch){
+		nave.dibujar(batch, status.getPosicion());
+	}
+
+	public void eliminar(){
+		// TODO Una posibilidad es indicarle al nivel que debe finalizar
 	}
 
 	public ColisionadorJugador getColisionador(){
@@ -106,31 +124,8 @@ public class Jugador extends EntidadViva {
 		col.colisionarConJugador(this);
 	}
 
-	public void actualizar(){
-		posicion.add((int)(input.getXAxis() * nave.getVelocidad() * Gdx.graphics.getDeltaTime()), 0);
-		// Evitar que se salga de la pantalla
-		int radio = this.getAncho()/2;
-		if(posicion.x + radio > Gdx.graphics.getWidth()) posicion.x = Gdx.graphics.getWidth();
-		if(posicion.x - radio < 0) posicion.x = 0;
-
-		if(input.sePresionoDisparar()){
-			nivel.agregarDisparo(arma.disparar((int)posicion.x, (int)posicion.y, new Vector2(0,1)));
-		}
-	}
-
-	public void dibujar(SpriteBatch batch){
-		Vector2 pos = getPosicion();
-		batch.draw(nave.getTextura(), pos.x - getAncho()/2, pos.y - getAlto()/2, getAncho(), getAlto());
-	}
-
-	public void eliminar(){
-		// TODO
-	}
-
-	private boolean jugadorEstaDentroDePantalla(int xPos){
-		int radio = getAncho()/2;
-		int extremoIzquierdo = 0;
-		int extremoDerecho = Gdx.graphics.getWidth();
-		return xPos - radio > extremoIzquierdo && xPos + radio < extremoDerecho;
+	private boolean posicionDentroDePantalla(Vector2 posicion){
+		float radio = nave.getAncho()/2;
+		return posicion.x - radio > 0 && posicion.x + radio < Gdx.graphics.getWidth();
 	}
 }

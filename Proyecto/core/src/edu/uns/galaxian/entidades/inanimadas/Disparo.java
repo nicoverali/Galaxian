@@ -1,77 +1,78 @@
 package edu.uns.galaxian.entidades.inanimadas;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.controladores.ControladorDisparo;
-import edu.uns.galaxian.entidades.EntidadColisionable;
+import edu.uns.galaxian.entidades.Entidad;
+import edu.uns.galaxian.entidades.status.Status;
+import edu.uns.galaxian.entidades.status.StatusMutable;
 
-public abstract class Disparo extends EntidadColisionable  {
+public abstract class Disparo implements Entidad {
 
 	protected int damage;
-	protected int velocidad;
-	protected Vector2 direccion;
+	protected StatusMutable status;
 	protected Texture textura;
 	private ControladorDisparo controlador;
 
 	public Disparo() {
-		super(0, 0, 1);
 		damage = 0;
-		velocidad = 0;
-		direccion = Vector2.Zero;
+		status = new StatusMutable();
 		textura = null;
 	}
 
-	public Disparo(int damage, int velocidad, Vector2 direccion, Texture textura){
-		super(0,0,1);
+	public Disparo(Vector2 posicion, Vector2 velocidad, int damage, Texture textura){
+		float rotacion  = velocidad.cpy().nor().x * MathUtils.radiansToDegrees;
 		this.damage = damage;
-		this.velocidad = velocidad;
-		this.direccion = direccion;
 		this.textura = textura;
+		this.status = new StatusMutable(posicion, velocidad, rotacion);
 	}
 
-	public Disparo(int damage, int velocidad, float factor, Vector2 direccion, Texture textura, ControladorDisparo controlador) {
-		super(0,0,factor);
+	public Disparo(Vector2 posicion, Vector2 velocidad, int damage, Texture textura, ControladorDisparo controlador) {
+		float rotacion  = velocidad.cpy().nor().x * MathUtils.radiansToDegrees;
 		this.damage = damage;
-		this.velocidad = velocidad;
-		this.direccion = direccion;
 		this.textura = textura;
+		this.status = new StatusMutable(posicion, velocidad, rotacion);
 		this.controlador = controlador;
 	}
-	
-	// METODOS ABSTRACTOS
-	
+
 	public abstract Disparo clonar();
-	
-	// METODOS Y CONSULTAS
-	
+
+	public Status getStatus(){
+		return status;
+	}
+
+	public float getAlto() {
+		return textura.getHeight();
+	}
+
+	public float getAncho() {
+		return textura.getWidth();
+	}
+
 	public int getDamage() {
 		return damage;
 	}
-	
-	public int getAlto() {
-		return (int) Math.ceil(textura.getHeight() * factorEscala);
-	}
-	
-	public int getAncho() {
-		return (int) Math.ceil(textura.getWidth() * factorEscala);
-	}
-	
+
 	public void setDamage( int damage) {
 		this.damage=damage;
 	}
 
-	public void setVelocidad(int velocidad) {
-		this.velocidad=velocidad;
+	public void setPosicion(Vector2 posicion){
+		status.setPosicion(posicion);
 	}
 
-	public void setDireccion(Vector2 v) {
-		direccion= v;
+	public void setVelocidad(Vector2 velocidad) {
+		status.setVelocidad(velocidad);
+	}
+
+	public void setRotacion(float rotacion){
+		status.setRotacion(rotacion);
 	}
 
 	public void setTextura(Texture textura) {
-		this.textura=textura;
+		this.textura = textura;
 	}
 
 	public void setControladorDisparo(ControladorDisparo c) {
@@ -79,16 +80,17 @@ public abstract class Disparo extends EntidadColisionable  {
 	}
 
 	public void dibujar(SpriteBatch batch) {
+		Vector2 posicion = status.getPosicion();
 		batch.draw(textura, posicion.x-(getAncho()/2), posicion.y-(getAlto()/2), getAncho(), getAlto());
 	}
 
-	public void actualizar() {
-		posicion.add(direccion.x, direccion.y*velocidad*Gdx.graphics.getDeltaTime());
+	public void actualizar(float delta) {
+		Vector2 nuevaPosicion = status.getPosicion().add(status.getVelocidad());
+		status.setPosicion(nuevaPosicion);
 	}
 
 	public void eliminar() {
 		controlador.deregistrar(this);
-    	//textura.dispose();
 	}
 	
 }

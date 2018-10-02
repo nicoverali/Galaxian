@@ -2,19 +2,16 @@ package edu.uns.galaxian.entidades.autonoma.enemigo;
 
 import java.util.List;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 import edu.uns.galaxian.entidades.EntidadViva;
 import edu.uns.galaxian.entidades.autonoma.Autonomo;
 import edu.uns.galaxian.entidades.autonoma.EntidadAutonoma;
-import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaArtificial;
 import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
-import edu.uns.galaxian.entidades.equipamiento.armas.ArmaComun;
 import edu.uns.galaxian.entidades.inanimadas.*;
 import edu.uns.galaxian.entidades.status.StatusMutableVida;
-import edu.uns.galaxian.nave.NaveEnemigo;
+import edu.uns.galaxian.nave.enemigo.NaveEnemigo;
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorEnemigo;
 import edu.uns.galaxian.controladores.ControladorEnemigo;

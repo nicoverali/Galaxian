@@ -1,5 +1,6 @@
 package edu.uns.galaxian.controladores;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -37,6 +38,14 @@ public class ControladorDisparo implements ControladorEntidad {
 		disparo.setControladorDisparo(this);
 		disparos.add(disparo);
 		detector.registrarColisionable(disparo);
+	}
+
+	public void agregarDisparos(Collection<Disparo> disparos){
+		for(Disparo disparo : disparos){
+			disparo.setControladorDisparo(this);
+			this.disparos.add(disparo);
+			detector.registrarColisionable(disparo);
+		}
 	}
 
 	public void dibujar(SpriteBatch batch) {

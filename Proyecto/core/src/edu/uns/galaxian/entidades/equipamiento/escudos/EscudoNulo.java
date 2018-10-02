@@ -7,13 +7,11 @@ public class EscudoNulo implements Escudo{
 
 	@Override
 	public float proteger(Enemigo enemigo) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public float proteger(Disparo disparo) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 }

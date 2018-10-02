@@ -7,20 +7,38 @@ public class StatusMutable implements Status {
 	private Vector2 posicion;
 	private Vector2 velocidad;
 	private float rotacion;
-	private float velocidadMax;
-	
+
+	/**
+	 * Inicializa el estado actual con todos sus valores por defectos.
+	 * La posicion y la velocidad seran vectores nulos, la rotacion sera de 0 grados.
+	 */
 	public StatusMutable(){
-		posicion= Vector2.Zero;
-		velocidad= Vector2.Zero;
-		rotacion=0;
-		velocidadMax=0;
+		posicion = Vector2.Zero;
+		velocidad = Vector2.Zero;
+		rotacion = 0;
 	}
-	
-	public StatusMutable( Vector2 pos, float v, float r, float vM){
-		posicion= pos;
-		velocidad= Vector2.Zero;
-		rotacion=r;
-		velocidadMax=vM;
+
+	/**
+	 * Incializa el estado actual con la informacion provida y la velocidad como vector nulo.
+	 * @param posicion Posicion actual
+	 * @param rotacion Rotacion actual
+	 */
+	public StatusMutable(Vector2 posicion, float rotacion){
+		this.posicion = posicion;
+		this.velocidad = Vector2.Zero;
+		this.rotacion = rotacion;
+	}
+
+	/**
+	 * Incializa el estado actual con la informacion provida.
+	 * @param posicion Posicion actual
+	 * @param velocidad Velocidad actual
+	 * @param rotacion Rotacion actual
+	 */
+	public StatusMutable( Vector2 posicion, Vector2 velocidad, float rotacion){
+		this.posicion = posicion;
+		this.velocidad = velocidad;
+		this.rotacion = rotacion;
 	}
 
 	public Vector2 getPosicion() {
@@ -28,37 +46,37 @@ public class StatusMutable implements Status {
 	}
 
 	public Vector2 getVelocidad() {
-		// TODO Auto-generated method stub
 		return velocidad.cpy();
 	}
 
 	public float getRotacion() {
-		// TODO Auto-generated method stub
 		return rotacion;
 	}
 
-	public float getVelocidadMax() {
-		// TODO Auto-generated method stub
-		return velocidadMax;
+	/**
+	 * Setea un nuevo valor en la posicion.
+	 * @param nuevaPosicion Nuevo valor de la posicion
+	 */
+	public void setPosicion(Vector2 nuevaPosicion)
+	{
+		posicion = nuevaPosicion;
 	}
 
-	public void setPosicion(Vector2 p)
+	/**
+	 * Setea un nuevo valor de velocidad
+	 * @param nuevaVelocidad Nuevo valor de velocidad
+	 */
+	public void setVelocidad(Vector2 nuevaVelocidad)
 	{
-		posicion=p;
+		velocidad = nuevaVelocidad;
 	}
-	
-	public void setVelocidad(Vector2 v)
+
+	/**
+	 * Setea un nuevo valor de rotacion
+	 * @param nuevaRotacion
+	 */
+	public void setRotacion(float nuevaRotacion)
 	{
-		velocidad=v;
-	}
-	
-	public void setVelocidadMax(float v)
-	{
-		velocidadMax=v;
-	}
-	
-	public void setRotacion(float r)
-	{
-		rotacion=r;
+		rotacion = nuevaRotacion;
 	}
 }

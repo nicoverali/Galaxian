@@ -11,21 +11,23 @@ public class DisparoEnemigo extends Disparo {
 	
 	private ColisionadorDisparoEnemigo colisionador = new ColisionadorDisparoEnemigo(this);
 
-	public DisparoEnemigo(int damage, int velocidad, float factor, Vector2 direccion, Texture textura, ControladorDisparo controlador) {
-		super(damage, velocidad, factor, direccion, textura, controlador);
+	public DisparoEnemigo() {
 	}
 
-	public DisparoEnemigo(int damage, int velocidad, Vector2 direccion, Texture textura){
-		super(damage, velocidad, direccion, textura);
+	public DisparoEnemigo(Vector2 posicion, Vector2 velocidad, int damage, Texture textura) {
+		super(posicion, velocidad, damage, textura);
 	}
-	
-	public DisparoEnemigo() {
-		super();
+
+	public DisparoEnemigo(Vector2 posicion, Vector2 velocidad, int damage, Texture textura, ControladorDisparo controlador) {
+		super(posicion, velocidad, damage, textura, controlador);
 	}
-	
+
 	public DisparoEnemigo clonar() {
-		DisparoEnemigo nuevoDisparo = new DisparoEnemigo(this.damage, this.velocidad, this.direccion, this.textura);
-		return nuevoDisparo;
+		int damage = this.damage;
+		Vector2 posicion = this.status.getPosicion();
+		Vector2 velocidad = this.status.getVelocidad();
+		Texture textura = this.textura;
+		return new DisparoEnemigo(posicion, velocidad, damage, textura);
 	}
 	
 	public void aceptarColision(Colisionador col) {
