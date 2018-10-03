@@ -1,43 +1,39 @@
 package edu.uns.galaxian.entidades.autonoma.enemigo;
 
-import edu.uns.galaxian.nave.enemigo.NaveEnemigo;
+import edu.uns.galaxian.controladores.ControladorEnemigo;
+import edu.uns.galaxian.entidades.status.StatusMutableVida;
+import edu.uns.galaxian.entidades.status.StatusVida;
 import edu.uns.galaxian.nave.enemigo.NaveKamikaze;
 
 public class FabricaEstandar implements FabricaEnemigos {
 
-
-	public Enemigo getKamikaze(int xPos, int yPos) {
-		int vidaMaxima = 100;
-		int colisionDamage = 50;
-		return crearEnemigo(xPos, yPos, vidaMaxima, colisionDamage);
+	@Override
+	public Enemigo getKamikaze(int xPos, int yPos, ControladorEnemigo controlador, StatusVida estadoJugador) {
+		NaveKamikaze nave = new NaveKamikaze(150, 200, 20, estadoJugador);
+		return new Enemigo(xPos, yPos, nave, controlador);
 	}
 
-	public Enemigo getKamikazeAleatorio(int xPos, int yPos) {
-		int vidaMaxima = 100;
-		int colisionDamage = 50;
-		return crearEnemigo(xPos, yPos, vidaMaxima, colisionDamage);
+	@Override
+	public Enemigo getKamikazeAleatorio(int xPos, int yPos, ControladorEnemigo controlador) {
+		NaveKamikaze nave = new NaveKamikaze(150, 200, 20, new StatusMutableVida());
+		return new Enemigo(xPos, yPos, nave, controlador);
 	}
 
-	public Enemigo getKamikazeMixto(int xPos, int yPos) {
-		int vidaMaxima = 100;
-		int colisionDamage = 50;
-		return crearEnemigo(xPos, yPos, vidaMaxima, colisionDamage);
+	@Override
+	public Enemigo getKamikazeMixto(int xPos, int yPos, ControladorEnemigo controlador, StatusVida estadoJugador) {
+		NaveKamikaze nave = new NaveKamikaze(150, 200, 20, estadoJugador);
+		return new Enemigo(xPos, yPos, nave, controlador);
 	}
 
-	public Enemigo getArmado(int xPos, int yPos) {
-		int vidaMaxima = 100;
-		int colisionDamage = 50;
-		return crearEnemigo(xPos, yPos, vidaMaxima, colisionDamage);
+	@Override
+	public Enemigo getArmado(int xPos, int yPos, ControladorEnemigo controlador, StatusVida estadoJugador) {
+		NaveKamikaze nave = new NaveKamikaze(150, 200, 20, estadoJugador);
+		return new Enemigo(xPos, yPos, nave, controlador);
 	}
 
-	public Enemigo getArmadoDebil(int xPos, int yPos) {
-		int vidaMaxima = 100;
-		int colisionDamage = 50;
-		return crearEnemigo(xPos, yPos, vidaMaxima, colisionDamage);
-	}
-
-	private Enemigo crearEnemigo(int xPos, int yPos, int vidaMaxima, int colisionDamage){
-		NaveEnemigo nave = new NaveKamikaze(vidaMaxima,colisionDamage);
-		return  new Enemigo(xPos,yPos,nave);
+	@Override
+	public Enemigo getArmadoDebil(int xPos, int yPos, ControladorEnemigo controlador, StatusVida estadoJugador) {
+		NaveKamikaze nave = new NaveKamikaze(150, 200, 20, estadoJugador);
+		return new Enemigo(xPos, yPos, nave, controlador);
 	}
 }

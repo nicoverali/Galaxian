@@ -87,11 +87,11 @@ public class ControladorEnemigo implements ControladorEntidad {
     private Enemigo crearEnemigoCorrespondiente(TipoEnemigo tipoEnemigo, FabricaEnemigos fabrica, int xPos, int yPos){
         Enemigo nuevoEnemigo = null;
         switch (tipoEnemigo){
-            case KAMIKAZE: { nuevoEnemigo = fabrica.getKamikaze(xPos, yPos); break; }
-            case KAMIKAZE_ALEATORIO: { nuevoEnemigo = fabrica.getKamikazeAleatorio(xPos, yPos); break;}
-            case KAMIKAZE_MIXTO:{ nuevoEnemigo = fabrica.getKamikazeMixto(xPos, yPos); break; }
-            case ARMADO: { nuevoEnemigo = fabrica.getArmado(xPos, yPos); break; }
-            case ARMADO_DEBIL:{ nuevoEnemigo = fabrica.getArmadoDebil(xPos, yPos); break; }
+            case KAMIKAZE: { nuevoEnemigo = fabrica.getKamikaze(xPos, yPos, this, estadoJugador); break; }
+            case KAMIKAZE_ALEATORIO: { nuevoEnemigo = fabrica.getKamikazeAleatorio(xPos, yPos, this); break;}
+            case KAMIKAZE_MIXTO:{ nuevoEnemigo = fabrica.getKamikazeMixto(xPos, yPos, this, estadoJugador); break; }
+            case ARMADO: { nuevoEnemigo = fabrica.getArmado(xPos, yPos, this, estadoJugador); break; }
+            case ARMADO_DEBIL:{ nuevoEnemigo = fabrica.getArmadoDebil(xPos, yPos, this, estadoJugador); break; }
         }
         return nuevoEnemigo;
     }
