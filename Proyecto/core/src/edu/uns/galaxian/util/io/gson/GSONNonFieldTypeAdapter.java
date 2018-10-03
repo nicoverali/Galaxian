@@ -1,4 +1,4 @@
-package edu.uns.galaxian.util.io;
+package edu.uns.galaxian.util.io.gson;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -15,13 +15,13 @@ public class GSONNonFieldTypeAdapter implements TypeAdapterFactory{
     private static final String CLASS_NAME = "className";
 
     private Class<?> targetClass;
-    private Class<?>[] parametersTypes;
     private Object[] parameters;
+    private Class<?>[] parametersTypes;
 
-    public GSONNonFieldTypeAdapter(Class<?> objClass, final Class<?>[] constructorParametersClasses, final Object[] parameters){
-        this.parametersTypes = constructorParametersClasses;
-        this.parameters = parameters;
+    public GSONNonFieldTypeAdapter(Class<?> objClass, final Class<?>[] parametersTypes, final Object[] parameters){
         this.targetClass = objClass;
+        this.parameters = parameters;
+        this.parametersTypes = parametersTypes;
     }
 
     public GSONNonFieldTypeAdapter(Class<?> objClass){

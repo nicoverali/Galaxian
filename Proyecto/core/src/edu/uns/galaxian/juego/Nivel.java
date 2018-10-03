@@ -32,10 +32,14 @@ public class Nivel extends ScreenAdapter {
         this.juego = juego;
         background = new Background();
         detector = new DetectorColision();
-
         controladores = new LinkedList<>();
-        controladores.add(new ControladorEnemigo(config.getFabricaEnemigos(), formacionRandom(), jugador.getStatus(), detector));
-        controladores.add(new ControladorDisparo(detector));
+
+        ControladorDisparo cDisparos = new ControladorDisparo(detector);
+        jugador = new Jugador(Gdx.graphics.getWidth()/2, 50, config.getNaveJugador(), this, cDisparos);
+        ControladorEnemigo cEnemigos = new ControladorEnemigo(config.getFabricaEnemigos(), formacionRandom(), jugador.getStatus(), detector);
+
+        controladores.add(cDisparos);
+        controladores.add(cEnemigos);
     }
 
     @Override

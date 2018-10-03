@@ -3,20 +3,23 @@ package edu.uns.galaxian.juego;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import edu.uns.galaxian.juego.config.AdministradorDatos;
 import edu.uns.galaxian.juego.config.ConfigNivel;
+import edu.uns.galaxian.juego.config.GameData;
+import edu.uns.galaxian.juego.config.SaveData;
 
 public class Juego extends Game {
 
 	private SpriteBatch batch;
-	private AdministradorDatos adminDatos;
+	private GameData gameData;
+	private SaveData saveData;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		adminDatos = new AdministradorDatos();
+		gameData = new GameData();
+		saveData = new SaveData();
 
-		ConfigNivel configNivel = adminDatos.getConfiguracionNivel(adminDatos.getNivelAlcanzado());
+		ConfigNivel configNivel = gameData.getConfiguracionNivel(saveData.getNivelAlcanzado(), saveData.getNaveJugador());
 		setScreen(new Nivel(configNivel,this));
 	}
 

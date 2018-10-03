@@ -5,38 +5,31 @@ import edu.uns.galaxian.entidades.autonoma.enemigo.FabricaEnemigos;
 import edu.uns.galaxian.entidades.equipamiento.armas.*;
 import edu.uns.galaxian.entidades.equipamiento.escudos.*;
 import edu.uns.galaxian.entidades.inanimadas.*;
-import edu.uns.galaxian.juego.config.keys.GameDataKey;
 import edu.uns.galaxian.nave.jugador.NaveJugador;
-import edu.uns.galaxian.util.io.GSONNonFieldTypeAdapter;
+import edu.uns.galaxian.util.io.gson.GSONNonFieldTypeAdapter;
 
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
 public class ConfigNivel{
 
-    private Arma armaJugador;
-    private Escudo escudoJugador;
     private NaveJugador naveJugador;
     private FabricaEnemigos fabricaEnemigos;
 
     public ConfigNivel(JsonObject datosNivel, NaveJugador naveJugador){
         Gson gson = getGson();
 
-        JsonObject datosJugador = datosNivel.getAsJsonObject(GameDataKey.JUGADOR.key());
-        armaJugador = gson.fromJson(datosJugador.getAsJsonObject(GameDataKey.ARMA.key()), Arma.class);
-        escudoJugador = gson.fromJson(datosJugador.getAsJsonObject(GameDataKey.ESCUDO.key()), Escudo.class);
-        this.naveJugador = naveJugador;
+        JsonObject equipamientoJugador = datosNivel.getAsJsonObject(GameData.EQUIPAMIENTO);
+        Arma armaJugador = gson.fromJson(equipamientoJugador.getAsJsonObject(GameData.ARMA), Arma.class);
+        Escudo escudoJugador = gson.fromJson(equipamientoJugador.getAsJsonObject(GameData.ESCUDO), Escudo.class);
+        naveJugador.setArma(armaJugador);
+        naveJugador.setEscudo(escudoJugador);
 
-        fabricaEnemigos = gson.fromJson(datosNivel.getAsJsonObject(GameDataKey.FABRICA_ENEMIGOS.key()), FabricaEnemigos.class);
+        this.naveJugador = naveJugador;
+        this.fabricaEnemigos = gson.fromJson(datosNivel.getAsJsonObject(GameData.FABRICA_ENEMIGO), FabricaEnemigos.class);
     }
 
     // Metodos
-   public Arma getArmaJugador(){
-        return armaJugador;
-   }
-   public Escudo getEscudoJugador(){
-        return escudoJugador;
-   }
    public NaveJugador getNaveJugador(){
         return naveJugador;
    }

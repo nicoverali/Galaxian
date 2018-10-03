@@ -1,1 +1,1 @@
-{"nivelAlcanzado":1,"naveJugador":{"className":"edu.uns.galaxian.entidades.jugador.nave.NaveLiviana"}}
+{"nivelAlcanzado":1,"naveJugador":{"className":"edu.uns.galaxian.nave.jugador.NaveLiviana"},"naveColor":"verde"}
