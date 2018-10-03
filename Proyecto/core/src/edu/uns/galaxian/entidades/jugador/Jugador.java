@@ -10,6 +10,7 @@ import edu.uns.galaxian.controladores.ControladorDisparo;
 import edu.uns.galaxian.entidades.EntidadViva;
 import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
 import edu.uns.galaxian.entidades.equipamiento.escudos.Escudo;
+import edu.uns.galaxian.entidades.inanimadas.DisparoJugador;
 import edu.uns.galaxian.entidades.jugador.input.InputKeyboard;
 import edu.uns.galaxian.entidades.jugador.input.ProcesadorInput;
 import edu.uns.galaxian.entidades.status.StatusMutableVida;
@@ -27,12 +28,12 @@ public class Jugador implements EntidadViva {
 	private ColisionadorJugador colisionador;
 
 	// Constructores	
-	public Jugador(Vector2 pos, NaveJugador nave, Nivel nivel, ControladorDisparo controladorDisparo) {
+	public Jugador(float xPos, float yPos, NaveJugador nave, Nivel nivel, ControladorDisparo controladorDisparo) {
 		this.nave = nave;
 		this.nivel = nivel;
 		this.controladorDisparo = controladorDisparo;
 
-		status = new StatusMutableVida(new Vector2(pos.x, pos.y), nave.getRotacionInicial(), nave.getVidaMax());
+		status = new StatusMutableVida(new Vector2(xPos, yPos), nave.getRotacionInicial(), nave.getVidaMax());
 		colisionador = new ColisionadorJugador(this);
 		input = new InputKeyboard();
 	}
@@ -42,6 +43,7 @@ public class Jugador implements EntidadViva {
 	 * @param nuevaArma Nueva arma que tendra el jugador.
 	 */
 	public void setArma (Arma nuevaArma) {
+		nuevaArma.setDisparoModelo(new DisparoJugador());
 		nave.setArma(nuevaArma);
 	}
 	
@@ -81,10 +83,6 @@ public class Jugador implements EntidadViva {
 		return nave.getAncho();
 	}
 
-	public Vector2 getPosicion(){
-		return status.getPosicion();
-	}
-
 	public void restarVida(int vidaARestar) throws IllegalArgumentException{
 		if(vidaARestar < 0){
 			throw new IllegalArgumentException("La vida a restar no puede ser negativa.");
@@ -104,7 +102,9 @@ public class Jugador implements EntidadViva {
 			status.setPosicion(nuevaPosicion);
 		}
 		if(input.sePresionoDisparar()){
-			controladorDisparo.agregarDisparos(nave.getArma().disparar(getPosicion(),90));
+			Vector2 posicion = status.getPosicion();
+			float rotacion = status.getRotacion();
+			controladorDisparo.agregarDisparos(nave.getArma().disparar(posicion, rotacion));
 		}
 	}
 

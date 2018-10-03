@@ -2,49 +2,24 @@ package edu.uns.galaxian.nave.enemigo;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 
 import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaArtificial;
-import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
-import edu.uns.galaxian.entidades.equipamiento.armas.ArmaComun;
-import edu.uns.galaxian.entidades.equipamiento.escudos.Escudo;
-import edu.uns.galaxian.entidades.inanimadas.DisparoEnemigo;
 
-public class NaveKamikaze implements  NaveEnemigo{
+public class NaveKamikaze extends NaveEnemigo{
 	
-	private static final String DIR = "./enemigos/";
-	private Texture textura = new Texture(Gdx.files.internal(DIR + "kamikaze/estandar.png"));
-	
+	private static final String TEXTURA_DIR = "./enemigos/kamikaze/estandar.png";
+
 	private int vidaMax;
 	private float velocidadMax;
-	private int colision_damage;
-	private Arma arma;
-	private InteligenciaArtificial inteligencia;
+	private int colisionDamage;
+	// TODO Crear inteligencia del kamikaze y asignarsela a esta nave de manera fija
+	private InteligenciaArtificial inteligenciaDeAtaque;
 	
-	public NaveKamikaze(int vida, int colision_damage) {
+	public NaveKamikaze(int vida, float velocidadMax, int colisionDamage) {
 		this.vidaMax = vida;
-		this.colision_damage = colision_damage;
-		arma = new ArmaComun(new DisparoEnemigo());
-		velocidadMax = 300;
-	}
-
-	public Arma getArma() {
-		return arma;
-	}
-
-	public void setArma(Arma nuevaArma) {
-		arma = nuevaArma;
-	}
-
-	public Escudo getEscudo() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void setEscudo(Escudo nuevoEscudo) {
-		// TODO Auto-generated method stub
-		
+		this.colisionDamage = colisionDamage;
+		this.velocidadMax = velocidadMax;
+		textura = new Texture(Gdx.files.internal(TEXTURA_DIR));
 	}
 
 	public int getVidaMax() {
@@ -56,30 +31,14 @@ public class NaveKamikaze implements  NaveEnemigo{
 	}
 
 	public float getRotacionInicial() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public float getAlto() {
-		return textura.getHeight();
-	}
-
-	public float getAncho() {
-		return textura.getWidth();
-	}
-
-	public void dibujar(SpriteBatch batch, Vector2 posicion) {
-		batch.draw(textura, posicion.x-(getAncho()/2), posicion.y-(getAlto()/2), getAncho(), getAlto());
+		return 180;
 	}
 
 	public int getDamage() {
-		return colision_damage;
+		return colisionDamage;
 	}
 
-	public InteligenciaArtificial getInteligencia() {
-		return inteligencia;
+	public InteligenciaArtificial getInteligenciaDeAtaque() {
+		return inteligenciaDeAtaque;
 	}
-	
-	
-	
 }

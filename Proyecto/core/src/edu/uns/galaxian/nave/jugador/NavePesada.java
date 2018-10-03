@@ -4,13 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import edu.uns.galaxian.util.enums.Color;
 
-public class NaveIntermedia extends NaveJugador {
+public class NavePesada extends NaveJugador {
 
-	private static final int VIDA_MAXIMA = 180;
-	private static final int VELOCIDAD_MAXIMA = 290;
-	private static final String TEXTURA_DIR = "./jugador/%s/naveIntermedia.png";
+	private static final int VIDA_MAXIMA = 250;
+	private static final int VELOCIDAD_MAXIMA = 140;
+	private static final String TEXTURA_DIR = "./jugador/%s/navePesada.png";
 
-	public NaveIntermedia(Color colorNave){
+	public NavePesada(Color colorNave){
 		String direccionCompleta = String.format(TEXTURA_DIR, colorNave.name());
 		textura = new Texture(Gdx.files.internal(direccionCompleta));
 	}

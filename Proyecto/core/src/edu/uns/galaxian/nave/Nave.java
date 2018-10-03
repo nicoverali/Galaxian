@@ -1,76 +1,78 @@
 package edu.uns.galaxian.nave;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
-import edu.uns.galaxian.entidades.equipamiento.escudos.Escudo;
-import edu.uns.galaxian.entidades.inanimadas.Disparo;
+import edu.uns.galaxian.entidades.equipamiento.armas.ArmaNula;
 
-import java.util.Collection;
+public abstract class Nave {
 
-// TODO ESTA CLASE DEBERIA SER ABSTRACTA
+	protected Arma arma;
+	protected Texture textura;
 
-public interface Nave {
+	public Nave(){
+		arma = new ArmaNula();
+	}
 
 	/**
 	 * Retorna el arma de la nave.
 	 * @return Arma de la nave
 	 */
-	public Arma getArma();
+	public Arma getArma(){
+		return arma;
+	}
 
 	/**
 	 * Reemplaza el arma actual de la nave por una nueva.
 	 * @param nuevaArma Nueva arma de la nave
 	 */
-	public void setArma(Arma nuevaArma);
-
-	/**
-	 * Retorna el escudo de la nave.
-	 * @return Escudo de la nave
-	 */
-	public Escudo getEscudo();
-
-	/**
-	 * Reemplaza el escudo actual de la nave por uno nuevo.
-	 * @param nuevoEscudo Nuevo escudo de la nave
-	 */
-	public void setEscudo(Escudo nuevoEscudo);
-
-	/**
-	 * Retorna la vida maxima de la nave.
-	 * @return Vida maxima de la nave
-	 */
-	public int getVidaMax();
-
-	/**
-	 * Retorna la velocidad maxima de la nave.
-	 * @return Velocidad maxima de la nave
-	 */
-	public float getVelocidadMax();
-
-	/**
-	 * Retorna la rotacion inicial de la nave.
-	 * @return Rotacion inicial de la nave
-	 */
-	public float getRotacionInicial();
+	public void setArma(Arma nuevaArma){
+		arma = nuevaArma;
+	}
 
 	/**
 	 * Retorna el alto de la nave.
 	 * @return Alto de la nave
 	 */
-	public float getAlto();
+	public float getAlto(){
+		return textura.getHeight();
+	}
 
 	/**
 	 * Retorna el ancho de la nave.
 	 * @return Ancho de la nave
 	 */
-	public float getAncho();
+	public float getAncho(){
+		return textura.getWidth();
+	}
 
 	/**
 	 * Utiliza el batch recibido para dibujar la nave en la posicion proveida.
 	 * @param batch Batch utilizado para dibujar en pantalla
 	 * @param posicion Posicion donde debe dibujarse la nave
 	 */
-	public void dibujar(SpriteBatch batch, Vector2 posicion);
-	
+	public void dibujar(SpriteBatch batch, Vector2 posicion){
+		float alto = textura.getHeight();
+		float ancho = textura.getWidth();
+		batch.draw(textura, posicion.x - ancho/2, posicion.y - alto/2, ancho, alto);
+	}
+
+	/**
+	 * Retorna la vida maxima de la nave.
+	 * @return Vida maxima de la nave
+	 */
+	public abstract int getVidaMax();
+
+	/**
+	 * Retorna la velocidad maxima de la nave.
+	 * @return Velocidad maxima de la nave
+	 */
+	public abstract float getVelocidadMax();
+
+	/**
+	 * Retorna la rotacion inicial de la nave.
+	 * @return Rotacion inicial de la nave
+	 */
+	public abstract float getRotacionInicial();
 }

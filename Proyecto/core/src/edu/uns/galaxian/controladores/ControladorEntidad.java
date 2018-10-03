@@ -6,8 +6,9 @@ public interface ControladorEntidad {
 
 	/**
 	 * Actualiza el estado de las entidades que estan bajo su control.
+	 * @param delta Tiempo desde el ultimo frame
 	 */
-	void actualizarEstado();
+	void actualizarEstado(float delta);
 	
 	/**
 	 * Dibuja todas las entidades que estan bajo su control.

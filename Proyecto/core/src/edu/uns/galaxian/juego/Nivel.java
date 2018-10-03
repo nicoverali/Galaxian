@@ -16,6 +16,7 @@ import edu.uns.galaxian.escenario.Background;
 import edu.uns.galaxian.juego.config.ConfigNivel;
 import edu.uns.galaxian.nave.jugador.NaveLiviana;
 import edu.uns.galaxian.entidades.autonoma.enemigo.TipoEnemigo;
+import sun.security.krb5.Config;
 
 import java.util.*;
 
@@ -25,25 +26,16 @@ public class Nivel extends ScreenAdapter {
     private Jugador jugador;
     private Background background;
     private DetectorColision detector;
-    private ControladorEnemigo cEnemigo;
-    private ControladorDisparo cDisparo;
+    private List<ControladorEntidad> controladores;
 
     public Nivel(ConfigNivel config, Juego juego){
         this.juego = juego;
-
         background = new Background();
         detector = new DetectorColision();
 
-        Arma armaJugador = config.getArmaJugador();
-        Escudo escudoJguador = config.getEscudoJugador();
-        //NaveJugador naveJugador = config.getNaveJugador();
-        Vector2 centroPantalla = new Vector2(Gdx.graphics.getWidth()/2,20);
-        int margeDelPiso = 60;
-        NaveLiviana n = new NaveLiviana();
-        cDisparo = new ControladorDisparo(detector);
-        jugador = new Jugador(centroPantalla, n, this, cDisparo);
-
-        cEnemigo = new ControladorEnemigo(config.getFabricaEnemigos(), formacionRandom(), jugador, detector);
+        controladores = new LinkedList<>();
+        controladores.add(new ControladorEnemigo(config.getFabricaEnemigos(), formacionRandom(), jugador.getStatus(), detector));
+        controladores.add(new ControladorDisparo(detector));
     }
 
     @Override
@@ -51,26 +43,19 @@ public class Nivel extends ScreenAdapter {
         // Limpiar pantalla
         Gdx.gl.glClearColor(0, 0, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         SpriteBatch batch = juego.getBatch();
+
         background.draw();
+        // Inicializa proceso de dibujado de SpriteBatch
         batch.begin();
-
-        cEnemigo.actualizarEstado();
-        cDisparo.actualizarEstado();
-        jugador.actualizar(Gdx.graphics.getDeltaTime());
-
-        cEnemigo.dibujar(batch);
-        cDisparo.dibujar(batch);
+        jugador.actualizar(delta);
         jugador.dibujar(batch);
-
-        batch.end();
-    }
-
-    public void agregarDisparo(List<Disparo> disparos){
-        for(Disparo disparo : disparos){
-            cDisparo.agregarDisparo(disparo);
+        for(ControladorEntidad controlador : controladores){
+            controlador.actualizarEstado(delta);
+            controlador.dibujar(batch);
         }
+        // Finaliza proceso de dibujado
+        batch.end();
     }
 
     @Override

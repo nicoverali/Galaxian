@@ -8,9 +8,9 @@ import com.badlogic.gdx.utils.TimeUtils;
 import edu.uns.galaxian.colision.DetectorColision;
 import edu.uns.galaxian.entidades.autonoma.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.autonoma.enemigo.FabricaEnemigos;
-import edu.uns.galaxian.entidades.jugador.Jugador;
 import edu.uns.galaxian.entidades.autonoma.enemigo.TipoEnemigo;
 import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaAleatoria;
+import edu.uns.galaxian.entidades.status.StatusVida;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -26,12 +26,12 @@ public class ControladorEnemigo implements ControladorEntidad {
 
     private List<List<Enemigo>> enemigos;
     private List<Enemigo> listaEliminar;
-    private Jugador jugador;
+    private StatusVida estadoJugador;
     private DetectorColision detector;
 
-    public ControladorEnemigo(FabricaEnemigos fabrica, List<List<TipoEnemigo>> formacion, Jugador jugador, DetectorColision detector){
+    public ControladorEnemigo(FabricaEnemigos fabrica, List<List<TipoEnemigo>> formacion, StatusVida estadoJugador, DetectorColision detector){
     	this.detector = detector;
-        this.jugador = jugador;
+    	this.estadoJugador = estadoJugador;
         listaEliminar = new LinkedList<>();
         
         this.ultimoAtaque = System.currentTimeMillis();
@@ -44,7 +44,6 @@ public class ControladorEnemigo implements ControladorEntidad {
             List<Enemigo> filaDeEnemigos = new ArrayList<>(fila.size());
             for(TipoEnemigo tipoEnemigo : fila){
                 Enemigo enemigo = crearEnemigoCorrespondiente(tipoEnemigo, fabrica, getPosX(fila.size(), numColumna), getPosY(numFila));
-                enemigo.setControladorEnemigo(this);
                 // TODO setear la IA al enemigo
                 detector.registrarColisionable(enemigo);
                 filaDeEnemigos.add(enemigo);
@@ -98,11 +97,11 @@ public class ControladorEnemigo implements ControladorEntidad {
     }
 
     public Vector2 getPosicionJugador(){
-        return jugador.getPosicion();
+        return estadoJugador.getPosicion();
     }
 
     @Override
-    public void actualizarEstado() {
+    public void actualizarEstado(float delta) {
         // TODO Este metodo debe decidir cuando un enemigo sale de la formacion
     	
     	realizarAtaque();

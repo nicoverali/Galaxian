@@ -22,8 +22,7 @@ public class ControladorDisparo implements ControladorEntidad {
 		listaEliminar = new LinkedList<>();
 	}
 
-	public void actualizarEstado() {
-		
+	public void actualizarEstado(float delta) {
 		for(Disparo d : listaEliminar) {
 			detector.eliminarEntidad(d);
 		}
@@ -31,7 +30,7 @@ public class ControladorDisparo implements ControladorEntidad {
 		listaEliminar = new LinkedList<>();
 		
 		for(Disparo d : disparos) {
-			d.actualizar(Gdx.graphics.getDeltaTime());
+			d.actualizar(delta);
 		}
 	}
 

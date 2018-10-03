@@ -16,8 +16,8 @@ public class InteligenciaAleatoria implements InteligenciaArtificial {
 	public void pensar(StatusMutableVida estado) {
 		float posY = estado.getPosicion().y - 1 ;
 		float posX = (float) (estado.getPosicion().x + 10*Math.sin(posY/35));
-		Vector2 nueva_pos = new Vector2(posX,posY);
-		estado.setPosicion(nueva_pos);
+		Vector2 nuevaPos = new Vector2(posX,posY);
+		estado.setPosicion(nuevaPos);
 	}
 
 }
