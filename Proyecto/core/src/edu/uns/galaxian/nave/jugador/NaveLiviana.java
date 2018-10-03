@@ -6,7 +6,7 @@ import edu.uns.galaxian.util.enums.Color;
 
 public class NaveLiviana extends NaveJugador {
 
-	private static final int VELOCIDAD_MAXIMA = 400;
+	private static final int VELOCIDAD_MAXIMA = 450;
 	private static final int VIDA_MAXIMA = 100;
 	private static final String TEXTURA_DIR = "./jugador/%s/naveLiviana.png";
 

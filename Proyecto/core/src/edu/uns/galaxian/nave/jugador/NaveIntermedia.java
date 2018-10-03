@@ -7,7 +7,7 @@ import edu.uns.galaxian.util.enums.Color;
 public class NaveIntermedia extends NaveJugador {
 
 	private static final int VIDA_MAXIMA = 180;
-	private static final int VELOCIDAD_MAXIMA = 290;
+	private static final int VELOCIDAD_MAXIMA = 320;
 	private static final String TEXTURA_DIR = "./jugador/%s/naveIntermedia.png";
 
 	public NaveIntermedia(Color colorNave){

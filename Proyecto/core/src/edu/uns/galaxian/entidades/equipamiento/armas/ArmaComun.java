@@ -13,7 +13,7 @@ import edu.uns.galaxian.entidades.inanimadas.Disparo;
 public class ArmaComun implements Arma {
 
 	private static final long CADENCIA = 500;
-	private static final int DAMAGE = 15;
+	private static final int DAMAGE = 35;
 	private static final int VELOCIDAD_MAXIMA = 150;
 	private static Texture TEXTURA = new Texture(Gdx.files.internal("./disparos/laserGreen11.png"));
 	private Disparo prototipo;
@@ -36,7 +36,7 @@ public class ArmaComun implements Arma {
 		Collection<Disparo> disparos = new ArrayList<>(1);
 		if(TimeUtils.timeSinceMillis(ultimoDisparo) > CADENCIA){
 			Disparo nuevoDisparo = prototipo.clonar();
-			Vector2 velocidad = new Vector2().rotate(anguloDeDisparo).setLength2(VELOCIDAD_MAXIMA*VELOCIDAD_MAXIMA);
+			Vector2 velocidad = new Vector2(1,0).rotate(anguloDeDisparo).setLength2(VELOCIDAD_MAXIMA);
 			nuevoDisparo.setPosicion(posicion);
 			nuevoDisparo.setRotacion(anguloDeDisparo);
 			nuevoDisparo.setVelocidad(velocidad);

@@ -30,7 +30,7 @@ public class ControladorDisparo implements ControladorEntidad {
 		listaEliminar = new LinkedList<>();
 		
 		for(Disparo d : disparos) {
-			d.actualizar(delta);
+  			d.actualizar(delta);
 		}
 	}
 
