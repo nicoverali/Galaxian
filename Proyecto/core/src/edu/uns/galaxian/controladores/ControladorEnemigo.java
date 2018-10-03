@@ -3,19 +3,26 @@ package edu.uns.galaxian.controladores;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.TimeUtils;
+
 import edu.uns.galaxian.colision.DetectorColision;
 import edu.uns.galaxian.entidades.autonoma.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.autonoma.enemigo.FabricaEnemigos;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 import edu.uns.galaxian.entidades.autonoma.enemigo.TipoEnemigo;
+import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaAleatoria;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 public class ControladorEnemigo implements ControladorEntidad {
 
     private static final int TAMANIO_NAVES = 40;
+    
+    private static final long CADENCIA_ATAQUE = 400;
+    private long ultimoAtaque;
 
     private List<List<Enemigo>> enemigos;
     private List<Enemigo> listaEliminar;
@@ -26,6 +33,8 @@ public class ControladorEnemigo implements ControladorEntidad {
     	this.detector = detector;
         this.jugador = jugador;
         listaEliminar = new LinkedList<>();
+        
+        this.ultimoAtaque = System.currentTimeMillis();
 
         // Crear formacion de enemigos
         enemigos = new ArrayList<>(formacion.size());
@@ -95,6 +104,9 @@ public class ControladorEnemigo implements ControladorEntidad {
     @Override
     public void actualizarEstado() {
         // TODO Este metodo debe decidir cuando un enemigo sale de la formacion
+    	
+    	realizarAtaque();
+    	
     	for(List<Enemigo> fila : enemigos) {
     		for(Enemigo enemigo : fila) {
                 // TODO Se debe actualizar el enemigo
@@ -116,6 +128,23 @@ public class ControladorEnemigo implements ControladorEntidad {
     		}
 		}
     	listaEliminar = new LinkedList<>();
+    }
+    
+    private void realizarAtaque() {
+    	if(TimeUtils.timeSinceMillis(ultimoAtaque) > CADENCIA_ATAQUE) {
+    		Random r = new Random();
+    		int filaAtacante = r.nextInt(enemigos.size());
+    		int cantidad = enemigos.get(filaAtacante).size();
+    		while(cantidad==0) {
+    			filaAtacante = r.nextInt(enemigos.size());
+    			cantidad = enemigos.get(filaAtacante).size();
+    		}
+    		List<Enemigo> f = enemigos.get(filaAtacante);
+    		Random rd = new Random();
+    		int j = rd.nextInt(f.size());
+    		f.get(j).setInteligencia(new InteligenciaAleatoria(f.get(j)));
+    		ultimoAtaque = TimeUtils.millis();
+    	}
     }
     
     public void setDetectorColisiones(DetectorColision d) {

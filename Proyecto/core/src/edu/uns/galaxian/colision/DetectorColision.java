@@ -36,10 +36,10 @@ public class DetectorColision {
 	 */
 	public void verificarYResolverColisiones(Colisionable referencia) {
 		for (Colisionable otroColisionable : colisionables){
-			int x = (int) referencia.getPosicion().x;
-			int y = (int) referencia.getPosicion().y;
-			int ancho = referencia.getAncho();
-			int alto = referencia.getAlto();
+			int x = (int) referencia.getStatus().getPosicion().x;
+			int y = (int) referencia.getStatus().getPosicion().y;
+			float ancho = referencia.getAncho();
+			float alto = referencia.getAlto();
 			if(referencia != otroColisionable && colisionaron(referencia, otroColisionable)) {
 				referencia.aceptarColision(otroColisionable.getColisionador());
 				otroColisionable.aceptarColision(referencia.getColisionador());
@@ -48,7 +48,7 @@ public class DetectorColision {
 	}
 
 	private boolean colisionaron(Colisionable A, Colisionable B){
-		return (Math.abs(A.getPosicion().x - B.getPosicion().x)<=(A.getAncho() + B.getAncho())/2
-				&& Math.abs(A.getPosicion().y - B.getPosicion().y)<=(A.getAlto() + B.getAlto())/2);
+		return (Math.abs(A.getStatus().getPosicion().x - B.getStatus().getPosicion().x)<=(A.getAncho() + B.getAncho())/2
+				&& Math.abs(A.getStatus().getPosicion().y - B.getStatus().getPosicion().y)<=(A.getAlto() + B.getAlto())/2);
 	}
 }

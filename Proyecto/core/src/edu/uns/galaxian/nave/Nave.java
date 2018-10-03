@@ -8,6 +8,8 @@ import edu.uns.galaxian.entidades.inanimadas.Disparo;
 
 import java.util.Collection;
 
+// TODO ESTA CLASE DEBERIA SER ABSTRACTA
+
 public interface Nave {
 
 	/**
@@ -63,14 +65,6 @@ public interface Nave {
 	 * @return Ancho de la nave
 	 */
 	public float getAncho();
-
-	/**
-	 * Utiliza el arma de la nave para disparar. Retorna los disparos producidos.
-	 * @param posicion Posicion en donde se deben originar los disparos
-	 * @param rotacion Angulo de rotacion con el que se dispara
-	 * @return Coleccion de los disparos producidos
-	 */
-	public Collection<Disparo> disparar(Vector2 posicion, float rotacion);
 
 	/**
 	 * Utiliza el batch recibido para dibujar la nave en la posicion proveida.

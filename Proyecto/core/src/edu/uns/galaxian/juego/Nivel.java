@@ -4,15 +4,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+
 import edu.uns.galaxian.colision.DetectorColision;
 import edu.uns.galaxian.controladores.*;
 import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
 import edu.uns.galaxian.entidades.equipamiento.escudos.Escudo;
 import edu.uns.galaxian.entidades.inanimadas.Disparo;
 import edu.uns.galaxian.entidades.jugador.Jugador;
-import edu.uns.galaxian.entidades.jugador.nave.NaveJugador;
 import edu.uns.galaxian.escenario.Background;
 import edu.uns.galaxian.juego.config.ConfigNivel;
+import edu.uns.galaxian.nave.jugador.NaveLiviana;
 import edu.uns.galaxian.entidades.autonoma.enemigo.TipoEnemigo;
 
 import java.util.*;
@@ -34,13 +36,14 @@ public class Nivel extends ScreenAdapter {
 
         Arma armaJugador = config.getArmaJugador();
         Escudo escudoJguador = config.getEscudoJugador();
-        NaveJugador naveJugador = config.getNaveJugador();
-        int centroPantalla = Gdx.graphics.getWidth()/2;
+        //NaveJugador naveJugador = config.getNaveJugador();
+        Vector2 centroPantalla = new Vector2(Gdx.graphics.getWidth()/2,20);
         int margeDelPiso = 60;
-        jugador = new Jugador(centroPantalla, margeDelPiso, 1, this, naveJugador, armaJugador, escudoJguador);
+        NaveLiviana n = new NaveLiviana();
+        cDisparo = new ControladorDisparo(detector);
+        jugador = new Jugador(centroPantalla, n, this, cDisparo);
 
         cEnemigo = new ControladorEnemigo(config.getFabricaEnemigos(), formacionRandom(), jugador, detector);
-        cDisparo = new ControladorDisparo(detector);
     }
 
     @Override
@@ -55,7 +58,7 @@ public class Nivel extends ScreenAdapter {
 
         cEnemigo.actualizarEstado();
         cDisparo.actualizarEstado();
-        jugador.actualizar();
+        jugador.actualizar(Gdx.graphics.getDeltaTime());
 
         cEnemigo.dibujar(batch);
         cDisparo.dibujar(batch);

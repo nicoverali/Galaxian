@@ -1,10 +1,11 @@
 package edu.uns.galaxian.juego.config;
 
+import edu.uns.galaxian.entidades.jugador.Jugador;
 import edu.uns.galaxian.entidades.jugador.input.InputKeyboard;
-import edu.uns.galaxian.entidades.jugador.nave.NaveJugador;
-import edu.uns.galaxian.entidades.jugador.nave.NaveLiviana;
 import edu.uns.galaxian.juego.config.keys.GameDataKey;
 import edu.uns.galaxian.juego.exceptions.NonExistentGameDataException;
+import edu.uns.galaxian.nave.jugador.NaveJugador;
+import edu.uns.galaxian.nave.jugador.NaveLiviana;
 import edu.uns.galaxian.util.enums.Color;
 import edu.uns.galaxian.util.io.GSONNonFieldTypeAdapter;
 import edu.uns.galaxian.util.io.IOManager;
@@ -26,9 +27,9 @@ public class AdministradorDatos {
         cargarDatosDeUsuario();
         cargarDatosDelJuego();
 
-        TypeAdapterFactory naveAdapter = new GSONNonFieldTypeAdapter(NaveJugador.class, new Class[]{Color.class}, new Object[]{Color.AZUL});
+        TypeAdapterFactory naveAdapter = new GSONNonFieldTypeAdapter(Jugador.class, new Class[]{Color.class}, new Object[]{Color.AZUL});
         Gson gson = new GsonBuilder().registerTypeAdapterFactory(naveAdapter).create();
-        naveJugador = gson.fromJson(datosDeUsuario.getAsJsonObject(SaveDataKey.NAVE_JUGADOR.key()), NaveJugador.class);
+        naveJugador = gson.fromJson(datosDeUsuario.getAsJsonObject(SaveDataKey.NAVE_JUGADOR.key()), NaveLiviana.class);
     }
 
 
@@ -84,7 +85,7 @@ public class AdministradorDatos {
         }catch (IOException e){
             TypeAdapterFactory genericAdapter = new GSONNonFieldTypeAdapter();
             Gson gson = new GsonBuilder().registerTypeAdapterFactory(genericAdapter).create();
-            JsonElement naveJugadorJson = gson.toJsonTree(new NaveLiviana(Color.AZUL), NaveJugador.class);
+            JsonElement naveJugadorJson = gson.toJsonTree(new NaveLiviana(), NaveLiviana.class);
             datosDeUsuario = new JsonObject();
             datosDeUsuario.addProperty(SaveDataKey.NIVEL_ALCANZADO.key(), 1);
             datosDeUsuario.add(SaveDataKey.NAVE_JUGADOR.key(), naveJugadorJson);

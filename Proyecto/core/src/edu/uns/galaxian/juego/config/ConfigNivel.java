@@ -1,14 +1,12 @@
 package edu.uns.galaxian.juego.config;
 
-
 import com.google.gson.Gson;
 import edu.uns.galaxian.entidades.autonoma.enemigo.FabricaEnemigos;
 import edu.uns.galaxian.entidades.equipamiento.armas.*;
 import edu.uns.galaxian.entidades.equipamiento.escudos.*;
 import edu.uns.galaxian.entidades.inanimadas.*;
-import edu.uns.galaxian.entidades.jugador.input.ProcesadorInput;
-import edu.uns.galaxian.entidades.jugador.nave.*;
 import edu.uns.galaxian.juego.config.keys.GameDataKey;
+import edu.uns.galaxian.nave.jugador.NaveJugador;
 import edu.uns.galaxian.util.io.GSONNonFieldTypeAdapter;
 
 import com.google.gson.GsonBuilder;

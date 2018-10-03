@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import edu.uns.galaxian.colision.DetectorColision;
@@ -30,7 +31,7 @@ public class ControladorDisparo implements ControladorEntidad {
 		listaEliminar = new LinkedList<>();
 		
 		for(Disparo d : disparos) {
-			d.actualizar();
+			d.actualizar(Gdx.graphics.getDeltaTime());
 		}
 	}
 

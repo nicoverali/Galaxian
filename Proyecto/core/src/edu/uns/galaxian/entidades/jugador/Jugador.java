@@ -27,12 +27,12 @@ public class Jugador implements EntidadViva {
 	private ColisionadorJugador colisionador;
 
 	// Constructores	
-	public Jugador(float xPos, float yPos, NaveJugador nave, Nivel nivel, ControladorDisparo controladorDisparo) {
+	public Jugador(Vector2 pos, NaveJugador nave, Nivel nivel, ControladorDisparo controladorDisparo) {
 		this.nave = nave;
 		this.nivel = nivel;
 		this.controladorDisparo = controladorDisparo;
 
-		status = new StatusMutableVida(new Vector2(xPos, yPos), nave.getRotacionInicial(), nave.getVidaMax());
+		status = new StatusMutableVida(new Vector2(pos.x, pos.y), nave.getRotacionInicial(), nave.getVidaMax());
 		colisionador = new ColisionadorJugador(this);
 		input = new InputKeyboard();
 	}
@@ -104,7 +104,7 @@ public class Jugador implements EntidadViva {
 			status.setPosicion(nuevaPosicion);
 		}
 		if(input.sePresionoDisparar()){
-			controladorDisparo.agregarDisparos(nave.disparar(status.getPosicion(), status.getRotacion()));
+			controladorDisparo.agregarDisparos(nave.getArma().disparar(getPosicion(),90));
 		}
 	}
 
