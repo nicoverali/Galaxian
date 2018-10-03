@@ -8,5 +8,4 @@ public interface StatusVida extends Status {
 	 */
 	public int getVida();
 	
-	
 }

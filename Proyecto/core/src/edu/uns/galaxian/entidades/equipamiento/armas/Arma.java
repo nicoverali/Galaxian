@@ -1,6 +1,5 @@
 package edu.uns.galaxian.entidades.equipamiento.armas;
 import java.util.Collection;
-import java.util.List;
 
 import com.badlogic.gdx.math.Vector2;
 

@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 
 import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaAleatoria;
 import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaArtificial;
+import edu.uns.galaxian.entidades.equipamiento.armas.ArmaComun;
+import edu.uns.galaxian.entidades.inanimadas.DisparoEnemigo;
 import edu.uns.galaxian.entidades.status.StatusVida;
 
 public class NaveKamikaze extends NaveEnemigo{
@@ -23,6 +25,9 @@ public class NaveKamikaze extends NaveEnemigo{
 		this.colisionDamage = colisionDamage;
 		this.velocidadMax = velocidadMax;
 		textura = new Texture(Gdx.files.internal(TEXTURA_DIR));
+		inteligenciaDeAtaque = new InteligenciaAleatoria();
+		
+		setArma(new ArmaComun(new DisparoEnemigo()));
 	}
 
 	public int getVidaMax() {
@@ -34,7 +39,7 @@ public class NaveKamikaze extends NaveEnemigo{
 	}
 
 	public float getRotacionInicial() {
-		return 180;
+		return 270;
 	}
 
 	public int getDamage() {

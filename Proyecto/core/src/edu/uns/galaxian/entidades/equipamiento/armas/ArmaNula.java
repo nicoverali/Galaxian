@@ -8,12 +8,10 @@ import java.util.Collection;
 
 public class ArmaNula implements Arma {
 
-    @Override
     public void setDisparoModelo(Disparo modelo) {
         // Do nothing
     }
 
-    @Override
     public Collection<Disparo> disparar(Vector2 posicion, float anguloDeDisparo) throws IllegalStateException {
         return new ArrayList<>(0);
     }

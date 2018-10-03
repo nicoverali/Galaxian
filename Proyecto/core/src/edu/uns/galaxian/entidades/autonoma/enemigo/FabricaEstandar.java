@@ -7,31 +7,26 @@ import edu.uns.galaxian.nave.enemigo.NaveKamikaze;
 
 public class FabricaEstandar implements FabricaEnemigos {
 
-	@Override
 	public Enemigo getKamikaze(int xPos, int yPos, ControladorEnemigo controlador, StatusVida estadoJugador) {
 		NaveKamikaze nave = new NaveKamikaze(60, 200, 20, estadoJugador);
 		return new Enemigo(xPos, yPos, nave, controlador);
 	}
 
-	@Override
 	public Enemigo getKamikazeAleatorio(int xPos, int yPos, ControladorEnemigo controlador) {
 		NaveKamikaze nave = new NaveKamikaze(80, 200, 20, new StatusMutableVida());
 		return new Enemigo(xPos, yPos, nave, controlador);
 	}
 
-	@Override
 	public Enemigo getKamikazeMixto(int xPos, int yPos, ControladorEnemigo controlador, StatusVida estadoJugador) {
 		NaveKamikaze nave = new NaveKamikaze(70, 200, 20, estadoJugador);
 		return new Enemigo(xPos, yPos, nave, controlador);
 	}
 
-	@Override
 	public Enemigo getArmado(int xPos, int yPos, ControladorEnemigo controlador, StatusVida estadoJugador) {
 		NaveKamikaze nave = new NaveKamikaze(60, 200, 20, estadoJugador);
 		return new Enemigo(xPos, yPos, nave, controlador);
 	}
 
-	@Override
 	public Enemigo getArmadoDebil(int xPos, int yPos, ControladorEnemigo controlador, StatusVida estadoJugador) {
 		NaveKamikaze nave = new NaveKamikaze(80, 200, 20, estadoJugador);
 		return new Enemigo(xPos, yPos, nave, controlador);

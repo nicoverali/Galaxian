@@ -1,12 +1,16 @@
 package edu.uns.galaxian.entidades.autonoma.enemigo;
 
 import java.util.Collection;
+
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.entidades.EntidadViva;
 import edu.uns.galaxian.entidades.autonoma.Autonomo;
 import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaArtificial;
+import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaFormacion;
 import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
+import edu.uns.galaxian.entidades.equipamiento.armas.ArmaDisparoDoble;
 import edu.uns.galaxian.entidades.inanimadas.*;
 import edu.uns.galaxian.entidades.status.StatusMutableVida;
 import edu.uns.galaxian.entidades.status.StatusVida;
@@ -28,6 +32,9 @@ public class Enemigo implements EntidadViva, Autonomo  {
 		this.controladorEnemigo = controlador;
 		this.estado = new StatusMutableVida(new Vector2(xPos,yPos), nave.getRotacionInicial() , nave.getVidaMax());
 		this.colisionador = new ColisionadorEnemigo(this);
+		inteligencia = new InteligenciaFormacion(estado.getPosicion());
+		
+		setArma(new ArmaDisparoDoble(new DisparoEnemigo()));
 	}
 
 	/**
@@ -57,22 +64,18 @@ public class Enemigo implements EntidadViva, Autonomo  {
 		return nave.getArma().disparar(posicion,rotacion);
 	}
 
-    @Override
     public float getAlto() {
     	return nave.getAlto();
     }
 
-    @Override
     public float getAncho() {
     	return nave.getAncho();
     }
 
-	@Override
 	public void setVidaAlMaximo() {
 		estado.setVida(nave.getVidaMax());
 	}
 
-	@Override
 	public void restarVida(int vidaARestar) throws IllegalArgumentException {
 		if(vidaARestar < 0){
 			throw new IllegalArgumentException("La vida a restar no puede ser negativa.");
@@ -81,42 +84,41 @@ public class Enemigo implements EntidadViva, Autonomo  {
 		estado.setVida(Math.max(0, nuevaVida));
 	}
 
-	@Override
 	public StatusVida getStatus() {
 		return estado;
 	}
 
-	@Override
 	public InteligenciaArtificial getInteligencia() {
 		return inteligencia;
 	}
 
-	@Override
 	public void setInteligencia(InteligenciaArtificial ia) {
 		inteligencia = ia;
 	}
 
-    @Override
-	public void actualizar(float d) {
+	public void actualizar(float delta) {
 		inteligencia.pensar(estado);
+		if(estado.getPosicion().y < 0) {
+			estado.setPosicion(new Vector2(estado.getPosicion().x,Gdx.graphics.getHeight()));
+		}
 	}
+    
+    public void atacar() {
+    	inteligencia = nave.getInteligenciaDeAtaque();
+    }
 
-    @Override
     public void dibujar(SpriteBatch batch) {
     	nave.dibujar(batch, estado.getPosicion());
     }
 
-    @Override
     public void eliminar() {
     	controladorEnemigo.deregistrar(this);
     }
 
-    @Override
 	public Colisionador getColisionador(){
 		return colisionador;
 	}
 
-	@Override
 	public void aceptarColision(Colisionador colisionador) {
 		colisionador.colisionarConEnemigo(this);
 	}

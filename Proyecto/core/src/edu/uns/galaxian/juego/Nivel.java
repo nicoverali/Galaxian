@@ -4,20 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 
 import edu.uns.galaxian.colision.DetectorColision;
 import edu.uns.galaxian.controladores.*;
-import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
-import edu.uns.galaxian.entidades.equipamiento.escudos.Escudo;
-import edu.uns.galaxian.entidades.inanimadas.Disparo;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 import edu.uns.galaxian.escenario.Background;
 import edu.uns.galaxian.juego.config.ConfigNivel;
-import edu.uns.galaxian.nave.jugador.NaveLiviana;
 import edu.uns.galaxian.entidades.autonoma.enemigo.TipoEnemigo;
-import sun.security.krb5.Config;
-
 import java.util.*;
 
 public class Nivel extends ScreenAdapter {
@@ -40,6 +33,8 @@ public class Nivel extends ScreenAdapter {
 
         controladores.add(cDisparos);
         controladores.add(cEnemigos);
+        
+        cEnemigos.setControladorDisparo(cDisparos);
     }
 
     @Override

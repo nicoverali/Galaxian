@@ -5,12 +5,10 @@ import edu.uns.galaxian.entidades.inanimadas.Disparo;
 
 public class EscudoNulo implements Escudo{
 
-	@Override
 	public float proteger(Enemigo enemigo) {
 		return 0;
 	}
 
-	@Override
 	public float proteger(Disparo disparo) {
 		return 0;
 	}

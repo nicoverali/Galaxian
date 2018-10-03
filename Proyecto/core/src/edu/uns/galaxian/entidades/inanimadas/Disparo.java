@@ -1,5 +1,6 @@
 package edu.uns.galaxian.entidades.inanimadas;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
@@ -87,6 +88,9 @@ public abstract class Disparo implements Entidad {
 	public void actualizar(float delta) {
 		Vector2 nuevaPosicion = status.getPosicion().add(status.getVelocidad());
 		status.setPosicion(nuevaPosicion);
+		if((status.getPosicion().y > Gdx.graphics.getHeight()) || (status.getPosicion().y<0)) {
+			eliminar();
+		}
 	}
 
 	public void eliminar() {

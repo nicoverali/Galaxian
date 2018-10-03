@@ -2,16 +2,9 @@ package edu.uns.galaxian.entidades.autonoma.ia;
 
 import com.badlogic.gdx.math.Vector2;
 
-import edu.uns.galaxian.entidades.autonoma.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.status.StatusMutableVida;
 
 public class InteligenciaAleatoria implements InteligenciaArtificial {
-	
-	private Enemigo enemigo;
-	
-	public InteligenciaAleatoria(Enemigo controlado) {
-		enemigo = controlado;
-	}
 
 	public void pensar(StatusMutableVida estado) {
 		float posY = estado.getPosicion().y - 1 ;

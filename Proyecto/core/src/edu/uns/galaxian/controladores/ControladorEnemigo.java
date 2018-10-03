@@ -9,30 +9,34 @@ import edu.uns.galaxian.colision.DetectorColision;
 import edu.uns.galaxian.entidades.autonoma.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.autonoma.enemigo.FabricaEnemigos;
 import edu.uns.galaxian.entidades.autonoma.enemigo.TipoEnemigo;
-import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaAleatoria;
 import edu.uns.galaxian.entidades.status.StatusVida;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class ControladorEnemigo implements ControladorEntidad {
 
     private static final int TAMANIO_NAVES = 40;
     
-    private static final long CADENCIA_ATAQUE = 400;
+    private static final long CADENCIA_ATAQUE = 1100;
     private long ultimoAtaque;
 
     private List<List<Enemigo>> enemigos;
     private List<Enemigo> listaEliminar;
     private StatusVida estadoJugador;
     private DetectorColision detector;
+    private ControladorDisparo controladorDisparo;
+    private Map<Enemigo,Boolean> atacantes;
 
     public ControladorEnemigo(FabricaEnemigos fabrica, List<List<TipoEnemigo>> formacion, StatusVida estadoJugador, DetectorColision detector){
     	this.detector = detector;
     	this.estadoJugador = estadoJugador;
         listaEliminar = new LinkedList<>();
+        atacantes = new HashMap<Enemigo,Boolean>();
         
         this.ultimoAtaque = System.currentTimeMillis();
 
@@ -48,6 +52,10 @@ public class ControladorEnemigo implements ControladorEntidad {
                 detector.registrarColisionable(enemigo);
                 filaDeEnemigos.add(enemigo);
                 numColumna++;
+                
+                // TODO experimento para poder realizar un ataque de enemigos
+                atacantes.put(enemigo,false);
+                
             }
             enemigos.add(filaDeEnemigos);
             numFila++;
@@ -102,13 +110,16 @@ public class ControladorEnemigo implements ControladorEntidad {
 
     @Override
     public void actualizarEstado(float delta) {
-        // TODO Este metodo debe decidir cuando un enemigo sale de la formacion
-    	
+  
     	realizarAtaque();
     	
     	for(List<Enemigo> fila : enemigos) {
     		for(Enemigo enemigo : fila) {
                 // TODO Se debe actualizar el enemigo
+    			enemigo.actualizar(delta);
+    			if(atacantes.get(enemigo) == true) {
+    				controladorDisparo.agregarDisparos(enemigo.disparar());
+    			}
                 detector.verificarYResolverColisiones(enemigo);
             }
     	}
@@ -122,6 +133,7 @@ public class ControladorEnemigo implements ControladorEntidad {
     					encontre = true;
     					fila.remove(eliminado);
     					detector.eliminarEntidad(eliminado);
+    					atacantes.remove(eliminado);  // provisorio
     				}
     			}
     		}
@@ -131,6 +143,7 @@ public class ControladorEnemigo implements ControladorEntidad {
     
     private void realizarAtaque() {
     	if(TimeUtils.timeSinceMillis(ultimoAtaque) > CADENCIA_ATAQUE) {
+    		
     		Random r = new Random();
     		int filaAtacante = r.nextInt(enemigos.size());
     		int cantidad = enemigos.get(filaAtacante).size();
@@ -138,16 +151,22 @@ public class ControladorEnemigo implements ControladorEntidad {
     			filaAtacante = r.nextInt(enemigos.size());
     			cantidad = enemigos.get(filaAtacante).size();
     		}
-    		List<Enemigo> f = enemigos.get(filaAtacante);
+    		List<Enemigo> filaDeEnemigos = enemigos.get(filaAtacante);
     		Random rd = new Random();
-    		int j = rd.nextInt(f.size());
-    		f.get(j).setInteligencia(new InteligenciaAleatoria(f.get(j)));
+    		int num_Enemigo = rd.nextInt(filaDeEnemigos.size());
+    		Enemigo elegido = filaDeEnemigos.get(num_Enemigo);
+    		elegido.atacar();
+    		atacantes.put(elegido,true);
     		ultimoAtaque = TimeUtils.millis();
     	}
     }
     
     public void setDetectorColisiones(DetectorColision d) {
     	detector = d;
+    }
+    
+    public void setControladorDisparo(ControladorDisparo c) {
+    	controladorDisparo = c;
     }
 
     public void dibujar(SpriteBatch batch) {
