@@ -2,11 +2,8 @@ package edu.uns.galaxian.entidades.status;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class StatusMutableVida implements StatusVida {
+public class StatusMutableVida extends StatusMutable implements StatusVida {
 
-	private Vector2 posicion;
-	private Vector2 velocidad;
-	private float rotacion;
 	private int vida;
 
 	/**
@@ -15,9 +12,7 @@ public class StatusMutableVida implements StatusVida {
 	 */
 	public StatusMutableVida()
 	{
-		posicion = Vector2.Zero;
-		velocidad = Vector2.Zero;
-		rotacion = 0;
+		super();
 		vida = 1;
 	}
 
@@ -28,9 +23,7 @@ public class StatusMutableVida implements StatusVida {
 	 * @param vida Vida actual
 	 */
 	public StatusMutableVida(Vector2 posicion, float rotacion, int vida){
-		this.posicion = posicion;
-		this.velocidad = Vector2.Zero;
-		this.rotacion = rotacion;
+		super(posicion, rotacion);
 		this.vida = vida;
 	}
 
@@ -43,54 +36,13 @@ public class StatusMutableVida implements StatusVida {
 	 */
 	public StatusMutableVida(Vector2 posicion, Vector2 velocidad, float rotacion, int vida)
 	{
-		this.posicion = posicion;
-		this.velocidad = velocidad;
-		this.rotacion = rotacion;
+		super(posicion, velocidad, rotacion);
 		this.vida = vida;
-	}
-	
-	public Vector2 getPosicion() {
-		return posicion.cpy();
-	}
-
-	public Vector2 getVelocidad() {
-		return velocidad.cpy();
-	}
-
-	public float getRotacion() {
-		return rotacion;
 	}
 
 	public int getVida()
 	{
 		return vida;
-	}
-
-	/**
-	 * Setea un nuevo valor en la posicion.
-	 * @param nuevaPosicion Nuevo valor de la posicion
-	 */
-	public void setPosicion(Vector2 nuevaPosicion)
-	{
-		posicion = nuevaPosicion;
-	}
-
-	/**
-	 * Setea un nuevo valor de velocidad.
-	 * @param nuevaVelocidad Nuevo valor de velocidad
-	 */
-	public void setVelocidad(Vector2 nuevaVelocidad)
-	{
-		velocidad = nuevaVelocidad;
-	}
-
-	/**
-	 * Setea un nuevo valor de rotacion.
-	 * @param nuevaRotacion Nuevo valor de rotacion en grados
-	 */
-	public void setRotacion(float nuevaRotacion)
-	{
-		rotacion = nuevaRotacion;
 	}
 
 	/**

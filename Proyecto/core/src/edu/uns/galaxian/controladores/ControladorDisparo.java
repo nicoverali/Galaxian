@@ -22,14 +22,15 @@ public class ControladorDisparo implements ControladorEntidad {
 	}
 
 	public void actualizarEstado(float delta) {
-		for(Disparo d : listaEliminar) {
-			detector.eliminarEntidad(d);
+		for(Disparo disparo : listaEliminar) {
+			detector.eliminarEntidad(disparo);
+			disparos.remove(disparo);
 		}
 		
 		listaEliminar = new LinkedList<>();
 		
-		for(Disparo d : disparos) {
-  			d.actualizar(delta);
+		for(Disparo disparo : disparos) {
+  			disparo.actualizar(delta);
 		}
 	}
 

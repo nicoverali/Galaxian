@@ -29,12 +29,10 @@ public class Nivel extends ScreenAdapter {
 
         ControladorDisparo cDisparos = new ControladorDisparo(detector);
         jugador = new Jugador(Gdx.graphics.getWidth()/2, 50, config.getNaveJugador(), this, cDisparos);
-        ControladorEnemigo cEnemigos = new ControladorEnemigo(config.getFabricaEnemigos(), formacionRandom(), jugador.getStatus(), detector);
+        ControladorEnemigo cEnemigos = new ControladorEnemigo(config.getFabricaEnemigos(), formacionRandom(), jugador.getStatus(), detector, cDisparos);
 
         controladores.add(cDisparos);
         controladores.add(cEnemigos);
-        
-        cEnemigos.setControladorDisparo(cDisparos);
     }
 
     @Override

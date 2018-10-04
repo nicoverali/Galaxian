@@ -32,11 +32,12 @@ public class ControladorEnemigo implements ControladorEntidad {
     private ControladorDisparo controladorDisparo;
     private Map<Enemigo,Boolean> atacantes;
 
-    public ControladorEnemigo(FabricaEnemigos fabrica, List<List<TipoEnemigo>> formacion, StatusVida estadoJugador, DetectorColision detector){
+    public ControladorEnemigo(FabricaEnemigos fabrica, List<List<TipoEnemigo>> formacion, StatusVida estadoJugador, DetectorColision detector, ControladorDisparo cDisparos){
     	this.detector = detector;
     	this.estadoJugador = estadoJugador;
+    	this.controladorDisparo = cDisparos;
         listaEliminar = new LinkedList<>();
-        atacantes = new HashMap<Enemigo,Boolean>();
+        atacantes = new HashMap<>();
         
         this.ultimoAtaque = System.currentTimeMillis();
 
@@ -159,14 +160,6 @@ public class ControladorEnemigo implements ControladorEntidad {
     		atacantes.put(elegido,true);
     		ultimoAtaque = TimeUtils.millis();
     	}
-    }
-    
-    public void setDetectorColisiones(DetectorColision d) {
-    	detector = d;
-    }
-    
-    public void setControladorDisparo(ControladorDisparo c) {
-    	controladorDisparo = c;
     }
 
     public void dibujar(SpriteBatch batch) {

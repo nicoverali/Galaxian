@@ -3,7 +3,7 @@ package edu.uns.galaxian.entidades.autonoma.ia;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
 
-import edu.uns.galaxian.entidades.status.StatusMutableVida;
+import edu.uns.galaxian.entidades.status.StatusMutable;
 
 public class InteligenciaFormacion implements InteligenciaArtificial{
 	
@@ -21,7 +21,7 @@ public class InteligenciaFormacion implements InteligenciaArtificial{
 		argumento = PI/60;
 	}
 
-	public void pensar(StatusMutableVida estado) {
+	public void pensar(StatusMutable estado) {
 		if(TimeUtils.timeSinceMillis(ultimoMovimiento) > CADENCIA_MOVIMIENTO) {
 			float nuevaPos_X = (float)(30*Math.cos(argumento)+posX_formacion);
 			float nuevaPos_Y = (float)(30*Math.sin(argumento)+posY_formacion);
