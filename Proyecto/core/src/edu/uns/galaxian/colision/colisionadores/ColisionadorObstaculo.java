@@ -6,12 +6,12 @@ import edu.uns.galaxian.entidades.inanimadas.DisparoJugador;
 import edu.uns.galaxian.entidades.inanimadas.Obstaculo;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
-public class ColisionadorEnemigo implements Colisionador<Enemigo> {
-
-	private Enemigo objetoFuente;
-
-	public ColisionadorEnemigo(Enemigo objetoFuente){
-		this.objetoFuente = objetoFuente;
+public class ColisionadorObstaculo implements Colisionador<Obstaculo> {
+	
+	private Obstaculo objetoFuente;
+	
+	public ColisionadorObstaculo(Obstaculo obstaculo) {
+		objetoFuente = obstaculo;
 	}
 
 	public void colisionarConJugador(Jugador jugador) {
@@ -19,23 +19,23 @@ public class ColisionadorEnemigo implements Colisionador<Enemigo> {
 	}
 
 	public void colisionarConEnemigo(Enemigo enemigo) {
-		// La colision entre enemigos no produce ningun efecto.
+		enemigo.restarVida(objetoFuente.getColisionDamage());
 	}
 
 	public void colisionarConDisparoJugador(DisparoJugador disparo) {
 		objetoFuente.restarVida(disparo.getDamage());
-		if(objetoFuente.getStatus().getVida() == 0){
-			objetoFuente.eliminar();
-		}
+		disparo.eliminar();
+		System.out.println("holaaaaaaaaaaaa");
 	}
-	
+
 	public void colisionarConDisparoEnemigo(DisparoEnemigo disparo) {
-		// Un disparo enemigo no afecta al enemigo.
+		objetoFuente.restarVida(disparo.getDamage());
+		disparo.eliminar();
 	}
 
 	public void colisionarConObstaculo(Obstaculo obstaculo) {
-		obstaculo.restarVida(objetoFuente.getColisionDamage());
-		objetoFuente.restarVida(obstaculo.getColisionDamage());
+		obstaculo.eliminar();
+		objetoFuente.eliminar();
 	}
 
 }

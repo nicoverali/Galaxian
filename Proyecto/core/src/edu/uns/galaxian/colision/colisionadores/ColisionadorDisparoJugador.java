@@ -3,6 +3,7 @@ package edu.uns.galaxian.colision.colisionadores;
 import edu.uns.galaxian.entidades.autonoma.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.inanimadas.DisparoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.DisparoJugador;
+import edu.uns.galaxian.entidades.inanimadas.Obstaculo;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
 public class ColisionadorDisparoJugador implements Colisionador<DisparoJugador> {
@@ -27,6 +28,12 @@ public class ColisionadorDisparoJugador implements Colisionador<DisparoJugador> 
 
 	public void colisionarConDisparoEnemigo(DisparoEnemigo enemigo) {
 		// Un disparoJugador no afecta a un disparoEnemigo. Por el momento.
+	}
+
+	public void colisionarConObstaculo(Obstaculo obstaculo) {
+		obstaculo.restarVida(objetoFuente.getDamage());
+		objetoFuente.eliminar();
+		System.out.println("holaaaaaaaaaaaa");
 	}
 
 }

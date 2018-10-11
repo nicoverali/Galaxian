@@ -33,6 +33,15 @@ public class Nivel extends ScreenAdapter {
 
         controladores.add(cDisparos);
         controladores.add(cEnemigos);
+        
+        ControladorObstaculo cObstaculo = new ControladorObstaculo(detector);
+        controladores.add(cObstaculo);
+        
+        /* Parte provisoria de los obstaculos
+        ControladorObstaculo cObstaculo = new ControladorObstaculo(detector);
+        controladores.add(cObstaculo);
+        Thread cObstaculoThread = new Thread(cObstaculo);
+        cObstaculoThread.start();*/
     }
 
     @Override

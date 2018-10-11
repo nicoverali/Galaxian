@@ -15,7 +15,7 @@ public abstract class Disparo implements Entidad {
 	protected int damage;
 	protected StatusMutable status;
 	protected Texture textura;
-	private ControladorDisparo controlador;
+	protected ControladorDisparo controlador;
 
 	public Disparo() {
 		damage = 0;
