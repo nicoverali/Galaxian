@@ -4,6 +4,7 @@ import edu.uns.galaxian.entidades.autonoma.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.inanimadas.DisparoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.DisparoJugador;
 import edu.uns.galaxian.entidades.inanimadas.Obstaculo;
+
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
 public class ColisionadorEnemigo implements Colisionador<Enemigo> {
@@ -37,5 +38,4 @@ public class ColisionadorEnemigo implements Colisionador<Enemigo> {
 		obstaculo.restarVida(objetoFuente.getColisionDamage());
 		objetoFuente.restarVida(obstaculo.getColisionDamage());
 	}
-
 }

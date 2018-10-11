@@ -30,18 +30,11 @@ public class Nivel extends ScreenAdapter {
         ControladorDisparo cDisparos = new ControladorDisparo(detector);
         jugador = new Jugador(Gdx.graphics.getWidth()/2, 50, config.getNaveJugador(), this, cDisparos);
         ControladorEnemigo cEnemigos = new ControladorEnemigo(config.getFabricaEnemigos(), formacionRandom(), jugador.getStatus(), detector, cDisparos);
+        ControladorObstaculo cObstaculo = new ControladorObstaculo(detector);
 
         controladores.add(cDisparos);
         controladores.add(cEnemigos);
-        
-        ControladorObstaculo cObstaculo = new ControladorObstaculo(detector);
         controladores.add(cObstaculo);
-        
-        /* Parte provisoria de los obstaculos
-        ControladorObstaculo cObstaculo = new ControladorObstaculo(detector);
-        controladores.add(cObstaculo);
-        Thread cObstaculoThread = new Thread(cObstaculo);
-        cObstaculoThread.start();*/
     }
 
     @Override
@@ -75,8 +68,8 @@ public class Nivel extends ScreenAdapter {
     private List<List<TipoEnemigo>> formacionRandom(){
         Random ran = new Random();
         List<List<TipoEnemigo>> formacion = new ArrayList<>(4);
-        for(int i = 0; i < 6; i++){
-            int cant = ran.nextInt(11);
+        for(int i = 0; i < 5; i++){
+            int cant = ran.nextInt(9);
             List<TipoEnemigo> tempFila = new ArrayList<>(cant);
             for(int j = 0; j < cant; j++){
                 tempFila.add(TipoEnemigo.values()[ran.nextInt(cant) % 5]);
