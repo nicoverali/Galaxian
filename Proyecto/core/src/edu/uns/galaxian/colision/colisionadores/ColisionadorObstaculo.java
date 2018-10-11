@@ -6,32 +6,35 @@ import edu.uns.galaxian.entidades.inanimadas.DisparoJugador;
 import edu.uns.galaxian.entidades.inanimadas.Obstaculo;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
-public class ColisionadorDisparoEnemigo implements Colisionador<DisparoEnemigo> {
-
-	private DisparoEnemigo objetoFuente;
+public class ColisionadorObstaculo implements Colisionador<Obstaculo> {
 	
-	public ColisionadorDisparoEnemigo(DisparoEnemigo objetoFuente) {
-		this.objetoFuente = objetoFuente;
+	private Obstaculo objetoFuente;
+	
+	public ColisionadorObstaculo(Obstaculo obstaculo) {
+		objetoFuente = obstaculo;
 	}
 
 	public void colisionarConJugador(Jugador jugador) {
-		objetoFuente.eliminar();
+		jugador.restarVida(objetoFuente.getColisionDamage());
 	}
 
 	public void colisionarConEnemigo(Enemigo enemigo) {
-		// Un disparo enemigo no afecta a un enemigo.
+		enemigo.restarVida(objetoFuente.getColisionDamage());
 	}
 
 	public void colisionarConDisparoJugador(DisparoJugador disparo) {
-		// TODO Decidir si un disparo Jugador puede afectar a un enemigo.
+		objetoFuente.restarVida(disparo.getDamage());
+		disparo.eliminar();
 	}
-	
+
 	public void colisionarConDisparoEnemigo(DisparoEnemigo disparo) {
-		// Un disparo enemigo no afecta a otro disparo enemigo.
+		objetoFuente.restarVida(disparo.getDamage());
+		disparo.eliminar();
 	}
-  
+
 	public void colisionarConObstaculo(Obstaculo obstaculo) {
-		obstaculo.restarVida(objetoFuente.getDamage());
+		obstaculo.eliminar();
 		objetoFuente.eliminar();
 	}
+
 }

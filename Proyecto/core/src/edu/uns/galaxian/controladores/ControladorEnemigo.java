@@ -109,7 +109,6 @@ public class ControladorEnemigo implements ControladorEntidad {
         return estadoJugador.getPosicion();
     }
 
-    @Override
     public void actualizarEstado(float delta) {
   
     	realizarAtaque();

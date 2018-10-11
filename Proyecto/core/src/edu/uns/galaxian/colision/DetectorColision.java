@@ -38,8 +38,6 @@ public class DetectorColision {
 		for (Colisionable otroColisionable : colisionables){
 			int x = (int) referencia.getStatus().getPosicion().x;
 			int y = (int) referencia.getStatus().getPosicion().y;
-			float ancho = referencia.getAncho();
-			float alto = referencia.getAlto();
 			if(referencia != otroColisionable && colisionaron(referencia, otroColisionable)) {
 				referencia.aceptarColision(otroColisionable.getColisionador());
 				otroColisionable.aceptarColision(referencia.getColisionador());

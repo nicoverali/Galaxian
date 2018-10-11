@@ -3,6 +3,8 @@ package edu.uns.galaxian.colision.colisionadores;
 import edu.uns.galaxian.entidades.autonoma.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.inanimadas.DisparoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.DisparoJugador;
+import edu.uns.galaxian.entidades.inanimadas.Obstaculo;
+
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
 public class ColisionadorJugador implements Colisionador<Jugador> {
@@ -25,4 +27,7 @@ public class ColisionadorJugador implements Colisionador<Jugador> {
 		objetoFuente.restarVida(disparo.getDamage());
 	}
 
+	public void colisionarConObstaculo(Obstaculo disparo) {
+		// TODO Auto-generated method stub
+	}
 }
