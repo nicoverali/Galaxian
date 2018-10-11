@@ -14,8 +14,8 @@ import edu.uns.galaxian.entidades.status.StatusVida;
 
 public class Obstaculo implements EntidadViva {
 	
-	private static Texture TEXTURA = new Texture(Gdx.files.internal("./jugador/VERDE/navePesada.png"));
-	private static final int VIDA_MAX = 300;
+	private static Texture TEXTURA = new Texture(Gdx.files.internal("./obstaculos/asteroideMarron.png"));
+	private static final int VIDA_MAX = 550;
 	
 	private ColisionadorObstaculo colisionador;
 	private ControladorObstaculo  controlador;

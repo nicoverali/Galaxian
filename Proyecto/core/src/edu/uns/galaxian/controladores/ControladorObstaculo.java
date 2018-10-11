@@ -6,25 +6,23 @@ import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.TimeUtils;
 
 import edu.uns.galaxian.colision.DetectorColision;
 import edu.uns.galaxian.entidades.inanimadas.Obstaculo;
 
 public class ControladorObstaculo implements ControladorEntidad{
+
+	private final ControladorObstaculo CONTROLADOR = this;
 	
 	private List<Obstaculo> obstaculos;
 	private List<Obstaculo> listaEliminar;
 	private DetectorColision detector;
-	
-	private static final long CADENCIA = 1900;
-    private long ultimaCreacion;
-	
+
 	public ControladorObstaculo(DetectorColision detector) {
 		this.detector = detector;
-		obstaculos = new LinkedList<Obstaculo>();
-		listaEliminar = new LinkedList<Obstaculo>();
-		ultimaCreacion = System.currentTimeMillis();
+		obstaculos = new LinkedList<>();
+		listaEliminar = new LinkedList<>();
+		iniciarThreadDeCreacion();
 	}
 
 	public void actualizarEstado(float delta) {
@@ -34,30 +32,9 @@ public class ControladorObstaculo implements ControladorEntidad{
 		}
 		
 		listaEliminar = new LinkedList<>();
-		
 		for(Obstaculo obstaculo : obstaculos) {
   			obstaculo.actualizar(delta);
   			detector.verificarYResolverColisiones(obstaculo);
-		}
-		
-		crearObstaculos();
-	}
-	
-	private void crearObstaculos() {
-		if(TimeUtils.timeSinceMillis(ultimaCreacion) > CADENCIA) {
-			Random random = new Random();
-			int max = random.nextInt(2);
-			for(int i=0; i<max; i++) {
-	            int alto = Gdx.graphics.getHeight()/4;
-	            int ancho = Gdx.graphics.getWidth();
-	            int posX = random.nextInt(ancho);
-	            int posY  = random.nextInt(alto) + alto + 60;
-	            Obstaculo nuevoObstaculo = new Obstaculo(posX,posY);
-	            nuevoObstaculo.setControladorObstaculo(this);
-	            obstaculos.add(nuevoObstaculo);
-	            detector.registrarColisionable(nuevoObstaculo);
-			}
-			ultimaCreacion = TimeUtils.millis();
 		}
 	}
 
@@ -71,31 +48,28 @@ public class ControladorObstaculo implements ControladorEntidad{
 		listaEliminar.add(obstaculo);
 	}
 
-	/*public void run() {
-		try {
-			Thread.sleep(0);
-		} catch (InterruptedException e) { e.printStackTrace(); }
-		Random random = new Random();
-		int max = random.nextInt(10);
-		for(int i=0; i<max; i++) {
-			 Gdx.app.postRunnable(new Runnable() {
-                 public void run() {
-                	 Random random = new Random();
-                	 int altoPantalla = Gdx.graphics.getHeight()/4;
-                	 int anchoPantalla = Gdx.graphics.getWidth()/4;
-                	 int posX = random.nextInt(4);
-                	 int posY  = random.nextInt(4);
-                	 System.out.println(posX);
-                	 System.out.println(posY);
-                     Obstaculo nuevoObstaculo = new Obstaculo(posX*anchoPantalla,posY*altoPantalla);
-                     obstaculos.add(nuevoObstaculo);
-                     detector.registrarColisionable(nuevoObstaculo);
-                 }
-             });
-		}
-		for(Obstaculo obs : obstaculos) {
-			obs.setControladorObstaculo(this);
-		}
-	}*/
-	
+	private void iniciarThreadDeCreacion(){
+		new Thread(new Runnable() {
+			public void run() {
+				final Random ran = new Random();
+				while(true){
+					try {
+						Thread.sleep(ran.nextInt(6000) + 2000);
+						Gdx.app.postRunnable(new Runnable() {
+							public void run() {
+								int posX = ran.nextInt(Gdx.graphics.getWidth());
+								int posY  = ran.nextInt(150) + Gdx.graphics.getHeight() / 3;
+								Obstaculo nuevoObstaculo = new Obstaculo(posX,posY);
+								nuevoObstaculo.setControladorObstaculo(CONTROLADOR);
+								obstaculos.add(nuevoObstaculo);
+								detector.registrarColisionable(nuevoObstaculo);
+							}
+						});
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}).start();
+	}
 }

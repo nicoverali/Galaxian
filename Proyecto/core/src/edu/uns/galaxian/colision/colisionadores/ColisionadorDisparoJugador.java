@@ -33,7 +33,6 @@ public class ColisionadorDisparoJugador implements Colisionador<DisparoJugador> 
 	public void colisionarConObstaculo(Obstaculo obstaculo) {
 		obstaculo.restarVida(objetoFuente.getDamage());
 		objetoFuente.eliminar();
-		System.out.println("holaaaaaaaaaaaa");
 	}
 
 }

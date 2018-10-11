@@ -75,11 +75,11 @@ public class Nivel extends ScreenAdapter {
     private List<List<TipoEnemigo>> formacionRandom(){
         Random ran = new Random();
         List<List<TipoEnemigo>> formacion = new ArrayList<>(4);
-        for(int i = 0; i < 4; i++){
-            int cant = ran.nextInt(6);
+        for(int i = 0; i < 6; i++){
+            int cant = ran.nextInt(11);
             List<TipoEnemigo> tempFila = new ArrayList<>(cant);
             for(int j = 0; j < cant; j++){
-                tempFila.add(TipoEnemigo.values()[ran.nextInt(cant)]);
+                tempFila.add(TipoEnemigo.values()[ran.nextInt(cant) % 5]);
             }
             formacion.add(tempFila);
         }
