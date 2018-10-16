@@ -12,14 +12,18 @@ public class DetectorColision {
 	}
 
 	/**
-	 * Registra un nuevo colisionable
+	 * Registra un nuevo colisionable.
 	 * @param col Colsionable a registrar
 	 */
 	public void registrarColisionable(Colisionable col) {
 		colisionables.add(col);
 	}
 
-	public void eliminarEntidad(Colisionable eliminar) {
+	/**
+	 * Elimina el colisionable de la lista de colisionables registrados.
+	 * @param eliminar Colisionable a eliminar
+	 */
+	public void eliminarColisionable(Colisionable eliminar) {
 		boolean encontre = false;
 		for(int i=0; i<colisionables.size() && !encontre; i++) {
 			if(colisionables.get(i).equals(eliminar)) {
@@ -30,14 +34,27 @@ public class DetectorColision {
 	}
 
 	/**
+	 * Verifica entre todos los colisionables registrados si se produjo alguna
+	 * colision. En caso de producirse, esta es resuelta.
+	 */
+	public void resolverColisiones(){
+		for(Colisionable referencia : colisionables){
+			for(Colisionable otroColisionable : colisionables){
+				if(referencia != otroColisionable && colisionaron(referencia, otroColisionable)){
+					referencia.aceptarColision(otroColisionable.getColisionador());
+				}
+			}
+		}
+	}
+
+	// TODO Eliminar este metodo
+	/**
 	 * A partir del colisionable previsto, se verifica la existencia de alguna colision con este colisionable.
 	 * En caso de haber una colision, esta se resuelve.
 	 * @param referencia Objeto colisionable del cual se verifican las colisiones
 	 */
 	public void verificarYResolverColisiones(Colisionable referencia) {
 		for (Colisionable otroColisionable : colisionables){
-			int x = (int) referencia.getStatus().getPosicion().x;
-			int y = (int) referencia.getStatus().getPosicion().y;
 			if(referencia != otroColisionable && colisionaron(referencia, otroColisionable)) {
 				referencia.aceptarColision(otroColisionable.getColisionador());
 				otroColisionable.aceptarColision(referencia.getColisionador());

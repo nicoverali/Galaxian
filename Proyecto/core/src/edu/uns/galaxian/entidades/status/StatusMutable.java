@@ -73,7 +73,7 @@ public class StatusMutable implements Status {
 
 	/**
 	 * Setea un nuevo valor de rotacion
-	 * @param nuevaRotacion
+	 * @param nuevaRotacion Nuevo valor de rotacion
 	 */
 	public void setRotacion(float nuevaRotacion)
 	{

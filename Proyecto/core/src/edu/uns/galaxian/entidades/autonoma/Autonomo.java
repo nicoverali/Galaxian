@@ -7,11 +7,11 @@ public interface Autonomo {
 	/**
 	 * Retorna la inteligencia del enemigo
 	 */
-	public InteligenciaArtificial getInteligencia();
+    InteligenciaArtificial getInteligencia();
 		
 	/**
 	 * Setea la inteligencia al enemigo
 	 */
-	public void setInteligencia( InteligenciaArtificial i);
+    void setInteligencia(InteligenciaArtificial i);
 	
 }

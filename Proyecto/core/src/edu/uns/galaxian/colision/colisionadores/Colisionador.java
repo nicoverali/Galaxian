@@ -34,7 +34,7 @@ public interface Colisionador<T> {
 	
 	/**
 	 * Comportamiento al momento de colisionar con un Obstaculo
-	 * @param disparo Obstaculo con el que se colisiono
+	 * @param obstaculo Obstaculo con el que se colisiono
 	 */
 	void colisionarConObstaculo(Obstaculo obstaculo);
 }

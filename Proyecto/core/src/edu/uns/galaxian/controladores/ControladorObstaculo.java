@@ -27,7 +27,7 @@ public class ControladorObstaculo implements ControladorEntidad{
 
 	public void actualizarEstado(float delta) {
 		for(Obstaculo obstaculo : listaEliminar) {
-			detector.eliminarEntidad(obstaculo);
+			detector.eliminarColisionable(obstaculo);
 			obstaculos.remove(obstaculo);
 		}
 		

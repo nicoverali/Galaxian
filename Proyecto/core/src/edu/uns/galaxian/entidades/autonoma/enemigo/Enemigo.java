@@ -122,4 +122,10 @@ public class Enemigo implements EntidadViva, Autonomo  {
 	public void aceptarColision(Colisionador colisionador) {
 		colisionador.colisionarConEnemigo(this);
 	}
+
+
+	// TODO Esto es solo de desarrollo
+	public void setPosicion(float xPos, float yPos){
+    	this.estado.setPosicion(new Vector2(xPos, yPos));
+	}
 }

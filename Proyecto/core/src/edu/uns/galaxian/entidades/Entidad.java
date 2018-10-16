@@ -11,32 +11,32 @@ public interface Entidad extends Colisionable
 	 * Devuelve la altura de la entidad en pixeles.
 	 * @return Altura de la entidad en pixeles.
 	 */
-	public float getAlto();
+    float getAlto();
 
 	/**
 	 * Devuelve el ancho de la entidad en pixeles
 	 * @return Ancho de la entidad en pixeles.
 	 */
-	public float getAncho();
+    float getAncho();
 
 	/**
 	 * Retorna el estado actual de la entidad
 	 */
-	public Status getStatus();
+    Status getStatus();
 
 	/**
 	 * Dibuja la entidad en el mapa.
 	 * @param batch Batch que se utilizara para dibujar la entidad
 	 */
-	public void dibujar(SpriteBatch batch);
+    void dibujar(SpriteBatch batch);
 
 	/**
 	 * Actualiza el estado de la entidad.
 	 */
-	public void actualizar(float d);
+    void actualizar(float d);
 
 	/**
 	 * Elimina la entidad del juego.
 	 */
-	public void eliminar();
+    void eliminar();
 }

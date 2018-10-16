@@ -57,8 +57,7 @@ public class GSONNonFieldTypeAdapter implements TypeAdapterFactory{
                     try{
                         String className = in.nextString();
                         Class<?> resultingClass = Class.forName(className);
-                        T resultingObject = (T) resultingClass.getConstructor(parametersTypes).newInstance(parameters);
-                        return resultingObject;
+                        return (T) resultingClass.getConstructor(parametersTypes).newInstance(parameters);
                     }catch(NoSuchMethodException |SecurityException e){
                         throw new IOException("A constructor with the given parameter types does not exists.", e);
                     }catch(IllegalAccessException | InstantiationException | InvocationTargetException e) {

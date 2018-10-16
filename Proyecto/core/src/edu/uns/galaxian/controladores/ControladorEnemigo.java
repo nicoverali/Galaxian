@@ -132,7 +132,7 @@ public class ControladorEnemigo implements ControladorEntidad {
     				if(fila.get(j)==eliminado) {
     					encontre = true;
     					fila.remove(eliminado);
-    					detector.eliminarEntidad(eliminado);
+    					detector.eliminarColisionable(eliminado);
     					atacantes.remove(eliminado);  // provisorio
     				}
     			}

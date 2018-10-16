@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -127,7 +128,7 @@ public class IOManager {
      * @throws IOException Si no se tiene permisos para escribir en esta direccion o ocurre un problema la intentar hacerlo
      */
     public void escribirArchivoComoBytes(String dirRelativa, String contenido, boolean anexar) throws IOException{
-        escribirArchivoComoBytes(dirRelativa, contenido.getBytes("UTF-8"), anexar);
+        escribirArchivoComoBytes(dirRelativa, contenido.getBytes(StandardCharsets.UTF_8), anexar);
     }
 
 /**
@@ -221,11 +222,11 @@ public class IOManager {
     public String obtenerMD5Hex(String contenido){
         try{
             byte[] data = MessageDigest.getInstance("MD5").digest(contenido.getBytes("UTF-8"));
-            StringBuffer stringBuffer = new StringBuffer();
-            for (int i = 0; i < data.length; i++) {
-                stringBuffer.append(Integer.toString((data[i] & 0xff) + 0x100, 16).substring(1));
+            StringBuilder stringBuilder = new StringBuilder();
+            for (byte aData : data) {
+                stringBuilder.append(Integer.toString((aData & 0xff) + 0x100, 16).substring(1));
             }
-            return stringBuffer.toString();
+            return stringBuilder.toString();
         }catch (NoSuchAlgorithmException | UnsupportedEncodingException e){
             System.out.println("Lo imposible se volvio real.");
             return null;

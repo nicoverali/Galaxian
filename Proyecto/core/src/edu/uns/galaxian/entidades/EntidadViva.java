@@ -7,7 +7,7 @@ public interface EntidadViva extends Entidad {
 	/**
 	 * Setea la vida de la entidad al maximo permitido.
 	 */
-	public void setVidaAlMaximo();
+    void setVidaAlMaximo();
 	
 	/**
 	 * Resta a la vida actual de la entidad, la cantidad de vida recibida. Si al restar la vida,
@@ -16,12 +16,12 @@ public interface EntidadViva extends Entidad {
 	 * @param vidaARestar Cantidad de vida que se desea restar
 	 * @throws IllegalArgumentException Si la vida recibida es negativa
 	 */
-	public void restarVida(int vidaARestar) throws IllegalArgumentException;
+    void restarVida(int vidaARestar) throws IllegalArgumentException;
 
 	/**
 	 * Retorna el estado actual de la entidad.
 	 * @return Estado actual de la entidad
 	 */
-	public StatusVida getStatus();
+    StatusVida getStatus();
 	
 }

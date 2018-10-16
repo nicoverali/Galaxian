@@ -23,7 +23,7 @@ public class ControladorDisparo implements ControladorEntidad {
 
 	public void actualizarEstado(float delta) {
 		for(Disparo disparo : listaEliminar) {
-			detector.eliminarEntidad(disparo);
+			detector.eliminarColisionable(disparo);
 			disparos.remove(disparo);
 		}
 		
