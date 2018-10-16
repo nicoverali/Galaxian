@@ -1,7 +1,7 @@
 package edu.uns.galaxian.colision;
 
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
-import edu.uns.galaxian.entidades.status.Status;
+import edu.uns.galaxian.entidades.status.GameObject;
 
 public interface Colisionable {
 
@@ -19,9 +19,9 @@ public interface Colisionable {
 
 	/**
 	 * Devuelve el status del colisionable
-	 * @return Status del colisionable
+	 * @return GameObject del colisionable
 	 */
-	Status getStatus();
+	GameObject getStatus();
 
 	/**
 	 * El objeto colisionable acepta entrar en un estado de colision. Recibe

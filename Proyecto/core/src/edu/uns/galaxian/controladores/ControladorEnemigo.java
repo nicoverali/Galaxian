@@ -9,7 +9,7 @@ import edu.uns.galaxian.colision.DetectorColision;
 import edu.uns.galaxian.entidades.autonoma.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.autonoma.enemigo.FabricaEnemigos;
 import edu.uns.galaxian.entidades.autonoma.enemigo.TipoEnemigo;
-import edu.uns.galaxian.entidades.status.StatusVida;
+import edu.uns.galaxian.entidades.status.GameObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,12 +27,12 @@ public class ControladorEnemigo implements ControladorEntidad {
 
     private List<List<Enemigo>> enemigos;
     private List<Enemigo> listaEliminar;
-    private StatusVida estadoJugador;
+    private GameObject estadoJugador;
     private DetectorColision detector;
     private ControladorDisparo controladorDisparo;
     private Map<Enemigo,Boolean> atacantes;
 
-    public ControladorEnemigo(FabricaEnemigos fabrica, List<List<TipoEnemigo>> formacion, StatusVida estadoJugador, DetectorColision detector, ControladorDisparo cDisparos){
+    public ControladorEnemigo(FabricaEnemigos fabrica, List<List<TipoEnemigo>> formacion, GameObject estadoJugador, DetectorColision detector, ControladorDisparo cDisparos){
     	this.detector = detector;
     	this.estadoJugador = estadoJugador;
     	this.controladorDisparo = cDisparos;

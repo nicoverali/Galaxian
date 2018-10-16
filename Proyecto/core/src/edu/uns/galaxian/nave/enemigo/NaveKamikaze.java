@@ -7,7 +7,7 @@ import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaAleatoria;
 import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaArtificial;
 import edu.uns.galaxian.entidades.equipamiento.armas.ArmaComun;
 import edu.uns.galaxian.entidades.inanimadas.DisparoEnemigo;
-import edu.uns.galaxian.entidades.status.StatusVida;
+import edu.uns.galaxian.entidades.status.GameObject;
 
 public class NaveKamikaze extends NaveEnemigo{
 	
@@ -20,7 +20,7 @@ public class NaveKamikaze extends NaveEnemigo{
 	private InteligenciaArtificial inteligenciaDeAtaque;
 
 	// REVIEW El estado que se recibe es para despues poder darselo a la inteligencia
-	public NaveKamikaze(int vida, float velocidadMax, int colisionDamage, StatusVida estadoJugador) {
+	public NaveKamikaze(int vida, float velocidadMax, int colisionDamage, GameObject estadoJugador) {
 		this.vidaMax = vida;
 		this.colisionDamage = colisionDamage;
 		this.velocidadMax = velocidadMax;

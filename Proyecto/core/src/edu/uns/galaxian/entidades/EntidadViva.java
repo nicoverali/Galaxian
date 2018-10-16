@@ -1,14 +1,35 @@
 package edu.uns.galaxian.entidades;
 
-import edu.uns.galaxian.entidades.status.StatusVida;
+import com.badlogic.gdx.math.Vector2;
+import edu.uns.galaxian.observer.livedata.LiveData;
+import edu.uns.galaxian.observer.livedata.LiveDataMutable;
 
-public interface EntidadViva extends Entidad {
+public abstract class EntidadViva extends Entidad {
+
+	protected LiveDataMutable<Integer> vida;
+
+	public EntidadViva(Vector2 posicion, Vector2 velocidad, float rotacion, int vida){
+		super(posicion, velocidad, rotacion);
+		this.vida = new LiveDataMutable<>(vida);
+	}
+
+	public EntidadViva(Vector2 posicion, float rotacion, int vida){
+		this(posicion, new Vector2(0, 0), rotacion, vida);
+	}
+
+	public EntidadViva(){
+		this(new Vector2(0, 0), 0, 1);
+	}
 
 	/**
-	 * Setea la vida de la entidad al maximo permitido.
+	 * Devuelve la vida actual de la entidad encapsulada
+	 * en un LiveData.
+	 * @return Vida actual de la entidad
 	 */
-    void setVidaAlMaximo();
-	
+	public LiveData<Integer> getVida(){
+		return vida;
+	}
+
 	/**
 	 * Resta a la vida actual de la entidad, la cantidad de vida recibida. Si al restar la vida,
 	 * esta resulta ser menor que 0 entonces la vida se setea a 0, es decir, la vida resultante nunca
@@ -16,12 +37,16 @@ public interface EntidadViva extends Entidad {
 	 * @param vidaARestar Cantidad de vida que se desea restar
 	 * @throws IllegalArgumentException Si la vida recibida es negativa
 	 */
-    void restarVida(int vidaARestar) throws IllegalArgumentException;
+	public void restarVida(int vidaARestar) throws IllegalArgumentException{
+		if(vidaARestar < 0){
+			throw new IllegalArgumentException("La vida a restar no puede ser negativa.");
+		}
+		int nuevaVida = vida.getValor() - vidaARestar;
+		vida.setValor(Math.max(0, nuevaVida));
+	}
 
 	/**
-	 * Retorna el estado actual de la entidad.
-	 * @return Estado actual de la entidad
+	 * Setea la vida de la entidad al maximo permitido.
 	 */
-    StatusVida getStatus();
-	
+	abstract public void setVidaAlMaximo();
 }

@@ -18,13 +18,13 @@ public class ColisionadorJugador implements Colisionador<Jugador> {
 	public void colisionarConJugador(Jugador jugador) {}
 
 	public void colisionarConEnemigo(Enemigo enemigo) {
-		objetoFuente.restarVida(enemigo.getColisionDamage());
+		objetoFuente.restarVida(enemigo.getFuerzaDeColision());
 	}
 
 	public void colisionarConDisparoJugador(DisparoJugador disparo) {}
 
 	public void colisionarConDisparoEnemigo(DisparoEnemigo disparo) {
-		objetoFuente.restarVida(disparo.getDamage());
+		objetoFuente.restarVida(disparo.getFuerzaDeDisparo());
 	}
 
 	public void colisionarConObstaculo(Obstaculo disparo) {

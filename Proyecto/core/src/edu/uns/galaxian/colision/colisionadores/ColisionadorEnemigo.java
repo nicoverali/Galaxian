@@ -16,7 +16,7 @@ public class ColisionadorEnemigo implements Colisionador<Enemigo> {
 	}
 
 	public void colisionarConJugador(Jugador jugador) {
-		jugador.restarVida(objetoFuente.getColisionDamage());
+		jugador.restarVida(objetoFuente.getFuerzaDeColision());
 	}
 
 	public void colisionarConEnemigo(Enemigo enemigo) {
@@ -24,8 +24,8 @@ public class ColisionadorEnemigo implements Colisionador<Enemigo> {
 	}
 
 	public void colisionarConDisparoJugador(DisparoJugador disparo) {
-		objetoFuente.restarVida(disparo.getDamage());
-		if(objetoFuente.getStatus().getVida() == 0){
+		objetoFuente.restarVida(disparo.getFuerzaDeDisparo());
+		if(objetoFuente.getVida().getValor() == 0){
 			objetoFuente.eliminar();
 		}
 	}
@@ -35,7 +35,7 @@ public class ColisionadorEnemigo implements Colisionador<Enemigo> {
 	}
 
 	public void colisionarConObstaculo(Obstaculo obstaculo) {
-		obstaculo.restarVida(objetoFuente.getColisionDamage());
-		objetoFuente.restarVida(obstaculo.getColisionDamage());
+		obstaculo.restarVida(objetoFuente.getFuerzaDeColision());
+		objetoFuente.restarVida(obstaculo.getFuerzaDeColision());
 	}
 }

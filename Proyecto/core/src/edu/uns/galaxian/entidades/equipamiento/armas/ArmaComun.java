@@ -21,14 +21,14 @@ public class ArmaComun implements Arma {
 
 	public ArmaComun(Disparo modelo) {
 		prototipo = modelo;
-		prototipo.setDamage(DAMAGE);
+		prototipo.setFuerzaDeDisparo(DAMAGE);
 		prototipo.setTextura(TEXTURA);
 		ultimoDisparo = TimeUtils.millis() - CADENCIA;
 	}
 
 	public void setDisparoModelo(Disparo modelo){
 		prototipo = modelo;
-		prototipo.setDamage(DAMAGE);
+		prototipo.setFuerzaDeDisparo(DAMAGE);
 		prototipo.setTextura(TEXTURA);
 	}
 

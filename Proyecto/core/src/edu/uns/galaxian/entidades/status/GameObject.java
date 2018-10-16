@@ -2,7 +2,7 @@ package edu.uns.galaxian.entidades.status;
 
 import com.badlogic.gdx.math.Vector2;
 
-public interface Status{
+public interface GameObject {
 
 	/**
 	 * Retorna la posicion actual.

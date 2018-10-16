@@ -23,11 +23,7 @@ public class DisparoJugador extends Disparo {
 	}
 
 	public DisparoJugador clonar() {
-		int damage = this.damage;
-		Vector2 posicion = this.status.getPosicion();
-		Vector2 velocidad = this.status.getVelocidad();
-		Texture textura = this.textura;
-		return new DisparoJugador(posicion, velocidad, damage, textura);
+		return new DisparoJugador(posicion, velocidad, fuerzaDeDisparo, textura);
 	}
 	
 	public void aceptarColision(Colisionador col) {

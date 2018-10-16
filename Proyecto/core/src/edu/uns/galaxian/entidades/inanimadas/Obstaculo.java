@@ -9,34 +9,31 @@ import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorObstaculo;
 import edu.uns.galaxian.controladores.ControladorObstaculo;
 import edu.uns.galaxian.entidades.EntidadViva;
-import edu.uns.galaxian.entidades.status.StatusMutableVida;
-import edu.uns.galaxian.entidades.status.StatusVida;
 
-public class Obstaculo implements EntidadViva {
+public class Obstaculo extends EntidadViva {
 	
 	private static Texture TEXTURA = new Texture(Gdx.files.internal("./obstaculos/asteroideMarron.png"));
 	private static final int VIDA_MAX = 550;
 	
 	private ColisionadorObstaculo colisionador;
 	private ControladorObstaculo  controlador;
-	private StatusMutableVida status;
-	private int damage;
+	private int fuerzaDeColision;
 	
 	public Obstaculo(int xPos, int yPos, ControladorObstaculo controlador) {
-		status = new StatusMutableVida(new Vector2(xPos,yPos), 45 , VIDA_MAX);
+		super(new Vector2(xPos, yPos), 0, VIDA_MAX);
 		this.controlador = controlador;
 		colisionador = new ColisionadorObstaculo(this);
-		damage = 300;
+		fuerzaDeColision = 300;
 	}
 	
 	public Obstaculo(int xPos, int yPos) {
-		status = new StatusMutableVida(new Vector2(xPos,yPos), 45 , VIDA_MAX);
+		super(new Vector2(xPos, yPos), 0, VIDA_MAX);
 		colisionador = new ColisionadorObstaculo(this);
-		damage = 100;
+		fuerzaDeColision = 100;
 	}
 	
-	public int getColisionDamage() {
-		return damage;
+	public int getFuerzaDeColision() {
+		return fuerzaDeColision;
 	}
 
 	public float getAlto() {
@@ -48,12 +45,11 @@ public class Obstaculo implements EntidadViva {
 	}
 
 	public void dibujar(SpriteBatch batch) {
-		Vector2 posicion = status.getPosicion();
 		batch.draw(TEXTURA, posicion.x-(getAncho()/2), posicion.y-(getAlto()/2), getAncho(), getAlto());
 	}
 
 	public void actualizar(float d) {
-		if((status.getPosicion().y > Gdx.graphics.getHeight()) || (status.getPosicion().y<0)) {
+		if((posicion.y > Gdx.graphics.getHeight()) || (posicion.y<0)) {
 			eliminar();
 		}
 	}
@@ -63,24 +59,9 @@ public class Obstaculo implements EntidadViva {
 	}
 
 	public void setVidaAlMaximo() {
-		status.setVida(VIDA_MAX);
+		vida.setValor(VIDA_MAX);
 	}
 
-	public void restarVida(int vidaARestar) throws IllegalArgumentException {
-		if(vidaARestar < 0){
-			throw new IllegalArgumentException("La vida a restar no puede ser negativa.");
-		}
-		int nuevaVida = status.getVida() - vidaARestar;
-		if(nuevaVida<=0) {
-			eliminar();
-		}
-		else { status.setVida(Math.max(0, nuevaVida)); }
-	}
-
-	public StatusVida getStatus() {
-		return status;
-	}
-	
 	public void aceptarColision(Colisionador colisionador) {
 		colisionador.colisionarConObstaculo(this);
 	}

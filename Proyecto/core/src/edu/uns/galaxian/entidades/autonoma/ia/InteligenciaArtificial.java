@@ -1,9 +1,9 @@
 package edu.uns.galaxian.entidades.autonoma.ia;
 
-import edu.uns.galaxian.entidades.status.StatusMutable;
+import edu.uns.galaxian.entidades.Entidad;
 
 public interface InteligenciaArtificial {
 
-	void pensar(StatusMutable estado);
+	void pensar(Entidad estado);
 	
 }

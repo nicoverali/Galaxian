@@ -13,14 +13,11 @@ import edu.uns.galaxian.entidades.equipamiento.escudos.Escudo;
 import edu.uns.galaxian.entidades.inanimadas.DisparoJugador;
 import edu.uns.galaxian.entidades.jugador.input.InputKeyboard;
 import edu.uns.galaxian.entidades.jugador.input.ProcesadorInput;
-import edu.uns.galaxian.entidades.status.StatusMutableVida;
-import edu.uns.galaxian.entidades.status.StatusVida;
 import edu.uns.galaxian.juego.Nivel;
 import edu.uns.galaxian.nave.jugador.NaveJugador;
 
-public class Jugador implements EntidadViva {
+public class Jugador extends EntidadViva {
 
-	private StatusMutableVida status;
 	private NaveJugador nave;
 	private ProcesadorInput input;
 	private Nivel nivel;
@@ -29,11 +26,11 @@ public class Jugador implements EntidadViva {
 
 	// Constructores	
 	public Jugador(float xPos, float yPos, NaveJugador nave, Nivel nivel, ControladorDisparo controladorDisparo) {
+		super(new Vector2(xPos, yPos), nave.getRotacionInicial(), nave.getVidaMax());
 		this.nave = nave;
 		this.nivel = nivel;
 		this.controladorDisparo = controladorDisparo;
 
-		status = new StatusMutableVida(new Vector2(xPos, yPos), nave.getRotacionInicial(), nave.getVidaMax());
 		colisionador = new ColisionadorJugador(this);
 		input = new InputKeyboard();
 	}
@@ -71,10 +68,6 @@ public class Jugador implements EntidadViva {
 		return nave.getEscudo();
 	}
 
-	public StatusVida getStatus(){
-		return status;
-	}
-
 	public float getAlto(){
 		return nave.getAlto();
 	}
@@ -83,33 +76,23 @@ public class Jugador implements EntidadViva {
 		return nave.getAncho();
 	}
 
-	public void restarVida(int vidaARestar) throws IllegalArgumentException{
-		if(vidaARestar < 0){
-			throw new IllegalArgumentException("La vida a restar no puede ser negativa.");
-		}
-		int nuevaVida = status.getVida() - vidaARestar;
-		status.setVida(Math.max(0, nuevaVida));
-	}
-
 	public void setVidaAlMaximo(){
-		status.setVida(nave.getVidaMax());
+		vida.setValor(nave.getVidaMax());
 	}
 
 
 	public void actualizar(float delta){
-		Vector2 nuevaPosicion = status.getPosicion().add(input.getXAxis() * nave.getVelocidadMax() * delta, 0);
+		Vector2 nuevaPosicion = posicion.cpy().add(input.getXAxis() * nave.getVelocidadMax() * delta, 0);
 		if(posicionDentroDePantalla(nuevaPosicion)){
-			status.setPosicion(nuevaPosicion);
+			posicion = nuevaPosicion;
 		}
-		if(input.sePresionoDisparar()){
-			Vector2 posicion = status.getPosicion();
-			float rotacion = status.getRotacion();
-			controladorDisparo.agregarDisparos(nave.getArma().disparar(posicion, rotacion));
+ 		if(input.sePresionoDisparar()){
+			controladorDisparo.agregarDisparos(nave.getArma().disparar(posicion.cpy(), rotacion));
 		}
-	}
+ 	}
 
 	public void dibujar(SpriteBatch batch){
-		nave.dibujar(batch, status.getPosicion());
+		nave.dibujar(batch, posicion);
 	}
 
 	public void eliminar(){
