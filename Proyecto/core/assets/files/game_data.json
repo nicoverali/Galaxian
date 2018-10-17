@@ -1,1 +1,1 @@
-[{"equipamiento":{"arma":{"className":"edu.uns.galaxian.entidades.equipamiento.armas.ArmaComun"},"escudo":{"className":"edu.uns.galaxian.entidades.equipamiento.escudos.EscudoNulo"}},"fabricaEnemigo":{"className":"edu.uns.galaxian.entidades.autonoma.enemigo.FabricaEstandar"}}]
+[{"equipamiento":{"arma":{"className":"edu.uns.galaxian.entidades.equipamiento.armas.ArmaComun"},"escudo":{"className":"edu.uns.galaxian.entidades.equipamiento.escudos.EscudoNulo"}},"fabricaEnemigo":{"className":"edu.uns.galaxian.entidades.autonoma.enemigo.fabrica.FabricaEstandar"}}]

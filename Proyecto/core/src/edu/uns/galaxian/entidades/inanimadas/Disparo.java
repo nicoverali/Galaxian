@@ -3,7 +3,7 @@ package edu.uns.galaxian.entidades.inanimadas;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import edu.uns.galaxian.controladores.ControladorDisparo;
+import edu.uns.galaxian.controladores.Controlador;
 import edu.uns.galaxian.entidades.Entidad;
 import edu.uns.galaxian.entidades.EntidadBatch;
 
@@ -11,7 +11,7 @@ public abstract class Disparo extends Entidad {
 
 	protected int fuerzaDeDisparo;
 	protected Texture textura;
-	protected ControladorDisparo controlador;
+	protected Controlador controlador;
 
 	public Disparo() {
 		super();
@@ -25,7 +25,7 @@ public abstract class Disparo extends Entidad {
 		this.textura = textura;
 	}
 
-	public Disparo(Vector2 posicion, Vector2 velocidad, int fuerzaDeDisparo, Texture textura, ControladorDisparo controlador) {
+	public Disparo(Vector2 posicion, Vector2 velocidad, int fuerzaDeDisparo, Texture textura, Controlador controlador) {
 		super(posicion, velocidad, velocidad.angle());
 		this.fuerzaDeDisparo = fuerzaDeDisparo;
 		this.textura = textura;
@@ -54,7 +54,7 @@ public abstract class Disparo extends Entidad {
 		this.textura = textura;
 	}
 
-	public void setControladorDisparo(ControladorDisparo c) {
+	public void setControladorDisparo(Controlador c) {
 		controlador = c;
 	}
 
@@ -70,7 +70,7 @@ public abstract class Disparo extends Entidad {
 	}
 
 	public void eliminar() {
-		controlador.deregistrar(this);
+		controlador.eliminarEntidad(this);
 	}
 	
 }

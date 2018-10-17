@@ -2,8 +2,8 @@ package edu.uns.galaxian.level_maker;
 
 import com.badlogic.gdx.Game;
 import com.google.gson.*;
-import edu.uns.galaxian.entidades.autonoma.enemigo.FabricaEnemigos;
-import edu.uns.galaxian.entidades.autonoma.enemigo.FabricaEstandar;
+import edu.uns.galaxian.entidades.autonoma.enemigo.fabrica.FabricaEnemigos;
+import edu.uns.galaxian.entidades.autonoma.enemigo.fabrica.FabricaEstandar;
 import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
 import edu.uns.galaxian.entidades.equipamiento.armas.ArmaComun;
 import edu.uns.galaxian.entidades.equipamiento.escudos.Escudo;

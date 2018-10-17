@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorDisparoJugador;
-import edu.uns.galaxian.controladores.ControladorDisparo;
+import edu.uns.galaxian.controladores.Controlador;
 
 public class DisparoJugador extends Disparo {
 
@@ -18,7 +18,7 @@ public class DisparoJugador extends Disparo {
 		super(posicion, velocidad, damage, textura);
 	}
 
-	public DisparoJugador(Vector2 posicion, Vector2 velocidad, int damage, Texture textura, ControladorDisparo controlador) {
+	public DisparoJugador(Vector2 posicion, Vector2 velocidad, int damage, Texture textura, Controlador controlador) {
 		super(posicion, velocidad, damage, textura, controlador);
 	}
 

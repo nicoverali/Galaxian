@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorObstaculo;
-import edu.uns.galaxian.controladores.ControladorObstaculo;
+import edu.uns.galaxian.controladores.Controlador;
 import edu.uns.galaxian.entidades.EntidadBatch;
 import edu.uns.galaxian.entidades.EntidadViva;
 
@@ -16,10 +16,10 @@ public class Obstaculo extends EntidadViva {
 	private static final int VIDA_MAX = 300;
 	
 	private ColisionadorObstaculo colisionador;
-	private ControladorObstaculo  controlador;
+	private Controlador controlador;
 	private int fuerzaDeColision;
 	
-	public Obstaculo(float xPos, float yPos, ControladorObstaculo controlador) {
+	public Obstaculo(float xPos, float yPos, Controlador controlador) {
 		super(new Vector2(xPos, yPos), 0, VIDA_MAX);
 		this.controlador = controlador;
 		colisionador = new ColisionadorObstaculo(this);
@@ -55,7 +55,7 @@ public class Obstaculo extends EntidadViva {
 	}
 
 	public void eliminar() {
-		controlador.deregistrar(this);
+		controlador.eliminarEntidad(this);
 	}
 
 	public void setVidaAlMaximo() {
@@ -70,7 +70,7 @@ public class Obstaculo extends EntidadViva {
 		return colisionador;
 	}
 
-	public void setControladorObstaculo(ControladorObstaculo controlador) {
+	public void setControladorObstaculo(Controlador controlador) {
 		this.controlador = controlador;
 	}
 	

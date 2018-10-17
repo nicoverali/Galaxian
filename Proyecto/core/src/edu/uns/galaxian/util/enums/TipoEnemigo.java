@@ -1,4 +1,4 @@
-package edu.uns.galaxian.entidades.autonoma.enemigo;
+package edu.uns.galaxian.util.enums;
 
 public enum TipoEnemigo {
     KAMIKAZE,

@@ -41,10 +41,8 @@ public abstract class EntidadViva extends Entidad {
 			throw new IllegalArgumentException("La vida a restar no puede ser negativa.");
 		}
 		int nuevaVida = vida.getValor() - vidaARestar;
-		if(nuevaVida > 0){
-			vida.setValor(nuevaVida);
-		}
-		else{
+		vida.setValor(Math.max(0, nuevaVida));
+		if(vida.getValor() == 0){
 			this.eliminar();
 		}
 	}

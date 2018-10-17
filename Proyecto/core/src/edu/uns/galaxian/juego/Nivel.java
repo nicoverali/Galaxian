@@ -4,37 +4,30 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 
-import edu.uns.galaxian.colision.DetectorColision;
 import edu.uns.galaxian.controladores.*;
 import edu.uns.galaxian.entidades.EntidadBatch;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 import edu.uns.galaxian.escenario.Background;
 import edu.uns.galaxian.juego.config.ConfigNivel;
-import edu.uns.galaxian.entidades.autonoma.enemigo.TipoEnemigo;
+import edu.uns.galaxian.servicios.FormacionEnemigo;
+import edu.uns.galaxian.util.enums.TipoEnemigo;
 import java.util.*;
 
 public class Nivel extends ScreenAdapter {
 
     private Juego juego;
-    private Jugador jugador;
     private Background background;
-    private DetectorColision detector;
-    private List<ControladorEntidad> controladores;
+    private Controlador controlador;
+    private FormacionEnemigo formacion;
 
     public Nivel(ConfigNivel config, Juego juego){
         this.juego = juego;
         background = new Background();
-        detector = new DetectorColision();
-        controladores = new LinkedList<>();
-
-        ControladorDisparo cDisparos = new ControladorDisparo(detector);
-        jugador = new Jugador(Gdx.graphics.getWidth()/2, 50, config.getNaveJugador(), this, cDisparos);
-        ControladorEnemigo cEnemigos = new ControladorEnemigo(config.getFabricaEnemigos(), formacionRandom(), jugador.getStatus(), detector, cDisparos);
-        ControladorObstaculo cObstaculo = new ControladorObstaculo(detector);
-
-        controladores.add(cDisparos);
-        controladores.add(cEnemigos);
-        controladores.add(cObstaculo);
+        Jugador jugador = new Jugador(Gdx.graphics.getWidth()/2, 50, config.getNaveJugador(), this);
+        controlador = new Controlador(jugador);
+        jugador.setControlador(controlador);
+        formacion = new FormacionEnemigo(formacionRandom(), config.getFabricaEnemigos(), controlador);
+        formacion.activar();
     }
 
     @Override
@@ -47,12 +40,8 @@ public class Nivel extends ScreenAdapter {
         background.draw();
         // Inicializa proceso de dibujado de EntidadBatch
         batch.begin();
-        jugador.actualizar(delta);
-        jugador.dibujar(batch);
-        for(ControladorEntidad controlador : controladores){
-            controlador.actualizarEstado(delta);
-            controlador.dibujar(batch);
-        }
+        controlador.actualizarEstado(delta);
+        controlador.dibujar(batch);
         // Finaliza proceso de dibujado
         batch.end();
     }
@@ -69,7 +58,10 @@ public class Nivel extends ScreenAdapter {
         Random ran = new Random();
         List<List<TipoEnemigo>> formacion = new ArrayList<>(4);
         for(int i = 0; i < 5; i++){
-            int cant = ran.nextInt(9);
+            int cant;
+            do{
+                cant = ran.nextInt(7)+2;
+            }while(cant % 2 == 0);
             List<TipoEnemigo> tempFila = new ArrayList<>(cant);
             for(int j = 0; j < cant; j++){
                 tempFila.add(TipoEnemigo.values()[ran.nextInt(cant) % 5]);

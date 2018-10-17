@@ -1,9 +1,8 @@
 package edu.uns.galaxian.entidades.autonoma.enemigo;
 
-import java.util.Collection;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import edu.uns.galaxian.controladores.Controlador;
 import edu.uns.galaxian.entidades.EntidadBatch;
 import edu.uns.galaxian.entidades.EntidadViva;
 import edu.uns.galaxian.entidades.autonoma.Autonomo;
@@ -15,19 +14,20 @@ import edu.uns.galaxian.entidades.inanimadas.*;
 import edu.uns.galaxian.nave.enemigo.NaveEnemigo;
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorEnemigo;
-import edu.uns.galaxian.controladores.ControladorEnemigo;
+
+import java.util.Collection;
 
 public class Enemigo extends EntidadViva implements Autonomo  {
 	
 	private NaveEnemigo nave;
-	private ControladorEnemigo controladorEnemigo;
+	private Controlador controlador;
 	private ColisionadorEnemigo colisionador;
 	private InteligenciaArtificial inteligencia;
 	
-	public Enemigo(float xPos, float yPos, NaveEnemigo nave, ControladorEnemigo controlador){
-		super(new Vector2(xPos, yPos), nave.getRotacionInicial(), nave.getVidaMax());
+	public Enemigo(Vector2 posicion, NaveEnemigo nave, Controlador controlador){
+		super(posicion, nave.getRotacionInicial(), nave.getVidaMax());
 		this.nave = nave;
-		this.controladorEnemigo = controlador;
+		this.controlador = controlador;
 		this.colisionador = new ColisionadorEnemigo(this);
 		inteligencia = new InteligenciaFormacion(posicion);
 		
@@ -51,11 +51,14 @@ public class Enemigo extends EntidadViva implements Autonomo  {
 	}
 
 	/**
-	 * Retorna una coleccion de disparos producidos por el enemigo.
-	 * @return Coleccion de disparos producidos
+	 * Produce nuevos disparos con el arma que tiene el enemigo.
 	 */
-    public Collection<Disparo> disparar() {
-		return nave.getArma().disparar(posicion.cpy() ,rotacion);
+    public void disparar() {
+		Collection<Disparo> disparos = nave.getArma().disparar(posicion.cpy(), rotacion);
+		for(Disparo disparo : disparos){
+			disparo.setControladorDisparo(controlador);
+		}
+		controlador.agregarEntidades(disparos);
 	}
 
     public float getAlto() {
@@ -90,11 +93,11 @@ public class Enemigo extends EntidadViva implements Autonomo  {
     }
 
     public void dibujar(EntidadBatch batch) {
-    	nave.dibujar(batch, posicion);
+    	nave.dibujar(batch, posicion.cpy());
     }
 
     public void eliminar() {
-    	controladorEnemigo.deregistrar(this);
+    	controlador.eliminarEntidad(this);
     }
 
 	public Colisionador getColisionador(){

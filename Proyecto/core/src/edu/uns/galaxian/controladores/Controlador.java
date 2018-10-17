@@ -10,12 +10,16 @@ import java.util.*;
 public class Controlador {
 
     private List<Entidad> entidades;
+    private Set<Entidad> nuevasEntidades;
+    private Set<Entidad> entidadesEliminadas;
     private List<Jugador> jugadores;
     private DetectorColision detectorColision;
 
     public Controlador(Jugador jugador){
         detectorColision = new DetectorColision();
         entidades = new ArrayList<>();
+        nuevasEntidades = new HashSet<>();
+        entidadesEliminadas = new HashSet<>();
         jugadores = new ArrayList<>(3);
 
         jugadores.add(jugador);
@@ -27,7 +31,7 @@ public class Controlador {
      * @param entidad Nueva entidad
      */
     public void agregarEntidad(Entidad entidad){
-        entidades.add(entidad);
+        nuevasEntidades.add(entidad);
         detectorColision.registrarColisionable(entidad);
     }
 
@@ -35,8 +39,8 @@ public class Controlador {
      * Registra una coleccion de nuevas entidades en el controlador.
      * @param entidades Coleccion de nuevas entidades
      */
-    public void agregarEntidades(Collection<Entidad> entidades){
-        this.entidades.addAll(entidades);
+    public <T extends Entidad> void agregarEntidades(Collection<T> entidades){
+        nuevasEntidades.addAll(entidades);
         for(Entidad entidad : entidades){
             detectorColision.registrarColisionable(entidad);
         }
@@ -60,8 +64,7 @@ public class Controlador {
         if(!entidades.contains(entidad)){
             throw new IllegalArgumentException("La entidad recibida no se encuentra registrada.");
         }
-        entidades.remove(entidad);
-        detectorColision.eliminarColisionable(entidad);
+        entidadesEliminadas.add(entidad);
     }
 
     public void eliminarJugador(Jugador jugador) throws IllegalArgumentException{
@@ -109,6 +112,13 @@ public class Controlador {
         for(Jugador jugador : jugadores){
             jugador.actualizar(delta);
         }
+        entidades.addAll(nuevasEntidades);
+        entidades.removeAll(entidadesEliminadas);
+        for(Entidad eliminada : entidadesEliminadas){
+            detectorColision.eliminarColisionable(eliminada);
+        }
+        nuevasEntidades.clear();
+        entidadesEliminadas.clear();
     }
 
     /**

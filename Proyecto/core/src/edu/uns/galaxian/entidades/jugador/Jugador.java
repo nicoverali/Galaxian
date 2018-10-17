@@ -5,34 +5,39 @@ import com.badlogic.gdx.math.Vector2;
 
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorJugador;
-import edu.uns.galaxian.controladores.ControladorDisparo;
+import edu.uns.galaxian.controladores.Controlador;
 import edu.uns.galaxian.entidades.EntidadBatch;
 import edu.uns.galaxian.entidades.EntidadViva;
 import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
 import edu.uns.galaxian.entidades.equipamiento.escudos.Escudo;
+import edu.uns.galaxian.entidades.inanimadas.Disparo;
 import edu.uns.galaxian.entidades.inanimadas.DisparoJugador;
 import edu.uns.galaxian.entidades.jugador.input.InputKeyboard;
 import edu.uns.galaxian.entidades.jugador.input.ProcesadorInput;
 import edu.uns.galaxian.juego.Nivel;
 import edu.uns.galaxian.nave.jugador.NaveJugador;
 
+import java.util.Collection;
+
 public class Jugador extends EntidadViva {
 
 	private NaveJugador nave;
 	private ProcesadorInput input;
 	private Nivel nivel;
-	private ControladorDisparo controladorDisparo;
 	private ColisionadorJugador colisionador;
+	private Controlador controlador;
 
-	// Constructores	
-	public Jugador(float xPos, float yPos, NaveJugador nave, Nivel nivel, ControladorDisparo controladorDisparo) {
+	public Jugador(float xPos, float yPos, NaveJugador nave, Nivel nivel, Controlador controlador) {
 		super(new Vector2(xPos, yPos), nave.getRotacionInicial(), nave.getVidaMax());
 		this.nave = nave;
 		this.nivel = nivel;
-		this.controladorDisparo = controladorDisparo;
-
+		this.controlador = controlador;
 		colisionador = new ColisionadorJugador(this);
 		input = new InputKeyboard();
+	}
+
+	public Jugador(float xPos, float yPos, NaveJugador nave, Nivel nivel){
+		this(xPos, yPos, nave, nivel, null);
 	}
 
 	/**
@@ -79,6 +84,9 @@ public class Jugador extends EntidadViva {
 		vida.setValor(nave.getVidaMax());
 	}
 
+	public void setControlador(Controlador controlador){
+		this.controlador = controlador;
+	}
 
 	public void actualizar(float delta){
 		Vector2 nuevaPosicion = posicion.cpy().add(input.getXAxis() * nave.getVelocidadMax() * delta, 0);
@@ -86,7 +94,11 @@ public class Jugador extends EntidadViva {
 			posicion = nuevaPosicion;
 		}
  		if(input.sePresionoDisparar()){
-			controladorDisparo.agregarDisparos(nave.getArma().disparar(posicion.cpy(), rotacion));
+			Collection<Disparo> disparos = nave.getArma().disparar(posicion.cpy(), rotacion);
+			for(Disparo disparo : disparos){
+				disparo.setControladorDisparo(controlador);
+			}
+			controlador.agregarEntidades(disparos);
 		}
  	}
 
