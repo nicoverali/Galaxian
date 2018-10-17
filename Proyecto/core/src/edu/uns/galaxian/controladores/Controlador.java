@@ -3,17 +3,23 @@ package edu.uns.galaxian.controladores;
 import edu.uns.galaxian.colision.DetectorColision;
 import edu.uns.galaxian.entidades.Entidad;
 import edu.uns.galaxian.entidades.EntidadBatch;
+import edu.uns.galaxian.entidades.jugador.Jugador;
 
 import java.util.*;
 
 public class Controlador {
 
     private List<Entidad> entidades;
+    private List<Jugador> jugadores;
     private DetectorColision detectorColision;
 
-    public Controlador(){
+    public Controlador(Jugador jugador){
         detectorColision = new DetectorColision();
         entidades = new ArrayList<>();
+        jugadores = new ArrayList<>(3);
+
+        jugadores.add(jugador);
+        detectorColision.registrarColisionable(jugador);
     }
 
     /**
@@ -23,6 +29,25 @@ public class Controlador {
     public void agregarEntidad(Entidad entidad){
         entidades.add(entidad);
         detectorColision.registrarColisionable(entidad);
+    }
+
+    /**
+     * Registra una coleccion de nuevas entidades en el controlador.
+     * @param entidades Coleccion de nuevas entidades
+     */
+    public void agregarEntidades(Collection<Entidad> entidades){
+        this.entidades.addAll(entidades);
+        for(Entidad entidad : entidades){
+            detectorColision.registrarColisionable(entidad);
+        }
+    }
+
+    /**
+     * Registra un nuevo jugador en el controlador
+     * @param jugador Nuevo jugador
+     */
+    public void agregarJugador(Jugador jugador){
+        jugadores.add(jugador);
     }
 
     /**
@@ -39,14 +64,37 @@ public class Controlador {
         detectorColision.eliminarColisionable(entidad);
     }
 
+    public void eliminarJugador(Jugador jugador) throws IllegalArgumentException{
+        if(!jugadores.contains(jugador)){
+            throw new IllegalArgumentException("El jugador recibido no se encuentra registrado.");
+        }
+        jugadores.remove(jugador);
+        detectorColision.eliminarColisionable(jugador);
+    }
+
     /**
      * Retorna una coleccion de todas las entidades registradas en este controlador.
      * @return Coleccion de entidades registradas
      */
-    public Collection<Entidad> obtenerEntidades(){
-        List<Entidad> listaCopia = new ArrayList<>();
-        Collections.copy(listaCopia, entidades);
-        return listaCopia;
+    public Collection<Entidad> getEntidades(){
+        return copiarLista(entidades);
+    }
+
+    /**
+     * Retorna una coleccion de todos los jugadores del controlador.
+     * @return Coleccion de jugadores registrados
+     */
+    public Collection<Jugador> getJugadores(){
+        return copiarLista(jugadores);
+    }
+
+    /**
+     * Toma al azar un jugador registrado en el controlador y lo devuelve.
+     * @return Jugador registrado al azar
+     */
+    public Jugador getJugador(){
+        Random random = new Random();
+        return jugadores.get(random.nextInt(jugadores.size()));
     }
 
     /**
@@ -57,6 +105,9 @@ public class Controlador {
         detectorColision.resolverColisiones();
         for(Entidad entidad : entidades){
             entidad.actualizar(delta);
+        }
+        for(Jugador jugador : jugadores){
+            jugador.actualizar(delta);
         }
     }
 
@@ -69,5 +120,19 @@ public class Controlador {
         for(Entidad entidad : entidades){
             entidad.dibujar(batch);
         }
+        for(Jugador jugador : jugadores){
+            jugador.dibujar(batch);
+        }
+    }
+
+    /**
+     * Retorna la copia de una lista
+     * @param listaOriginal Lista original
+     * @return Copia de la lista original
+     */
+    private <T> List<T> copiarLista(List<T> listaOriginal){
+        List<T> listaCopia = new ArrayList<>(listaOriginal.size());
+        Collections.copy(listaCopia, listaOriginal);
+        return listaCopia;
     }
 }
