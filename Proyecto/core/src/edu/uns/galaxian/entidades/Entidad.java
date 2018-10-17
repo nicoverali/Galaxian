@@ -1,7 +1,5 @@
 package edu.uns.galaxian.entidades;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.colision.Colisionable;
 import edu.uns.galaxian.entidades.status.GameObject;
@@ -99,7 +97,7 @@ public abstract class Entidad implements Colisionable, GameObject
 	 * Dibuja la entidad en el mapa.
 	 * @param batch Batch que se utilizara para dibujar la entidad
 	 */
-	abstract public void dibujar(SpriteBatch batch);
+	abstract public void dibujar(EntidadBatch batch);
 
 	/**
 	 * Actualiza el estado de la entidad.

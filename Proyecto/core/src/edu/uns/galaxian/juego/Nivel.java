@@ -3,10 +3,10 @@ package edu.uns.galaxian.juego;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import edu.uns.galaxian.colision.DetectorColision;
 import edu.uns.galaxian.controladores.*;
+import edu.uns.galaxian.entidades.EntidadBatch;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 import edu.uns.galaxian.escenario.Background;
 import edu.uns.galaxian.juego.config.ConfigNivel;
@@ -42,10 +42,10 @@ public class Nivel extends ScreenAdapter {
         // Limpiar pantalla
         Gdx.gl.glClearColor(0, 0, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        SpriteBatch batch = juego.getBatch();
+        EntidadBatch batch = juego.getBatch();
 
         background.draw();
-        // Inicializa proceso de dibujado de SpriteBatch
+        // Inicializa proceso de dibujado de EntidadBatch
         batch.begin();
         jugador.actualizar(delta);
         jugador.dibujar(batch);

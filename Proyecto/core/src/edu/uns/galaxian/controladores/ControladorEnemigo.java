@@ -1,11 +1,11 @@
 package edu.uns.galaxian.controladores;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
 
 import edu.uns.galaxian.colision.DetectorColision;
+import edu.uns.galaxian.entidades.EntidadBatch;
 import edu.uns.galaxian.entidades.autonoma.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.autonoma.enemigo.FabricaEnemigos;
 import edu.uns.galaxian.entidades.autonoma.enemigo.TipoEnemigo;
@@ -161,7 +161,7 @@ public class ControladorEnemigo implements ControladorEntidad {
     	}
     }
 
-    public void dibujar(SpriteBatch batch) {
+    public void dibujar(EntidadBatch batch) {
         for(List<Enemigo> fila : enemigos){
             for(Enemigo enemigo : fila){
                 enemigo.dibujar(batch);

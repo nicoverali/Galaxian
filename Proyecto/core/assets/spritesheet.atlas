@@ -1,0 +1,187 @@
+spritesheet.png
+size: 244, 244
+format: RGBA8888
+filter: MipMapLinearNearest,Nearest
+repeat: none
+disparo/enemigo/comun
+  rotate: false
+  xy: 1, 1
+  size: 19, 5
+  orig: 19, 5
+  offset: 0, 0
+  index: -1
+disparo/jugador/AZUL
+  rotate: false
+  xy: 22, 1
+  size: 19, 5
+  orig: 19, 5
+  offset: 0, 0
+  index: -1
+disparo/jugador/BORDO
+  rotate: false
+  xy: 1, 1
+  size: 19, 5
+  orig: 19, 5
+  offset: 0, 0
+  index: -1
+disparo/jugador/ROJO
+  rotate: false
+  xy: 1, 1
+  size: 19, 5
+  orig: 19, 5
+  offset: 0, 0
+  index: -1
+disparo/jugador/VERDE
+  rotate: false
+  xy: 43, 1
+  size: 19, 5
+  orig: 19, 5
+  offset: 0, 0
+  index: -1
+enemigo/armado/estandar
+  rotate: false
+  xy: 81, 146
+  size: 42, 52
+  orig: 42, 52
+  offset: 0, 0
+  index: -1
+enemigo/armadoDebil/estandar
+  rotate: false
+  xy: 199, 1
+  size: 42, 47
+  orig: 42, 47
+  offset: 0, 0
+  index: -1
+enemigo/kamikaze/estandar
+  rotate: false
+  xy: 105, 44
+  size: 42, 49
+  orig: 42, 49
+  offset: 0, 0
+  index: -1
+enemigo/kamikazeAleatorio/estandar
+  rotate: false
+  xy: 64, 1
+  size: 42, 41
+  orig: 42, 41
+  offset: 0, 0
+  index: -1
+enemigo/kamikazeMixto/estandar
+  rotate: false
+  xy: 108, 1
+  size: 42, 41
+  orig: 42, 41
+  offset: 0, 0
+  index: -1
+jugador/AZUL/naveIntermedia
+  rotate: false
+  xy: 125, 147
+  size: 38, 56
+  orig: 38, 56
+  offset: 0, 0
+  index: -1
+jugador/AZUL/naveLiviana
+  rotate: false
+  xy: 143, 95
+  size: 38, 50
+  orig: 38, 50
+  offset: 0, 0
+  index: -1
+jugador/AZUL/navePesada
+  rotate: false
+  xy: 149, 44
+  size: 38, 49
+  orig: 38, 49
+  offset: 0, 0
+  index: -1
+jugador/BORDO/naveIntermedia
+  rotate: false
+  xy: 165, 153
+  size: 38, 56
+  orig: 38, 56
+  offset: 0, 0
+  index: -1
+jugador/BORDO/naveLiviana
+  rotate: false
+  xy: 183, 101
+  size: 38, 50
+  orig: 38, 50
+  offset: 0, 0
+  index: -1
+jugador/BORDO/navePesada
+  rotate: false
+  xy: 189, 50
+  size: 38, 49
+  orig: 38, 49
+  offset: 0, 0
+  index: -1
+jugador/ROJO/naveIntermedia
+  rotate: false
+  xy: 205, 153
+  size: 38, 56
+  orig: 38, 56
+  offset: 0, 0
+  index: -1
+jugador/ROJO/naveLiviana
+  rotate: false
+  xy: 1, 103
+  size: 38, 50
+  orig: 38, 50
+  offset: 0, 0
+  index: -1
+jugador/ROJO/navePesada
+  rotate: false
+  xy: 1, 52
+  size: 38, 49
+  orig: 38, 49
+  offset: 0, 0
+  index: -1
+jugador/VERDE/naveIntermedia
+  rotate: false
+  xy: 1, 155
+  size: 38, 56
+  orig: 38, 56
+  offset: 0, 0
+  index: -1
+jugador/VERDE/naveLiviana
+  rotate: false
+  xy: 41, 145
+  size: 38, 50
+  orig: 38, 50
+  offset: 0, 0
+  index: -1
+jugador/VERDE/navePesada
+  rotate: false
+  xy: 41, 94
+  size: 38, 49
+  orig: 38, 49
+  offset: 0, 0
+  index: -1
+obstaculo/meteoro1
+  rotate: false
+  xy: 1, 8
+  size: 51, 42
+  orig: 51, 42
+  offset: 0, 0
+  index: -1
+obstaculo/meteoro2
+  rotate: false
+  xy: 81, 95
+  size: 60, 49
+  orig: 60, 49
+  offset: 0, 0
+  index: -1
+obstaculo/meteoro3
+  rotate: false
+  xy: 152, 1
+  size: 45, 41
+  orig: 45, 41
+  offset: 0, 0
+  index: -1
+obstaculo/meteoro4
+  rotate: false
+  xy: 54, 44
+  size: 49, 48
+  orig: 49, 48
+  offset: 0, 0
+  index: -1

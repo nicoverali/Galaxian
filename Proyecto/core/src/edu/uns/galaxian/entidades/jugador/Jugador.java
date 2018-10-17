@@ -1,12 +1,12 @@
 package edu.uns.galaxian.entidades.jugador;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorJugador;
 import edu.uns.galaxian.controladores.ControladorDisparo;
+import edu.uns.galaxian.entidades.EntidadBatch;
 import edu.uns.galaxian.entidades.EntidadViva;
 import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
 import edu.uns.galaxian.entidades.equipamiento.escudos.Escudo;
@@ -90,7 +90,7 @@ public class Jugador extends EntidadViva {
 		}
  	}
 
-	public void dibujar(SpriteBatch batch){
+	public void dibujar(EntidadBatch batch){
 		nave.dibujar(batch, posicion);
 	}
 

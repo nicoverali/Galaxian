@@ -1,23 +1,28 @@
 package edu.uns.galaxian.juego;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import edu.uns.galaxian.entidades.EntidadBatch;
 import edu.uns.galaxian.juego.config.ConfigNivel;
 import edu.uns.galaxian.juego.config.GameData;
 import edu.uns.galaxian.juego.config.SaveData;
 
 public class Juego extends Game {
 
-	private SpriteBatch batch;
+	private static final String TEXTURE_ATLAS_DIR = "spritesheet.atlas";
+
+	private TextureAtlas textureAtlas;
+	private EntidadBatch batch;
 	private GameData gameData;
 	private SaveData saveData;
 
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
+		batch = new EntidadBatch();
 		gameData = new GameData();
 		saveData = new SaveData();
+		textureAtlas = new TextureAtlas(TEXTURE_ATLAS_DIR);
 
 		ConfigNivel configNivel = gameData.getConfiguracionNivel(saveData.getNivelAlcanzado(), saveData.getNaveJugador());
 		setScreen(new Nivel(configNivel,this));
@@ -34,11 +39,19 @@ public class Juego extends Game {
 	}
 
 	/**
-	 * Devuelve el SpriteBatch del juego.
-	 * @return SpriteBatch del juego
+	 * Devuelve el EntidadBatch del juego.
+	 * @return EntidadBatch del juego
 	 */
-	public SpriteBatch getBatch(){
+	public EntidadBatch getBatch(){
 		return batch;
+	}
+
+	/**
+	 * Devuelve el TextureAtlas del juego
+	 * @return TextureAtlas del juego
+	 */
+	public TextureAtlas getTextureAtlas(){
+		return textureAtlas;
 	}
 
 	/**

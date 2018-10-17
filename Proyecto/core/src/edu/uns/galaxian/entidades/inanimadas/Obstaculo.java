@@ -2,12 +2,12 @@ package edu.uns.galaxian.entidades.inanimadas;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorObstaculo;
 import edu.uns.galaxian.controladores.ControladorObstaculo;
+import edu.uns.galaxian.entidades.EntidadBatch;
 import edu.uns.galaxian.entidades.EntidadViva;
 
 public class Obstaculo extends EntidadViva {
@@ -44,7 +44,7 @@ public class Obstaculo extends EntidadViva {
 		return TEXTURA.getWidth();
 	}
 
-	public void dibujar(SpriteBatch batch) {
+	public void dibujar(EntidadBatch batch) {
 		batch.draw(TEXTURA, posicion.x-(getAncho()/2), posicion.y-(getAlto()/2), getAncho(), getAlto());
 	}
 

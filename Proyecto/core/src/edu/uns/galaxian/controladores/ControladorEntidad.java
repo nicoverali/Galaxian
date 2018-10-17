@@ -1,6 +1,6 @@
 package edu.uns.galaxian.controladores;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import edu.uns.galaxian.entidades.EntidadBatch;
 
 public interface ControladorEntidad {
 
@@ -14,5 +14,5 @@ public interface ControladorEntidad {
 	 * Dibuja todas las entidades que estan bajo su control.
 	 * @param batch Batch para dibujar las entidades
 	 */
-	void dibujar(SpriteBatch batch);
+	void dibujar(EntidadBatch batch);
 }

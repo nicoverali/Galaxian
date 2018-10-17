@@ -1,8 +1,8 @@
 package edu.uns.galaxian.controladores;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import edu.uns.galaxian.colision.DetectorColision;
 import edu.uns.galaxian.entidades.Entidad;
+import edu.uns.galaxian.entidades.EntidadBatch;
 
 import java.util.*;
 
@@ -61,11 +61,11 @@ public class Controlador {
     }
 
     /**
-     * Dibuja utilizando el SpriteBatch recibido a todas las entidades registradas
+     * Dibuja utilizando el EntidadBatch recibido a todas las entidades registradas
      * en este controlador.
-     * @param batch SpriteBatch utilizado para dibujar las entidades registradas
+     * @param batch EntidadBatch utilizado para dibujar las entidades registradas
      */
-    public void dibujar(SpriteBatch batch){
+    public void dibujar(EntidadBatch batch){
         for(Entidad entidad : entidades){
             entidad.dibujar(batch);
         }

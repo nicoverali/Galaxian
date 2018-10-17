@@ -1,8 +1,8 @@
 package edu.uns.galaxian.nave;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import edu.uns.galaxian.entidades.EntidadBatch;
 import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
 import edu.uns.galaxian.entidades.equipamiento.armas.ArmaNula;
 
@@ -52,7 +52,7 @@ public abstract class Nave {
 	 * @param batch Batch utilizado para dibujar en pantalla
 	 * @param posicion Posicion donde debe dibujarse la nave
 	 */
-	public void dibujar(SpriteBatch batch, Vector2 posicion){
+	public void dibujar(EntidadBatch batch, Vector2 posicion){
 		float alto = textura.getHeight();
 		float ancho = textura.getWidth();
 		batch.draw(textura, posicion.x - ancho/2, posicion.y - alto/2, ancho, alto);

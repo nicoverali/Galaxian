@@ -2,10 +2,10 @@ package edu.uns.galaxian.entidades.inanimadas;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.controladores.ControladorDisparo;
 import edu.uns.galaxian.entidades.Entidad;
+import edu.uns.galaxian.entidades.EntidadBatch;
 
 public abstract class Disparo extends Entidad {
 
@@ -58,7 +58,7 @@ public abstract class Disparo extends Entidad {
 		controlador = c;
 	}
 
-	public void dibujar(SpriteBatch batch) {
+	public void dibujar(EntidadBatch batch) {
 		batch.draw(textura, posicion.x-(getAncho()/2), posicion.y-(getAlto()/2), getAncho(), getAlto());
 	}
 

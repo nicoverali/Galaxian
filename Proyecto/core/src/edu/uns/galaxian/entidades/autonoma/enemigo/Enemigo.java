@@ -3,8 +3,8 @@ package edu.uns.galaxian.entidades.autonoma.enemigo;
 import java.util.Collection;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import edu.uns.galaxian.entidades.EntidadBatch;
 import edu.uns.galaxian.entidades.EntidadViva;
 import edu.uns.galaxian.entidades.autonoma.Autonomo;
 import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaArtificial;
@@ -89,7 +89,7 @@ public class Enemigo extends EntidadViva implements Autonomo  {
     	inteligencia = nave.getInteligenciaDeAtaque();
     }
 
-    public void dibujar(SpriteBatch batch) {
+    public void dibujar(EntidadBatch batch) {
     	nave.dibujar(batch, posicion);
     }
 

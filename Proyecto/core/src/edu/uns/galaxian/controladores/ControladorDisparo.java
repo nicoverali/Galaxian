@@ -4,9 +4,8 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import edu.uns.galaxian.colision.DetectorColision;
+import edu.uns.galaxian.entidades.EntidadBatch;
 import edu.uns.galaxian.entidades.inanimadas.Disparo;
 
 public class ControladorDisparo implements ControladorEntidad {
@@ -48,7 +47,7 @@ public class ControladorDisparo implements ControladorEntidad {
 		}
 	}
 
-	public void dibujar(SpriteBatch batch) {
+	public void dibujar(EntidadBatch batch) {
 		for(Disparo d : disparos) {
 			d.dibujar(batch);
 		}

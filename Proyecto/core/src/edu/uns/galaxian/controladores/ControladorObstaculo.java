@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import edu.uns.galaxian.colision.DetectorColision;
+import edu.uns.galaxian.entidades.EntidadBatch;
 import edu.uns.galaxian.entidades.inanimadas.Obstaculo;
 
 public class ControladorObstaculo implements ControladorEntidad{
@@ -38,7 +38,7 @@ public class ControladorObstaculo implements ControladorEntidad{
 		}
 	}
 
-	public void dibujar(SpriteBatch batch) {
+	public void dibujar(EntidadBatch batch) {
 		for(Obstaculo obstaculo : obstaculos) {
 			obstaculo.dibujar(batch);
 		}
