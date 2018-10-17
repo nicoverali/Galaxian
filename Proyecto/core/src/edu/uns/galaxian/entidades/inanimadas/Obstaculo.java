@@ -19,14 +19,14 @@ public class Obstaculo extends EntidadViva {
 	private ControladorObstaculo  controlador;
 	private int fuerzaDeColision;
 	
-	public Obstaculo(int xPos, int yPos, ControladorObstaculo controlador) {
+	public Obstaculo(float xPos, float yPos, ControladorObstaculo controlador) {
 		super(new Vector2(xPos, yPos), 0, VIDA_MAX);
 		this.controlador = controlador;
 		colisionador = new ColisionadorObstaculo(this);
 		fuerzaDeColision = 300;
 	}
 	
-	public Obstaculo(int xPos, int yPos) {
+	public Obstaculo(float xPos, float yPos) {
 		super(new Vector2(xPos, yPos), 0, VIDA_MAX);
 		colisionador = new ColisionadorObstaculo(this);
 		fuerzaDeColision = 100;

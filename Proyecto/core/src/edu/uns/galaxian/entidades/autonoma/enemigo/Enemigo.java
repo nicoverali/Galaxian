@@ -24,7 +24,7 @@ public class Enemigo extends EntidadViva implements Autonomo  {
 	private ColisionadorEnemigo colisionador;
 	private InteligenciaArtificial inteligencia;
 	
-	public Enemigo(int xPos, int yPos, NaveEnemigo nave, ControladorEnemigo controlador){
+	public Enemigo(float xPos, float yPos, NaveEnemigo nave, ControladorEnemigo controlador){
 		super(new Vector2(xPos, yPos), nave.getRotacionInicial(), nave.getVidaMax());
 		this.nave = nave;
 		this.controladorEnemigo = controlador;

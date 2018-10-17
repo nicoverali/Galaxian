@@ -48,7 +48,7 @@ public class ControladorEnemigo implements ControladorEntidad {
         for(List<TipoEnemigo> fila : formacion) {
             List<Enemigo> filaDeEnemigos = new ArrayList<>(fila.size());
             for(TipoEnemigo tipoEnemigo : fila){
-                Enemigo enemigo = crearEnemigoCorrespondiente(tipoEnemigo, fabrica, getPosX(fila.size(), numColumna), getPosY(numFila));
+                Enemigo enemigo = fabrica.crearEnemigo(tipoEnemigo, getPosX(fila.size(), numColumna), getPosY(numFila), this, estadoJugador);
                 // TODO setear la IA al enemigo
                 detector.registrarColisionable(enemigo);
                 filaDeEnemigos.add(enemigo);
@@ -91,18 +91,6 @@ public class ControladorEnemigo implements ControladorEntidad {
     private int getPosY(int numeroFila) {
     	int margen = 10;
     	return Gdx.graphics.getHeight() - (numeroFila+1)*TAMANIO_NAVES - margen;
-    }
-
-    private Enemigo crearEnemigoCorrespondiente(TipoEnemigo tipoEnemigo, FabricaEnemigos fabrica, int xPos, int yPos){
-        Enemigo nuevoEnemigo = null;
-        switch (tipoEnemigo){
-            case KAMIKAZE: { nuevoEnemigo = fabrica.getKamikaze(xPos, yPos, this, estadoJugador); break; }
-            case KAMIKAZE_ALEATORIO: { nuevoEnemigo = fabrica.getKamikazeAleatorio(xPos, yPos, this); break;}
-            case KAMIKAZE_MIXTO:{ nuevoEnemigo = fabrica.getKamikazeMixto(xPos, yPos, this, estadoJugador); break; }
-            case ARMADO: { nuevoEnemigo = fabrica.getArmado(xPos, yPos, this, estadoJugador); break; }
-            case ARMADO_DEBIL:{ nuevoEnemigo = fabrica.getArmadoDebil(xPos, yPos, this, estadoJugador); break; }
-        }
-        return nuevoEnemigo;
     }
 
     public Vector2 getPosicionJugador(){
