@@ -10,6 +10,8 @@ import edu.uns.galaxian.entidades.jugador.Jugador;
 import edu.uns.galaxian.escenario.Background;
 import edu.uns.galaxian.juego.config.ConfigNivel;
 import edu.uns.galaxian.servicios.FormacionEnemigo;
+import edu.uns.galaxian.servicios.GeneracionObstaculo;
+import edu.uns.galaxian.servicios.Servicio;
 import edu.uns.galaxian.util.enums.TipoEnemigo;
 import java.util.*;
 
@@ -18,7 +20,7 @@ public class Nivel extends ScreenAdapter {
     private Juego juego;
     private Background background;
     private Controlador controlador;
-    private FormacionEnemigo formacion;
+    private List<Servicio> servicios;
 
     public Nivel(ConfigNivel config, Juego juego){
         this.juego = juego;
@@ -26,8 +28,13 @@ public class Nivel extends ScreenAdapter {
         Jugador jugador = new Jugador(Gdx.graphics.getWidth()/2, 50, config.getNaveJugador(), this);
         controlador = new Controlador(jugador);
         jugador.setControlador(controlador);
-        formacion = new FormacionEnemigo(formacionRandom(), config.getFabricaEnemigos(), controlador);
+        servicios = new LinkedList<Servicio>();
+        FormacionEnemigo formacion = new FormacionEnemigo(formacionRandom(), config.getFabricaEnemigos(), controlador);
         formacion.activar();
+        GeneracionObstaculo obstaculos = new GeneracionObstaculo(controlador);
+        obstaculos.activar();
+        servicios.add(formacion);
+        servicios.add(obstaculos);
     }
 
     @Override
