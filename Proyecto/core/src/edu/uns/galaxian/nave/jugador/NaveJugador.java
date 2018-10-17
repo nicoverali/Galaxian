@@ -11,7 +11,7 @@ public abstract class NaveJugador extends Nave {
     protected Escudo escudo;
 
     public NaveJugador(){
-        arma = new ArmaComun(new DisparoJugador());
+        arma = new ArmaComun<DisparoJugador>(new DisparoJugador());
         escudo = new EscudoNulo();
     }
 

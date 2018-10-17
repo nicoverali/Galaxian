@@ -5,9 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import edu.uns.galaxian.entidades.inanimadas.*;
 
-public interface Arma {
-
-	void setDisparoModelo(Disparo modelo);
+public interface Arma<T extends Disparo> {
 
 	/**
 	 * Produce nuevos disparos a partir de la posicion y el angulo de disparo proveido.
@@ -16,5 +14,6 @@ public interface Arma {
 	 * @return Coleccion de disparos producidos
 	 * @throws IllegalStateException Si el arma no tiene un disparo modelo
 	 */
-	Collection<Disparo> disparar(Vector2 posicion, float anguloDeDisparo) throws IllegalStateException;
+	public Collection<T> disparar(Vector2 posicion, float anguloDeDisparo) throws IllegalStateException;
+	
 }

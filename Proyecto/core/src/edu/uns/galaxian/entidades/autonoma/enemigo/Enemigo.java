@@ -31,7 +31,7 @@ public class Enemigo extends EntidadViva implements Autonomo  {
 		this.colisionador = new ColisionadorEnemigo(this);
 		inteligencia = new InteligenciaFormacion(posicion);
 		
-		setArma(new ArmaDisparoDoble(new DisparoEnemigo()));
+		setArma(new ArmaDisparoDoble<DisparoEnemigo>(new DisparoEnemigo()));
 	}
 
 	/**
@@ -46,8 +46,7 @@ public class Enemigo extends EntidadViva implements Autonomo  {
 	 * Cambia el arma actual del enemigo por una nueva.
 	 * @param nuevaArma Nueva arma del enemigo
 	 */
-	public void setArma(Arma nuevaArma) {
-		nuevaArma.setDisparoModelo(new DisparoEnemigo());
+	public void setArma(Arma<DisparoEnemigo> nuevaArma) {
 		nave.setArma(nuevaArma);
 	}
 

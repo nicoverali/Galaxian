@@ -39,8 +39,7 @@ public class Jugador extends EntidadViva {
 	 * Setea el arma del jugador con la nueva pasada como parametro.
 	 * @param nuevaArma Nueva arma que tendra el jugador.
 	 */
-	public void setArma (Arma nuevaArma) {
-		nuevaArma.setDisparoModelo(new DisparoJugador());
+	public void setArma (Arma<DisparoJugador> nuevaArma) {
 		nave.setArma(nuevaArma);
 	}
 	
@@ -48,7 +47,7 @@ public class Jugador extends EntidadViva {
 	 * Devuelve el arma que el jugador posee actualmente.
 	 * @return Arma que posee el jugador.
 	 */
-	public Arma getArma() {
+	public Arma<DisparoJugador> getArma() {
 		return nave.getArma();
 	}
 	

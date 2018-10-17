@@ -6,13 +6,9 @@ import edu.uns.galaxian.entidades.inanimadas.Disparo;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class ArmaNula implements Arma {
+public class ArmaNula<T extends Disparo> implements Arma<T> {
 
-    public void setDisparoModelo(Disparo modelo) {
-        // Do nothing
-    }
-
-    public Collection<Disparo> disparar(Vector2 posicion, float anguloDeDisparo) throws IllegalStateException {
+    public Collection<T> disparar(Vector2 posicion, float anguloDeDisparo) throws IllegalStateException {
         return new ArrayList<>(0);
     }
 }

@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 
 import edu.uns.galaxian.entidades.inanimadas.Disparo;
 
-public class ArmaDisparoDoble implements Arma {
+public class ArmaDisparoDoble<T extends Disparo> implements Arma<T> {
 
 	private static final long CADENCIA = 1000;
 	private static final int DAMAGE = 35;
@@ -19,24 +19,18 @@ public class ArmaDisparoDoble implements Arma {
 	private Disparo prototipo;
 	private long ultimoDisparo;
 
-	public ArmaDisparoDoble(Disparo modelo) {
+	public ArmaDisparoDoble(T modelo) {
 		prototipo = modelo;
 		prototipo.setFuerzaDeDisparo(DAMAGE);
 		prototipo.setTextura(TEXTURA);
 		ultimoDisparo = TimeUtils.millis() - CADENCIA;
 	}
 
-	public void setDisparoModelo(Disparo modelo){
-		prototipo = modelo;
-		prototipo.setFuerzaDeDisparo(DAMAGE);
-		prototipo.setTextura(TEXTURA);
-	}
-
-	public Collection<Disparo> disparar(Vector2 posicion, float anguloDeDisparo) {
-		Collection<Disparo> disparos = new ArrayList<>(2);
+	public Collection<T> disparar(Vector2 posicion, float anguloDeDisparo) {
+		Collection<T> disparos = new ArrayList<T>(2);
 		if(TimeUtils.timeSinceMillis(ultimoDisparo) > CADENCIA){
-			Disparo nuevoDisparo_1 = prototipo.clonar();
-			Disparo nuevoDisparo_2 = prototipo.clonar();
+			T nuevoDisparo_1 = (T) prototipo.clonar();
+			T nuevoDisparo_2 = (T) prototipo.clonar();
 			Vector2 velocidad = new Vector2(1,0).rotate(anguloDeDisparo).setLength2(VELOCIDAD_MAXIMA);
 			nuevoDisparo_1.setPosicion(posicion.cpy().add(10,0));
 			nuevoDisparo_1.setRotacion(anguloDeDisparo);
