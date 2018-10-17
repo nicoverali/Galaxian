@@ -32,8 +32,7 @@ public abstract class EntidadViva extends Entidad {
 
 	/**
 	 * Resta a la vida actual de la entidad, la cantidad de vida recibida. Si al restar la vida,
-	 * esta resulta ser menor que 0 entonces la vida se setea a 0, es decir, la vida resultante nunca
-	 * puede ser negativa.
+	 * esta resulta ser 0 o menos, la entidad es eliminada del juego.
 	 * @param vidaARestar Cantidad de vida que se desea restar
 	 * @throws IllegalArgumentException Si la vida recibida es negativa
 	 */
@@ -42,7 +41,12 @@ public abstract class EntidadViva extends Entidad {
 			throw new IllegalArgumentException("La vida a restar no puede ser negativa.");
 		}
 		int nuevaVida = vida.getValor() - vidaARestar;
-		vida.setValor(Math.max(0, nuevaVida));
+		if(nuevaVida > 0){
+			vida.setValor(nuevaVida);
+		}
+		else{
+			this.eliminar();
+		}
 	}
 
 	/**

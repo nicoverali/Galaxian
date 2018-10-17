@@ -13,7 +13,7 @@ import edu.uns.galaxian.entidades.EntidadViva;
 public class Obstaculo extends EntidadViva {
 	
 	private static Texture TEXTURA = new Texture(Gdx.files.internal("./obstaculos/asteroideMarron.png"));
-	private static final int VIDA_MAX = 35;
+	private static final int VIDA_MAX = 300;
 	
 	private ColisionadorObstaculo colisionador;
 	private ControladorObstaculo  controlador;
