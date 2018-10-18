@@ -241,11 +241,11 @@ public class IOManager {
     public String obtenerMD5Hex(byte[] contenido){
         try{
             byte[] data = MessageDigest.getInstance("MD5").digest(contenido);
-            StringBuffer stringBuffer = new StringBuffer();
-            for (int i = 0; i < data.length; i++) {
-                stringBuffer.append(Integer.toString((data[i] & 0xff) + 0x100, 16).substring(1));
+            StringBuilder stringBuilder = new StringBuilder();
+            for (byte aData : data) {
+                stringBuilder.append(Integer.toString((aData & 0xff) + 0x100, 16).substring(1));
             }
-            return stringBuffer.toString();
+            return stringBuilder.toString();
         }catch (NoSuchAlgorithmException e){
             System.out.println("Lo imposible se volvio real.");
             return null;

@@ -10,14 +10,12 @@ import edu.uns.galaxian.entidades.EntidadBatch;
 import edu.uns.galaxian.entidades.EntidadViva;
 import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
 import edu.uns.galaxian.entidades.equipamiento.escudos.Escudo;
-import edu.uns.galaxian.entidades.inanimadas.Disparo;
-import edu.uns.galaxian.entidades.inanimadas.DisparoJugador;
+import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
 import edu.uns.galaxian.entidades.jugador.input.InputKeyboard;
 import edu.uns.galaxian.entidades.jugador.input.ProcesadorInput;
 import edu.uns.galaxian.juego.Nivel;
 import edu.uns.galaxian.nave.jugador.NaveJugador;
 
-import java.util.Collection;
 
 public class Jugador extends EntidadViva {
 
@@ -94,11 +92,7 @@ public class Jugador extends EntidadViva {
 			posicion = nuevaPosicion;
 		}
  		if(input.sePresionoDisparar()){
-			Collection<Disparo> disparos = nave.getArma().disparar(posicion.cpy(), rotacion);
-			for(Disparo disparo : disparos){
-				disparo.setControladorDisparo(controlador);
-			}
-			controlador.agregarEntidades(disparos);
+			nave.getArma().disparar(posicion.cpy(), rotacion, controlador);
 		}
  	}
 

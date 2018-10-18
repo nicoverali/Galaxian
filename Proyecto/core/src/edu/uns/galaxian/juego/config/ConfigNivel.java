@@ -4,7 +4,8 @@ import com.google.gson.Gson;
 import edu.uns.galaxian.entidades.autonoma.enemigo.fabrica.FabricaEnemigos;
 import edu.uns.galaxian.entidades.equipamiento.armas.*;
 import edu.uns.galaxian.entidades.equipamiento.escudos.*;
-import edu.uns.galaxian.entidades.inanimadas.*;
+import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparo;
+import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparoJugador;
 import edu.uns.galaxian.nave.jugador.NaveJugador;
 import edu.uns.galaxian.util.io.gson.GSONNonFieldTypeAdapter;
 
@@ -38,8 +39,8 @@ public class ConfigNivel{
    }
 
     private Gson getGson(){
-        Class<?>[] armaClases = new Class[]{Disparo.class};
-        Object[] armaParametros = new Object[]{new DisparoJugador()};
+        Class<?>[] armaClases = new Class[]{FabricaDisparo.class};
+        Object[] armaParametros = new Object[]{new FabricaDisparoJugador()};
         return new GsonBuilder().registerTypeAdapterFactory(new GSONNonFieldTypeAdapter())
                 .registerTypeAdapterFactory(new GSONNonFieldTypeAdapter(Arma.class, armaClases, armaParametros))
                 .create();

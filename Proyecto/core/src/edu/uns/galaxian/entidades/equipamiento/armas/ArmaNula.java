@@ -1,14 +1,12 @@
 package edu.uns.galaxian.entidades.equipamiento.armas;
 
 import com.badlogic.gdx.math.Vector2;
-import edu.uns.galaxian.entidades.inanimadas.Disparo;
-
-import java.util.ArrayList;
-import java.util.Collection;
+import edu.uns.galaxian.controladores.Controlador;
+import edu.uns.galaxian.entidades.inanimadas.disparos.Disparo;
 
 public class ArmaNula<T extends Disparo> implements Arma<T> {
 
-    public Collection<T> disparar(Vector2 posicion, float anguloDeDisparo) throws IllegalStateException {
-        return new ArrayList<>(0);
+    public void disparar(Vector2 posicion, float anguloDeDisparo, Controlador controlador) throws IllegalStateException {
+        // Un arma nula no crea disparos
     }
 }

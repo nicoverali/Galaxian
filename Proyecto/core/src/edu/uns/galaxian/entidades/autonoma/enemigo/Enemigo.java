@@ -10,12 +10,11 @@ import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaArtificial;
 import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaFormacion;
 import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
 import edu.uns.galaxian.entidades.equipamiento.armas.ArmaDisparoDoble;
-import edu.uns.galaxian.entidades.inanimadas.*;
+import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEnemigo;
+import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparoEnemigo;
 import edu.uns.galaxian.nave.enemigo.NaveEnemigo;
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorEnemigo;
-
-import java.util.Collection;
 
 public class Enemigo extends EntidadViva implements Autonomo  {
 	
@@ -31,7 +30,7 @@ public class Enemigo extends EntidadViva implements Autonomo  {
 		this.colisionador = new ColisionadorEnemigo(this);
 		inteligencia = new InteligenciaFormacion(posicion);
 		
-		setArma(new ArmaDisparoDoble<DisparoEnemigo>(new DisparoEnemigo()));
+		setArma(new ArmaDisparoDoble<>(new FabricaDisparoEnemigo()));
 	}
 
 	/**
@@ -54,11 +53,7 @@ public class Enemigo extends EntidadViva implements Autonomo  {
 	 * Produce nuevos disparos con el arma que tiene el enemigo.
 	 */
     public void disparar() {
-		Collection<Disparo> disparos = nave.getArma().disparar(posicion.cpy(), rotacion);
-		for(Disparo disparo : disparos){
-			disparo.setControladorDisparo(controlador);
-		}
-		controlador.agregarEntidades(disparos);
+		nave.getArma().disparar(posicion.cpy(), rotacion, controlador);
 	}
 
     public float getAlto() {

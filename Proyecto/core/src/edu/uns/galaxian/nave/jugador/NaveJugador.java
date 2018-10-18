@@ -3,7 +3,7 @@ package edu.uns.galaxian.nave.jugador;
 import edu.uns.galaxian.entidades.equipamiento.armas.ArmaComun;
 import edu.uns.galaxian.entidades.equipamiento.escudos.Escudo;
 import edu.uns.galaxian.entidades.equipamiento.escudos.EscudoNulo;
-import edu.uns.galaxian.entidades.inanimadas.DisparoJugador;
+import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparoJugador;
 import edu.uns.galaxian.nave.Nave;
 
 public abstract class NaveJugador extends Nave {
@@ -11,7 +11,7 @@ public abstract class NaveJugador extends Nave {
     protected Escudo escudo;
 
     public NaveJugador(){
-        arma = new ArmaComun<DisparoJugador>(new DisparoJugador());
+        arma = new ArmaComun<>(new FabricaDisparoJugador());
         escudo = new EscudoNulo();
     }
 

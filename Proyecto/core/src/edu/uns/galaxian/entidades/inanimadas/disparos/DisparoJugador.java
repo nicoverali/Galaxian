@@ -1,4 +1,4 @@
-package edu.uns.galaxian.entidades.inanimadas;
+package edu.uns.galaxian.entidades.inanimadas.disparos;
 
 
 import com.badlogic.gdx.graphics.Texture;
@@ -11,19 +11,12 @@ public class DisparoJugador extends Disparo {
 
 	private ColisionadorDisparoJugador colisionador = new ColisionadorDisparoJugador(this);
 
-	public DisparoJugador() {
-	}
-
-	public DisparoJugador(Vector2 posicion, Vector2 velocidad, int damage, Texture textura) {
-		super(posicion, velocidad, damage, textura);
-	}
-
-	public DisparoJugador(Vector2 posicion, Vector2 velocidad, int damage, Texture textura, Controlador controlador) {
-		super(posicion, velocidad, damage, textura, controlador);
+	public DisparoJugador(Vector2 posicion, Vector2 velocidad, float rotacion, int fuerzaDeDisparo, Texture textura, Controlador controlador) {
+		super(posicion, velocidad, rotacion, fuerzaDeDisparo, textura, controlador);
 	}
 
 	public DisparoJugador clonar() {
-		return new DisparoJugador(posicion, velocidad, fuerzaDeDisparo, textura);
+		return new DisparoJugador(posicion.cpy(), velocidad.cpy(), rotacion, fuerzaDeDisparo, textura, controlador);
 	}
 	
 	public void aceptarColision(Colisionador col) {

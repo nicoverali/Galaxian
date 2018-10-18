@@ -1,4 +1,4 @@
-package edu.uns.galaxian.entidades.inanimadas;
+package edu.uns.galaxian.entidades.inanimadas.disparos;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -13,25 +13,17 @@ public abstract class Disparo extends Entidad {
 	protected Texture textura;
 	protected Controlador controlador;
 
-	public Disparo() {
-		super();
-		fuerzaDeDisparo = 0;
-		textura = null;
-	}
-
-	public Disparo(Vector2 posicion, Vector2 velocidad, int fuerzaDeDisparo, Texture textura){
-		super(posicion, velocidad, velocidad.angle());
-		this.fuerzaDeDisparo = fuerzaDeDisparo;
-		this.textura = textura;
-	}
-
-	public Disparo(Vector2 posicion, Vector2 velocidad, int fuerzaDeDisparo, Texture textura, Controlador controlador) {
-		super(posicion, velocidad, velocidad.angle());
+	public Disparo(Vector2 posicion, Vector2 velocidad, float rotacion, int fuerzaDeDisparo, Texture textura, Controlador controlador) {
+		super(posicion, velocidad, rotacion);
 		this.fuerzaDeDisparo = fuerzaDeDisparo;
 		this.textura = textura;
 		this.controlador = controlador;
 	}
 
+	/**
+	 * Retorna un nuevo disparo con los mismos atributos
+	 * @return Clon de este disparo
+	 */
 	public abstract Disparo clonar();
 
 	public float getAlto() {
@@ -46,25 +38,13 @@ public abstract class Disparo extends Entidad {
 		return fuerzaDeDisparo;
 	}
 
-	public void setFuerzaDeDisparo(int fuerzaDeDisparo) {
-		this.fuerzaDeDisparo = fuerzaDeDisparo;
-	}
-
-	public void setTextura(Texture textura) {
-		this.textura = textura;
-	}
-
-	public void setControladorDisparo(Controlador c) {
-		controlador = c;
-	}
-
 	public void dibujar(EntidadBatch batch) {
 		batch.draw(textura, posicion.x-(getAncho()/2), posicion.y-(getAlto()/2), getAncho(), getAlto());
 	}
 
 	public void actualizar(float delta) {
 		posicion.add(velocidad);
-		if((posicion.y > Gdx.graphics.getHeight()) || (posicion.y<0)) {
+		if((posicion.y > Gdx.graphics.getHeight()) || (posicion.y < 0)) {
 			eliminar();
 		}
 	}
@@ -72,5 +52,4 @@ public abstract class Disparo extends Entidad {
 	public void eliminar() {
 		controlador.eliminarEntidad(this);
 	}
-	
 }

@@ -8,7 +8,8 @@ import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
 import edu.uns.galaxian.entidades.equipamiento.armas.ArmaComun;
 import edu.uns.galaxian.entidades.equipamiento.escudos.Escudo;
 import edu.uns.galaxian.entidades.equipamiento.escudos.EscudoNulo;
-import edu.uns.galaxian.entidades.inanimadas.DisparoJugador;
+import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
+import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparoJugador;
 import edu.uns.galaxian.juego.config.GameData;
 import edu.uns.galaxian.util.io.gson.GSONNonFieldTypeAdapter;
 import edu.uns.galaxian.util.io.IOManager;
@@ -18,12 +19,12 @@ import java.io.IOException;
 
 public class Maker extends Game {
 
-    private Arma ARMA_JUGADOR;
+    private Arma<DisparoJugador> ARMA_JUGADOR;
     private Escudo ESCUDO_JUGADOR;
     private FabricaEnemigos FABRICA_ENEMIGOS;
 
     public void create(){
-        ARMA_JUGADOR = new ArmaComun(new DisparoJugador());
+        ARMA_JUGADOR = new ArmaComun(new FabricaDisparoJugador());
         ESCUDO_JUGADOR = new EscudoNulo();
         FABRICA_ENEMIGOS = new FabricaEstandar();
 
