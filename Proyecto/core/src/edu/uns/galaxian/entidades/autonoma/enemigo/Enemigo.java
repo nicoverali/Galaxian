@@ -80,6 +80,9 @@ public class Enemigo extends EntidadViva implements Autonomo  {
 		inteligencia.pensar(this);
 		if(posicion.y < 0) {
 			posicion.y = Gdx.graphics.getHeight();
+			if(posicion.x<0 || posicion.x>Gdx.graphics.getWidth()) {
+				posicion.x = 40;
+			}
 		}
 	}
     

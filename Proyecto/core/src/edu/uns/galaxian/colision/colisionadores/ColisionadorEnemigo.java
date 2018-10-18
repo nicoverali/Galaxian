@@ -32,6 +32,6 @@ public class ColisionadorEnemigo implements Colisionador<Enemigo> {
 	}
 
 	public void colisionarConObstaculo(Obstaculo obstaculo) {
-		obstaculo.restarVida(objetoFuente.getFuerzaDeColision());
+		objetoFuente.restarVida(obstaculo.getFuerzaDeColision());
 	}
 }

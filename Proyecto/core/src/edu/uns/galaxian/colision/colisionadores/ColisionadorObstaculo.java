@@ -19,17 +19,15 @@ public class ColisionadorObstaculo implements Colisionador<Obstaculo> {
 	}
 
 	public void colisionarConEnemigo(Enemigo enemigo) {
-		enemigo.restarVida(objetoFuente.getFuerzaDeColision());
+		objetoFuente.restarVida(enemigo.getFuerzaDeColision());
 	}
 
 	public void colisionarConDisparoJugador(DisparoJugador disparo) {
 		objetoFuente.restarVida(disparo.getFuerzaDeDisparo());
-		disparo.eliminar();
 	}
 
 	public void colisionarConDisparoEnemigo(DisparoEnemigo disparo) {
 		objetoFuente.restarVida(disparo.getFuerzaDeDisparo());
-		disparo.eliminar();
 	}
 
 	public void colisionarConObstaculo(Obstaculo obstaculo) {
