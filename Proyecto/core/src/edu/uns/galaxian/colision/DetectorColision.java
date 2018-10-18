@@ -47,23 +47,9 @@ public class DetectorColision {
 		}
 	}
 
-	// TODO Eliminar este metodo
-	/**
-	 * A partir del colisionable previsto, se verifica la existencia de alguna colision con este colisionable.
-	 * En caso de haber una colision, esta se resuelve.
-	 * @param referencia Objeto colisionable del cual se verifican las colisiones
-	 */
-	public void verificarYResolverColisiones(Colisionable referencia) {
-		for (Colisionable otroColisionable : colisionables){
-			if(referencia != otroColisionable && colisionaron(referencia, otroColisionable)) {
-				referencia.aceptarColision(otroColisionable.getColisionador());
-				otroColisionable.aceptarColision(referencia.getColisionador());
-			}
-		}
-	}
-
 	private boolean colisionaron(Colisionable A, Colisionable B){
 		return (Math.abs(A.getStatus().getPosicion().x - B.getStatus().getPosicion().x)<=(A.getAncho() + B.getAncho())/2
 				&& Math.abs(A.getStatus().getPosicion().y - B.getStatus().getPosicion().y)<=(A.getAlto() + B.getAlto())/2);
 	}
+	
 }

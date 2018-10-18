@@ -133,8 +133,6 @@ public class FormacionEnemigo implements Servicio {
             Random random = new Random();
             while(activado && !enemigos.isEmpty()){
                 // TODO Se deberia setear un estado de ataque normal
-                verificarEntidadesEliminadas();
-                verificarFilasVacias();
                 if(enemigosAtacando.size() <= LIMITE_ENEMIGOS_ATACANDO){
                     int cantFilas = enemigos.size();
                     List<Enemigo> filaRandom = enemigos.get(random.nextInt(cantFilas));
@@ -147,6 +145,8 @@ public class FormacionEnemigo implements Servicio {
                         System.out.println("Error en ejecucion de Thread de FormacionEnemigo");
                     }
                 }
+                verificarEntidadesEliminadas();
+                verificarFilasVacias();
             }
         }
     }

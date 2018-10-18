@@ -15,8 +15,8 @@ public class GeneracionObstaculo implements Servicio, Observador<LiveData<Intege
 	private Controlador controlador;
 	private GeneracionObstaculo generador = this;
     private volatile boolean activado;
-    private int cantObstaculos;
-    private static final int CANT_MAXIMA_OBSTACULOS = 2;
+    private volatile int cantObstaculos;
+    private static final int CANT_MAXIMA_OBSTACULOS = 8;
     
     public GeneracionObstaculo(Controlador controlador){
         this.controlador = controlador;
@@ -47,6 +47,7 @@ public class GeneracionObstaculo implements Servicio, Observador<LiveData<Intege
 							Obstaculo nuevoObstaculo = new Obstaculo(posX,posY);
 							nuevoObstaculo.getVida().observar(generador);
 							nuevoObstaculo.setControladorObstaculo(controlador);
+							// Probabilidad de que el obstaculo tenga inteligencia de movimiento = 4/10
 							if(ran.nextInt(10)<3) {
 								nuevoObstaculo.setPosicion(0,posY-15);
 								nuevoObstaculo.setInteligencia(new InteligenciaDeOnda());
@@ -67,7 +68,7 @@ public class GeneracionObstaculo implements Servicio, Observador<LiveData<Intege
 	public void notificar(LiveData<Integer> subject) {
 		if(subject.getValor()==0) {
 			cantObstaculos--;
-			//System.out.println(cantObstaculos);
+			System.out.println(cantObstaculos);
 		}
 	}
 
