@@ -14,16 +14,25 @@ public class Controlador {
     private Set<Entidad> entidadesEliminadas;
     private List<Jugador> jugadores;
     private DetectorColision detectorColision;
-
+    private int puntuacion;
+    
     public Controlador(Jugador jugador){
         detectorColision = new DetectorColision();
         entidades = new ArrayList<>();
         nuevasEntidades = new HashSet<>();
         entidadesEliminadas = new HashSet<>();
         jugadores = new ArrayList<>(3);
-
+        puntuacion=0;
         jugadores.add(jugador);
         detectorColision.registrarColisionable(jugador);
+    }
+    
+    public void sumar(int aSumar){
+    	puntuacion+=aSumar;
+    }
+    
+    public int getPuntuacion(){
+    	return puntuacion;
     }
 
     /**
@@ -137,6 +146,7 @@ public class Controlador {
 
     /**
      * Retorna la copia de una lista
+     * @param <T>
      * @param listaOriginal Lista original
      * @return Copia de la lista original
      */

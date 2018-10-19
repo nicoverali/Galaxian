@@ -1,16 +1,16 @@
-package edu.uns.galaxian.nave.enemigo;
+package edu.uns.galaxian.entidades.autonoma.enemigo.tipos;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 
-import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaAleatoria;
+import edu.uns.galaxian.controladores.Controlador;
+import edu.uns.galaxian.entidades.autonoma.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaArtificial;
-import edu.uns.galaxian.entidades.equipamiento.armas.ArmaComun;
-import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparoEnemigo;
 import edu.uns.galaxian.entidades.status.GameObject;
 
-public class NaveKamikaze extends NaveEnemigo{
-	
+public class Kamikaze extends Enemigo{
+
 	private static final String TEXTURA_DIR = "./enemigos/kamikaze/estandar.png";
 
 	private int vidaMax;
@@ -18,18 +18,17 @@ public class NaveKamikaze extends NaveEnemigo{
 	private int colisionDamage;
 	// TODO Crear inteligencia del kamikaze y asignarsela a esta nave de manera fija
 	private InteligenciaArtificial inteligenciaDeAtaque;
-
-	// REVIEW El estado que se recibe es para despues poder darselo a la inteligencia
-	public NaveKamikaze(int vida, float velocidadMax, int colisionDamage, GameObject estadoJugador) {
-		this.vidaMax = vida;
-		this.colisionDamage = colisionDamage;
-		this.velocidadMax = velocidadMax;
-		textura = new Texture(Gdx.files.internal(TEXTURA_DIR));
-		inteligenciaDeAtaque = new InteligenciaAleatoria();
-		
-		setArma(new ArmaComun(new FabricaDisparoEnemigo()));
+	
+	private static Texture textura= new Texture(Gdx.files.internal(TEXTURA_DIR));
+	
+	//TODO fijarse el estadoJugador no esta asignado a nada, mandarlo a la inteligencia
+	public Kamikaze(Vector2 pos, int vida, float velocidadMax, int colisionDamage, Controlador controlador, GameObject estadoJugador) {
+		super(pos, vida, textura,controlador);
+		vidaMax=vida;
+		this.velocidadMax=velocidadMax;
+		this.colisionDamage=colisionDamage;
 	}
-
+	
 	public int getVidaMax() {
 		return vidaMax;
 	}
@@ -50,3 +49,8 @@ public class NaveKamikaze extends NaveEnemigo{
 		return inteligenciaDeAtaque;
 	}
 }
+	
+
+
+
+

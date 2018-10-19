@@ -3,6 +3,7 @@ package edu.uns.galaxian.juego;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 import edu.uns.galaxian.controladores.*;
 import edu.uns.galaxian.entidades.EntidadBatch;
@@ -22,6 +23,14 @@ public class Nivel extends ScreenAdapter {
     private Controlador controlador;
     private List<Servicio> servicios;
 
+    private BitmapFont score;
+    private BitmapFont time;
+    
+    private int contador;
+    private int mili;
+    private int seg;
+    private int min;
+    
     public Nivel(ConfigNivel config, Juego juego){
         this.juego = juego;
         background = new Background();
@@ -35,6 +44,23 @@ public class Nivel extends ScreenAdapter {
         obstaculos.activar();
         servicios.add(formacion);
         servicios.add(obstaculos);
+        //El marcador
+        score= new BitmapFont();
+        time= new BitmapFont();
+    }
+    
+    private void actualizarTiempo(){
+    	contador=(int) Gdx.graphics.getDeltaTime();
+    	if(contador<=1) {mili++;}
+    	if(mili==59)
+    	{
+    		seg++;mili=0;
+    	}
+    	if(seg==59)
+    	{
+    		seg=0;
+    		min++;
+    	}  	
     }
 
     @Override
@@ -45,10 +71,13 @@ public class Nivel extends ScreenAdapter {
         EntidadBatch batch = juego.getBatch();
 
         background.draw();
+        actualizarTiempo();
         // Inicializa proceso de dibujado de EntidadBatch
         batch.begin();
         controlador.actualizarEstado(delta);
         controlador.dibujar(batch);
+        score.draw(batch,"Score= "+Integer.toString(controlador.getPuntuacion()),0,Gdx.graphics.getHeight()-5);
+        time.draw(batch, "Time= "+min+":"+seg+":"+mili,0,Gdx.graphics.getHeight()-20);
         // Finaliza proceso de dibujado
         batch.end();
     }

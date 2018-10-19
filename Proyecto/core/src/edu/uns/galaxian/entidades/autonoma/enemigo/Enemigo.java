@@ -1,6 +1,7 @@
 package edu.uns.galaxian.entidades.autonoma.enemigo;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.controladores.Controlador;
 import edu.uns.galaxian.entidades.EntidadBatch;
@@ -12,60 +13,69 @@ import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
 import edu.uns.galaxian.entidades.equipamiento.armas.ArmaDisparoDoble;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparoEnemigo;
-import edu.uns.galaxian.nave.enemigo.NaveEnemigo;
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorEnemigo;
 
-public class Enemigo extends EntidadViva implements Autonomo  {
+public  class Enemigo extends EntidadViva implements Autonomo  {
 	
-	private NaveEnemigo nave;
 	private Controlador controlador;
 	private ColisionadorEnemigo colisionador;
 	private InteligenciaArtificial inteligencia;
 	
-	public Enemigo(Vector2 posicion, NaveEnemigo nave, Controlador controlador){
-		super(posicion, nave.getRotacionInicial(), nave.getVidaMax());
-		this.nave = nave;
+	private static final int puntaje=10;
+	
+	private int vidaMax;
+	private int rotacion;
+	
+	
+	protected Arma arma;
+	protected Texture textura;
+	
+	public Enemigo(Vector2 posicion, int vida, Texture textura, Controlador controlador){
+		super(posicion, vida, 270);
+		this.textura=textura;
+		vidaMax=vida;
+		rotacion=270;
 		this.controlador = controlador;
 		this.colisionador = new ColisionadorEnemigo(this);
 		inteligencia = new InteligenciaFormacion(posicion);
-		
 		setArma(new ArmaDisparoDoble<>(new FabricaDisparoEnemigo()));
 	}
 
 	/**
-	 * Retorna fuerza con la que colisiona este enemigo con otra entidad.
-	 * @return Fuerza de colision
+	 * Retorna el danio por colisionar con la entidad
+	 * @return int danio por colisionar
 	 */
-	public int getFuerzaDeColision() {
-    	return nave.getDamage();
-    }
-
+	public int getFuerzaDeColision()
+	{
+		return 100;
+	}
+	
 	/**
 	 * Cambia el arma actual del enemigo por una nueva.
 	 * @param nuevaArma Nueva arma del enemigo
 	 */
 	public void setArma(Arma<DisparoEnemigo> nuevaArma) {
-		nave.setArma(nuevaArma);
+		arma=nuevaArma;
 	}
 
 	/**
 	 * Produce nuevos disparos con el arma que tiene el enemigo.
 	 */
     public void disparar() {
-		nave.getArma().disparar(posicion.cpy(), rotacion, controlador);
+		arma.disparar(posicion.cpy(), rotacion, controlador);
 	}
 
     public float getAlto() {
-    	return nave.getAlto();
+    	return textura.getHeight();
     }
 
     public float getAncho() {
-    	return nave.getAncho();
+    	return textura.getWidth();
     }
 
 	public void setVidaAlMaximo() {
-		vida.setValor(nave.getVidaMax());
+		vida.setValor(vidaMax);
 	}
 
 	public InteligenciaArtificial getInteligencia() {
@@ -86,16 +96,21 @@ public class Enemigo extends EntidadViva implements Autonomo  {
 		}
 	}
     
+	//TODO setear inteligencia
     public void atacar() {
-    	inteligencia = nave.getInteligenciaDeAtaque();
+    	disparar();
     }
 
     public void dibujar(EntidadBatch batch) {
-    	nave.dibujar(batch, posicion.cpy());
+    	float alto = getAlto();
+		float ancho = getAncho();
+		batch.draw(textura, posicion.x - ancho/2, posicion.y - alto/2, ancho, alto);
+
     }
 
     public void eliminar() {
     	controlador.eliminarEntidad(this);
+    	controlador.sumar(puntaje);
     }
 
 	public Colisionador getColisionador(){
