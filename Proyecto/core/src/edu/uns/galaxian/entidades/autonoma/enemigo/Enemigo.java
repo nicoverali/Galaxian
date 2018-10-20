@@ -22,8 +22,8 @@ import edu.uns.galaxian.entidades.inanimadas.powerups.magiaTemporal.MejoraArma;
 import edu.uns.galaxian.entidades.inanimadas.powerups.magiaTemporal.PastillaVida;
 import edu.uns.galaxian.entidades.inanimadas.powerups.objetoPrecioso.CongelaTiempo;
 import edu.uns.galaxian.entidades.inanimadas.powerups.objetoPrecioso.Misil;
-import edu.uns.galaxian.colision.HBRectangulo;
-import edu.uns.galaxian.colision.HeadBox;
+import edu.uns.galaxian.colision.hitbox.HBRectangulo;
+import edu.uns.galaxian.colision.hitbox.HitBox;
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorEnemigo;
 
@@ -158,12 +158,8 @@ public  class Enemigo extends EntidadViva implements Autonomo  {
     	return azar==1;
     }
 
-	public HeadBox getHeadBox() {
+	public HitBox getHitBox() {
 		return box;
-	}
-
-	public boolean aceptarInterseccion(HeadBox headBox) {
-		return headBox.intersectarConRectangulo(box);
 	}
 
 }

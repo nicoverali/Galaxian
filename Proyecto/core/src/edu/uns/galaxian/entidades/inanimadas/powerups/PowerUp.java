@@ -4,8 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
-import edu.uns.galaxian.colision.HBCirculo;
-import edu.uns.galaxian.colision.HeadBox;
+import edu.uns.galaxian.colision.hitbox.HBCirculo;
+import edu.uns.galaxian.colision.hitbox.HitBox;
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorPowerUp;
 import edu.uns.galaxian.controladores.Controlador;
@@ -59,12 +59,7 @@ public abstract class PowerUp extends Entidad {
 		controlador.eliminarEntidad(this);
 	}
 	
-	public HeadBox getHeadBox() {
+	public HitBox getHitBox() {
 		return box;
 	}
-	
-	public boolean aceptarInterseccion(HeadBox headBox) {
-		return headBox.insersectarConCirculo(box);
-	}
-	
 }

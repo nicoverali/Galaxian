@@ -1,27 +1,21 @@
 package edu.uns.galaxian.colision;
 
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
-import edu.uns.galaxian.entidades.status.GameObject;
+import edu.uns.galaxian.colision.hitbox.HitBox;
 
 public interface Colisionable {
 
 	/**
-	 * Devuelve el alto del colisionable
-	 * @return Alto del colisionable
+	 * Retorna el hitbox del colisionable
+	 * @return Hitbox del colisionable
 	 */
-	float getAlto();
+	HitBox getHitBox();
 
 	/**
-	 * Devuelve el ancho del colisionable
-	 * @return Ancho del colisionable
+	 * Devuelve el colisionador del colisionable
+	 * @return Colisionador del colisionable
 	 */
-	float getAncho();
-
-	/**
-	 * Devuelve el status del colisionable
-	 * @return GameObject del colisionable
-	 */
-	GameObject getStatus();
+	Colisionador getColisionador();
 
 	/**
 	 * El objeto colisionable acepta entrar en un estado de colision. Recibe
@@ -29,14 +23,4 @@ public interface Colisionable {
 	 * @param colisionador Colisionador del otro colisionable participante en la colision producida
 	 */
 	void aceptarColision(Colisionador colisionador);
-
-	/**
-	 * Devuelve el colisionador del colisionable
-	 * @return Colisionador del colisionable
-	 */
-	Colisionador getColisionador();
-	
-	HeadBox getHeadBox();
-	
-	boolean aceptarInterseccion(HeadBox headBox);
 }

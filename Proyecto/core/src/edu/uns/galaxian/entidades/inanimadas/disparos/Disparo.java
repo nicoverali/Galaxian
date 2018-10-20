@@ -4,8 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
-import edu.uns.galaxian.colision.HBRectangulo;
-import edu.uns.galaxian.colision.HeadBox;
+import edu.uns.galaxian.colision.hitbox.HBRectangulo;
+import edu.uns.galaxian.colision.hitbox.HitBox;
 import edu.uns.galaxian.controladores.Controlador;
 import edu.uns.galaxian.entidades.Entidad;
 import edu.uns.galaxian.entidades.EntidadBatch;
@@ -58,11 +58,7 @@ public abstract class Disparo extends Entidad {
 		controlador.eliminarEntidad(this);
 	}
 	
-	public HeadBox getHeadBox() {
+	public HitBox getHitBox() {
 		return box;
-	}
-	
-	public boolean aceptarInterseccion(HeadBox headBox) {
-		return headBox.intersectarConRectangulo(box);
 	}
 }
