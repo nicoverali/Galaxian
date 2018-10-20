@@ -1,44 +1,42 @@
 package edu.uns.galaxian.colision.colisionadores;
 
 import edu.uns.galaxian.entidades.autonoma.enemigo.Enemigo;
+import edu.uns.galaxian.entidades.inanimadas.Obstaculo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
 import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
-import edu.uns.galaxian.entidades.inanimadas.Obstaculo;
-
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
-public class ColisionadorEnemigo implements Colisionador<Enemigo> {
+public class ColisionadorPowerUp implements Colisionador<PowerUp> {
 
-	private Enemigo objetoFuente;
+	private PowerUp objetoFuente;
 
-	public ColisionadorEnemigo(Enemigo objetoFuente){
-		this.objetoFuente = objetoFuente;
+	public ColisionadorPowerUp(PowerUp powerUp){
+		this.objetoFuente=powerUp;
 	}
-
+	
 	public void colisionarConJugador(Jugador jugador) {
-		jugador.restarVida(objetoFuente.getFuerzaDeColision());
+		objetoFuente.efectoJugador(jugador);
 	}
 
 	public void colisionarConEnemigo(Enemigo enemigo) {
-		// La colision entre enemigos no produce ningun efecto.
+		//No pasa nada
 	}
 
 	public void colisionarConDisparoJugador(DisparoJugador disparo) {
-		objetoFuente.restarVida(disparo.getFuerzaDeDisparo());
+		//No pasa nada
 	}
-	
+
 	public void colisionarConDisparoEnemigo(DisparoEnemigo disparo) {
-		// Un disparo enemigo no afecta al enemigo.
+		//No pasa nada		
 	}
 
 	public void colisionarConObstaculo(Obstaculo obstaculo) {
-		objetoFuente.restarVida(obstaculo.getFuerzaDeColision());
+		//No pasa nada
 	}
-
-	@Override
+	
 	public void colisionarConPowerUp(PowerUp powerUp) {
-		// TODO Auto-generated method stub
 		
 	}
+
 }

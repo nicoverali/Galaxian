@@ -24,7 +24,7 @@ public class Obstaculo extends EntidadViva implements Autonomo {
 	private InteligenciaArtificial inteligencia;
 	
 	public Obstaculo(float xPos, float yPos, Controlador controlador) {
-		super(new Vector2(xPos, yPos), 0, VIDA_MAX);
+		super(new Vector2(xPos, yPos), VIDA_MAX,0 );
 		this.controlador = controlador;
 		colisionador = new ColisionadorObstaculo(this);
 		fuerzaDeColision = 300;
@@ -32,7 +32,7 @@ public class Obstaculo extends EntidadViva implements Autonomo {
 	}
 	
 	public Obstaculo(float xPos, float yPos) {
-		super(new Vector2(xPos, yPos), 0, VIDA_MAX);
+		super(new Vector2(xPos, yPos), VIDA_MAX, 0);
 		colisionador = new ColisionadorObstaculo(this);
 		fuerzaDeColision = 100;
 		inteligencia = new InteligenciaNula();

@@ -13,7 +13,7 @@ public abstract class EntidadViva extends Entidad {
 		this.vida = new LiveDataMutable<>(vida);
 	}
 
-	public EntidadViva(Vector2 posicion, float rotacion, int vida){
+	public EntidadViva(Vector2 posicion, int vida, float rotacion){
 		this(posicion, new Vector2(0, 0), rotacion, vida);
 	}
 

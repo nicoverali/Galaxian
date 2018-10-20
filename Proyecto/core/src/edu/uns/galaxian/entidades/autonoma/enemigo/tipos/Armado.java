@@ -22,7 +22,7 @@ public class Armado extends Enemigo {
 	private static Texture textura= new Texture(Gdx.files.internal(TEXTURA_DIR));
 	
 	//TODO fijarse el estadoJugador no esta asignado a nada, mandarlo a la inteligencia
-	public Armado(Vector2 pos, int vida, float velocidadMax, int colisionDamage, Controlador controlador, GameObject estado ) {
+	public Armado(Vector2 pos, int vida, float velocidadMax, int colisionDamage, Controlador controlador, GameObject estadoJugador) {
 		super(pos, vida, textura,controlador);
 		vidaMax=vida;
 		this.velocidadMax=velocidadMax;
@@ -48,5 +48,12 @@ public class Armado extends Enemigo {
 	public InteligenciaArtificial getInteligenciaDeAtaque() {
 		return inteligenciaDeAtaque;
 	}
+
+	@Override
+	public int getFuerzaDeColision() {
+		// TODO Auto-generated method stub
+		return colisionDamage;
+	}
+	
 	
 }

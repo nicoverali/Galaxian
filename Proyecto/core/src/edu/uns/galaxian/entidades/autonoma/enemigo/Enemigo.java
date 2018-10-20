@@ -1,5 +1,7 @@
 package edu.uns.galaxian.entidades.autonoma.enemigo;
 
+import java.util.Random;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
@@ -7,12 +9,19 @@ import edu.uns.galaxian.controladores.Controlador;
 import edu.uns.galaxian.entidades.EntidadBatch;
 import edu.uns.galaxian.entidades.EntidadViva;
 import edu.uns.galaxian.entidades.autonoma.Autonomo;
+import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaAleatoria;
 import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaArtificial;
 import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaFormacion;
 import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
 import edu.uns.galaxian.entidades.equipamiento.armas.ArmaDisparoDoble;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparoEnemigo;
+import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
+import edu.uns.galaxian.entidades.inanimadas.powerups.magiaTemporal.CampoDeProteccion;
+import edu.uns.galaxian.entidades.inanimadas.powerups.magiaTemporal.MejoraArma;
+import edu.uns.galaxian.entidades.inanimadas.powerups.magiaTemporal.PastillaVida;
+import edu.uns.galaxian.entidades.inanimadas.powerups.objetoPrecioso.CongelaTiempo;
+import edu.uns.galaxian.entidades.inanimadas.powerups.objetoPrecioso.Misil;
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorEnemigo;
 
@@ -27,7 +36,6 @@ public  class Enemigo extends EntidadViva implements Autonomo  {
 	private int vidaMax;
 	private int rotacion;
 	
-	
 	protected Arma arma;
 	protected Texture textura;
 	
@@ -39,7 +47,7 @@ public  class Enemigo extends EntidadViva implements Autonomo  {
 		this.controlador = controlador;
 		this.colisionador = new ColisionadorEnemigo(this);
 		inteligencia = new InteligenciaFormacion(posicion);
-		setArma(new ArmaDisparoDoble<>(new FabricaDisparoEnemigo()));
+		arma=new ArmaDisparoDoble<>(new FabricaDisparoEnemigo());
 	}
 
 	/**
@@ -98,26 +106,54 @@ public  class Enemigo extends EntidadViva implements Autonomo  {
     
 	//TODO setear inteligencia
     public void atacar() {
-    	disparar();
+    	inteligencia = new InteligenciaAleatoria();
     }
 
     public void dibujar(EntidadBatch batch) {
     	float alto = getAlto();
 		float ancho = getAncho();
 		batch.draw(textura, posicion.x - ancho/2, posicion.y - alto/2, ancho, alto);
-
     }
-
-    public void eliminar() {
-    	controlador.eliminarEntidad(this);
-    	controlador.sumar(puntaje);
-    }
-
-	public Colisionador getColisionador(){
+    
+    public Colisionador getColisionador(){
 		return colisionador;
 	}
 
 	public void aceptarColision(Colisionador colisionador) {
 		colisionador.colisionarConEnemigo(this);
 	}
+    
+    public void eliminar() {
+    	controlador.eliminarEntidad(this);
+    	if(true)
+    	{
+    		PowerUp entidad= crearPower();
+    		System.out.println("GENERA POWERUPS");
+    		controlador.agregarEntidad(entidad);
+    	}    		
+    	controlador.sumar(puntaje);
+    }
+    
+    private PowerUp crearPower(){
+    	//Cuando esten todos los powers
+    	//Random ran= new Random();
+    	//int n= ran.nextInt(5); 
+    	int n=3;
+    	switch(n){
+    		case 0: return new PastillaVida(posicion,new Vector2 (0,-1),rotacion,controlador);
+    		case 1: return new CampoDeProteccion(posicion,new Vector2 (0,-1),rotacion,controlador);
+    		case 2: return new Misil(posicion,new Vector2 (0,-1),rotacion,controlador);
+    		case 3: return new MejoraArma(posicion,new Vector2 (0,-1),rotacion,controlador);
+    		case 4: return new CongelaTiempo(posicion,new Vector2 (0,-1),rotacion,controlador);
+    		default: return null;
+    	}
+    }
+    
+    //Probabilidad de que se genere un power 1 de 5
+    private boolean generaPower() {
+    	Random ran= new Random();
+    	int n= ran.nextInt(5);
+    	return (n==2)? true : false;
+    }
+
 }

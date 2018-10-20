@@ -3,6 +3,7 @@ package edu.uns.galaxian.colision.colisionadores;
 import edu.uns.galaxian.entidades.autonoma.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
+import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
 import edu.uns.galaxian.entidades.inanimadas.Obstaculo;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
@@ -37,4 +38,10 @@ public interface Colisionador<T> {
 	 * @param obstaculo Obstaculo con el que se colisiono
 	 */
 	void colisionarConObstaculo(Obstaculo obstaculo);
+	
+	/**
+	 * Comportamiento al momento de colisionar con un PowerUp
+	 * @param powerUp PowerUp con el que se colisiono
+	 */
+	void colisionarConPowerUp(PowerUp powerUp);
 }

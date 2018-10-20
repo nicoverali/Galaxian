@@ -26,7 +26,7 @@ public class Jugador extends EntidadViva {
 	private Controlador controlador;
 
 	public Jugador(float xPos, float yPos, NaveJugador nave, Nivel nivel, Controlador controlador) {
-		super(new Vector2(xPos, yPos), nave.getRotacionInicial(), nave.getVidaMax());
+		super(new Vector2(xPos, yPos), nave.getVidaMax(), nave.getRotacionInicial());
 		this.nave = nave;
 		this.nivel = nivel;
 		this.controlador = controlador;

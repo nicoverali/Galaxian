@@ -48,5 +48,11 @@ public class ArmadoDebil extends Enemigo {
 	public InteligenciaArtificial getInteligenciaDeAtaque() {
 		return inteligenciaDeAtaque;
 	}
+
+	@Override
+	public int getFuerzaDeColision() {
+		// TODO Auto-generated method stub
+		return colisionDamage;
+	}
 	
 }

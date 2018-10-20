@@ -13,22 +13,22 @@ import edu.uns.galaxian.entidades.status.GameObject;
 public class FabricaEstandar extends FabricaEnemigos {
 
 	public Enemigo getKamikaze(Vector2 posicion, Controlador controlador, GameObject jugador) {
-		return new Kamikaze(posicion,60,200,20,controlador,jugador);
+		return new Kamikaze(posicion,60,200,60,controlador,jugador);
 	}
 
 	public Enemigo getKamikazeAleatorio(Vector2 posicion, Controlador controlador) {
-		return new KamikazeAleatorio(posicion,80,200,20,controlador,null);
+		return new KamikazeAleatorio(posicion,80,200,50,controlador,null);
 	}
 
 	public Enemigo getKamikazeMixto(Vector2 posicion, Controlador controlador, GameObject jugador) {
-		return new KamikazeMixto(posicion,70,200,20,controlador,jugador);
-		}
+		return new KamikazeMixto(posicion,70,200,40,controlador,jugador);
+	}
 
 	public Enemigo getArmado(Vector2 posicion, Controlador controlador, GameObject jugador) {
-		return new Armado(posicion,100,180,30,controlador,jugador);
-		}
+		return new Armado(posicion,60,200,20,controlador,jugador);
+	}
 
 	public Enemigo getArmadoDebil(Vector2 posicion, Controlador controlador, GameObject jugador) {
-		return new ArmadoDebil(posicion,50,200,20,controlador,jugador);
-		}
+		return new ArmadoDebil(posicion,80,200,10,controlador,jugador);
+	}
 }

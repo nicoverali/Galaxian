@@ -3,6 +3,7 @@ package edu.uns.galaxian.colision.colisionadores;
 import edu.uns.galaxian.entidades.autonoma.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
+import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
 import edu.uns.galaxian.entidades.inanimadas.Obstaculo;
 
 import edu.uns.galaxian.entidades.jugador.Jugador;
@@ -29,5 +30,9 @@ public class ColisionadorJugador implements Colisionador<Jugador> {
 
 	public void colisionarConObstaculo(Obstaculo disparo) {
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void colisionarConPowerUp(PowerUp powerUp) {
 	}
 }

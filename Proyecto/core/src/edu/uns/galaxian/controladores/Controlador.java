@@ -15,33 +15,42 @@ public class Controlador {
     private List<Jugador> jugadores;
     private DetectorColision detectorColision;
     private int puntuacion;
-    
+
     public Controlador(Jugador jugador){
         detectorColision = new DetectorColision();
         entidades = new ArrayList<>();
         nuevasEntidades = new HashSet<>();
         entidadesEliminadas = new HashSet<>();
         jugadores = new ArrayList<>(3);
-        puntuacion=0;
+        
+
         jugadores.add(jugador);
         detectorColision.registrarColisionable(jugador);
     }
     
+    /**
+     * Suma a la puntuacion el valor a sumar
+     * @param aSumar valor a sumar
+     */
     public void sumar(int aSumar){
     	puntuacion+=aSumar;
     }
     
+    /**
+     * Retorna la puntuacion
+     * @return puntuacion
+     */
     public int getPuntuacion(){
     	return puntuacion;
     }
-
+    
+   
     /**
      * Registra una nueva entidad en el controlador
      * @param entidad Nueva entidad
      */
     public void agregarEntidad(Entidad entidad){
         nuevasEntidades.add(entidad);
-        detectorColision.registrarColisionable(entidad);
     }
 
     /**
@@ -50,9 +59,6 @@ public class Controlador {
      */
     public <T extends Entidad> void agregarEntidades(Collection<T> entidades){
         nuevasEntidades.addAll(entidades);
-        for(Entidad entidad : entidades){
-            detectorColision.registrarColisionable(entidad);
-        }
     }
 
     /**
@@ -123,6 +129,9 @@ public class Controlador {
         }
         entidades.addAll(nuevasEntidades);
         entidades.removeAll(entidadesEliminadas);
+        for(Entidad nuevaEntidad : nuevasEntidades){
+            detectorColision.registrarColisionable(nuevaEntidad);
+        }
         for(Entidad eliminada : entidadesEliminadas){
             detectorColision.eliminarColisionable(eliminada);
         }
@@ -146,7 +155,6 @@ public class Controlador {
 
     /**
      * Retorna la copia de una lista
-     * @param <T>
      * @param listaOriginal Lista original
      * @return Copia de la lista original
      */

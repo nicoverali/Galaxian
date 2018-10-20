@@ -68,7 +68,6 @@ public class GeneracionObstaculo implements Servicio, Observador<LiveData<Intege
 	public void notificar(LiveData<Integer> subject) {
 		if(subject.getValor()==0) {
 			cantObstaculos--;
-			System.out.println(cantObstaculos);
 		}
 	}
 
