@@ -16,7 +16,7 @@ public class ColisionadorObstaculo implements Colisionador<Obstaculo> {
 	}
 
 	public void colisionarConJugador(Jugador jugador) {
-		jugador.restarVida(objetoFuente.getFuerzaDeColision());
+		// El obstaculo no se encarga de quitarle vida al jugador.
 	}
 
 	public void colisionarConEnemigo(Enemigo enemigo) {
@@ -35,10 +35,8 @@ public class ColisionadorObstaculo implements Colisionador<Obstaculo> {
 		objetoFuente.restarVida(obstaculo.getFuerzaDeColision());
 	}
 
-	@Override
 	public void colisionarConPowerUp(PowerUp powerUp) {
-		// TODO Auto-generated method stub
-		
+		// Un obstaculo no afecta a un powerUp.
 	}
 
 }

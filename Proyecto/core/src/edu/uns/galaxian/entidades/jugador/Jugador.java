@@ -3,6 +3,8 @@ package edu.uns.galaxian.entidades.jugador;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
+import edu.uns.galaxian.colision.HBRectangulo;
+import edu.uns.galaxian.colision.HeadBox;
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorJugador;
 import edu.uns.galaxian.controladores.Controlador;
@@ -24,6 +26,7 @@ public class Jugador extends EntidadViva {
 	private Nivel nivel;
 	private ColisionadorJugador colisionador;
 	private Controlador controlador;
+	private HBRectangulo box;
 
 	public Jugador(float xPos, float yPos, NaveJugador nave, Nivel nivel, Controlador controlador) {
 		super(new Vector2(xPos, yPos), nave.getVidaMax(), nave.getRotacionInicial());
@@ -32,6 +35,7 @@ public class Jugador extends EntidadViva {
 		this.controlador = controlador;
 		colisionador = new ColisionadorJugador(this);
 		input = new InputKeyboard();
+		box = new HBRectangulo(this,15,15);
 	}
 
 	public Jugador(float xPos, float yPos, NaveJugador nave, Nivel nivel){
@@ -115,5 +119,13 @@ public class Jugador extends EntidadViva {
 	private boolean posicionDentroDePantalla(Vector2 posicion){
 		float radio = nave.getAncho()/2;
 		return posicion.x - radio > 0 && posicion.x + radio < Gdx.graphics.getWidth();
+	}
+
+	public HeadBox getHeadBox() {
+		return box;
+	}
+
+	public boolean aceptarInterseccion(HeadBox headBox) {
+		return headBox.intersectarConRectangulo(box);
 	}
 }

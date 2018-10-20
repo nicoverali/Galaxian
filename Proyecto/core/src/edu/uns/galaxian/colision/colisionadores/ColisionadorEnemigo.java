@@ -36,9 +36,7 @@ public class ColisionadorEnemigo implements Colisionador<Enemigo> {
 		objetoFuente.restarVida(obstaculo.getFuerzaDeColision());
 	}
 
-	@Override
 	public void colisionarConPowerUp(PowerUp powerUp) {
-		// TODO Auto-generated method stub
-		
+		// Un enemigo no afecta a un powerUp.
 	}
 }

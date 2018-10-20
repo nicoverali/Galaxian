@@ -29,16 +29,14 @@ public class ColisionadorDisparoJugador implements Colisionador<DisparoJugador> 
 	}
 
 	public void colisionarConDisparoEnemigo(DisparoEnemigo enemigo) {
-		// Un disparoJugador no afecta a un disparoEnemigo. Por el momento.
+		// Un disparoJugador no afecta a un disparoEnemigo.
 	}
 
 	public void colisionarConObstaculo(Obstaculo obstaculo) {
 		objetoFuente.eliminar();
 	}
 
-	@Override
 	public void colisionarConPowerUp(PowerUp powerUp) {
-		// TODO Auto-generated method stub
-		
+		// El disparo no afecta al powerUp.
 	}
 }

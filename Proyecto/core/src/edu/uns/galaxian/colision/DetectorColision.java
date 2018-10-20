@@ -48,8 +48,9 @@ public class DetectorColision {
 	}
 
 	private boolean colisionaron(Colisionable A, Colisionable B){
-		return (Math.abs(A.getStatus().getPosicion().x - B.getStatus().getPosicion().x)<=(A.getAncho() + B.getAncho())/2
-				&& Math.abs(A.getStatus().getPosicion().y - B.getStatus().getPosicion().y)<=(A.getAlto() + B.getAlto())/2);
+		/*return (Math.abs(A.getStatus().getPosicion().x - B.getStatus().getPosicion().x)<=(A.getAncho() + B.getAncho())/2
+				&& Math.abs(A.getStatus().getPosicion().y - B.getStatus().getPosicion().y)<=(A.getAlto() + B.getAlto())/2);*/
+		return A.aceptarInterseccion(B.getHeadBox());
 	}
 	
 }

@@ -22,6 +22,8 @@ import edu.uns.galaxian.entidades.inanimadas.powerups.magiaTemporal.MejoraArma;
 import edu.uns.galaxian.entidades.inanimadas.powerups.magiaTemporal.PastillaVida;
 import edu.uns.galaxian.entidades.inanimadas.powerups.objetoPrecioso.CongelaTiempo;
 import edu.uns.galaxian.entidades.inanimadas.powerups.objetoPrecioso.Misil;
+import edu.uns.galaxian.colision.HBRectangulo;
+import edu.uns.galaxian.colision.HeadBox;
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorEnemigo;
 
@@ -30,13 +32,14 @@ public  class Enemigo extends EntidadViva implements Autonomo  {
 	private Controlador controlador;
 	private ColisionadorEnemigo colisionador;
 	private InteligenciaArtificial inteligencia;
+	private HBRectangulo box;
 	
 	private static final int puntaje=10;
 	
 	private int vidaMax;
 	private int rotacion;
 	
-	protected Arma arma;
+	protected Arma<DisparoEnemigo> arma;
 	protected Texture textura;
 	
 	public Enemigo(Vector2 posicion, int vida, Texture textura, Controlador controlador){
@@ -48,6 +51,7 @@ public  class Enemigo extends EntidadViva implements Autonomo  {
 		this.colisionador = new ColisionadorEnemigo(this);
 		inteligencia = new InteligenciaFormacion(posicion);
 		arma=new ArmaDisparoDoble<>(new FabricaDisparoEnemigo());
+		box = new HBRectangulo(this,textura.getHeight(),textura.getWidth());
 	}
 
 	/**
@@ -125,10 +129,8 @@ public  class Enemigo extends EntidadViva implements Autonomo  {
     
     public void eliminar() {
     	controlador.eliminarEntidad(this);
-    	if(true)
-    	{
-    		PowerUp entidad= crearPower();
-    		System.out.println("GENERA POWERUPS");
+    	if(decidirCrearPowerUp()) {
+    		PowerUp entidad = crearPower();
     		controlador.agregarEntidad(entidad);
     	}    		
     	controlador.sumar(puntaje);
@@ -149,11 +151,19 @@ public  class Enemigo extends EntidadViva implements Autonomo  {
     	}
     }
     
-    //Probabilidad de que se genere un power 1 de 5
-    private boolean generaPower() {
+    //Probabilidad de que se genere un power 1 de 10
+    private boolean decidirCrearPowerUp() {
     	Random ran= new Random();
-    	int n= ran.nextInt(5);
-    	return (n==2)? true : false;
+    	int azar = ran.nextInt(10);
+    	return azar==1;
     }
+
+	public HeadBox getHeadBox() {
+		return box;
+	}
+
+	public boolean aceptarInterseccion(HeadBox headBox) {
+		return headBox.intersectarConRectangulo(box);
+	}
 
 }

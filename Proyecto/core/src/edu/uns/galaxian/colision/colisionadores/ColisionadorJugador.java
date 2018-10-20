@@ -16,23 +16,28 @@ public class ColisionadorJugador implements Colisionador<Jugador> {
 		this.objetoFuente = objetoFuente;
 	}
 
-	public void colisionarConJugador(Jugador jugador) {}
+	public void colisionarConJugador(Jugador jugador) {
+		// Un jugador no afecta a otro jugador.
+	}
 
 	public void colisionarConEnemigo(Enemigo enemigo) {
 		objetoFuente.restarVida(enemigo.getFuerzaDeColision());
 	}
 
-	public void colisionarConDisparoJugador(DisparoJugador disparo) {}
+	public void colisionarConDisparoJugador(DisparoJugador disparo) {
+		// Un disparo del jugador no afecta al mismo.
+	}
 
 	public void colisionarConDisparoEnemigo(DisparoEnemigo disparo) {
 		objetoFuente.restarVida(disparo.getFuerzaDeDisparo());
 	}
 
-	public void colisionarConObstaculo(Obstaculo disparo) {
-		// TODO Auto-generated method stub
+	public void colisionarConObstaculo(Obstaculo obstaculo) {
+		objetoFuente.restarVida(obstaculo.getFuerzaDeColision());
 	}
 
-	@Override
 	public void colisionarConPowerUp(PowerUp powerUp) {
+		// El jugador no es el encargado de obtener el beneficio del powerUp.
 	}
+	
 }

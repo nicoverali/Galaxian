@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
+import edu.uns.galaxian.colision.HBCirculo;
+import edu.uns.galaxian.colision.HeadBox;
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorObstaculo;
 import edu.uns.galaxian.controladores.Controlador;
@@ -22,6 +24,7 @@ public class Obstaculo extends EntidadViva implements Autonomo {
 	private Controlador controlador;
 	private int fuerzaDeColision;
 	private InteligenciaArtificial inteligencia;
+	private HBCirculo box;
 	
 	public Obstaculo(float xPos, float yPos, Controlador controlador) {
 		super(new Vector2(xPos, yPos), VIDA_MAX,0 );
@@ -29,6 +32,7 @@ public class Obstaculo extends EntidadViva implements Autonomo {
 		colisionador = new ColisionadorObstaculo(this);
 		fuerzaDeColision = 300;
 		inteligencia = new InteligenciaNula();
+		box = new HBCirculo(this,TEXTURA.getWidth()/5);
 	}
 	
 	public Obstaculo(float xPos, float yPos) {
@@ -36,6 +40,7 @@ public class Obstaculo extends EntidadViva implements Autonomo {
 		colisionador = new ColisionadorObstaculo(this);
 		fuerzaDeColision = 100;
 		inteligencia = new InteligenciaNula();
+		box = new HBCirculo(this,TEXTURA.getWidth()/2);
 	}
 	
 	public int getFuerzaDeColision() {
@@ -87,6 +92,14 @@ public class Obstaculo extends EntidadViva implements Autonomo {
 
 	public void setInteligencia(InteligenciaArtificial i) {
 		inteligencia = i;
+	}
+
+	public HeadBox getHeadBox() {
+		return box;
+	}
+
+	public boolean aceptarInterseccion(HeadBox headBox) {
+		return headBox.insersectarConCirculo(box);
 	}
 	
 }

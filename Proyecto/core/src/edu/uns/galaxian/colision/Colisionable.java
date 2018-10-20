@@ -35,4 +35,8 @@ public interface Colisionable {
 	 * @return Colisionador del colisionable
 	 */
 	Colisionador getColisionador();
+	
+	HeadBox getHeadBox();
+	
+	boolean aceptarInterseccion(HeadBox headBox);
 }

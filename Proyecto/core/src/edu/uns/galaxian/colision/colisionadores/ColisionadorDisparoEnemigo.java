@@ -24,7 +24,7 @@ public class ColisionadorDisparoEnemigo implements Colisionador<DisparoEnemigo> 
 	}
 
 	public void colisionarConDisparoJugador(DisparoJugador disparo) {
-		// TODO Decidir si un disparo Jugador puede afectar a un enemigo.
+		// Un disparo enemigo no afecta a un disparo jugador.
 	}
 	
 	public void colisionarConDisparoEnemigo(DisparoEnemigo disparo) {
@@ -35,8 +35,7 @@ public class ColisionadorDisparoEnemigo implements Colisionador<DisparoEnemigo> 
 		objetoFuente.eliminar();
 	}
 
-	@Override
 	public void colisionarConPowerUp(PowerUp powerUp) {
-		// TODO Auto-generated method stub	
+		// El disparo no afecta a un powerUp
 	}
 }

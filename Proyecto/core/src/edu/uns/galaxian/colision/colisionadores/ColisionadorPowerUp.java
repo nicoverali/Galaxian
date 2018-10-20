@@ -17,26 +17,27 @@ public class ColisionadorPowerUp implements Colisionador<PowerUp> {
 	
 	public void colisionarConJugador(Jugador jugador) {
 		objetoFuente.efectoJugador(jugador);
+		objetoFuente.eliminar();
 	}
 
 	public void colisionarConEnemigo(Enemigo enemigo) {
-		//No pasa nada
+		// Un powerUp no beneficia a un enemigo.
 	}
 
 	public void colisionarConDisparoJugador(DisparoJugador disparo) {
-		//No pasa nada
+		// Un disparo no afecta al powerUp.
 	}
 
 	public void colisionarConDisparoEnemigo(DisparoEnemigo disparo) {
-		//No pasa nada		
+		// Un disparo no afecta al powerUp.
 	}
 
 	public void colisionarConObstaculo(Obstaculo obstaculo) {
-		//No pasa nada
+		// Un obstaculo no afecta al powerUp.
 	}
 	
 	public void colisionarConPowerUp(PowerUp powerUp) {
-		
+		// Un powerUp no afecta a otro.
 	}
 
 }
