@@ -20,23 +20,15 @@ public class Jugador extends EntidadConNave<NaveJugador, DisparoJugador> {
 	private Controlador controlador;
 
 	public Jugador(float xPos, float yPos, NaveJugador nave, Nivel nivel, Controlador controlador) {
-		super(new Vector2(xPos, yPos), 90, nave);
+		super(new Vector2(xPos, yPos), 90, nave, controlador.getTextureAtlas());
 		this.nivel = nivel;
 		this.controlador = controlador;
 		colisionador = new ColisionadorJugador(this);
 		input = new InputKeyboard();
 	}
 
-	public Jugador(float xPos, float yPos, NaveJugador nave, Nivel nivel){
-		this(xPos, yPos, nave, nivel, null);
-	}
-
 	public void disparar() {
 		nave.getArma().disparar(posicion, rotacion, controlador);
-	}
-
-	public void setControlador(Controlador controlador){
-		this.controlador = controlador;
 	}
 
 	public void actualizar(float delta){

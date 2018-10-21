@@ -17,8 +17,8 @@ import java.util.*;
 // TODO Revisitar clase una vez que se unifique el controlador
 public class FormacionEnemigo implements Servicio {
 
-    private static final int DISTANCIA = 50;
-    private static final int MARGEN_SUPERIOR = 50;
+    private static final int DISTANCIA = 35;
+    private static final int MARGEN_SUPERIOR = 40;
     private static final int LIMITE_ENEMIGOS_ATACANDO = 3;
 
     private List<List<Enemigo>> enemigos;

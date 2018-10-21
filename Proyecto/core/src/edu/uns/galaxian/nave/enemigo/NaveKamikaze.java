@@ -7,7 +7,7 @@ import edu.uns.galaxian.nave.NaveEnemigo;
 
 public class NaveKamikaze extends NaveEnemigo {
 
-	private static final String TEXTURA_DIR = "./enemigos/kamikaze/estandar.png";
+	private static final String TEXTURA_DIR = "enemigo/kamikaze/estandar";
 
 	public NaveKamikaze(int vidaMax, float velocidadMax, float steeringMax, int fuerzaColision) {
 		super(TEXTURA_DIR, vidaMax, velocidadMax, fuerzaColision, steeringMax);

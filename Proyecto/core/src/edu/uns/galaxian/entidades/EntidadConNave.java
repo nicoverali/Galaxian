@@ -1,7 +1,7 @@
 package edu.uns.galaxian.entidades;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.colision.hitbox.HBRectangulo;
 import edu.uns.galaxian.colision.hitbox.HitBox;
@@ -14,14 +14,14 @@ import edu.uns.galaxian.util.EntidadBatch;
 public abstract class EntidadConNave<T extends Nave<S>, S extends Disparo> extends EntidadViva{
 
     protected T nave;
-    protected Texture textura;
+    protected TextureRegion textura;
     protected HitBox hitbox;
 
-    public EntidadConNave(Vector2 posicion, float rotacion, T nave){
+    public EntidadConNave(Vector2 posicion, float rotacion, T nave, TextureAtlas atlas){
         super(posicion, nave.getVidaMax(), rotacion);
         this.nave = nave;
-        textura = new Texture(Gdx.files.internal(nave.getTexturaDir()));
-        hitbox = new HBRectangulo(this, textura.getHeight(), textura.getWidth());
+        textura = atlas.findRegion(nave.getTexturaDir());
+        hitbox = new HBRectangulo(this, textura.getRegionHeight(), textura.getRegionWidth());
     }
 
     /**
@@ -69,9 +69,7 @@ public abstract class EntidadConNave<T extends Nave<S>, S extends Disparo> exten
     @Override
     public void dibujar(EntidadBatch batch) {
         // TODO Puede ser que deba estar en Jugador y Enemigo. Tambien falta el metodo nave.dibujarEquipamiento, y utilizar EntidadBatch para dibujar
-        float alto = textura.getHeight();
-        float ancho = textura.getWidth();
-        batch.draw(textura, posicion.x - ancho/2, posicion.y - alto/2, ancho, alto);
+        batch.draw(textura, posicion, rotacion);
     }
 
     @Override

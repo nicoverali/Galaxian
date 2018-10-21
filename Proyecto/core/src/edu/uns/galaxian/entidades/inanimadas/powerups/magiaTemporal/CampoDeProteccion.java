@@ -1,7 +1,5 @@
 package edu.uns.galaxian.entidades.inanimadas.powerups.magiaTemporal;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
 import edu.uns.galaxian.controladores.Controlador;
@@ -12,7 +10,7 @@ public class CampoDeProteccion extends PowerUp {
 
 	public CampoDeProteccion(Vector2 posicion, Vector2 velocidad, float rotacion, Controlador controlador) {
 		super(posicion, velocidad, rotacion, controlador);
-		this.textura=new Texture(Gdx.files.internal("./Power-ups/shield_green.png"));
+		this.textura = controlador.getTextureAtlas().findRegion("powerup/campoProteccion");
 	}
 
 	@Override

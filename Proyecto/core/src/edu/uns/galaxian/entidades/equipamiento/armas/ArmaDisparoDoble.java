@@ -1,7 +1,5 @@
 package edu.uns.galaxian.entidades.equipamiento.armas;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
 
@@ -11,10 +9,10 @@ import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparo;
 
 public class ArmaDisparoDoble<T extends Disparo> implements Arma<T> {
 
-	private static final long CADENCIA = 1000;
+	private static final long CADENCIA = 400;
 	private static final int FUERZA = 35;
 	private static final int VELOCIDAD_MAXIMA = 150;
-	private static Texture TEXTURA = new Texture(Gdx.files.internal("./disparos/laserGreen11.png"));
+	private static final String TEXTURA_DIR = "disparo/enemigo/comun";
 	private FabricaDisparo<T> fabrica;
 	private long ultimoDisparo;
 
@@ -28,8 +26,8 @@ public class ArmaDisparoDoble<T extends Disparo> implements Arma<T> {
 			Vector2 velocidad = new Vector2(1,0).rotate(anguloDeDisparo).setLength2(VELOCIDAD_MAXIMA);
 			Vector2 posicion1 = posicion.cpy().add(10,0);
 			Vector2 posicion2 = posicion.cpy().add(-10,0);
-			controlador.agregarEntidad(fabrica.crearDisparo(posicion1, velocidad, anguloDeDisparo, FUERZA, TEXTURA, controlador));
-			controlador.agregarEntidad(fabrica.crearDisparo(posicion2, velocidad, anguloDeDisparo, FUERZA, TEXTURA, controlador));
+			controlador.agregarEntidad(fabrica.crearDisparo(posicion1, velocidad, anguloDeDisparo, FUERZA, TEXTURA_DIR, controlador));
+			controlador.agregarEntidad(fabrica.crearDisparo(posicion2, velocidad, anguloDeDisparo, FUERZA, TEXTURA_DIR, controlador));
 			ultimoDisparo = TimeUtils.millis();
 		}
 	}

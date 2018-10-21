@@ -7,7 +7,7 @@ import edu.uns.galaxian.nave.NaveEnemigo;
 
 public class NaveArmadoDebil extends NaveEnemigo {
 
-	private static final String TEXTURA_DIR = "./enemigos/armado_debil/estandar.png";
+	private static final String TEXTURA_DIR = "enemigo/armadoDebil/estandar";
 
 	public NaveArmadoDebil(int vidaMax, float velocidadMax, float steeringMax, int fuerzaColision) {
 		super(TEXTURA_DIR, vidaMax, velocidadMax, fuerzaColision, steeringMax);

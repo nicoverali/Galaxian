@@ -1,7 +1,7 @@
 package edu.uns.galaxian.entidades.inanimadas;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 import edu.uns.galaxian.colision.hitbox.HBCirculo;
@@ -17,22 +17,24 @@ import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaNula;
 
 public class Obstaculo extends EntidadViva implements Autonomo {
 	
-	private static Texture TEXTURA = new Texture(Gdx.files.internal("./obstaculos/asteroideMarron.png"));
+	private static final String TEXTURA_DIR = "obstaculo/meteoro1";
 	private static final int VIDA_MAX = 300;
-	
-	private ColisionadorObstaculo colisionador;
-	private Controlador controlador;
+
+	private TextureRegion textura;
 	private int fuerzaDeColision;
-	private InteligenciaArtificial inteligencia;
+	private Controlador controlador;
 	private HBCirculo box;
-	
+	private InteligenciaArtificial inteligencia;
+	private ColisionadorObstaculo colisionador;
+
 	public Obstaculo(float xPos, float yPos, Controlador controlador) {
 		super(new Vector2(xPos, yPos), VIDA_MAX,0 );
 		this.controlador = controlador;
+		textura = controlador.getTextureAtlas().findRegion(TEXTURA_DIR);
 		colisionador = new ColisionadorObstaculo(this);
 		fuerzaDeColision = 300;
 		inteligencia = new InteligenciaNula();
-		box = new HBCirculo(this,TEXTURA.getWidth()/5);
+		box = new HBCirculo(this,textura.getRegionWidth()/2);
 	}
 	
 	public Obstaculo(float xPos, float yPos) {
@@ -40,7 +42,7 @@ public class Obstaculo extends EntidadViva implements Autonomo {
 		colisionador = new ColisionadorObstaculo(this);
 		fuerzaDeColision = 100;
 		inteligencia = new InteligenciaNula();
-		box = new HBCirculo(this,TEXTURA.getWidth()/2);
+		box = new HBCirculo(this,textura.getRegionWidth()/2);
 	}
 	
 	public int getFuerzaDeColision() {
@@ -48,7 +50,7 @@ public class Obstaculo extends EntidadViva implements Autonomo {
 	}
 
 	public void dibujar(EntidadBatch batch) {
-		batch.draw(TEXTURA, posicion.x-(TEXTURA.getWidth()/2), posicion.y-(TEXTURA.getHeight()/2), TEXTURA.getWidth(), TEXTURA.getHeight());
+		batch.draw(textura, posicion, rotacion);
 	}
 
 	public void actualizar(float d) {
@@ -72,10 +74,6 @@ public class Obstaculo extends EntidadViva implements Autonomo {
 
 	public Colisionador getColisionador() {
 		return colisionador;
-	}
-
-	public void setControladorObstaculo(Controlador controlador) {
-		this.controlador = controlador;
 	}
 
 	public InteligenciaArtificial getInteligencia() {

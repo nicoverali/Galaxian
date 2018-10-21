@@ -7,7 +7,7 @@ public class NaveLiviana extends NaveJugador {
 
 	private static final int VELOCIDAD_MAXIMA = 450;
 	private static final int VIDA_MAXIMA = 100;
-	private static final String TEXTURA_DIR = "./jugador/%s/naveLiviana.png";
+	private static final String TEXTURA_DIR = "jugador/%s/naveLiviana";
 
 	public NaveLiviana(Color colorNave){
 		super(String.format(TEXTURA_DIR, colorNave.name()), colorNave);

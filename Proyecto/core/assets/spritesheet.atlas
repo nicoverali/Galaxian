@@ -1,187 +1,222 @@
 spritesheet.png
-size: 244, 244
+size: 161, 161
 format: RGBA8888
 filter: MipMapLinearNearest,Nearest
 repeat: none
 disparo/enemigo/comun
   rotate: false
-  xy: 1, 1
-  size: 19, 5
-  orig: 19, 5
+  xy: 134, 133
+  size: 12, 3
+  orig: 12, 3
   offset: 0, 0
   index: -1
 disparo/jugador/AZUL
   rotate: false
-  xy: 22, 1
-  size: 19, 5
-  orig: 19, 5
+  xy: 148, 133
+  size: 12, 3
+  orig: 12, 3
   offset: 0, 0
   index: -1
 disparo/jugador/BORDO
   rotate: false
-  xy: 1, 1
-  size: 19, 5
-  orig: 19, 5
+  xy: 134, 133
+  size: 12, 3
+  orig: 12, 3
   offset: 0, 0
   index: -1
 disparo/jugador/ROJO
   rotate: false
-  xy: 1, 1
-  size: 19, 5
-  orig: 19, 5
+  xy: 134, 133
+  size: 12, 3
+  orig: 12, 3
   offset: 0, 0
   index: -1
 disparo/jugador/VERDE
   rotate: false
-  xy: 43, 1
-  size: 19, 5
-  orig: 19, 5
+  xy: 133, 138
+  size: 12, 3
+  orig: 12, 3
   offset: 0, 0
   index: -1
 enemigo/armado/estandar
   rotate: false
-  xy: 81, 146
-  size: 42, 52
-  orig: 42, 52
+  xy: 1, 91
+  size: 27, 33
+  orig: 27, 33
   offset: 0, 0
   index: -1
 enemigo/armadoDebil/estandar
   rotate: false
-  xy: 199, 1
-  size: 42, 47
-  orig: 42, 47
+  xy: 125, 1
+  size: 27, 30
+  orig: 27, 30
   offset: 0, 0
   index: -1
 enemigo/kamikaze/estandar
   rotate: false
-  xy: 105, 44
-  size: 42, 49
-  orig: 42, 49
+  xy: 1, 126
+  size: 27, 31
+  orig: 27, 31
   offset: 0, 0
   index: -1
 enemigo/kamikazeAleatorio/estandar
   rotate: false
-  xy: 64, 1
-  size: 42, 41
-  orig: 42, 41
+  xy: 41, 62
+  size: 27, 26
+  orig: 27, 26
   offset: 0, 0
   index: -1
 enemigo/kamikazeMixto/estandar
   rotate: false
-  xy: 108, 1
-  size: 42, 41
-  orig: 42, 41
+  xy: 70, 62
+  size: 27, 26
+  orig: 27, 26
   offset: 0, 0
   index: -1
 jugador/AZUL/naveIntermedia
   rotate: false
-  xy: 125, 147
-  size: 38, 56
-  orig: 38, 56
+  xy: 30, 91
+  size: 24, 36
+  orig: 24, 36
   offset: 0, 0
   index: -1
 jugador/AZUL/naveLiviana
   rotate: false
-  xy: 143, 95
-  size: 38, 50
-  orig: 38, 50
+  xy: 56, 128
+  size: 24, 32
+  orig: 24, 32
   offset: 0, 0
   index: -1
 jugador/AZUL/navePesada
   rotate: false
-  xy: 149, 44
-  size: 38, 49
-  orig: 38, 49
+  xy: 30, 129
+  size: 24, 31
+  orig: 24, 31
   offset: 0, 0
   index: -1
 jugador/BORDO/naveIntermedia
   rotate: false
-  xy: 165, 153
-  size: 38, 56
-  orig: 38, 56
+  xy: 56, 90
+  size: 24, 36
+  orig: 24, 36
   offset: 0, 0
   index: -1
 jugador/BORDO/naveLiviana
   rotate: false
-  xy: 183, 101
-  size: 38, 50
-  orig: 38, 50
+  xy: 82, 128
+  size: 24, 32
+  orig: 24, 32
   offset: 0, 0
   index: -1
 jugador/BORDO/navePesada
   rotate: false
-  xy: 189, 50
-  size: 38, 49
-  orig: 38, 49
+  xy: 108, 102
+  size: 24, 31
+  orig: 24, 31
   offset: 0, 0
   index: -1
 jugador/ROJO/naveIntermedia
   rotate: false
-  xy: 205, 153
-  size: 38, 56
-  orig: 38, 56
+  xy: 82, 90
+  size: 24, 36
+  orig: 24, 36
   offset: 0, 0
   index: -1
 jugador/ROJO/naveLiviana
   rotate: false
-  xy: 1, 103
-  size: 38, 50
-  orig: 38, 50
+  xy: 125, 33
+  size: 24, 32
+  orig: 24, 32
   offset: 0, 0
   index: -1
 jugador/ROJO/navePesada
   rotate: false
-  xy: 1, 52
-  size: 38, 49
-  orig: 38, 49
+  xy: 134, 67
+  size: 24, 31
+  orig: 24, 31
   offset: 0, 0
   index: -1
 jugador/VERDE/naveIntermedia
   rotate: false
-  xy: 1, 155
-  size: 38, 56
-  orig: 38, 56
+  xy: 99, 30
+  size: 24, 36
+  orig: 24, 36
   offset: 0, 0
   index: -1
 jugador/VERDE/naveLiviana
   rotate: false
-  xy: 41, 145
-  size: 38, 50
-  orig: 38, 50
+  xy: 108, 68
+  size: 24, 32
+  orig: 24, 32
   offset: 0, 0
   index: -1
 jugador/VERDE/navePesada
   rotate: false
-  xy: 41, 94
-  size: 38, 49
-  orig: 38, 49
+  xy: 134, 100
+  size: 24, 31
+  orig: 24, 31
   offset: 0, 0
   index: -1
 obstaculo/meteoro1
   rotate: false
-  xy: 1, 8
-  size: 51, 42
-  orig: 51, 42
+  xy: 91, 1
+  size: 32, 27
+  orig: 32, 27
   offset: 0, 0
   index: -1
 obstaculo/meteoro2
   rotate: false
-  xy: 81, 95
-  size: 60, 49
-  orig: 60, 49
+  xy: 1, 58
+  size: 38, 31
+  orig: 38, 31
   offset: 0, 0
   index: -1
 obstaculo/meteoro3
   rotate: false
-  xy: 152, 1
-  size: 45, 41
-  orig: 45, 41
+  xy: 58, 34
+  size: 28, 26
+  orig: 28, 26
   offset: 0, 0
   index: -1
 obstaculo/meteoro4
   rotate: false
-  xy: 54, 44
-  size: 49, 48
-  orig: 49, 48
+  xy: 58, 1
+  size: 31, 31
+  orig: 31, 31
+  offset: 0, 0
+  index: -1
+powerup/campoProteccion
+  rotate: false
+  xy: 108, 148
+  size: 10, 10
+  orig: 10, 10
+  offset: 0, 0
+  index: -1
+powerup/congelaTiempo
+  rotate: false
+  xy: 108, 135
+  size: 11, 11
+  orig: 11, 11
+  offset: 0, 0
+  index: -1
+powerup/mejoraArma
+  rotate: false
+  xy: 121, 135
+  size: 10, 10
+  orig: 10, 10
+  offset: 0, 0
+  index: -1
+powerup/recuperaVida
+  rotate: false
+  xy: 99, 68
+  size: 7, 7
+  orig: 7, 7
+  offset: 0, 0
+  index: -1
+spritesheet
+  rotate: false
+  xy: 1, 1
+  size: 55, 55
+  orig: 55, 55
   offset: 0, 0
   index: -1

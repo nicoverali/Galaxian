@@ -1,5 +1,6 @@
 package edu.uns.galaxian.controladores;
 
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import edu.uns.galaxian.colision.DetectorColision;
 import edu.uns.galaxian.entidades.Entidad;
 import edu.uns.galaxian.util.EntidadBatch;
@@ -14,18 +15,16 @@ public class Controlador {
     private Set<Entidad> entidadesEliminadas;
     private List<Jugador> jugadores;
     private DetectorColision detectorColision;
+    private TextureAtlas textureAtlas;
     private int puntuacion;
 
-    public Controlador(Jugador jugador){
+    public Controlador(TextureAtlas atlas){
+        textureAtlas = atlas;
         detectorColision = new DetectorColision();
         entidades = new ArrayList<>();
         nuevasEntidades = new HashSet<>();
         entidadesEliminadas = new HashSet<>();
         jugadores = new ArrayList<>(3);
-        
-
-        jugadores.add(jugador);
-        detectorColision.registrarColisionable(jugador);
     }
     
     /**
@@ -67,6 +66,7 @@ public class Controlador {
      */
     public void agregarJugador(Jugador jugador){
         jugadores.add(jugador);
+        detectorColision.registrarColisionable(jugador);
     }
 
     /**
@@ -101,18 +101,26 @@ public class Controlador {
     /**
      * Retorna una coleccion de todos los jugadores del controlador.
      * @return Coleccion de jugadores registrados
+     * @throws IllegalStateException Si no se registraron jugadores en el controlador
      */
-    public Collection<Jugador> getJugadores(){
+    public Collection<Jugador> getJugadores() throws IllegalStateException{
+        if(jugadores.isEmpty()) throw new IllegalStateException("Primero se debe agregar al menos un jugador al controlador.");
         return copiarLista(jugadores);
     }
 
     /**
      * Toma al azar un jugador registrado en el controlador y lo devuelve.
      * @return Jugador registrado al azar
+     * @throws IllegalStateException Si no se registro ningun jugador en el controlador
      */
-    public Jugador getJugador(){
+    public Jugador getJugador() throws IllegalStateException{
+        if(jugadores.isEmpty()) throw new IllegalStateException("Primero se debe agregar al menos un jugador al controlador.");
         Random random = new Random();
         return jugadores.get(random.nextInt(jugadores.size()));
+    }
+
+    public TextureAtlas getTextureAtlas(){
+        return textureAtlas;
     }
 
     /**

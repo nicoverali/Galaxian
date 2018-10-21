@@ -2,6 +2,7 @@ package edu.uns.galaxian.entidades.inanimadas.powerups;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 import edu.uns.galaxian.colision.hitbox.HBCirculo;
@@ -17,7 +18,7 @@ public abstract class PowerUp extends Entidad {
 
 	private Controlador controlador;
 	private ColisionadorPowerUp colisionador;
-	protected Texture textura;
+	protected TextureRegion textura;
 	protected HBCirculo box;
 	
 	public PowerUp(Vector2 posicion, Vector2 velocidad, float rotacion, Controlador controlador){
@@ -37,7 +38,7 @@ public abstract class PowerUp extends Entidad {
 	}
 
 	public void dibujar(EntidadBatch batch) {
-		batch.draw(textura, posicion.x-(textura.getWidth()/2), posicion.y-(textura.getHeight()/2), textura.getWidth(), textura.getHeight());
+		batch.draw(textura, posicion, rotacion);
 	}
 
 	public void actualizar(float delta) {

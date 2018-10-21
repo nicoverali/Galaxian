@@ -34,9 +34,9 @@ public class Nivel extends ScreenAdapter {
     public Nivel(ConfigNivel config, Juego juego){
         this.juego = juego;
         background = new Background();
-        Jugador jugador = new Jugador(Gdx.graphics.getWidth()/2, 50, config.getNaveJugador(), this);
-        controlador = new Controlador(jugador);
-        jugador.setControlador(controlador);
+        controlador = new Controlador(juego.getTextureAtlas());
+        Jugador jugador = new Jugador(Gdx.graphics.getWidth()/2, 50, config.getNaveJugador(), this, controlador);
+        controlador.agregarJugador(jugador);
         servicios = new LinkedList<>();
         FormacionEnemigo formacion = new FormacionEnemigo(formacionRandom(), config.getFabricaEnemigos(), controlador);
         formacion.activar();

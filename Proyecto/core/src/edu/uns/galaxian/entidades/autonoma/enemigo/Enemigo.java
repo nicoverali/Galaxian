@@ -23,7 +23,7 @@ public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implem
 	private ColisionadorEnemigo colisionador;
 
 	public Enemigo(Vector2 posicion, NaveEnemigo nave, Controlador controlador){
-		super(posicion, 270, nave);
+		super(posicion, 270, nave, controlador.getTextureAtlas());
 		this.controlador = controlador;
 		inteligencia = new InteligenciaFormacion(posicion);
 		colisionador = new ColisionadorEnemigo(this);
@@ -87,11 +87,11 @@ public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implem
     	}
     }
 
-    //Probabilidad de que se genere un power 1 de 10
+    //Probabilidad de que se genere un power 3 de 10
 	private boolean decidirCrearPowerUp() {
     	Random ran= new Random();
     	int azar = ran.nextInt(10);
-    	return azar==1;
+    	return azar<3;
     }
 
 	public Colisionador getColisionador(){

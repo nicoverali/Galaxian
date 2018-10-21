@@ -2,6 +2,7 @@ package edu.uns.galaxian.entidades.inanimadas.disparos;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 import edu.uns.galaxian.colision.hitbox.HBRectangulo;
@@ -13,30 +14,24 @@ import edu.uns.galaxian.util.EntidadBatch;
 public abstract class Disparo extends Entidad {
 
 	protected int fuerzaDeDisparo;
-	protected Texture textura;
+	protected TextureRegion textura;
 	protected Controlador controlador;
 	protected HBRectangulo box;
 
-	public Disparo(Vector2 posicion, Vector2 velocidad, float rotacion, int fuerzaDeDisparo, Texture textura, Controlador controlador) {
+	public Disparo(Vector2 posicion, Vector2 velocidad, float rotacion, int fuerzaDeDisparo, String texturaDir, Controlador controlador) {
 		super(posicion, velocidad, rotacion);
 		this.fuerzaDeDisparo = fuerzaDeDisparo;
-		this.textura = textura;
+		this.textura = controlador.getTextureAtlas().findRegion(texturaDir);
 		this.controlador = controlador;
-		box = new HBRectangulo(this,textura.getHeight(),textura.getWidth());
+		box = new HBRectangulo(this,textura.getRegionHeight(),textura.getRegionWidth());
 	}
-
-	/**
-	 * Retorna un nuevo disparo con los mismos atributos
-	 * @return Clon de este disparo
-	 */
-	public abstract Disparo clonar();
 
 	public int getFuerzaDeDisparo() {
 		return fuerzaDeDisparo;
 	}
 
 	public void dibujar(EntidadBatch batch) {
-		batch.draw(textura, posicion.x-(textura.getWidth()/2), posicion.y-(textura.getHeight()/2), textura.getWidth(), textura.getHeight());
+		batch.draw(textura, posicion, rotacion);
 	}
 
 	public void actualizar(float delta) {

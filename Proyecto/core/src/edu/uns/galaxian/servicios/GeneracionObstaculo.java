@@ -44,9 +44,8 @@ public class GeneracionObstaculo implements Servicio, Observador<LiveData<Intege
 						public void run() {
 							int posX = ran.nextInt(Gdx.graphics.getWidth());
 							int posY  = ran.nextInt(120) + Gdx.graphics.getHeight() / 3;
-							Obstaculo nuevoObstaculo = new Obstaculo(posX,posY);
+							Obstaculo nuevoObstaculo = new Obstaculo(posX,posY, controlador);
 							nuevoObstaculo.getVida().observar(generador);
-							nuevoObstaculo.setControladorObstaculo(controlador);
 							// Probabilidad de que el obstaculo tenga inteligencia de movimiento = 4/10
 							if(ran.nextInt(10)<3) {
 								nuevoObstaculo.setPosicion(0,posY-15);
