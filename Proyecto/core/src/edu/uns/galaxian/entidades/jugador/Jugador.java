@@ -74,14 +74,6 @@ public class Jugador extends EntidadViva {
 		return nave.getEscudo();
 	}
 
-	public float getAlto(){
-		return nave.getAlto();
-	}
-	
-	public float getAncho(){
-		return nave.getAncho();
-	}
-
 	public void setVidaAlMaximo(){
 		vida.setValor(nave.getVidaMax());
 	}
@@ -117,7 +109,8 @@ public class Jugador extends EntidadViva {
 	}
 
 	private boolean posicionDentroDePantalla(Vector2 posicion){
-		float radio = nave.getAncho()/2;
+		// TODO El radio antes era nave.getAncho()/2, ahora la nave no tiene ese metodo
+		float radio = 30;
 		return posicion.x - radio > 0 && posicion.x + radio < Gdx.graphics.getWidth();
 	}
 

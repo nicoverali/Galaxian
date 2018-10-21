@@ -32,22 +32,6 @@ public abstract class Nave {
 	}
 
 	/**
-	 * Retorna el alto de la nave.
-	 * @return Alto de la nave
-	 */
-	public float getAlto(){
-		return textura.getHeight();
-	}
-
-	/**
-	 * Retorna el ancho de la nave.
-	 * @return Ancho de la nave
-	 */
-	public float getAncho(){
-		return textura.getWidth();
-	}
-
-	/**
 	 * Utiliza el batch recibido para dibujar la nave en la posicion proveida.
 	 * @param batch Batch utilizado para dibujar en pantalla
 	 * @param posicion Posicion donde debe dibujarse la nave

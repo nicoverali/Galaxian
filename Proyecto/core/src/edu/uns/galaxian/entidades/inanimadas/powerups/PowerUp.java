@@ -36,16 +36,8 @@ public abstract class PowerUp extends Entidad {
 		return colisionador;
 	}
 
-	public float getAlto() {
-		return textura.getHeight();
-	}
-
-	public float getAncho() {
-		return textura.getWidth(); 
-	}
-
 	public void dibujar(EntidadBatch batch) {
-		batch.draw(textura, posicion.x-(getAncho()/2), posicion.y-(getAlto()/2), getAncho(), getAlto());
+		batch.draw(textura, posicion.x-(textura.getWidth()/2), posicion.y-(textura.getHeight()/2), textura.getWidth(), textura.getHeight());
 	}
 
 	public void actualizar(float delta) {

@@ -82,18 +82,6 @@ public abstract class Entidad implements Colisionable, GameObject
 	}
 
 	/**
-	 * Devuelve la altura de la entidad en pixeles.
-	 * @return Altura de la entidad en pixeles.
-	 */
-	abstract public float getAlto();
-
-	/**
-	 * Devuelve el ancho de la entidad en pixeles
-	 * @return Ancho de la entidad en pixeles.
-	 */
-	abstract public float getAncho();
-
-	/**
 	 * Dibuja la entidad en el mapa.
 	 * @param batch Batch que se utilizara para dibujar la entidad
 	 */

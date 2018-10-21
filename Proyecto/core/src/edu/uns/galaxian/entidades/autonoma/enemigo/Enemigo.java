@@ -29,19 +29,17 @@ import edu.uns.galaxian.colision.colisionadores.ColisionadorEnemigo;
 
 public  class Enemigo extends EntidadViva implements Autonomo  {
 	
+
+	private static final int puntaje=10;
+
 	private Controlador controlador;
 	private ColisionadorEnemigo colisionador;
-	private InteligenciaArtificial inteligencia;
 	private HBRectangulo box;
-	
-	private static final int puntaje=10;
-	
 	private int vidaMax;
-	private int rotacion;
-	
-	protected Arma<DisparoEnemigo> arma;
 	protected Texture textura;
-	
+	protected Arma<DisparoEnemigo> arma;
+	private InteligenciaArtificial inteligencia;
+
 	public Enemigo(Vector2 posicion, int vida, Texture textura, Controlador controlador){
 		super(posicion, vida, 270);
 		this.textura=textura;
@@ -78,14 +76,6 @@ public  class Enemigo extends EntidadViva implements Autonomo  {
 		arma.disparar(posicion.cpy(), rotacion, controlador);
 	}
 
-    public float getAlto() {
-    	return textura.getHeight();
-    }
-
-    public float getAncho() {
-    	return textura.getWidth();
-    }
-
 	public void setVidaAlMaximo() {
 		vida.setValor(vidaMax);
 	}
@@ -114,8 +104,8 @@ public  class Enemigo extends EntidadViva implements Autonomo  {
     }
 
     public void dibujar(EntidadBatch batch) {
-    	float alto = getAlto();
-		float ancho = getAncho();
+    	float alto = textura.getHeight();
+		float ancho = textura.getWidth();
 		batch.draw(textura, posicion.x - ancho/2, posicion.y - alto/2, ancho, alto);
     }
     

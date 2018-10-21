@@ -47,16 +47,8 @@ public class Obstaculo extends EntidadViva implements Autonomo {
 		return fuerzaDeColision;
 	}
 
-	public float getAlto() {
-		return TEXTURA.getHeight();
-	}
-
-	public float getAncho() {
-		return TEXTURA.getWidth();
-	}
-
 	public void dibujar(EntidadBatch batch) {
-		batch.draw(TEXTURA, posicion.x-(getAncho()/2), posicion.y-(getAlto()/2), getAncho(), getAlto());
+		batch.draw(TEXTURA, posicion.x-(TEXTURA.getWidth()/2), posicion.y-(TEXTURA.getHeight()/2), TEXTURA.getWidth(), TEXTURA.getHeight());
 	}
 
 	public void actualizar(float d) {
