@@ -1,7 +1,7 @@
 package edu.uns.galaxian.juego.config;
 
 import com.google.gson.*;
-import edu.uns.galaxian.nave.jugador.NaveJugador;
+import edu.uns.galaxian.nave.NaveJugador;
 import edu.uns.galaxian.nave.jugador.NaveLiviana;
 import edu.uns.galaxian.util.enums.Color;
 import edu.uns.galaxian.util.io.gson.GSONNonFieldTypeAdapter;

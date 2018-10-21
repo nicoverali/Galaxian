@@ -8,7 +8,7 @@ import edu.uns.galaxian.colision.hitbox.HBRectangulo;
 import edu.uns.galaxian.colision.hitbox.HitBox;
 import edu.uns.galaxian.controladores.Controlador;
 import edu.uns.galaxian.entidades.Entidad;
-import edu.uns.galaxian.entidades.EntidadBatch;
+import edu.uns.galaxian.util.EntidadBatch;
 
 public abstract class Disparo extends Entidad {
 

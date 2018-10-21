@@ -54,20 +54,20 @@ public abstract class FabricaEnemigos {
 	public abstract Enemigo getKamikazeMixto(Vector2 posicion, Controlador controlador, GameObject jugador);
 
 	/**
-	 * Crea un nuevo enemigo Armado con la informacion provista
+	 * Crea un nuevo enemigo NaveArmado con la informacion provista
 	 * @param posicion Posicion del enemigo
 	 * @param controlador Controlador del cual dependara el enemigo
 	 * @param jugador Jugador objetivo del enemigo
-	 * @return Nuevo enemigo Armado
+	 * @return Nuevo enemigo NaveArmado
 	 */
 	public abstract Enemigo getArmado(Vector2 posicion, Controlador controlador, GameObject jugador);
 
 	/**
-	 * Crea un nuevo enemigo Armado Debil con la informacion provista
+	 * Crea un nuevo enemigo NaveArmado Debil con la informacion provista
 	 * @param posicion Posicion del enemigo
 	 * @param controlador Controlador del cual dependara el enemigo
 	 * @param jugador Jugador objetivo del enemigo
-	 * @return Nuevo enemigo Armado Debil
+	 * @return Nuevo enemigo NaveArmado Debil
 	 */
 	public abstract Enemigo getArmadoDebil(Vector2 posicion, Controlador controlador, GameObject jugador);
 	

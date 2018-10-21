@@ -5,13 +5,13 @@ import edu.uns.galaxian.entidades.autonoma.ia.*;
 public interface Autonomo {
 
 	/**
-	 * Retorna la inteligencia del enemigo
+	 * Retorna la inteligencia actual
 	 */
     InteligenciaArtificial getInteligencia();
 		
 	/**
-	 * Setea la inteligencia al enemigo
+	 * Cambia la inteligencia actual por una nueva
 	 */
-    void setInteligencia(InteligenciaArtificial i);
+    void setInteligencia(InteligenciaArtificial ia);
 	
 }

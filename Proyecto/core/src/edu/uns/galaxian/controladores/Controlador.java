@@ -2,7 +2,7 @@ package edu.uns.galaxian.controladores;
 
 import edu.uns.galaxian.colision.DetectorColision;
 import edu.uns.galaxian.entidades.Entidad;
-import edu.uns.galaxian.entidades.EntidadBatch;
+import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
 import java.util.*;

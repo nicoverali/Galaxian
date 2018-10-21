@@ -10,7 +10,7 @@ import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorPowerUp;
 import edu.uns.galaxian.controladores.Controlador;
 import edu.uns.galaxian.entidades.Entidad;
-import edu.uns.galaxian.entidades.EntidadBatch;
+import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
 public abstract class PowerUp extends Entidad {

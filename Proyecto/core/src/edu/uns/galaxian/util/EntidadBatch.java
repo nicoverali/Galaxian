@@ -1,4 +1,4 @@
-package edu.uns.galaxian.entidades;
+package edu.uns.galaxian.util;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;

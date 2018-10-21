@@ -1,45 +1,19 @@
 package edu.uns.galaxian.nave;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
-import edu.uns.galaxian.entidades.EntidadBatch;
 import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
-import edu.uns.galaxian.entidades.equipamiento.armas.ArmaNula;
+import edu.uns.galaxian.entidades.equipamiento.escudos.Escudo;
+import edu.uns.galaxian.entidades.inanimadas.disparos.Disparo;
 
-public abstract class Nave {
+public abstract class Nave<T extends Disparo> {
 
-	protected Arma arma;
-	protected Texture textura;
+	protected Arma<T> arma;
+	protected Escudo escudo;
+	protected String texturaDir;
 
-	public Nave(){
-		arma = new ArmaNula();
-	}
-
-	/**
-	 * Retorna el arma de la nave.
-	 * @return Arma de la nave
-	 */
-	public Arma getArma(){
-		return arma;
-	}
-
-	/**
-	 * Reemplaza el arma actual de la nave por una nueva.
-	 * @param nuevaArma Nueva arma de la nave
-	 */
-	public void setArma(Arma nuevaArma){
-		arma = nuevaArma;
-	}
-
-	/**
-	 * Utiliza el batch recibido para dibujar la nave en la posicion proveida.
-	 * @param batch Batch utilizado para dibujar en pantalla
-	 * @param posicion Posicion donde debe dibujarse la nave
-	 */
-	public void dibujar(EntidadBatch batch, Vector2 posicion){
-		float alto = textura.getHeight();
-		float ancho = textura.getWidth();
-		batch.draw(textura, posicion.x - ancho/2, posicion.y - alto/2, ancho, alto);
+	public Nave(Arma<T> arma, Escudo escudo, String texturaDir){
+		this.arma = arma;
+		this.escudo = escudo;
+		this.texturaDir = texturaDir;
 	}
 
 	/**
@@ -55,8 +29,44 @@ public abstract class Nave {
 	public abstract float getVelocidadMax();
 
 	/**
-	 * Retorna la rotacion inicial de la nave.
-	 * @return Rotacion inicial de la nave
+	 * Retorna la direccion de la textura correspondiente
+	 * @return Direccion de la textura
 	 */
-	public abstract float getRotacionInicial();
+	public String getTexturaDir(){
+		return texturaDir;
+	}
+
+	/**
+	 * Retorna el arma de la nave.
+	 * @return Arma de la nave
+	 */
+	public Arma<T> getArma(){
+		return arma;
+	}
+
+	/**
+	 * Reemplaza el arma actual de la nave por una nueva.
+	 * @param nuevaArma Nueva arma de la nave
+	 */
+	public void setArma(Arma<T> nuevaArma){
+		arma = nuevaArma;
+	}
+
+	/**
+	 * Retorna el escudo de la nave.
+	 * @return Escudo de la nave
+	 */
+	public Escudo getEscudo(){
+		return escudo;
+	}
+
+	/**
+	 * Reemplaza el escudo actual de la nave por uno nuevo.
+	 * @param nuevoEscudo Nuevo escudo de la nave
+	 */
+	public void setEscudo(Escudo nuevoEscudo){
+		escudo = nuevoEscudo;
+	}
+
+	// TODO public void dibujarEquipamiento(EntidadBatch batch);
 }

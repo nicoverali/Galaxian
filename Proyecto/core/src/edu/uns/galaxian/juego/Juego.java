@@ -3,7 +3,7 @@ package edu.uns.galaxian.juego;
 import com.badlogic.gdx.Game;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import edu.uns.galaxian.entidades.EntidadBatch;
+import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.juego.config.ConfigNivel;
 import edu.uns.galaxian.juego.config.GameData;
 import edu.uns.galaxian.juego.config.SaveData;

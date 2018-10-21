@@ -4,9 +4,10 @@ import com.google.gson.Gson;
 import edu.uns.galaxian.entidades.autonoma.enemigo.fabrica.FabricaEnemigos;
 import edu.uns.galaxian.entidades.equipamiento.armas.*;
 import edu.uns.galaxian.entidades.equipamiento.escudos.*;
+import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
 import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparoJugador;
-import edu.uns.galaxian.nave.jugador.NaveJugador;
+import edu.uns.galaxian.nave.NaveJugador;
 import edu.uns.galaxian.util.io.gson.GSONNonFieldTypeAdapter;
 
 import com.google.gson.GsonBuilder;
@@ -21,7 +22,7 @@ public class ConfigNivel{
         Gson gson = getGson();
 
         JsonObject equipamientoJugador = datosNivel.getAsJsonObject(GameData.EQUIPAMIENTO);
-        Arma armaJugador = gson.fromJson(equipamientoJugador.getAsJsonObject(GameData.ARMA), Arma.class);
+        Arma<DisparoJugador> armaJugador = gson.fromJson(equipamientoJugador.getAsJsonObject(GameData.ARMA), Arma.class);
         Escudo escudoJugador = gson.fromJson(equipamientoJugador.getAsJsonObject(GameData.ESCUDO), Escudo.class);
         naveJugador.setArma(armaJugador);
         naveJugador.setEscudo(escudoJugador);
