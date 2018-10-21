@@ -14,7 +14,6 @@ import edu.uns.galaxian.util.enums.TipoEnemigo;
 
 import java.util.*;
 
-// TODO Revisitar clase una vez que se unifique el controlador
 public class FormacionEnemigo implements Servicio {
 
     private static final int DISTANCIA = 35;
@@ -70,7 +69,6 @@ public class FormacionEnemigo implements Servicio {
         int cantEnFila = enemigos.size();
         List<Enemigo> filaResultado = new ArrayList<>(cantEnFila);
         for(TipoEnemigo tipoEnemigo : enemigos){
-            // TODO Esto no va a funcionar hasta que utilizemos el controlador unico
             final Enemigo enemigoResultado = fabrica.crearEnemigo(tipoEnemigo, formarEnemigo(numFila, columna++, cantEnFila), controlador, controlador.getJugador());
             filaResultado.add(enemigoResultado);
             controlador.agregarEntidad(enemigoResultado);

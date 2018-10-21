@@ -9,7 +9,7 @@ import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparo;
 
 public class ArmaComun<T extends Disparo> implements Arma<T> {
 
-	private static final long CADENCIA = 500;
+	private static final long CADENCIA = 275;
 	private static final int FUERZA = 35;
 	private static final int VELOCIDAD_MAXIMA = 150;
 	private static final String TEXTURA_DIR = "disparo/jugador/AZUL";

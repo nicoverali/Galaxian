@@ -5,6 +5,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
+import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.controladores.*;
 import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.entidades.jugador.Jugador;
@@ -35,7 +36,7 @@ public class Nivel extends ScreenAdapter {
         this.juego = juego;
         background = new Background();
         controlador = new Controlador(juego.getTextureAtlas());
-        Jugador jugador = new Jugador(Gdx.graphics.getWidth()/2, 50, config.getNaveJugador(), this, controlador);
+        Jugador jugador = new Jugador(new Vector2(Gdx.graphics.getWidth()/2, 50), config.getNaveJugador(), this, controlador);
         controlador.agregarJugador(jugador);
         servicios = new LinkedList<>();
         FormacionEnemigo formacion = new FormacionEnemigo(formacionRandom(), config.getFabricaEnemigos(), controlador);

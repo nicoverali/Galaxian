@@ -19,8 +19,8 @@ public class Jugador extends EntidadConNave<NaveJugador, DisparoJugador> {
 	private ColisionadorJugador colisionador;
 	private Controlador controlador;
 
-	public Jugador(float xPos, float yPos, NaveJugador nave, Nivel nivel, Controlador controlador) {
-		super(new Vector2(xPos, yPos), 90, nave, controlador.getTextureAtlas());
+	public Jugador(Vector2 posicion, NaveJugador nave, Nivel nivel, Controlador controlador) {
+		super(posicion, 90, nave, controlador.getTextureAtlas());
 		this.nivel = nivel;
 		this.controlador = controlador;
 		colisionador = new ColisionadorJugador(this);
@@ -54,8 +54,7 @@ public class Jugador extends EntidadConNave<NaveJugador, DisparoJugador> {
 	}
 
 	private boolean posicionDentroDePantalla(Vector2 posicion){
-		// TODO El radio antes era nave.getAncho()/2, ahora la nave no tiene ese metodo
-		float radio = 30;
+		float radio = textura.getRegionWidth()/2;
 		return posicion.x - radio > 0 && posicion.x + radio < Gdx.graphics.getWidth();
 	}
 }
