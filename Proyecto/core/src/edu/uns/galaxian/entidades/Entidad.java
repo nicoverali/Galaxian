@@ -56,6 +56,9 @@ public abstract class Entidad implements Colisionable, GameObject
 	 */
 	public void setRotacion(float nuevaRotacion){
 		rotacion = nuevaRotacion;
+		if(rotacion > 360){
+			rotacion -= 360;
+		}
 	}
 
 	/**

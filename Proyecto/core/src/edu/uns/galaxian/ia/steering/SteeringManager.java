@@ -60,8 +60,40 @@ public class SteeringManager {
         return seek(positionFutura);
     }
 
+    public float align(float rotacionObjetivo, float radioDeLlegada){
+        float rawRotation = rotacionObjetivo - autonomo.getRotacion();
+        float rotacion = mapear(rawRotation, 0, 360, 180, -180);
+        float magnitudRotacion = Math.abs(rawRotation);
+        float rotacionFinal;
+        if(magnitudRotacion < 1f){
+            return 0;
+        }
+        else if(magnitudRotacion > radioDeLlegada){
+            rotacionFinal = autonomo.getSteeringMaximo()*50;
+        }
+        else{
+            rotacionFinal = autonomo.getSteeringMaximo()*50*magnitudRotacion/radioDeLlegada;
+        }
+        rotacionFinal *= rotacion / magnitudRotacion;
+        float steeringAngular = rotacionFinal - rotacionObjetivo;
+        return rotacionFinal;
+    }
 
-    private float mapear(float valor, float a, float b, float c, float d){
-        return c + ((valor-a)*(d-c)/(c-a));
+    public float face(GameObject target){
+        Vector2 direccion = target.getPosicion().sub(autonomo.getPosicion());
+        if(direccion.len() == 0){
+            return 0;
+        }
+        return align(direccion.angle(), 50);
+    }
+
+
+    private float mapear(float valor, float A, float B, float a, float b){
+        if(valor > 180){
+            return valor-360;
+        }
+        else {
+            return valor;
+        }
     }
 }

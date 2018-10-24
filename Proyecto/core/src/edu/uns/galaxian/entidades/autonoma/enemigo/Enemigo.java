@@ -39,7 +39,7 @@ public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implem
 		return nave.getFuerzaDeColision();
 	}
     public void disparar() {
-		nave.getArma().disparar(posicion, rotacion, controlador);
+		nave.getArma().disparar(posicion.cpy(), rotacion, controlador);
 	}
 
 	public void atacar() {

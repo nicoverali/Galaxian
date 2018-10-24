@@ -17,7 +17,7 @@ public class ServicioDeDesarrollo implements Servicio {
     }
 
     public void activar() throws IllegalStateException {
-        Enemigo enemigo = fabrica.getKamikaze(new Vector2(50,700), controlador, controlador.getJugador());
+        Enemigo enemigo = fabrica.getKamikaze(new Vector2(200,700), controlador, controlador.getJugador());
         enemigo.setInteligencia(new InteligenciaDeDesarrollo(enemigo, controlador.getJugador()));
         controlador.agregarEntidad(enemigo);
         Enemigo enemigo1 = fabrica.getKamikaze(new Vector2(1100,700), controlador, controlador.getJugador());
