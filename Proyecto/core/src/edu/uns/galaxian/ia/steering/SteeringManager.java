@@ -3,6 +3,7 @@ package edu.uns.galaxian.ia.steering;
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.entidades.autonoma.AutonomoDinamico;
 import edu.uns.galaxian.entidades.status.GameObject;
+import edu.uns.galaxian.util.camino.CaminoSimple;
 
 public class SteeringManager {
 
@@ -85,6 +86,15 @@ public class SteeringManager {
             return 0;
         }
         return align(direccion.angle(), 50);
+    }
+
+    public Vector2 followPath(CaminoSimple camino, float radioDeLlegada){
+        Vector2 paradaActual = camino.getParadaActual();
+        float distancia = autonomo.getPosicion().dst(paradaActual);
+        if(distancia < radioDeLlegada){
+            paradaActual = camino.avanzar();
+        }
+        return arrive(paradaActual, radioDeLlegada);
     }
 
 
