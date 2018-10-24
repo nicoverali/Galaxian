@@ -5,7 +5,7 @@ import java.util.Random;
 import com.badlogic.gdx.Gdx;
 
 import edu.uns.galaxian.controladores.Controlador;
-import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaDeOnda;
+import edu.uns.galaxian.ia.inteligencias.InteligenciaDeOnda;
 import edu.uns.galaxian.entidades.inanimadas.Obstaculo;
 import edu.uns.galaxian.observer.Observador;
 import edu.uns.galaxian.observer.livedata.LiveData;
@@ -49,7 +49,7 @@ public class GeneracionObstaculo implements Servicio, Observador<LiveData<Intege
 							// Probabilidad de que el obstaculo tenga inteligencia de movimiento = 4/10
 							if(ran.nextInt(10)<3) {
 								nuevoObstaculo.setPosicion(0,posY-15);
-								nuevoObstaculo.setInteligencia(new InteligenciaDeOnda());
+								nuevoObstaculo.setInteligencia(new InteligenciaDeOnda(nuevoObstaculo));
 							}
 							controlador.agregarEntidad(nuevoObstaculo);
 							cantObstaculos++;

@@ -12,8 +12,8 @@ import edu.uns.galaxian.controladores.Controlador;
 import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.entidades.EntidadViva;
 import edu.uns.galaxian.entidades.autonoma.Autonomo;
-import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaArtificial;
-import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaNula;
+import edu.uns.galaxian.ia.InteligenciaArtificial;
+import edu.uns.galaxian.ia.inteligencias.InteligenciaNula;
 
 public class Obstaculo extends EntidadViva implements Autonomo {
 	
@@ -57,7 +57,7 @@ public class Obstaculo extends EntidadViva implements Autonomo {
 		if((posicion.y > Gdx.graphics.getHeight()) || (posicion.y<0) || posicion.x<0 || posicion.x>Gdx.graphics.getWidth()) {
 			restarVida(getVida().getValor());
 		}
-		inteligencia.pensar(this);
+		inteligencia.pensar(d);
 	}
 
 	public void eliminar() {

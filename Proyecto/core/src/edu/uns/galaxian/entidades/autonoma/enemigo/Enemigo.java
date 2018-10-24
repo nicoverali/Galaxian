@@ -6,14 +6,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.controladores.Controlador;
 import edu.uns.galaxian.entidades.EntidadConNave;
-import edu.uns.galaxian.entidades.autonoma.Autonomo;
 import edu.uns.galaxian.entidades.autonoma.AutonomoDinamico;
-import edu.uns.galaxian.entidades.autonoma.ia.*;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
 import edu.uns.galaxian.entidades.inanimadas.powerups.magiaTemporal.*;
 import edu.uns.galaxian.entidades.inanimadas.powerups.objetoPrecioso.*;
 import edu.uns.galaxian.colision.colisionadores.*;
+import edu.uns.galaxian.ia.InteligenciaArtificial;
+import edu.uns.galaxian.ia.inteligencias.InteligenciaFormacion;
 import edu.uns.galaxian.nave.NaveEnemigo;
 
 public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implements AutonomoDinamico {
@@ -26,7 +26,7 @@ public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implem
 	public Enemigo(Vector2 posicion, NaveEnemigo nave, Controlador controlador){
 		super(posicion, 270, nave, controlador.getTextureAtlas());
 		this.controlador = controlador;
-		inteligencia = new InteligenciaFormacion(posicion);
+		inteligencia = new InteligenciaFormacion(this, posicion);
 		colisionador = new ColisionadorEnemigo(this);
 	}
 
@@ -43,7 +43,7 @@ public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implem
 	}
 
 	public void atacar() {
-		inteligencia = nave.getInteligenciaAtaque();
+		inteligencia = nave.getInteligenciaAtaque(this);
 	}
 
 	public InteligenciaArtificial getInteligencia() {
@@ -55,7 +55,7 @@ public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implem
 	}
 
 	public void actualizar(float delta) {
-		inteligencia.pensar(this);
+		inteligencia.pensar(delta);
 		if(posicion.y < 0) {
 			posicion.y = Gdx.graphics.getHeight();
 			if(posicion.x<0 || posicion.x>Gdx.graphics.getWidth()) {

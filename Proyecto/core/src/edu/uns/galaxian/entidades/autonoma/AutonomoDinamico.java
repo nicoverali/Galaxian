@@ -11,27 +11,8 @@ public interface AutonomoDinamico extends Autonomo {
     float getVelocidadMaxima();
 
     /**
-     * Retorna el steering maximo
+     * Retorna el utils maximo
      * @return Steering maximo
      */
     float getSteeringMaximo();
-
-    /**
-     * Modifica la velocidad actual del autonomo
-     * @param velocidad Nueva velocidad del autonomo
-     */
-    void setVelocidad(Vector2 velocidad);
-
-    /**
-     * Modifica la posicion actual del autonomo
-     * @param posicion Nueva posicion del autonomo
-     */
-    void setPosicion(Vector2 posicion);
-
-    /**
-     * Modifica la rotacion actual del autonomo
-     * @param rotacion Nueva rotacion del autonomo
-     */
-    void setRotacion(float rotacion);
-
 }

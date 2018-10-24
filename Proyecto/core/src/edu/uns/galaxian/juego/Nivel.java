@@ -12,8 +12,6 @@ import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 import edu.uns.galaxian.escenario.Background;
 import edu.uns.galaxian.juego.config.ConfigNivel;
-import edu.uns.galaxian.servicios.FormacionEnemigo;
-import edu.uns.galaxian.servicios.GeneracionObstaculo;
 import edu.uns.galaxian.servicios.Servicio;
 import edu.uns.galaxian.util.enums.TipoEnemigo;
 import java.util.*;
