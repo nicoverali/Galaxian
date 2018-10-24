@@ -32,7 +32,8 @@ public class Jugador extends EntidadConNave<NaveJugador, DisparoJugador> {
 	}
 
 	public void actualizar(float delta){
-		Vector2 nuevaPosicion = posicion.cpy().add(input.getXAxis() * nave.getVelocidadMax() * delta, 0);
+		this.setVelocidad(Vector2.X.cpy().scl(input.getXAxis() * nave.getVelocidadMax()));
+		Vector2 nuevaPosicion = posicion.cpy().add(getVelocidad().scl(delta));
 		if(posicionDentroDePantalla(nuevaPosicion)){
 			posicion = nuevaPosicion;
 		}

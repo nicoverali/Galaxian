@@ -63,7 +63,7 @@ public abstract class Entidad implements Colisionable, GameObject
 	 * @return Posicion actual de la entidad
 	 */
 	public Vector2 getPosicion() {
-		return posicion;
+		return posicion.cpy();
 	}
 
 	/**
@@ -71,7 +71,7 @@ public abstract class Entidad implements Colisionable, GameObject
 	 * @return Velocidad actual de la entidad
 	 */
 	public Vector2 getVelocidad() {
-		return velocidad;
+		return velocidad.cpy();
 	}
 
 	/**

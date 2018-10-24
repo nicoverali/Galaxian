@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.controladores.Controlador;
 import edu.uns.galaxian.entidades.EntidadConNave;
 import edu.uns.galaxian.entidades.autonoma.Autonomo;
+import edu.uns.galaxian.entidades.autonoma.AutonomoDinamico;
 import edu.uns.galaxian.entidades.autonoma.ia.*;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
@@ -15,7 +16,7 @@ import edu.uns.galaxian.entidades.inanimadas.powerups.objetoPrecioso.*;
 import edu.uns.galaxian.colision.colisionadores.*;
 import edu.uns.galaxian.nave.NaveEnemigo;
 
-public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implements Autonomo  {
+public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implements AutonomoDinamico {
 	
 	private static final int puntaje=10;
 	private Controlador controlador;
@@ -101,5 +102,13 @@ public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implem
 	public void aceptarColision(Colisionador colisionador) {
 		colisionador.colisionarConEnemigo(this);
 		nave.aceptarColision(colisionador);
+	}
+
+	public float getVelocidadMaxima() {
+		return nave.getVelocidadMax();
+	}
+
+	public float getSteeringMaximo() {
+		return nave.getSteeringMax();
 	}
 }
