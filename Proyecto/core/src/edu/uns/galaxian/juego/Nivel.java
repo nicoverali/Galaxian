@@ -31,6 +31,7 @@ public class Nivel extends ScreenAdapter {
     private int mili;
     private int seg;
     private int min;
+   
     
     public Nivel(ConfigNivel config, Juego juego){
         this.juego = juego;
@@ -107,4 +108,8 @@ public class Nivel extends ScreenAdapter {
         }
         return  formacion;
     }
+
+	public void gameOver() {
+		juego.pantallaGameOver(controlador.getPuntuacion());
+	}
 }

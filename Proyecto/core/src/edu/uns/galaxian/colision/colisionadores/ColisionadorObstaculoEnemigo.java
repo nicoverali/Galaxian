@@ -9,28 +9,26 @@ import edu.uns.galaxian.entidades.inanimadas.obstaculos.ObstaculoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
-public class ColisionadorEnemigo implements Colisionador<Enemigo> {
-
-	private Enemigo objetoFuente;
-
-	public ColisionadorEnemigo(Enemigo objetoFuente){
-		this.objetoFuente = objetoFuente;
+public class ColisionadorObstaculoEnemigo implements Colisionador<ObstaculoEnemigo> {
+	
+	private ObstaculoEnemigo objetoFuente;
+	
+	public ColisionadorObstaculoEnemigo(ObstaculoEnemigo obstaculoEnemigo) {
+		objetoFuente = obstaculoEnemigo;
 	}
 
 	public void colisionarConJugador(Jugador jugador) {
-		jugador.restarVida(objetoFuente.getFuerzaDeColision());
+		// El obstaculo no se encarga de quitarle vida al jugador.
 	}
 
 	public void colisionarConEnemigo(Enemigo enemigo) {
-		// La colision entre enemigos no produce ningun efecto.
 	}
 
 	public void colisionarConDisparoJugador(DisparoJugador disparo) {
 		objetoFuente.restarVida(disparo.getFuerzaDeDisparo());
 	}
-	
+
 	public void colisionarConDisparoEnemigo(DisparoEnemigo disparo) {
-		// Un disparo enemigo no afecta al enemigo.
 	}
 
 	public void colisionarConObstaculo(Obstaculo obstaculo) {
@@ -38,18 +36,18 @@ public class ColisionadorEnemigo implements Colisionador<Enemigo> {
 	}
 
 	public void colisionarConPowerUp(PowerUp powerUp) {
-		// Un enemigo no afecta a un powerUp.
+		// Un obstaculo no afecta a un powerUp.
 	}
 
 	@Override
 	public void colisionarEscudo(Escudo escudo) {
-		objetoFuente.eliminar();
-		escudo.eliminar();
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void colisionarObstaculoEnemigo(ObstaculoEnemigo obstaculoEnemigo) {
-		// TODO Auto-generated method stub
 		
 	}
+
 }

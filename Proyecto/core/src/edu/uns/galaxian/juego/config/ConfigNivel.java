@@ -23,9 +23,7 @@ public class ConfigNivel{
 
         JsonObject equipamientoJugador = datosNivel.getAsJsonObject(GameData.EQUIPAMIENTO);
         Arma<DisparoJugador> armaJugador = gson.fromJson(equipamientoJugador.getAsJsonObject(GameData.ARMA), Arma.class);
-        Escudo escudoJugador = gson.fromJson(equipamientoJugador.getAsJsonObject(GameData.ESCUDO), Escudo.class);
         naveJugador.setArma(armaJugador);
-        naveJugador.setEscudo(escudoJugador);
 
         this.naveJugador = naveJugador;
         this.fabricaEnemigos = gson.fromJson(datosNivel.getAsJsonObject(GameData.FABRICA_ENEMIGO), FabricaEnemigos.class);

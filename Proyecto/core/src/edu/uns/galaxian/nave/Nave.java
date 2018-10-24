@@ -1,18 +1,15 @@
 package edu.uns.galaxian.nave;
 
 import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
-import edu.uns.galaxian.entidades.equipamiento.escudos.Escudo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.Disparo;
 
 public abstract class Nave<T extends Disparo> {
 
 	protected Arma<T> arma;
-	protected Escudo escudo;
 	protected String texturaDir;
 
-	public Nave(Arma<T> arma, Escudo escudo, String texturaDir){
+	public Nave(Arma<T> arma, String texturaDir){
 		this.arma = arma;
-		this.escudo = escudo;
 		this.texturaDir = texturaDir;
 	}
 
@@ -50,22 +47,6 @@ public abstract class Nave<T extends Disparo> {
 	 */
 	public void setArma(Arma<T> nuevaArma){
 		arma = nuevaArma;
-	}
-
-	/**
-	 * Retorna el escudo de la nave.
-	 * @return Escudo de la nave
-	 */
-	public Escudo getEscudo(){
-		return escudo;
-	}
-
-	/**
-	 * Reemplaza el escudo actual de la nave por uno nuevo.
-	 * @param nuevoEscudo Nuevo escudo de la nave
-	 */
-	public void setEscudo(Escudo nuevoEscudo){
-		escudo = nuevoEscudo;
 	}
 
 	// TODO public void dibujarEquipamiento(EntidadBatch batch);

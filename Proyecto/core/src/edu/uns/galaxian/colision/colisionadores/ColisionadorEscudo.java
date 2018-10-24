@@ -9,42 +9,53 @@ import edu.uns.galaxian.entidades.inanimadas.obstaculos.ObstaculoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
-public class ColisionadorEnemigo implements Colisionador<Enemigo> {
+public class ColisionadorEscudo implements Colisionador<Escudo> {
 
-	private Enemigo objetoFuente;
-
-	public ColisionadorEnemigo(Enemigo objetoFuente){
-		this.objetoFuente = objetoFuente;
-	}
-
-	public void colisionarConJugador(Jugador jugador) {
-		jugador.restarVida(objetoFuente.getFuerzaDeColision());
-	}
-
-	public void colisionarConEnemigo(Enemigo enemigo) {
-		// La colision entre enemigos no produce ningun efecto.
-	}
-
-	public void colisionarConDisparoJugador(DisparoJugador disparo) {
-		objetoFuente.restarVida(disparo.getFuerzaDeDisparo());
-	}
+	private Escudo objetoFuente;
 	
+	public ColisionadorEscudo(Escudo escudo){
+		objetoFuente=escudo;
+	}
+
+	@Override
+	public void colisionarConJugador(Jugador jugador) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void colisionarConEnemigo(Enemigo enemigo) {
+		enemigo.eliminar();
+		objetoFuente.eliminar();
+	}
+
+	@Override
+	public void colisionarConDisparoJugador(DisparoJugador disparo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
 	public void colisionarConDisparoEnemigo(DisparoEnemigo disparo) {
-		// Un disparo enemigo no afecta al enemigo.
+		disparo.eliminar();
 	}
 
+	@Override
 	public void colisionarConObstaculo(Obstaculo obstaculo) {
-		objetoFuente.restarVida(obstaculo.getFuerzaDeColision());
+		// TODO Auto-generated method stub
+		
 	}
 
+	@Override
 	public void colisionarConPowerUp(PowerUp powerUp) {
-		// Un enemigo no afecta a un powerUp.
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void colisionarEscudo(Escudo escudo) {
-		objetoFuente.eliminar();
-		escudo.eliminar();
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override

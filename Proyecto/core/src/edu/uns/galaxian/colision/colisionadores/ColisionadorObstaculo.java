@@ -1,10 +1,12 @@
 package edu.uns.galaxian.colision.colisionadores;
 
 import edu.uns.galaxian.entidades.autonoma.enemigo.Enemigo;
+import edu.uns.galaxian.entidades.equipamiento.escudos.Escudo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
+import edu.uns.galaxian.entidades.inanimadas.obstaculos.Obstaculo;
+import edu.uns.galaxian.entidades.inanimadas.obstaculos.ObstaculoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
-import edu.uns.galaxian.entidades.inanimadas.Obstaculo;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
 public class ColisionadorObstaculo implements Colisionador<Obstaculo> {
@@ -37,6 +39,17 @@ public class ColisionadorObstaculo implements Colisionador<Obstaculo> {
 
 	public void colisionarConPowerUp(PowerUp powerUp) {
 		// Un obstaculo no afecta a un powerUp.
+	}
+
+	@Override
+	public void colisionarEscudo(Escudo escudo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void colisionarObstaculoEnemigo(ObstaculoEnemigo obstaculoEnemigo) {
+		objetoFuente.restarVida(obstaculoEnemigo.getFuerzaDeColision());		
 	}
 
 }

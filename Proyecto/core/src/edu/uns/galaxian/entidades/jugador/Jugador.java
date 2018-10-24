@@ -18,6 +18,7 @@ public class Jugador extends EntidadConNave<NaveJugador, DisparoJugador> {
 	private Nivel nivel;
 	private ColisionadorJugador colisionador;
 	private Controlador controlador;
+	
 
 	public Jugador(Vector2 posicion, NaveJugador nave, Nivel nivel, Controlador controlador) {
 		super(posicion, 90, nave, controlador.getTextureAtlas());
@@ -42,7 +43,7 @@ public class Jugador extends EntidadConNave<NaveJugador, DisparoJugador> {
  	}
 
 	public void eliminar(){
-		// TODO Una posibilidad es indicarle al nivel que debe finalizar
+		nivel.gameOver();
 	}
 
 	public ColisionadorJugador getColisionador(){

@@ -6,7 +6,7 @@ import com.badlogic.gdx.Gdx;
 
 import edu.uns.galaxian.controladores.Controlador;
 import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaDeOnda;
-import edu.uns.galaxian.entidades.inanimadas.Obstaculo;
+import edu.uns.galaxian.entidades.inanimadas.obstaculos.Obstaculo;
 import edu.uns.galaxian.observer.Observador;
 import edu.uns.galaxian.observer.livedata.LiveData;
 

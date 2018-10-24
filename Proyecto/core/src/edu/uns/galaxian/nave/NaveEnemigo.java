@@ -4,7 +4,6 @@ import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.entidades.autonoma.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaArtificial;
 import edu.uns.galaxian.entidades.equipamiento.armas.ArmaComun;
-import edu.uns.galaxian.entidades.equipamiento.escudos.EscudoNulo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparoEnemigo;
 
@@ -16,7 +15,7 @@ public abstract class NaveEnemigo extends Nave<DisparoEnemigo> {
     private int fuerzaColision;
 
     public NaveEnemigo(String texturaDir, int vidaMaxima, float velocidadMax, int fuerzaColision, float steeringMax){
-        super(new ArmaComun<>(new FabricaDisparoEnemigo()), new EscudoNulo(), texturaDir);
+        super(new ArmaComun<>(new FabricaDisparoEnemigo()), texturaDir);
         this.vidaMaxima = vidaMaxima;
         this.velocidadMax = velocidadMax;
         this.steeringMax = steeringMax;

@@ -1,4 +1,4 @@
-package edu.uns.galaxian.entidades.inanimadas;
+package edu.uns.galaxian.entidades.inanimadas.obstaculos;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;

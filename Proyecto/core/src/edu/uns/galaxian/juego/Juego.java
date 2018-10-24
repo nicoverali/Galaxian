@@ -1,12 +1,15 @@
 package edu.uns.galaxian.juego;
 
 import com.badlogic.gdx.Game;
-
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.juego.config.ConfigNivel;
 import edu.uns.galaxian.juego.config.GameData;
 import edu.uns.galaxian.juego.config.SaveData;
+import edu.uns.galaxian.juego.menus.Menu;
+import edu.uns.galaxian.juego.menus.MenuGameOver;
+import edu.uns.galaxian.juego.menus.MenuPrincipal;
 
 public class Juego extends Game {
 
@@ -16,6 +19,8 @@ public class Juego extends Game {
 	private EntidadBatch batch;
 	private GameData gameData;
 	private SaveData saveData;
+	private Menu menuPrincipal;
+	private MenuGameOver menuG;
 
 	@Override
 	public void create () {
@@ -24,8 +29,19 @@ public class Juego extends Game {
 		saveData = new SaveData();
 		textureAtlas = new TextureAtlas(TEXTURE_ATLAS_DIR);
 
+		menuPrincipal= new MenuPrincipal(this);
+		setScreen(menuPrincipal);
+	}
+	
+	public void iniciarNivel(){
 		ConfigNivel configNivel = gameData.getConfiguracionNivel(saveData.getNivelAlcanzado(), saveData.getNaveJugador());
 		setScreen(new Nivel(configNivel,this));
+	}
+	
+	//TODO para el boton restart, por ahora hacer que se inicie nuevamente el nivel, esta mal
+	// haces 3 veces restart y te anda todo lento
+	public void reiniciarNivel(){
+		
 	}
 
 	@Override
@@ -60,5 +76,13 @@ public class Juego extends Game {
 	 */
 	public void cargarSiguienteNivel(Nivel nivelActual){
 		// TODO Implementar metodo
+	}
+	
+	/**
+	 * Muestra la pantalla cuando el jugador pierde
+	 */
+	public void pantallaGameOver(int score){
+		menuG= new MenuGameOver(this, score);
+		setScreen(menuG);
 	}
 }

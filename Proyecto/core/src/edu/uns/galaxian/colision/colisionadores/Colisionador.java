@@ -1,10 +1,12 @@
 package edu.uns.galaxian.colision.colisionadores;
 
 import edu.uns.galaxian.entidades.autonoma.enemigo.Enemigo;
+import edu.uns.galaxian.entidades.equipamiento.escudos.Escudo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
+import edu.uns.galaxian.entidades.inanimadas.obstaculos.Obstaculo;
+import edu.uns.galaxian.entidades.inanimadas.obstaculos.ObstaculoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
-import edu.uns.galaxian.entidades.inanimadas.Obstaculo;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
 public interface Colisionador<T> {
@@ -44,4 +46,16 @@ public interface Colisionador<T> {
 	 * @param powerUp PowerUp con el que se colisiono
 	 */
 	void colisionarConPowerUp(PowerUp powerUp);
+	
+	/**
+	 * Comportamiento al momento de colisionar con un escudo
+	 * @param escudo Escudo con el que se lo colisiono
+	 */
+	void colisionarEscudo(Escudo escudo);
+	
+	/**
+	 * Comportamiento al momento de colisionar con obstaculo del enemigo
+	 * @param obstaculoEnemigo Obstaculo Enemigo con el que se colisiono
+	 */
+	void colisionarObstaculoEnemigo(ObstaculoEnemigo obstaculoEnemigo);
 }

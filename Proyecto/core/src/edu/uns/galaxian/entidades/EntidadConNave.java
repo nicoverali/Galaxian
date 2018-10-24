@@ -6,7 +6,6 @@ import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.colision.hitbox.HBRectangulo;
 import edu.uns.galaxian.colision.hitbox.HitBox;
 import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
-import edu.uns.galaxian.entidades.equipamiento.escudos.Escudo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.Disparo;
 import edu.uns.galaxian.nave.Nave;
 import edu.uns.galaxian.util.EntidadBatch;
@@ -38,22 +37,6 @@ public abstract class EntidadConNave<T extends Nave<S>, S extends Disparo> exten
      */
     public Arma<S> getArma(){
         return nave.getArma();
-    }
-
-    /**
-     * Cambia el escudo actual de la entidad por uno nuevo.
-     * @param nuevoEscudo Nuevo escudo de la entidad
-     */
-    public void setEscudo(Escudo nuevoEscudo){
-        nave.setEscudo(nuevoEscudo);
-    }
-
-    /**
-     * Retorna el escudo actual de la entidad
-     * @return Escudo actual
-     */
-    public Escudo getEscudo(){
-        return nave.getEscudo();
     }
 
     /**

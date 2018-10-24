@@ -16,8 +16,8 @@ import edu.uns.galaxian.entidades.jugador.Jugador;
 
 public abstract class PowerUp extends Entidad {
 
-	private Controlador controlador;
-	private ColisionadorPowerUp colisionador;
+	protected Controlador controlador;
+	protected ColisionadorPowerUp colisionador;
 	protected TextureRegion textura;
 	protected HBCirculo box;
 	
