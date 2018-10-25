@@ -1,9 +1,9 @@
-package edu.uns.galaxian.ia.tarea.acciones;
+package edu.uns.galaxian.ia.btree.acciones;
 
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.ia.autonomo.AutonomoDinamico;
 import edu.uns.galaxian.ia.Blackboard;
-import edu.uns.galaxian.ia.tarea.Tarea;
+import edu.uns.galaxian.ia.btree.Tarea;
 import edu.uns.galaxian.ia.utils.SteeringManager;
 import edu.uns.galaxian.util.camino.CaminoSimple;
 

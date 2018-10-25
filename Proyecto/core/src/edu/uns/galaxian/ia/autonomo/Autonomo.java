@@ -13,8 +13,18 @@ public interface Autonomo extends GameObject {
 		
 	/**
 	 * Cambia la inteligencia actual por una nueva
+	 * de manera inmediata
+	 * @param ia Nueva inteligencia
 	 */
     void setInteligencia(InteligenciaArtificial ia);
+
+	/**
+	 * Cambia la inteligencia actual por una nueva
+	 * realizando la transicion correspondiente de la
+	 * actual a la nueva.
+	 * @param ia Nueva inteligencia
+	 */
+	void transicionarInteligencia(InteligenciaArtificial ia);
 
 	/**
 	 * Modifica la velocidad actual del autonomo

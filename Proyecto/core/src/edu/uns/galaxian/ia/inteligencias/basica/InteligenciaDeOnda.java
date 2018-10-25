@@ -1,4 +1,4 @@
-package edu.uns.galaxian.ia.inteligencias;
+package edu.uns.galaxian.ia.inteligencias.basica;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -19,5 +19,8 @@ public class InteligenciaDeOnda<T extends Autonomo> implements InteligenciaArtif
 		Vector2 nuevaPos = new Vector2(posX,posY);
 		autonomo.setPosicion(nuevaPos);
 	}
-	
+
+	public void transicionar(InteligenciaArtificial<T> nuevaInteligencia) {
+		autonomo.setInteligencia(nuevaInteligencia);
+	}
 }

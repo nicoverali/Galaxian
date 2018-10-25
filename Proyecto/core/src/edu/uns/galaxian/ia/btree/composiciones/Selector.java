@@ -1,7 +1,7 @@
-package edu.uns.galaxian.ia.tarea.composiciones;
+package edu.uns.galaxian.ia.btree.composiciones;
 
 import edu.uns.galaxian.ia.autonomo.Autonomo;
-import edu.uns.galaxian.ia.tarea.Tarea;
+import edu.uns.galaxian.ia.btree.Tarea;
 
 import java.util.List;
 

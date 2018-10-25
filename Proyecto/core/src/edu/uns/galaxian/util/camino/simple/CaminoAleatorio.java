@@ -10,7 +10,7 @@ public class CaminoAleatorio  extends CaminoSimple {
 
     private static final int PASO_POR_DEFECTO = 20;
 
-    public CaminoAleatorio(Vector2 posicionInicial, Direccion direccion, int ancho, int largo, int paso, boolean puedeRetroceder){
+    public CaminoAleatorio(Vector2 posicionInicial, Direccion direccion, int ancho, int largo, int paso, boolean impedirRetroceso, int cantMaxParadas){
         super();
         agregarPrimerParada(posicionInicial);
         Random ran = new Random();
@@ -20,12 +20,12 @@ public class CaminoAleatorio  extends CaminoSimple {
         float recorridoActual = 0;
         while(recorridoActual <= largo){
             float pasoActual;
-            if(puedeRetroceder){
-                // Se toma una probabilidad en la cual el paso es negativo (Se vuelve para atras)
-                pasoActual = paso * Math.signum(ran.nextInt(10)-3);
+            if(impedirRetroceso || (largo-recorridoActual)/paso >= cantMaxParadas){
+                pasoActual = paso;
             }
             else{
-                pasoActual = paso;
+                // Se toma una probabilidad en la cual el paso es negativo (Se vuelve para atras)
+                pasoActual = paso * Math.signum(ran.nextInt(10)-2);
             }
             if(pasoActual == 0){
                 pasoActual = paso;
@@ -41,11 +41,11 @@ public class CaminoAleatorio  extends CaminoSimple {
     }
 
     public CaminoAleatorio(Vector2 posicionInicial, Direccion direccion, int ancho, int largo, int paso){
-        this(posicionInicial, direccion, ancho, largo, paso, true);
+        this(posicionInicial, direccion, ancho, largo, paso, false, Integer.MAX_VALUE);
     }
 
     public CaminoAleatorio(Vector2 posicionInicial, Direccion direccion, int ancho, int largo){
-        this(posicionInicial, direccion, ancho, largo, PASO_POR_DEFECTO, true);
+        this(posicionInicial, direccion, ancho, largo, PASO_POR_DEFECTO, false, Integer.MAX_VALUE);
     }
 
     /**

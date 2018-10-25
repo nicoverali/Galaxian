@@ -2,6 +2,7 @@ package edu.uns.galaxian.nave;
 
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.entidades.enemigo.Enemigo;
+import edu.uns.galaxian.entidades.jugador.Jugador;
 import edu.uns.galaxian.ia.InteligenciaArtificial;
 import edu.uns.galaxian.entidades.equipamiento.armas.ArmaComun;
 import edu.uns.galaxian.entidades.equipamiento.escudos.EscudoNulo;
@@ -27,7 +28,7 @@ public abstract class NaveEnemigo extends Nave<DisparoEnemigo> {
      * Retorna la inteligencia de ataque de la nave
      * @return Inteligencia de ataque
      */
-    public abstract InteligenciaArtificial getInteligenciaAtaque(Enemigo enemigo);
+    public abstract InteligenciaArtificial getInteligenciaAtaque(Enemigo enemigo, Jugador jugador);
 
     /**
      * La nave acepta entrar en un estado de colision. Recibe

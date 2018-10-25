@@ -13,7 +13,7 @@ import edu.uns.galaxian.entidades.inanimadas.powerups.magiaTemporal.*;
 import edu.uns.galaxian.entidades.inanimadas.powerups.objetoPrecioso.*;
 import edu.uns.galaxian.colision.colisionadores.*;
 import edu.uns.galaxian.ia.InteligenciaArtificial;
-import edu.uns.galaxian.ia.inteligencias.InteligenciaFormacion;
+import edu.uns.galaxian.ia.inteligencias.basica.InteligenciaNula;
 import edu.uns.galaxian.nave.NaveEnemigo;
 
 public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implements AutonomoDinamico {
@@ -23,10 +23,17 @@ public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implem
 	private InteligenciaArtificial inteligencia;
 	private ColisionadorEnemigo colisionador;
 
+	public Enemigo(Vector2 posicion, NaveEnemigo nave, Controlador controlador, InteligenciaArtificial iaIncial){
+		super(posicion, 270, nave, controlador.getTextureAtlas());
+		this.controlador = controlador;
+		inteligencia = iaIncial;
+		colisionador = new ColisionadorEnemigo(this);
+	}
+
 	public Enemigo(Vector2 posicion, NaveEnemigo nave, Controlador controlador){
 		super(posicion, 270, nave, controlador.getTextureAtlas());
 		this.controlador = controlador;
-		inteligencia = new InteligenciaFormacion(this, posicion);
+		inteligencia = new InteligenciaNula<>(this);
 		colisionador = new ColisionadorEnemigo(this);
 	}
 
@@ -43,7 +50,7 @@ public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implem
 	}
 
 	public void atacar() {
-		inteligencia = nave.getInteligenciaAtaque(this);
+		inteligencia.transicionar(nave.getInteligenciaAtaque(this, controlador.getJugador()));
 	}
 
 	public InteligenciaArtificial getInteligencia() {
@@ -54,14 +61,12 @@ public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implem
 		inteligencia = ia;
 	}
 
+	public void transicionarInteligencia(InteligenciaArtificial ia) {
+		inteligencia.transicionar(ia);
+	}
+
 	public void actualizar(float delta) {
 		inteligencia.pensar(delta);
-		if(posicion.y < 0) {
-			posicion.y = Gdx.graphics.getHeight();
-			if(posicion.x<0 || posicion.x>Gdx.graphics.getWidth()) {
-				posicion.x = 40;
-			}
-		}
 	}
 
     public void eliminar() {

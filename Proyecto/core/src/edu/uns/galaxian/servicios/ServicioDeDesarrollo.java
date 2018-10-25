@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.entidades.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.enemigo.fabrica.FabricaEnemigos;
-import edu.uns.galaxian.ia.inteligencias.InteligenciaDeDesarrollo;
+import edu.uns.galaxian.ia.inteligencias.basica.InteligenciaDeDesarrollo;
 
 public class ServicioDeDesarrollo implements Servicio {
 

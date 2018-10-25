@@ -1,11 +1,17 @@
-package edu.uns.galaxian.ia.inteligencias;
+package edu.uns.galaxian.ia.inteligencias.basica;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
-import edu.uns.galaxian.ia.autonomo.Autonomo;
+import edu.uns.galaxian.ia.Blackboard;
 import edu.uns.galaxian.ia.InteligenciaArtificial;
+import edu.uns.galaxian.ia.autonomo.AutonomoDinamico;
+import edu.uns.galaxian.ia.inteligencias.transicion.TransicionTarea;
+import edu.uns.galaxian.ia.btree.acciones.PathFollowSimple;
+import edu.uns.galaxian.util.camino.CaminoSimple;
+import edu.uns.galaxian.util.camino.simple.CaminoCircular;
+import edu.uns.galaxian.util.enums.Direccion;
 
-public class InteligenciaFormacion<T extends Autonomo> implements InteligenciaArtificial<T> {
+public class InteligenciaFormacion<T extends AutonomoDinamico> implements InteligenciaArtificial<T> {
 	
 	private static final long CADENCIA_MOVIMIENTO = 15;
 	private long ultimoMovimiento;
@@ -34,4 +40,9 @@ public class InteligenciaFormacion<T extends Autonomo> implements InteligenciaAr
 		}
 	}
 
+	public void transicionar(InteligenciaArtificial<T> nuevaInteligencia) {
+		CaminoSimple camino = new CaminoCircular(autonomo.getPosicion(), 150, Direccion.DERECHA, 180);
+		PathFollowSimple<T> pathFollow = new PathFollowSimple<>(new Blackboard<>(autonomo), camino, 1);
+		autonomo.setInteligencia(new TransicionTarea<>(autonomo, pathFollow, nuevaInteligencia));
+	}
 }

@@ -1,9 +1,9 @@
-package edu.uns.galaxian.ia.tarea.acciones;
+package edu.uns.galaxian.ia.btree.acciones;
 
 import edu.uns.galaxian.ia.autonomo.AutonomoDinamico;
 import edu.uns.galaxian.juego.GameObject;
 import edu.uns.galaxian.ia.Blackboard;
-import edu.uns.galaxian.ia.tarea.Tarea;
+import edu.uns.galaxian.ia.btree.Tarea;
 import edu.uns.galaxian.ia.utils.SteeringManager;
 
 public class MirarA<T extends AutonomoDinamico> implements Tarea<T> {

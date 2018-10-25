@@ -1,4 +1,4 @@
-package edu.uns.galaxian.ia.inteligencias;
+package edu.uns.galaxian.ia.inteligencias.basica;
 
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.ia.autonomo.Autonomo;
@@ -22,4 +22,7 @@ public class InteligenciaAleatoria<T extends Autonomo> implements InteligenciaAr
 		((Enemigo)autonomo).disparar();
 	}
 
+	public void transicionar(InteligenciaArtificial<T> nuevaInteligencia) {
+		autonomo.setInteligencia(nuevaInteligencia);
+	}
 }

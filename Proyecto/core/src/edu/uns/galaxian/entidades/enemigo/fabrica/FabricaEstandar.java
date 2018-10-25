@@ -15,22 +15,22 @@ public class FabricaEstandar extends FabricaEnemigos {
 	}
 
 	public Enemigo getKamikazeAleatorio(Vector2 posicion, Controlador controlador) {
-		NaveEnemigo nave = new NaveKamikazeAleatorio(150, 300,90, 100);
+		NaveEnemigo nave = new NaveKamikazeAleatorio(150, 300,5, 100);
 		return new Enemigo(posicion, nave, controlador);
 	}
 
 	public Enemigo getKamikazeMixto(Vector2 posicion, Controlador controlador, GameObject jugador) {
-		NaveEnemigo nave = new NaveKamikazeMixto(150, 200,90, 100);
+		NaveEnemigo nave = new NaveKamikazeMixto(150, 350,15, 100);
 		return new Enemigo(posicion, nave, controlador);
 	}
 
 	public Enemigo getArmado(Vector2 posicion, Controlador controlador, GameObject jugador) {
-		NaveEnemigo nave =  new NaveArmado(150, 200,90, 100);
+		NaveEnemigo nave =  new NaveArmado(150, 200,20, 100);
 		return new Enemigo(posicion, nave, controlador);
 	}
 
 	public Enemigo getArmadoDebil(Vector2 posicion, Controlador controlador, GameObject jugador) {
-		NaveEnemigo nave = new NaveArmadoDebil(150, 200,90, 100);
+		NaveEnemigo nave = new NaveArmadoDebil(150, 200,10, 100);
 		return new Enemigo(posicion, nave, controlador);
 	}
 }

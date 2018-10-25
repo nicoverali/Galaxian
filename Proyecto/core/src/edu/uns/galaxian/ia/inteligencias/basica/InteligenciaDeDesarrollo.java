@@ -1,4 +1,4 @@
-package edu.uns.galaxian.ia.inteligencias;
+package edu.uns.galaxian.ia.inteligencias.basica;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
@@ -7,7 +7,7 @@ import edu.uns.galaxian.entidades.enemigo.Enemigo;
 import edu.uns.galaxian.juego.GameObject;
 import edu.uns.galaxian.ia.Blackboard;
 import edu.uns.galaxian.ia.InteligenciaArtificial;
-import edu.uns.galaxian.ia.tarea.acciones.PathFollowSimple;
+import edu.uns.galaxian.ia.btree.acciones.PathFollowSimple;
 import edu.uns.galaxian.ia.utils.SteeringManager;
 import edu.uns.galaxian.util.camino.CaminoSimple;
 import edu.uns.galaxian.util.camino.simple.CaminoAleatorio;
@@ -61,5 +61,9 @@ public class InteligenciaDeDesarrollo implements InteligenciaArtificial {
         float steeringAngular = steeringManager.mirarA(autonomoDinamico, target);
         autonomoDinamico.setRotacion(autonomoDinamico.getRotacion()+steeringAngular * Gdx.graphics.getDeltaTime());
         ((Enemigo)autonomoDinamico).disparar();
+    }
+
+    public void transicionar(InteligenciaArtificial nuevaInteligencia) {
+        autonomoDinamico.setInteligencia(nuevaInteligencia);
     }
 }

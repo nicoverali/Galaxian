@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.controlador.*;
+import edu.uns.galaxian.servicios.FormacionEnemigo;
+import edu.uns.galaxian.servicios.GeneracionObstaculo;
 import edu.uns.galaxian.servicios.ServicioDeDesarrollo;
 import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.entidades.jugador.Jugador;
@@ -38,13 +40,13 @@ public class Nivel extends ScreenAdapter {
         Jugador jugador = new Jugador(new Vector2(Gdx.graphics.getWidth()/2, 50), config.getNaveJugador(), this, controlador);
         controlador.agregarJugador(jugador);
         servicios = new LinkedList<>();
-        /*FormacionEnemigo formacion = new FormacionEnemigo(formacionRandom(), config.getFabricaEnemigos(), controlador);
+        FormacionEnemigo formacion = new FormacionEnemigo(formacionRandom(), config.getFabricaEnemigos(), controlador);
         GeneracionObstaculo obstaculos = new GeneracionObstaculo(controlador);
         servicios.add(formacion);
         servicios.add(obstaculos);
         formacion.activar();
-        obstaculos.activar();*/
-        new ServicioDeDesarrollo(controlador, config.getFabricaEnemigos()).activar();
+        //obstaculos.activar();
+        //new ServicioDeDesarrollo(controlador, config.getFabricaEnemigos()).activar();
         //El marcador
         score= new BitmapFont();
         time= new BitmapFont();

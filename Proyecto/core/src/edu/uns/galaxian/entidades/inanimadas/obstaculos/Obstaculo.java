@@ -13,7 +13,7 @@ import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.entidades.EntidadViva;
 import edu.uns.galaxian.ia.autonomo.Autonomo;
 import edu.uns.galaxian.ia.InteligenciaArtificial;
-import edu.uns.galaxian.ia.inteligencias.InteligenciaNula;
+import edu.uns.galaxian.ia.inteligencias.basica.InteligenciaNula;
 
 public class Obstaculo extends EntidadViva implements Autonomo {
 	
@@ -24,7 +24,7 @@ public class Obstaculo extends EntidadViva implements Autonomo {
 	private int fuerzaDeColision;
 	private Controlador controlador;
 	private HBCirculo box;
-	private InteligenciaArtificial inteligencia;
+	private InteligenciaArtificial<Obstaculo> inteligencia;
 	private ColisionadorObstaculo colisionador;
 
 	public Obstaculo(float xPos, float yPos, Controlador controlador) {
@@ -33,7 +33,7 @@ public class Obstaculo extends EntidadViva implements Autonomo {
 		textura = controlador.getTextureAtlas().findRegion(TEXTURA_DIR);
 		colisionador = new ColisionadorObstaculo(this);
 		fuerzaDeColision = 300;
-		inteligencia = new InteligenciaNula();
+		inteligencia = new InteligenciaNula(this);
 		box = new HBCirculo(this,textura.getRegionWidth()/2);
 	}
 	
@@ -41,7 +41,7 @@ public class Obstaculo extends EntidadViva implements Autonomo {
 		super(new Vector2(xPos, yPos), VIDA_MAX, 0);
 		colisionador = new ColisionadorObstaculo(this);
 		fuerzaDeColision = 100;
-		inteligencia = new InteligenciaNula();
+		inteligencia = new InteligenciaNula(this);
 		box = new HBCirculo(this,textura.getRegionWidth()/2);
 	}
 	
@@ -82,6 +82,10 @@ public class Obstaculo extends EntidadViva implements Autonomo {
 
 	public void setInteligencia(InteligenciaArtificial i) {
 		inteligencia = i;
+	}
+
+	public void transicionarInteligencia(InteligenciaArtificial ia) {
+		inteligencia.transicionar(ia);
 	}
 
 	public HitBox getHitBox() {

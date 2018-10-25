@@ -1,4 +1,4 @@
-package edu.uns.galaxian.ia.tarea;
+package edu.uns.galaxian.ia.btree;
 
 import edu.uns.galaxian.ia.autonomo.Autonomo;
 

@@ -1,7 +1,7 @@
-package edu.uns.galaxian.ia.tarea.decorators;
+package edu.uns.galaxian.ia.btree.decorators;
 
 import edu.uns.galaxian.ia.autonomo.Autonomo;
-import edu.uns.galaxian.ia.tarea.Tarea;
+import edu.uns.galaxian.ia.btree.Tarea;
 
 public class HastaFallar<T extends Autonomo> extends TareaDecorator<T> {
 
