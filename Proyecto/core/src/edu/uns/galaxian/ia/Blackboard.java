@@ -1,11 +1,8 @@
 package edu.uns.galaxian.ia;
 
-import edu.uns.galaxian.entidades.autonoma.Autonomo;
-import edu.uns.galaxian.entidades.status.GameObject;
+import edu.uns.galaxian.ia.autonomo.Autonomo;
+import edu.uns.galaxian.juego.GameObject;
 import edu.uns.galaxian.ia.utils.SteeringManager;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class Blackboard<T extends Autonomo> {
 

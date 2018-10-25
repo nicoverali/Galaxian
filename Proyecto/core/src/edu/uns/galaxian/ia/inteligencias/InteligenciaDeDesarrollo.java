@@ -2,9 +2,9 @@ package edu.uns.galaxian.ia.inteligencias;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import edu.uns.galaxian.entidades.autonoma.AutonomoDinamico;
-import edu.uns.galaxian.entidades.autonoma.enemigo.Enemigo;
-import edu.uns.galaxian.entidades.status.GameObject;
+import edu.uns.galaxian.ia.autonomo.AutonomoDinamico;
+import edu.uns.galaxian.entidades.enemigo.Enemigo;
+import edu.uns.galaxian.juego.GameObject;
 import edu.uns.galaxian.ia.Blackboard;
 import edu.uns.galaxian.ia.InteligenciaArtificial;
 import edu.uns.galaxian.ia.tarea.acciones.PathFollowSimple;

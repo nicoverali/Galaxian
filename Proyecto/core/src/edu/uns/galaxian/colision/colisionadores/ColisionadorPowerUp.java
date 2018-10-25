@@ -1,7 +1,7 @@
 package edu.uns.galaxian.colision.colisionadores;
 
-import edu.uns.galaxian.entidades.autonoma.enemigo.Enemigo;
-import edu.uns.galaxian.entidades.inanimadas.Obstaculo;
+import edu.uns.galaxian.entidades.enemigo.Enemigo;
+import edu.uns.galaxian.entidades.inanimadas.obstaculos.Obstaculo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
 import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;

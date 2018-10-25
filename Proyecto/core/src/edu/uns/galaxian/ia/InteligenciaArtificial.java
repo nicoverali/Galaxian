@@ -1,6 +1,6 @@
 package edu.uns.galaxian.ia;
 
-import edu.uns.galaxian.entidades.autonoma.Autonomo;
+import edu.uns.galaxian.ia.autonomo.Autonomo;
 
 public interface InteligenciaArtificial<T extends Autonomo> {
 

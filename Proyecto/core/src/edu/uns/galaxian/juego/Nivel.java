@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 import com.badlogic.gdx.math.Vector2;
-import edu.uns.galaxian.controladores.*;
+import edu.uns.galaxian.controlador.*;
 import edu.uns.galaxian.servicios.ServicioDeDesarrollo;
 import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.entidades.jugador.Jugador;

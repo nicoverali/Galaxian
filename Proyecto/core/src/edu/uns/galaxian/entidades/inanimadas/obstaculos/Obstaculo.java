@@ -1,4 +1,4 @@
-package edu.uns.galaxian.entidades.inanimadas;
+package edu.uns.galaxian.entidades.inanimadas.obstaculos;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -8,10 +8,10 @@ import edu.uns.galaxian.colision.hitbox.HBCirculo;
 import edu.uns.galaxian.colision.hitbox.HitBox;
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorObstaculo;
-import edu.uns.galaxian.controladores.Controlador;
+import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.entidades.EntidadViva;
-import edu.uns.galaxian.entidades.autonoma.Autonomo;
+import edu.uns.galaxian.ia.autonomo.Autonomo;
 import edu.uns.galaxian.ia.InteligenciaArtificial;
 import edu.uns.galaxian.ia.inteligencias.InteligenciaNula;
 

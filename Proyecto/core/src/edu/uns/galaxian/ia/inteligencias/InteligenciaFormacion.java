@@ -2,8 +2,7 @@ package edu.uns.galaxian.ia.inteligencias;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
-import edu.uns.galaxian.entidades.Entidad;
-import edu.uns.galaxian.entidades.autonoma.Autonomo;
+import edu.uns.galaxian.ia.autonomo.Autonomo;
 import edu.uns.galaxian.ia.InteligenciaArtificial;
 
 public class InteligenciaFormacion<T extends Autonomo> implements InteligenciaArtificial<T> {

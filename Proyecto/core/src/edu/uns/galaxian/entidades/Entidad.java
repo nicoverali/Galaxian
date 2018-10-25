@@ -2,7 +2,7 @@ package edu.uns.galaxian.entidades;
 
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.colision.Colisionable;
-import edu.uns.galaxian.entidades.status.GameObject;
+import edu.uns.galaxian.juego.GameObject;
 import edu.uns.galaxian.util.EntidadBatch;
 
 public abstract class Entidad implements Colisionable, GameObject

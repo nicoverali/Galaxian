@@ -1,7 +1,7 @@
 package edu.uns.galaxian.ia.tarea.acciones;
 
 import com.badlogic.gdx.math.Vector2;
-import edu.uns.galaxian.entidades.autonoma.AutonomoDinamico;
+import edu.uns.galaxian.ia.autonomo.AutonomoDinamico;
 import edu.uns.galaxian.ia.Blackboard;
 import edu.uns.galaxian.ia.tarea.Tarea;
 import edu.uns.galaxian.ia.utils.SteeringManager;

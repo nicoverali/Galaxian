@@ -1,4 +1,4 @@
-package edu.uns.galaxian.controladores;
+package edu.uns.galaxian.controlador;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import edu.uns.galaxian.colision.DetectorColision;

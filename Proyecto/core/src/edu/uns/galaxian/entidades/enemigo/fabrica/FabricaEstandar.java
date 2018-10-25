@@ -1,11 +1,11 @@
-package edu.uns.galaxian.entidades.autonoma.enemigo.fabrica;
+package edu.uns.galaxian.entidades.enemigo.fabrica;
 
 import com.badlogic.gdx.math.Vector2;
-import edu.uns.galaxian.controladores.Controlador;
-import edu.uns.galaxian.entidades.autonoma.enemigo.Enemigo;
+import edu.uns.galaxian.controlador.Controlador;
+import edu.uns.galaxian.entidades.enemigo.Enemigo;
 import edu.uns.galaxian.nave.NaveEnemigo;
 import edu.uns.galaxian.nave.enemigo.*;
-import edu.uns.galaxian.entidades.status.GameObject;
+import edu.uns.galaxian.juego.GameObject;
 
 public class FabricaEstandar extends FabricaEnemigos {
 

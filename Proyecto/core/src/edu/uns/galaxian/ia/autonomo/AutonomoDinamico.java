@@ -1,6 +1,4 @@
-package edu.uns.galaxian.entidades.autonoma;
-
-import com.badlogic.gdx.math.Vector2;
+package edu.uns.galaxian.ia.autonomo;
 
 public interface AutonomoDinamico extends Autonomo {
 
@@ -11,7 +9,7 @@ public interface AutonomoDinamico extends Autonomo {
     float getVelocidadMaxima();
 
     /**
-     * Retorna el utils maximo
+     * Retorna el steering maximo
      * @return Steering maximo
      */
     float getSteeringMaximo();

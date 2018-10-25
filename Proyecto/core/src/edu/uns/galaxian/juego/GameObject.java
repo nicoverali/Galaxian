@@ -1,4 +1,4 @@
-package edu.uns.galaxian.entidades.status;
+package edu.uns.galaxian.juego;
 
 import com.badlogic.gdx.math.Vector2;
 

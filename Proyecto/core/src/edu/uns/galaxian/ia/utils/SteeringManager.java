@@ -1,8 +1,8 @@
 package edu.uns.galaxian.ia.utils;
 
 import com.badlogic.gdx.math.Vector2;
-import edu.uns.galaxian.entidades.autonoma.AutonomoDinamico;
-import edu.uns.galaxian.entidades.status.GameObject;
+import edu.uns.galaxian.ia.autonomo.AutonomoDinamico;
+import edu.uns.galaxian.juego.GameObject;
 import edu.uns.galaxian.util.camino.CaminoSimple;
 
 public class SteeringManager {

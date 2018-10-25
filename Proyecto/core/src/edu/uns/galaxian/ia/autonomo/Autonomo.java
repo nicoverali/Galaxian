@@ -1,7 +1,7 @@
-package edu.uns.galaxian.entidades.autonoma;
+package edu.uns.galaxian.ia.autonomo;
 
 import com.badlogic.gdx.math.Vector2;
-import edu.uns.galaxian.entidades.status.GameObject;
+import edu.uns.galaxian.juego.GameObject;
 import edu.uns.galaxian.ia.InteligenciaArtificial;
 
 public interface Autonomo extends GameObject {

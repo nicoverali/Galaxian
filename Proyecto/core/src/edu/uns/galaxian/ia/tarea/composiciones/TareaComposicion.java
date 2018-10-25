@@ -1,6 +1,6 @@
 package edu.uns.galaxian.ia.tarea.composiciones;
 
-import edu.uns.galaxian.entidades.autonoma.Autonomo;
+import edu.uns.galaxian.ia.autonomo.Autonomo;
 import edu.uns.galaxian.ia.tarea.Tarea;
 
 import java.util.ArrayList;

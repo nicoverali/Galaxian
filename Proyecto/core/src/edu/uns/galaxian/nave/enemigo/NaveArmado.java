@@ -2,7 +2,7 @@ package edu.uns.galaxian.nave.enemigo;
 
 
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
-import edu.uns.galaxian.entidades.autonoma.enemigo.Enemigo;
+import edu.uns.galaxian.entidades.enemigo.Enemigo;
 import edu.uns.galaxian.ia.inteligencias.InteligenciaAleatoria;
 import edu.uns.galaxian.ia.InteligenciaArtificial;
 import edu.uns.galaxian.nave.NaveEnemigo;

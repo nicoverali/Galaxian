@@ -1,7 +1,7 @@
 package edu.uns.galaxian.ia.tarea.condiciones;
 
 import edu.uns.galaxian.entidades.EntidadViva;
-import edu.uns.galaxian.entidades.autonoma.Autonomo;
+import edu.uns.galaxian.ia.autonomo.Autonomo;
 import edu.uns.galaxian.ia.Blackboard;
 import edu.uns.galaxian.ia.tarea.Tarea;
 import edu.uns.galaxian.observer.Observador;

@@ -1,9 +1,8 @@
 package edu.uns.galaxian.ia.inteligencias;
 
 import com.badlogic.gdx.math.Vector2;
-import edu.uns.galaxian.entidades.Entidad;
-import edu.uns.galaxian.entidades.autonoma.Autonomo;
-import edu.uns.galaxian.entidades.autonoma.enemigo.Enemigo;
+import edu.uns.galaxian.ia.autonomo.Autonomo;
+import edu.uns.galaxian.entidades.enemigo.Enemigo;
 import edu.uns.galaxian.ia.InteligenciaArtificial;
 
 public class InteligenciaAleatoria<T extends Autonomo> implements InteligenciaArtificial<T> {

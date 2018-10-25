@@ -1,12 +1,12 @@
-package edu.uns.galaxian.entidades.autonoma.enemigo;
+package edu.uns.galaxian.entidades.enemigo;
 
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import edu.uns.galaxian.controladores.Controlador;
+import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.entidades.EntidadConNave;
-import edu.uns.galaxian.entidades.autonoma.AutonomoDinamico;
+import edu.uns.galaxian.ia.autonomo.AutonomoDinamico;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
 import edu.uns.galaxian.entidades.inanimadas.powerups.magiaTemporal.*;
