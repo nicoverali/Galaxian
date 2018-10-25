@@ -3,7 +3,7 @@ package edu.uns.galaxian.entidades.equipamiento.armas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
 
-import edu.uns.galaxian.controladores.Controlador;
+import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.entidades.inanimadas.disparos.Disparo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparo;
 

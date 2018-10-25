@@ -5,15 +5,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
-import edu.uns.galaxian.colision.colisionadores.ColisionadorObstaculo;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorObstaculoEnemigo;
 import edu.uns.galaxian.colision.hitbox.HBCirculo;
 import edu.uns.galaxian.colision.hitbox.HitBox;
-import edu.uns.galaxian.controladores.Controlador;
+import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.entidades.EntidadViva;
-import edu.uns.galaxian.entidades.autonoma.Autonomo;
-import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaArtificial;
-import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaNula;
+import edu.uns.galaxian.ia.InteligenciaArtificial;
+import edu.uns.galaxian.ia.autonomo.Autonomo;
+import edu.uns.galaxian.ia.inteligencias.basica.InteligenciaNula;
 import edu.uns.galaxian.util.EntidadBatch;
 
 public class ObstaculoEnemigo extends EntidadViva implements Autonomo {
@@ -33,7 +32,7 @@ public class ObstaculoEnemigo extends EntidadViva implements Autonomo {
 		super(new Vector2(xPos, yPos), VIDA_MAX, 0);
 		colisionador = new ColisionadorObstaculoEnemigo(this);
 		fuerzaDeColision = 100;
-		inteligencia = new InteligenciaNula();
+		inteligencia = new InteligenciaNula(this);
 	}
 	
 	
@@ -42,7 +41,7 @@ public class ObstaculoEnemigo extends EntidadViva implements Autonomo {
 		this.controlador = controlador;
 		colisionador = new ColisionadorObstaculoEnemigo(this);
 		fuerzaDeColision = 150;
-		inteligencia = new InteligenciaNula();
+		inteligencia = new InteligenciaNula(this);
 	}
 	
 	public int getFuerzaDeColision() {
@@ -53,7 +52,7 @@ public class ObstaculoEnemigo extends EntidadViva implements Autonomo {
 		if((posicion.y > Gdx.graphics.getHeight()) || (posicion.y<0) || posicion.x<0 || posicion.x>Gdx.graphics.getWidth()) {
 			restarVida(getVida().getValor());
 		}
-		inteligencia.pensar(this);
+		inteligencia.pensar(d);
 	}
 
 	public void eliminar() {
@@ -78,6 +77,10 @@ public class ObstaculoEnemigo extends EntidadViva implements Autonomo {
 
 	public void setInteligencia(InteligenciaArtificial i) {
 		inteligencia = i;
+	}
+
+	public void transicionarInteligencia(InteligenciaArtificial ia) {
+		inteligencia.transicionar(ia);
 	}
 
 	//TODO hacer

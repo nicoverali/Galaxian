@@ -2,12 +2,11 @@ package edu.uns.galaxian.servicios;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import edu.uns.galaxian.controladores.Controlador;
-import edu.uns.galaxian.entidades.autonoma.enemigo.Enemigo;
-import edu.uns.galaxian.entidades.autonoma.enemigo.fabrica.FabricaEnemigos;
-import edu.uns.galaxian.entidades.equipamiento.armas.ArmaComun;
-import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparoEnemigo;
-import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparoJugador;
+import edu.uns.galaxian.controlador.Controlador;
+import edu.uns.galaxian.entidades.enemigo.Enemigo;
+import edu.uns.galaxian.entidades.enemigo.fabrica.FabricaEnemigos;
+import edu.uns.galaxian.ia.inteligencias.basica.InteligenciaFormacion;
+import edu.uns.galaxian.ia.inteligencias.enemigo.InteligenciaFormacionDinamica;
 import edu.uns.galaxian.observer.Observador;
 import edu.uns.galaxian.observer.livedata.LiveData;
 import edu.uns.galaxian.util.enums.TipoEnemigo;
@@ -18,17 +17,17 @@ public class FormacionEnemigo implements Servicio {
 
     private static final int DISTANCIA = 35;
     private static final int MARGEN_SUPERIOR = 40;
-    private static final int LIMITE_ENEMIGOS_ATACANDO = 3;
+    private static final int LIMITE_ENEMIGOS_ATACANDO = 2;
 
     private List<List<Enemigo>> enemigos;
     private List<Enemigo> enemigosEliminados;
-    private Set<Enemigo> enemigosAtacando;
+    private Map<Enemigo, Vector2> enemigosAtacando;
     private Controlador controlador;
     private volatile boolean activado;
 
     public FormacionEnemigo(List<List<TipoEnemigo>> enemigos, FabricaEnemigos fabrica, Controlador controlador){
         this.enemigosEliminados = new ArrayList<>();
-        this.enemigosAtacando = new HashSet<>();
+        this.enemigosAtacando = new HashMap<>();
         this.controlador = controlador;
         this.enemigos = registrarEnemigos(enemigos, fabrica);
     }
@@ -69,7 +68,9 @@ public class FormacionEnemigo implements Servicio {
         int cantEnFila = enemigos.size();
         List<Enemigo> filaResultado = new ArrayList<>(cantEnFila);
         for(TipoEnemigo tipoEnemigo : enemigos){
-            final Enemigo enemigoResultado = fabrica.crearEnemigo(tipoEnemigo, formarEnemigo(numFila, columna++, cantEnFila), controlador, controlador.getJugador());
+            Vector2 posicionNuevoEnemigo = formarEnemigo(numFila, columna++, cantEnFila);
+            final Enemigo enemigoResultado = fabrica.crearEnemigo(tipoEnemigo, posicionNuevoEnemigo, controlador, controlador.getJugador());
+            enemigoResultado.setInteligencia(new InteligenciaFormacionDinamica<>(enemigoResultado, posicionNuevoEnemigo));
             filaResultado.add(enemigoResultado);
             controlador.agregarEntidad(enemigoResultado);
             enemigoResultado.getVida().observar(new Observador<LiveData<Integer>>() {
@@ -120,12 +121,24 @@ public class FormacionEnemigo implements Servicio {
      * la formacion.
      */
     private void verificarEntidadesEliminadas(){
-        if(!enemigosEliminados.isEmpty()){
+        for(Enemigo enemigoEliminado : enemigosEliminados){
             for(List<Enemigo> fila : enemigos){
-                fila.removeAll(enemigosEliminados);
+                fila.remove(enemigoEliminado);
             }
-            enemigosAtacando.removeAll(enemigosEliminados);
-            enemigosEliminados.clear();
+            enemigosAtacando.remove(enemigoEliminado);
+        }
+        enemigosEliminados.clear();
+    }
+
+    private void verificarEnemigosEnPantalla(){
+        Iterator<Enemigo> enemigosIt = enemigosAtacando.keySet().iterator();
+        while(enemigosIt.hasNext()){
+            Enemigo enemigo = enemigosIt.next();
+            if(enemigo.getPosicion().y < 0){
+                enemigo.setPosicion(enemigo.getPosicion().x, Gdx.graphics.getHeight()+50);
+                enemigo.transicionarInteligencia(new InteligenciaFormacionDinamica<>(enemigo, enemigosAtacando.get(enemigo)));
+                enemigosIt.remove();
+            }
         }
     }
 
@@ -139,7 +152,7 @@ public class FormacionEnemigo implements Servicio {
                     List<Enemigo> filaRandom = enemigos.get(random.nextInt(cantFilas));
                     Enemigo enemigoRandom = filaRandom.get(random.nextInt(filaRandom.size()));
                     enemigoRandom.atacar();
-                    enemigosAtacando.add(enemigoRandom);
+                    enemigosAtacando.put(enemigoRandom, enemigoRandom.getPosicion());
                     try{
                         Thread.sleep(2000 + random.nextInt(3000));
                     }catch (InterruptedException e){
@@ -148,6 +161,7 @@ public class FormacionEnemigo implements Servicio {
                 }
                 verificarEntidadesEliminadas();
                 verificarFilasVacias();
+                verificarEnemigosEnPantalla();
             }
         }
     }

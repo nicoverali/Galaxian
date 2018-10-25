@@ -1,7 +1,7 @@
 package edu.uns.galaxian.juego.config;
 
 import com.google.gson.Gson;
-import edu.uns.galaxian.entidades.autonoma.enemigo.fabrica.FabricaEnemigos;
+import edu.uns.galaxian.entidades.enemigo.fabrica.FabricaEnemigos;
 import edu.uns.galaxian.entidades.equipamiento.armas.*;
 import edu.uns.galaxian.entidades.equipamiento.escudos.*;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;

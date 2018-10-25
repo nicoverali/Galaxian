@@ -1,11 +1,10 @@
 package edu.uns.galaxian.entidades.inanimadas.disparos;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorDisparoEnemigo;
-import edu.uns.galaxian.controladores.Controlador;
+import edu.uns.galaxian.controlador.Controlador;
 
 public class DisparoEnemigo extends Disparo {
 	

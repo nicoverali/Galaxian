@@ -2,7 +2,7 @@ package edu.uns.galaxian.colision.hitbox;
 
 import com.badlogic.gdx.math.Vector2;
 
-import edu.uns.galaxian.entidades.status.GameObject;
+import edu.uns.galaxian.juego.GameObject;
 
 public class HBRectangulo implements HitBox {
 	

@@ -1,7 +1,9 @@
 package edu.uns.galaxian.nave;
 
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
-import edu.uns.galaxian.entidades.autonoma.ia.InteligenciaArtificial;
+import edu.uns.galaxian.entidades.enemigo.Enemigo;
+import edu.uns.galaxian.entidades.jugador.Jugador;
+import edu.uns.galaxian.ia.InteligenciaArtificial;
 import edu.uns.galaxian.entidades.equipamiento.armas.ArmaComun;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparoEnemigo;
@@ -25,7 +27,7 @@ public abstract class NaveEnemigo extends Nave<DisparoEnemigo> {
      * Retorna la inteligencia de ataque de la nave
      * @return Inteligencia de ataque
      */
-    public abstract InteligenciaArtificial getInteligenciaAtaque();
+    public abstract InteligenciaArtificial getInteligenciaAtaque(Enemigo enemigo, Jugador jugador);
 
     /**
      * La nave acepta entrar en un estado de colision. Recibe
@@ -43,8 +45,8 @@ public abstract class NaveEnemigo extends Nave<DisparoEnemigo> {
     }
 
     /**
-     * Retorna la capacidad de steering maxima de la nave
-     * @return Capacidad de steering
+     * Retorna la capacidad de utils maxima de la nave
+     * @return Capacidad de utils
      */
     public float getSteeringMax(){
         return steeringMax;

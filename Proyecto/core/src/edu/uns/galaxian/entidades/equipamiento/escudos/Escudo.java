@@ -4,7 +4,7 @@ import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorEscudo;
 import edu.uns.galaxian.colision.hitbox.HBCirculo;
 import edu.uns.galaxian.colision.hitbox.HitBox;
-import edu.uns.galaxian.controladores.Controlador;
+import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.entidades.Entidad;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 import edu.uns.galaxian.util.EntidadBatch;

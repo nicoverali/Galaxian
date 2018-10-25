@@ -6,13 +6,14 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 import com.badlogic.gdx.math.Vector2;
-import edu.uns.galaxian.controladores.*;
+import edu.uns.galaxian.controlador.*;
+import edu.uns.galaxian.servicios.FormacionEnemigo;
+import edu.uns.galaxian.servicios.GeneracionObstaculo;
+import edu.uns.galaxian.servicios.ServicioDeDesarrollo;
 import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 import edu.uns.galaxian.escenario.Background;
 import edu.uns.galaxian.juego.config.ConfigNivel;
-import edu.uns.galaxian.servicios.FormacionEnemigo;
-import edu.uns.galaxian.servicios.GeneracionObstaculo;
 import edu.uns.galaxian.servicios.Servicio;
 import edu.uns.galaxian.util.enums.TipoEnemigo;
 import java.util.*;
@@ -41,11 +42,12 @@ public class Nivel extends ScreenAdapter {
         controlador.agregarJugador(jugador);
         servicios = new LinkedList<>();
         FormacionEnemigo formacion = new FormacionEnemigo(formacionRandom(), config.getFabricaEnemigos(), controlador);
-        formacion.activar();
         GeneracionObstaculo obstaculos = new GeneracionObstaculo(controlador);
-        obstaculos.activar();
         servicios.add(formacion);
         servicios.add(obstaculos);
+        formacion.activar();
+        obstaculos.activar();
+        //new ServicioDeDesarrollo(controlador, config.getFabricaEnemigos()).activar();
         //El marcador
         score= new BitmapFont();
         time= new BitmapFont();

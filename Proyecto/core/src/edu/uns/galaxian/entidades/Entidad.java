@@ -2,7 +2,7 @@ package edu.uns.galaxian.entidades;
 
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.colision.Colisionable;
-import edu.uns.galaxian.entidades.status.GameObject;
+import edu.uns.galaxian.juego.GameObject;
 import edu.uns.galaxian.util.EntidadBatch;
 
 public abstract class Entidad implements Colisionable, GameObject
@@ -56,6 +56,9 @@ public abstract class Entidad implements Colisionable, GameObject
 	 */
 	public void setRotacion(float nuevaRotacion){
 		rotacion = nuevaRotacion;
+		if(rotacion > 360){
+			rotacion -= 360;
+		}
 	}
 
 	/**
@@ -63,7 +66,7 @@ public abstract class Entidad implements Colisionable, GameObject
 	 * @return Posicion actual de la entidad
 	 */
 	public Vector2 getPosicion() {
-		return posicion;
+		return posicion.cpy();
 	}
 
 	/**
@@ -71,7 +74,7 @@ public abstract class Entidad implements Colisionable, GameObject
 	 * @return Velocidad actual de la entidad
 	 */
 	public Vector2 getVelocidad() {
-		return velocidad;
+		return velocidad.cpy();
 	}
 
 	/**
