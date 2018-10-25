@@ -7,7 +7,6 @@ import edu.uns.galaxian.entidades.autonoma.enemigo.fabrica.FabricaEstandar;
 import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
 import edu.uns.galaxian.entidades.equipamiento.armas.ArmaComun;
 import edu.uns.galaxian.entidades.equipamiento.escudos.Escudo;
-import edu.uns.galaxian.entidades.equipamiento.escudos.EscudoNulo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
 import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparoJugador;
 import edu.uns.galaxian.juego.config.GameData;

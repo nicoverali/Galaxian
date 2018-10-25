@@ -1,11 +1,9 @@
 package edu.uns.galaxian.entidades.inanimadas.powerups;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
-import edu.uns.galaxian.colision.hitbox.HBCirculo;
 import edu.uns.galaxian.colision.hitbox.HitBox;
 import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorPowerUp;
@@ -19,7 +17,7 @@ public abstract class PowerUp extends Entidad {
 	protected Controlador controlador;
 	protected ColisionadorPowerUp colisionador;
 	protected TextureRegion textura;
-	protected HBCirculo box;
+	protected HitBox box;
 	
 	public PowerUp(Vector2 posicion, Vector2 velocidad, float rotacion, Controlador controlador){
 		super(posicion, velocidad,  rotacion);

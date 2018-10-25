@@ -65,7 +65,7 @@ public class ObstaculoEnemigo extends EntidadViva implements Autonomo {
 	}
 
 	public void aceptarColision(Colisionador colisionador) {
-		colisionador.colisionarObstaculoEnemigo(this);
+		colisionador.colisionarConBarricada(this);
 	}
 
 	public Colisionador getColisionador() {

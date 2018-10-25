@@ -6,10 +6,9 @@ import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
 import edu.uns.galaxian.entidades.inanimadas.obstaculos.Obstaculo;
 import edu.uns.galaxian.entidades.inanimadas.obstaculos.ObstaculoEnemigo;
-import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
-public class ColisionadorObstaculo implements Colisionador<Obstaculo> {
+public class ColisionadorObstaculo extends ColisionadorNulo<Obstaculo> {
 	
 	private Obstaculo objetoFuente;
 	
@@ -18,7 +17,7 @@ public class ColisionadorObstaculo implements Colisionador<Obstaculo> {
 	}
 
 	public void colisionarConJugador(Jugador jugador) {
-		// El obstaculo no se encarga de quitarle vida al jugador.
+		// TODO Falta ver si el obstaculo va a restarse vida.
 	}
 
 	public void colisionarConEnemigo(Enemigo enemigo) {
@@ -37,18 +36,11 @@ public class ColisionadorObstaculo implements Colisionador<Obstaculo> {
 		objetoFuente.restarVida(obstaculo.getFuerzaDeColision());
 	}
 
-	public void colisionarConPowerUp(PowerUp powerUp) {
-		// Un obstaculo no afecta a un powerUp.
+	public void colisionarConEscudo(Escudo escudo) {
+		// TODO Falta ver si el escudo afecta a un obstaculo.
 	}
 
-	@Override
-	public void colisionarEscudo(Escudo escudo) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void colisionarObstaculoEnemigo(ObstaculoEnemigo obstaculoEnemigo) {
+	public void colisionarConBarricada(ObstaculoEnemigo obstaculoEnemigo) {
 		objetoFuente.restarVida(obstaculoEnemigo.getFuerzaDeColision());		
 	}
 

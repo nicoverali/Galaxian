@@ -51,11 +51,11 @@ public interface Colisionador<T> {
 	 * Comportamiento al momento de colisionar con un escudo
 	 * @param escudo Escudo con el que se lo colisiono
 	 */
-	void colisionarEscudo(Escudo escudo);
+	void colisionarConEscudo(Escudo escudo);
 	
 	/**
 	 * Comportamiento al momento de colisionar con obstaculo del enemigo
 	 * @param obstaculoEnemigo Obstaculo Enemigo con el que se colisiono
 	 */
-	void colisionarObstaculoEnemigo(ObstaculoEnemigo obstaculoEnemigo);
+	void colisionarConBarricada(ObstaculoEnemigo obstaculoEnemigo);
 }

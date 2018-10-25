@@ -1,15 +1,11 @@
 package edu.uns.galaxian.colision.colisionadores;
 
-import edu.uns.galaxian.entidades.autonoma.enemigo.Enemigo;
-import edu.uns.galaxian.entidades.equipamiento.escudos.Escudo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
-import edu.uns.galaxian.entidades.inanimadas.obstaculos.Obstaculo;
-import edu.uns.galaxian.entidades.inanimadas.obstaculos.ObstaculoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
-public class ColisionadorPowerUp implements Colisionador<PowerUp> {
+public class ColisionadorPowerUp extends ColisionadorNulo<PowerUp> {
 
 	private PowerUp objetoFuente;
 
@@ -22,36 +18,12 @@ public class ColisionadorPowerUp implements Colisionador<PowerUp> {
 		objetoFuente.eliminar();
 	}
 
-	public void colisionarConEnemigo(Enemigo enemigo) {
-		// Un powerUp no beneficia a un enemigo.
-	}
-
 	public void colisionarConDisparoJugador(DisparoJugador disparo) {
-		// Un disparo no afecta al powerUp.
+		// TODO Decidir si un disparo jugador va a afectar al powerUp.
 	}
 
 	public void colisionarConDisparoEnemigo(DisparoEnemigo disparo) {
-		// Un disparo no afecta al powerUp.
-	}
-
-	public void colisionarConObstaculo(Obstaculo obstaculo) {
-		// Un obstaculo no afecta al powerUp.
-	}
-	
-	public void colisionarConPowerUp(PowerUp powerUp) {
-		// Un powerUp no afecta a otro.
-	}
-
-	@Override
-	public void colisionarEscudo(Escudo escudo) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void colisionarObstaculoEnemigo(ObstaculoEnemigo obstaculoEnemigo) {
-		// TODO Auto-generated method stub
-		
+		// TODO Decidir si un disparo enemigo va a afectar al powerUp.
 	}
 
 }
