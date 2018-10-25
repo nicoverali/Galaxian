@@ -10,7 +10,7 @@ import edu.uns.galaxian.entidades.status.GameObject;
 public class FabricaEstandar extends FabricaEnemigos {
 
 	public Enemigo getKamikaze(Vector2 posicion, Controlador controlador, GameObject jugador) {
-		NaveEnemigo nave = new NaveKamikaze(150, 200,10, 100);
+		NaveEnemigo nave = new NaveKamikaze(150, 400,15, 100);
 		return new Enemigo(posicion, nave, controlador);
 	}
 

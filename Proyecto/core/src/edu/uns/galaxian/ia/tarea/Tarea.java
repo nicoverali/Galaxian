@@ -7,8 +7,9 @@ public interface Tarea<T extends Autonomo> {
     /**
      * Realiza la tarea retornando verdadero si finalizo satisfactoriamente,
      * o falso en caso contrario.
+     * @param delta DeltaTime
      * @return Estado final de la tarea
      */
-    boolean realizar();
+    boolean realizar(float delta);
 
 }

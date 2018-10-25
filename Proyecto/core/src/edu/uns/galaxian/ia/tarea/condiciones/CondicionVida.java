@@ -16,20 +16,21 @@ public class CondicionVida<T extends EntidadViva & Autonomo> implements Tarea<T>
     private int vidaObjetivo;
     private boolean seCumpleCondicion;
 
-    public CondicionVida(Blackboard<T> blackboard, int vidaObjetivo, Comparacion comparacion){
+    public CondicionVida(Blackboard<T> blackboard, final int vidaObjetivo, final Comparacion comparacion){
         this.bboard = blackboard;
         this.vidaObjetivo = vidaObjetivo;
         this.comparacion = comparacion;
-        seCumpleCondicion = Comparador.compararNumero(bboard.getAutonomo().getVida().getValor(), vidaObjetivo, comparacion);
+        final T autonomoVivo = bboard.getAutonomo();
+        seCumpleCondicion = Comparador.compararNumero(autonomoVivo.getVida().getValor(), vidaObjetivo, comparacion);
 
         blackboard.getAutonomo().getVida().observar(new Observador<LiveData<Integer>>() {
             public void notificar(LiveData<Integer> subject) {
-                seCumpleCondicion = Comparador.compararNumero(CondicionVida.this.bboard.getAutonomo().getVida().getValor(), CondicionVida.this.vidaObjetivo, CondicionVida.this.comparacion);
+                seCumpleCondicion = Comparador.compararNumero(autonomoVivo.getVida().getValor(), vidaObjetivo, comparacion);
             }
         });
     }
 
-    public boolean realizar() {
+    public boolean realizar(float delta) {
         return seCumpleCondicion;
     }
 }

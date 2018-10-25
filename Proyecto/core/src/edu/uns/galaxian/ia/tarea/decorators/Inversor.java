@@ -9,7 +9,7 @@ public class Inversor<T extends Autonomo> extends TareaDecorator<T> {
         super(tareaDecorada);
     }
 
-    public boolean realizar() {
-        return !tareaDecorada.realizar();
+    public boolean realizar(float delta) {
+        return !tareaDecorada.realizar(delta);
     }
 }

@@ -15,9 +15,9 @@ public class Secuencia<T extends Autonomo> extends TareaComposicion<T> {
         super();
     }
 
-    public boolean realizar() {
+    public boolean realizar(float delta) {
         for(Tarea tarea : tareas){
-            if(tarea.realizar() == false){
+            if(tarea.realizar(delta) == false){
                 return false;
             }
         }

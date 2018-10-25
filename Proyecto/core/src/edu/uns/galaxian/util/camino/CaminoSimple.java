@@ -72,4 +72,22 @@ public class CaminoSimple {
         Collections.reverse(paradas);
         paradaActual = paradas.size() - paradaActual;
     }
+
+    /**
+     * Agrega una nueva parada al final del camino
+     * @param parada Nueva parada
+     */
+    public void agregarUltimaParada(Vector2 parada){
+        paradas.add(parada);
+    }
+
+    /**
+     * Agrega una nueva parada al comienzo del camino
+     * @param parada Nueva parada
+     */
+    public void agregarPrimerParada(Vector2 parada){
+        paradas.add(0, parada);
+        if(paradaActual > 0) paradaActual++;
+    }
+
 }

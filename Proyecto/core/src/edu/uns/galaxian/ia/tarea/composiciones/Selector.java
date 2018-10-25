@@ -15,9 +15,9 @@ public class Selector<T extends Autonomo> extends TareaComposicion<T> {
         super();
     }
 
-    public boolean realizar(){
+    public boolean realizar(float delta){
         for(Tarea tarea : tareas){
-            if(tarea.realizar() == true){
+            if(tarea.realizar(delta) == true){
                 return true;
             }
         }

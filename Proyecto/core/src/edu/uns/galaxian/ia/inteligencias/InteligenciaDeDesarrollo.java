@@ -5,9 +5,14 @@ import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.entidades.autonoma.AutonomoDinamico;
 import edu.uns.galaxian.entidades.autonoma.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.status.GameObject;
+import edu.uns.galaxian.ia.Blackboard;
 import edu.uns.galaxian.ia.InteligenciaArtificial;
+import edu.uns.galaxian.ia.tarea.acciones.PathFollowSimple;
 import edu.uns.galaxian.ia.utils.SteeringManager;
 import edu.uns.galaxian.util.camino.CaminoSimple;
+import edu.uns.galaxian.util.camino.simple.CaminoAleatorio;
+import edu.uns.galaxian.util.camino.simple.CaminoCircular;
+import edu.uns.galaxian.util.enums.Direccion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +23,10 @@ public class InteligenciaDeDesarrollo implements InteligenciaArtificial {
     private SteeringManager steeringManager;
     private GameObject target;
     private CaminoSimple camino;
+    private PathFollowSimple<AutonomoDinamico> pathFollow;
+    private PathFollowSimple<AutonomoDinamico> pathFollow2;
+    private PathFollowSimple<AutonomoDinamico> pathFollow3;
+
 
     public InteligenciaDeDesarrollo(AutonomoDinamico autonomoDinamico, GameObject target){
         this.autonomoDinamico = autonomoDinamico;
@@ -37,12 +46,18 @@ public class InteligenciaDeDesarrollo implements InteligenciaArtificial {
         paradas.add(parada5);
         paradas.add(parada6);
         camino = new CaminoSimple(paradas);
+        pathFollow = new PathFollowSimple<>(new Blackboard<>(autonomoDinamico), new CaminoCircular(autonomoDinamico.getPosicion(), 250, Direccion.IZQUIERDA, true, 85424), 2);
+        pathFollow2 = new PathFollowSimple<>(new Blackboard<>(autonomoDinamico), new CaminoCircular(autonomoDinamico.getPosicion(), 100, Direccion.ARRIBA, false, 270), 3);
+        pathFollow3 = new PathFollowSimple<>(new Blackboard<>(autonomoDinamico), new CaminoAleatorio(autonomoDinamico.getPosicion(), Direccion.ARRIBA, Gdx.graphics.getWidth()-500, 700, 70), 1);
     }
 
     public void pensar(float delta) {
-        Vector2 steering = steeringManager.followPath( autonomoDinamico, camino, 20);
-        autonomoDinamico.setPosicion(autonomoDinamico.getPosicion().add(autonomoDinamico.getVelocidad().scl(Gdx.graphics.getDeltaTime())));
-        autonomoDinamico.setVelocidad(autonomoDinamico.getVelocidad().add(steering).limit(autonomoDinamico.getVelocidadMaxima()));
+        /*if(pathFollow.realizar(delta)){
+
+        }else{
+            pathFollow2.realizar(delta);
+        }*/
+        pathFollow3.realizar(delta);
         float steeringAngular = steeringManager.mirarA(autonomoDinamico, target);
         autonomoDinamico.setRotacion(autonomoDinamico.getRotacion()+steeringAngular * Gdx.graphics.getDeltaTime());
         ((Enemigo)autonomoDinamico).disparar();

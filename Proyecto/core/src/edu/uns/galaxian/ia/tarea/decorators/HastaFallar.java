@@ -9,8 +9,8 @@ public class HastaFallar<T extends Autonomo> extends TareaDecorator<T> {
         super(tareaDecorada);
     }
 
-    public boolean realizar() {
-        while(tareaDecorada.realizar() == false){
+    public boolean realizar(float delta) {
+        while(tareaDecorada.realizar(delta) == false){
             // Seguir realizandola
         }
         return false;

@@ -15,10 +15,10 @@ public class Paralela<T extends Autonomo> extends TareaComposicion<T> {
         super();
     }
 
-    public boolean realizar() {
+    public boolean realizar(float delta) {
         boolean resultado = true;
         for(Tarea tarea : tareas){
-            resultado = resultado && tarea.realizar();
+            resultado = resultado && tarea.realizar(delta);
         }
         return resultado;
     }

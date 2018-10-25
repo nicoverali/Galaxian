@@ -1,5 +1,6 @@
 package edu.uns.galaxian.ia.tarea.acciones;
 
+import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.entidades.autonoma.Autonomo;
 import edu.uns.galaxian.entidades.autonoma.AutonomoDinamico;
 import edu.uns.galaxian.ia.Blackboard;
@@ -13,19 +14,18 @@ public class Seek<T extends AutonomoDinamico> implements Tarea<T> {
 
     public Seek(Blackboard<T> blackboard){
         this.blackboard = blackboard;
-        //this.utils = new Steering();
+        steering = new SteeringManager();
     }
 
-    public boolean realizar() {
+    public boolean realizar(float delta) {
         if(blackboard.getObjetivo() == null){
             return false;
         }
-        Autonomo autonomo = blackboard.getAutonomo();
-        /*utils.iniciarSteering(autonomo);
-        utils.seek(blackboard.getObjetivo().getPosicion(), 50);
-        Vector2 velocidadFinal = utils.finalizarSteering();
-        autonomo.setVelocidad(velocidadFinal);
-        autonomo.setPosicion(autonomo.getPosicion().add(velocidadFinal.scl(Gdx.graphics.getDeltaTime())));*/
+        AutonomoDinamico autonomo = blackboard.getAutonomo();
+        SteeringManager steering = blackboard.getSteeringManager();
+        Vector2 steeringVector = steering.seek(autonomo, blackboard.getObjetivo());
+        autonomo.setVelocidad(autonomo.getVelocidad().add(steeringVector).limit(autonomo.getVelocidadMaxima()));
+        autonomo.setPosicion(autonomo.getPosicion().add(autonomo.getVelocidad().scl(delta)));
         return true;
     }
 }
