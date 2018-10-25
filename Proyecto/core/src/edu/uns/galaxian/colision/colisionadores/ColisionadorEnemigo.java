@@ -28,7 +28,7 @@ public class ColisionadorEnemigo extends ColisionadorNulo<Enemigo> {
 	}
 
 	public void colisionarConEscudo(Escudo escudo) {
-		objetoFuente.eliminar();
+		objetoFuente.restarVida(objetoFuente.getVida().getValor());
 	}
 
 	public void colisionarConBarricada(ObstaculoEnemigo obstaculoEnemigo) {
