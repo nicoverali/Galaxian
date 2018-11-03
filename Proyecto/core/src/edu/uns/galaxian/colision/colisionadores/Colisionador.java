@@ -5,7 +5,7 @@ import edu.uns.galaxian.entidades.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
 import edu.uns.galaxian.entidades.inanimadas.obstaculos.Obstaculo;
-import edu.uns.galaxian.entidades.inanimadas.obstaculos.ObstaculoEnemigo;
+import edu.uns.galaxian.entidades.inanimadas.obstaculos.Barricada;
 import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
@@ -57,5 +57,5 @@ public interface Colisionador<T> {
 	 * Comportamiento al momento de colisionar con obstaculo del enemigo
 	 * @param obstaculoEnemigo Obstaculo Enemigo con el que se colisiono
 	 */
-	void colisionarConBarricada(ObstaculoEnemigo obstaculoEnemigo);
+	void colisionarConBarricada(Barricada obstaculoEnemigo);
 }

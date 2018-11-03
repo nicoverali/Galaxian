@@ -4,13 +4,14 @@ import edu.uns.galaxian.entidades.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
 import edu.uns.galaxian.entidades.inanimadas.obstaculos.Obstaculo;
-import edu.uns.galaxian.entidades.inanimadas.obstaculos.ObstaculoEnemigo;
+import edu.uns.galaxian.entidades.inanimadas.obstaculos.Barricada;
 
-public class ColisionadorObstaculoEnemigo extends ColisionadorNulo<ObstaculoEnemigo> {
+public class ColisionadorBarricada extends ColisionadorObstaculo {
 	
-	private ObstaculoEnemigo objetoFuente;
+	private Barricada objetoFuente;
 	
-	public ColisionadorObstaculoEnemigo(ObstaculoEnemigo obstaculoEnemigo) {
+	public ColisionadorBarricada(Barricada obstaculoEnemigo) {
+		super(obstaculoEnemigo);
 		objetoFuente = obstaculoEnemigo;
 	}
 
@@ -30,4 +31,6 @@ public class ColisionadorObstaculoEnemigo extends ColisionadorNulo<ObstaculoEnem
 		objetoFuente.restarVida(obstaculo.getFuerzaDeColision());
 	}
 
+	public void colisionarConBarricada(Barricada obstaculoEnemigo) {}
+	
 }

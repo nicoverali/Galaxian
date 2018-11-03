@@ -4,7 +4,7 @@ import edu.uns.galaxian.entidades.equipamiento.escudos.Escudo;
 import edu.uns.galaxian.entidades.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
 import edu.uns.galaxian.entidades.inanimadas.obstaculos.Obstaculo;
-import edu.uns.galaxian.entidades.inanimadas.obstaculos.ObstaculoEnemigo;
+import edu.uns.galaxian.entidades.inanimadas.obstaculos.Barricada;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
 public class ColisionadorEnemigo extends ColisionadorNulo<Enemigo> {
@@ -31,7 +31,7 @@ public class ColisionadorEnemigo extends ColisionadorNulo<Enemigo> {
 		objetoFuente.restarVida(objetoFuente.getVida().getValor());
 	}
 
-	public void colisionarConBarricada(ObstaculoEnemigo obstaculoEnemigo) {
+	public void colisionarConBarricada(Barricada obstaculoEnemigo) {
 		objetoFuente.restarVida(obstaculoEnemigo.getFuerzaDeColision());
 	}
 	

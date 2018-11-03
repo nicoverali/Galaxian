@@ -5,12 +5,12 @@ import edu.uns.galaxian.entidades.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
 import edu.uns.galaxian.entidades.inanimadas.obstaculos.Obstaculo;
-import edu.uns.galaxian.entidades.inanimadas.obstaculos.ObstaculoEnemigo;
+import edu.uns.galaxian.entidades.inanimadas.obstaculos.Barricada;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
 public class ColisionadorObstaculo extends ColisionadorNulo<Obstaculo> {
 	
-	private Obstaculo objetoFuente;
+	protected Obstaculo objetoFuente;
 	
 	public ColisionadorObstaculo(Obstaculo obstaculo) {
 		objetoFuente = obstaculo;
@@ -40,7 +40,7 @@ public class ColisionadorObstaculo extends ColisionadorNulo<Obstaculo> {
 		// TODO Falta ver si el escudo afecta a un obstaculo.
 	}
 
-	public void colisionarConBarricada(ObstaculoEnemigo obstaculoEnemigo) {
+	public void colisionarConBarricada(Barricada obstaculoEnemigo) {
 		objetoFuente.restarVida(obstaculoEnemigo.getFuerzaDeColision());		
 	}
 
