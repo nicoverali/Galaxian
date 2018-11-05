@@ -32,16 +32,16 @@ public class ColisionadorObstaculo extends ColisionadorNulo<Obstaculo> {
 		objetoFuente.restarVida(disparo.getFuerzaDeDisparo());
 	}
 
+	public void colisionarConEscudo(Escudo escudo) {
+		// TODO Falta ver si el escudo afecta a un obstaculo.
+	}
+	
 	public void colisionarConObstaculo(Obstaculo obstaculo) {
 		objetoFuente.restarVida(obstaculo.getFuerzaDeColision());
 	}
 
-	public void colisionarConEscudo(Escudo escudo) {
-		// TODO Falta ver si el escudo afecta a un obstaculo.
-	}
-
 	public void colisionarConBarricada(Barricada obstaculoEnemigo) {
-		objetoFuente.restarVida(obstaculoEnemigo.getFuerzaDeColision());		
+		objetoFuente.restarVida(obstaculoEnemigo.getFuerzaDeColision());
 	}
 
 }
