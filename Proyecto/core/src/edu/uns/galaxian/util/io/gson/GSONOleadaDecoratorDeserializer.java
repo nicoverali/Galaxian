@@ -2,7 +2,7 @@ package edu.uns.galaxian.util.io.gson;
 
 import com.google.gson.*;
 import edu.uns.galaxian.controlador.Controlador;
-import edu.uns.galaxian.servicios.*;
+import edu.uns.galaxian.oleada.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
@@ -16,14 +16,6 @@ public class GSONOleadaDecoratorDeserializer implements JsonDeserializer<Oleada>
     public GSONOleadaDecoratorDeserializer(Oleada oleadaPrincipal, Controlador controlador){
         this.controlador = controlador;
         oleadaActual = oleadaPrincipal;
-    }
-
-    public GSONOleadaDecoratorDeserializer(Controlador controlador){
-        this(null, controlador);
-    }
-
-    public void setOleadaPrincipal(Oleada principal){
-        oleadaActual = principal;
     }
 
     public Oleada deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {

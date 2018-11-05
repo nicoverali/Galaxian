@@ -5,8 +5,8 @@ import com.google.gson.*;
 import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.entidades.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.enemigo.fabrica.FabricaEnemigos;
-import edu.uns.galaxian.servicios.FormacionEnemigo;
-import edu.uns.galaxian.servicios.*;
+import edu.uns.galaxian.juego.nivel.Nivel;
+import edu.uns.galaxian.oleada.*;
 import edu.uns.galaxian.util.enums.TipoEnemigo;
 import edu.uns.galaxian.util.io.gson.*;
 
@@ -22,21 +22,21 @@ public class CargadorOleada {
         globalGson = crearGson();
     }
 
-    public Oleada cargarOleada(JsonObject oleadaJson, Controlador controlador){
+    public Oleada cargarOleada(JsonObject oleadaJson, Controlador controlador, Nivel nivel){
         JsonObject configOleada = oleadaJson.getAsJsonObject(CONFIG_OLEADA);
         JsonArray decoratorsOleada = oleadaJson.getAsJsonArray(DECORATORS);
-        Gson gsonOleada = crearGsonConfigOleada(configOleada, controlador);
+        Gson gsonOleada = crearGsonConfigOleada(configOleada, controlador, nivel);
         Oleada oleada = gsonOleada.fromJson(oleadaJson.get(OLEADA), Oleada.class);
         oleada = crearOleadaDecorators(oleada, decoratorsOleada, controlador);
         return oleada;
     }
 
-    private Gson crearGsonConfigOleada(JsonObject oleadaConfig, Controlador controlador){
+    private Gson crearGsonConfigOleada(JsonObject oleadaConfig, Controlador controlador, Nivel nivel){
         GsonBuilder builder = new GsonBuilder();
         FabricaEnemigos fabrica = globalGson.fromJson(oleadaConfig.get(FABRICA), FabricaEnemigos.class);
         if(oleadaConfig.has(FORMACION)){
-            Class<?>[] tiposArgumentos = new Class[]{List.class, Controlador.class};
-            Object[] argumentos = new Object[]{leerFormacion(oleadaConfig.getAsJsonArray(FORMACION), fabrica, controlador), controlador};
+            Class<?>[] tiposArgumentos = new Class[]{List.class, Controlador.class, Nivel.class};
+            Object[] argumentos = new Object[]{leerFormacion(oleadaConfig.getAsJsonArray(FORMACION), fabrica, controlador), controlador, nivel};
             builder.registerTypeAdapter(Oleada.class, new GSONClassDeserializer<>(tiposArgumentos, argumentos));
         }
         return builder.create();

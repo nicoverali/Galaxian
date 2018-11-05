@@ -1,50 +1,65 @@
-package edu.uns.galaxian.servicios;
+package edu.uns.galaxian.oleada;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.entidades.enemigo.Enemigo;
-import edu.uns.galaxian.entidades.enemigo.fabrica.FabricaEnemigos;
 import edu.uns.galaxian.ia.inteligencias.enemigo.InteligenciaFormacionDinamica;
+import edu.uns.galaxian.juego.nivel.Nivel;
 import edu.uns.galaxian.observer.Observador;
 import edu.uns.galaxian.observer.livedata.LiveData;
-import edu.uns.galaxian.util.enums.TipoEnemigo;
+import edu.uns.galaxian.util.Temporizador;
 
 import java.util.*;
 
-public class FormacionEnemigo implements Oleada {
+public class OleadaFormacion implements Oleada {
 
     private static final int DISTANCIA = 35;
     private static final int MARGEN_SUPERIOR = 40;
     private static final int LIMITE_ENEMIGOS_ATACANDO = 3;
 
     private List<List<Enemigo>> enemigos;
-    private List<Enemigo> enemigosEliminados;
     private Map<Enemigo, Vector2> enemigosAtacando;
+    private Temporizador temporizador;
     private Controlador controlador;
-    private volatile boolean iniciado;
+    private boolean iniciado;
+    private Nivel nivel;
 
-    public FormacionEnemigo(List<List<Enemigo>> enemigos, Controlador controlador){
-        this.enemigosEliminados = new ArrayList<>();
-        this.enemigosAtacando = new HashMap<>();
+    public OleadaFormacion(List<List<Enemigo>> enemigos, Controlador controlador, Nivel nivel){
         this.controlador = controlador;
         this.enemigos = enemigos;
+        this.nivel = nivel;
+        enemigosAtacando = new HashMap<>();
+        temporizador = new Temporizador();
         registrarEnemigos(enemigos);
     }
 
     public void iniciar() throws IllegalStateException {
         if(iniciado) throw new IllegalStateException("La oleada no puede iniciado si ya esta iniciada.");
         iniciado = true;
-        new Thread(new RunnableFormacion()).start();
     }
 
-    public void pausar(){
-        if(!iniciado) throw new IllegalStateException("La oleada no puede pausarse si no esta iniciada.");
+    public void actualizar(float delta) throws IllegalStateException{
+        if(!iniciado) throw new IllegalStateException("La oleada no puede actualizarse si no esta iniciada.");
+        verificarEnemigosEnPantalla();
+        if(enemigos.isEmpty()){
+            nivel.oleadaFinalizada();
+        }
+        else if(enemigosAtacando.size() <= LIMITE_ENEMIGOS_ATACANDO && temporizador.tiempoCumplido()){
+            Random random = new Random();
+            int cantFilas = enemigos.size();
+            List<Enemigo> filaRandom = enemigos.get(random.nextInt(cantFilas));
+            Enemigo enemigoRandom = filaRandom.get(random.nextInt(filaRandom.size()));
+            enemigoRandom.atacar();
+            enemigosAtacando.put(enemigoRandom, enemigoRandom.getPosicion());
+            temporizador.iniciar(2000 + random.nextInt(3000));
+        }
     }
 
     public void finalizar() throws IllegalStateException{
         if(!iniciado) throw new IllegalStateException("La oleada no puede finalizar si no esta iniciada.");
         iniciado = false;
+        enemigos.clear();
     }
 
     /**
@@ -63,7 +78,7 @@ public class FormacionEnemigo implements Oleada {
                     public void notificar(LiveData<Integer> subject) {
                         if(subject.getValor() == 0){
                             subject.removerObservador(this);
-                            enemigosEliminados.add(enemigo);
+                            eliminarEnemigo(enemigo);
                         }
                     }
                 });
@@ -89,34 +104,29 @@ public class FormacionEnemigo implements Oleada {
     }
 
     /**
-     * Verifica que no haya filas vacias por enemigos
-     * que se eliminaron. Si encuentra alguna elimina esta fila.
+     * Elimina un enemigo de la lista de enemigos
+     * @param enemigo Enemigo a eliminar
      */
-    private void verificarFilasVacias(){
-        Iterator<List<Enemigo>> ItFila = enemigos.iterator();
-        while(ItFila.hasNext()){
-            List<Enemigo> fila = ItFila.next();
-            if(fila.isEmpty()){
-                ItFila.remove();
+    private void eliminarEnemigo(Enemigo enemigo){
+        Iterator<List<Enemigo>> filasIt = enemigos.iterator();
+        while(filasIt.hasNext()){
+            List<Enemigo> fila = filasIt.next();
+            if(fila.contains(enemigo)){
+                fila.remove(enemigo);
+                if(fila.isEmpty()){
+                    filasIt.remove();
+                }
+                break;
             }
         }
     }
 
     /**
-     * Verifica si alguno de los enemigos de la formacion
-     * fue eliminado, y en ese caso lo elimina de la lista de
-     * la formacion.
+     * Verifica que los enemigos que esten atacando
+     * sigan dentro de los limites de la pantalla.
+     * En caso de que no este dentro, los coloca en la
+     * formacion
      */
-    private void verificarEntidadesEliminadas(){
-        for(Enemigo enemigoEliminado : enemigosEliminados){
-            for(List<Enemigo> fila : enemigos){
-                fila.remove(enemigoEliminado);
-            }
-            enemigosAtacando.remove(enemigoEliminado);
-        }
-        enemigosEliminados.clear();
-    }
-
     private void verificarEnemigosEnPantalla(){
         Iterator<Enemigo> enemigosIt = enemigosAtacando.keySet().iterator();
         while(enemigosIt.hasNext()){
@@ -125,30 +135,6 @@ public class FormacionEnemigo implements Oleada {
                 enemigo.setPosicion(enemigo.getPosicion().x, Gdx.graphics.getHeight()+50);
                 enemigo.transicionarInteligencia(new InteligenciaFormacionDinamica<>(enemigo, enemigosAtacando.get(enemigo)));
                 enemigosIt.remove();
-            }
-        }
-    }
-
-    private class RunnableFormacion implements Runnable{
-        public void run(){
-            Random random = new Random();
-            while(iniciado && !enemigos.isEmpty()){
-                // TODO Se deberia setear un estado de ataque normal
-                if(enemigosAtacando.size() <= LIMITE_ENEMIGOS_ATACANDO){
-                    int cantFilas = enemigos.size();
-                    List<Enemigo> filaRandom = enemigos.get(random.nextInt(cantFilas));
-                    Enemigo enemigoRandom = filaRandom.get(random.nextInt(filaRandom.size()));
-                    enemigoRandom.atacar();
-                    enemigosAtacando.put(enemigoRandom, enemigoRandom.getPosicion());
-                    try{
-                        Thread.sleep(2000 + random.nextInt(3000));
-                    }catch (InterruptedException e){
-                        System.out.println("Error en ejecucion de Thread de FormacionEnemigo");
-                    }
-                }
-                verificarEntidadesEliminadas();
-                verificarFilasVacias();
-                verificarEnemigosEnPantalla();
             }
         }
     }

@@ -2,7 +2,8 @@ package edu.uns.galaxian.juego;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import edu.uns.galaxian.juego.config.DirectorNivel;
+import edu.uns.galaxian.juego.nivel.DirectorNivel;
+import edu.uns.galaxian.juego.nivel.Nivel;
 import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.juego.config.GameData;
 import edu.uns.galaxian.juego.config.SaveData;
@@ -80,7 +81,7 @@ public class Juego extends Game {
 	 * Muestra la pantalla cuando el jugador pierde
 	 */
 	public void pantallaGameOver(int score){
-		menuG= new MenuGameOver(this, score);
+		menuG = new MenuGameOver(this, score);
 		setScreen(menuG);
 	}
 }

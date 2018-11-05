@@ -1,16 +1,19 @@
-package edu.uns.galaxian.servicios;
+package edu.uns.galaxian.oleada;
 
 public abstract class OleadaDecorator implements Oleada {
 
-    protected Oleada oleada;
+    private Oleada oleada;
 
     public OleadaDecorator(Oleada oleada){
         this.oleada = oleada;
     }
 
-
     public void iniciar() {
         oleada.iniciar();
+    }
+
+    public void actualizar(float delta){
+        oleada.actualizar(delta);
     }
 
     public void finalizar() {

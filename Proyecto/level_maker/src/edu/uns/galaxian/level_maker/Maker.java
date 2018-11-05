@@ -5,9 +5,9 @@ import com.google.gson.*;
 import edu.uns.galaxian.entidades.enemigo.fabrica.FabricaEnemigos;
 import edu.uns.galaxian.entidades.enemigo.fabrica.FabricaEstandar;
 import edu.uns.galaxian.juego.config.GameData;
-import edu.uns.galaxian.servicios.FormacionEnemigo;
-import edu.uns.galaxian.servicios.GeneracionObstaculo;
-import edu.uns.galaxian.servicios.Oleada;
+import edu.uns.galaxian.oleada.OleadaFormacion;
+import edu.uns.galaxian.oleada.decorators.LluviaAsteroides;
+import edu.uns.galaxian.oleada.Oleada;
 import edu.uns.galaxian.util.io.gson.GSONClassSerializer;
 import edu.uns.galaxian.util.io.IOManager;
 
@@ -34,10 +34,10 @@ public class Maker extends Game {
         // Oleada 1
         JsonObject oleadaJson = new JsonObject();
             // Oleada principal
-            oleadaJson.add(GameData.OLEADA, gson.toJsonTree(FormacionEnemigo.class, Oleada.class));
+            oleadaJson.add(GameData.OLEADA, gson.toJsonTree(OleadaFormacion.class, Oleada.class));
             // Decorators
             JsonArray oleadaDecorators = new JsonArray();
-            oleadaDecorators.add(gson.toJsonTree(GeneracionObstaculo.class, Oleada.class));
+            oleadaDecorators.add(gson.toJsonTree(LluviaAsteroides.class, Oleada.class));
             oleadaJson.add(GameData.DECORATORS, oleadaDecorators);
             // Configuracion
             JsonObject oleadaConfig = new JsonObject();

@@ -8,7 +8,7 @@ import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.entidades.EntidadConNave;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
 import edu.uns.galaxian.entidades.jugador.input.*;
-import edu.uns.galaxian.juego.Nivel;
+import edu.uns.galaxian.juego.nivel.Nivel;
 import edu.uns.galaxian.nave.NaveJugador;
 
 

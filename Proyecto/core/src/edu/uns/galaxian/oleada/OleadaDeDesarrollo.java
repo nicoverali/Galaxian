@@ -1,4 +1,4 @@
-package edu.uns.galaxian.servicios;
+package edu.uns.galaxian.oleada;
 
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.controlador.Controlador;
@@ -28,6 +28,11 @@ public class OleadaDeDesarrollo implements Oleada {
         Enemigo enemigo1 = fabrica.getKamikaze(new Vector2(1100,700), controlador, controlador.getJugador());
         enemigo1.setInteligencia(new InteligenciaDeDesarrollo(enemigo1, enemigo));
         //controlador.agregarEntidad(enemigo1);
+    }
+
+    @Override
+    public void actualizar(float delta) throws IllegalStateException {
+
     }
 
     public void finalizar() throws IllegalStateException {
