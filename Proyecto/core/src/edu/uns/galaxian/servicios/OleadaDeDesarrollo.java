@@ -6,17 +6,17 @@ import edu.uns.galaxian.entidades.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.enemigo.fabrica.FabricaEnemigos;
 import edu.uns.galaxian.ia.inteligencias.basica.InteligenciaDeDesarrollo;
 
-public class ServicioDeDesarrollo implements Servicio {
+public class OleadaDeDesarrollo implements Oleada {
 
     private Controlador controlador;
     private FabricaEnemigos fabrica;
 
-    public ServicioDeDesarrollo(Controlador controlador, FabricaEnemigos fabricaEnemigos){
+    public OleadaDeDesarrollo(Controlador controlador, FabricaEnemigos fabricaEnemigos){
         this.controlador = controlador;
         this.fabrica = fabricaEnemigos;
     }
 
-    public void activar() throws IllegalStateException {
+    public void iniciar() throws IllegalStateException {
         try {
             Thread.sleep(0);
         } catch (InterruptedException e) {
@@ -30,7 +30,7 @@ public class ServicioDeDesarrollo implements Servicio {
         //controlador.agregarEntidad(enemigo1);
     }
 
-    public void desactivar() throws IllegalStateException {
+    public void finalizar() throws IllegalStateException {
 
     }
 }

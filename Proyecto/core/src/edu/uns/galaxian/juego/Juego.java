@@ -1,10 +1,9 @@
 package edu.uns.galaxian.juego;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import edu.uns.galaxian.juego.config.DirectorNivel;
 import edu.uns.galaxian.util.EntidadBatch;
-import edu.uns.galaxian.juego.config.ConfigNivel;
 import edu.uns.galaxian.juego.config.GameData;
 import edu.uns.galaxian.juego.config.SaveData;
 import edu.uns.galaxian.juego.menus.Menu;
@@ -34,8 +33,7 @@ public class Juego extends Game {
 	}
 	
 	public void iniciarNivel(){
-		ConfigNivel configNivel = gameData.getConfiguracionNivel(saveData.getNivelAlcanzado(), saveData.getNaveJugador());
-		setScreen(new Nivel(configNivel,this));
+		new DirectorNivel(this, gameData.getNivel(saveData.getNivelAlcanzado()), saveData.getNaveJugador());
 	}
 	
 	//TODO para el boton restart, por ahora hacer que se inicie nuevamente el nivel, esta mal

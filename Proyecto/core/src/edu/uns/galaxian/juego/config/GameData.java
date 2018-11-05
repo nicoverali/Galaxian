@@ -12,10 +12,12 @@ import java.io.IOException;
 public class GameData {
 
     public static final String DIR = "./files/game_data.json";
-    public static final String EQUIPAMIENTO = "equipamiento";
-    public static final String ARMA = "arma";
-    public static final String ESCUDO = "escudo";
-    public static final String FABRICA_ENEMIGO = "fabricaEnemigo";
+    public static final String OLEADA = "oleada";
+    public static final String CONFIG_OLEADA = "configuracion";
+    public static final String FORMACION = "formacion";
+    public static final String FABRICA = "fabricaEnemigos";
+    public static final String CANT_ENEMIGOS = "cantidadEnemigos";
+    public static final String DECORATORS = "decoratorsOleada";
 
     private JsonArray dataJson;
 
@@ -40,14 +42,12 @@ public class GameData {
     /**
      * Retorna el objeto de configuracion del nivel pedido.
      * @param nivel Nivel
-     * @param naveJugador Nave que el jugador desea usar en este nivel
-     * @return Archivo de configuracion del nivel
+     * @return Objeto de configuracion del nivel
      * @throws IndexOutOfBoundsException Si el nivel es menor a 1 o no existe
      */
-    public ConfigNivel getConfiguracionNivel(int nivel, NaveJugador naveJugador) throws IndexOutOfBoundsException{
+    public JsonArray getNivel(int nivel) throws IndexOutOfBoundsException{
         verificarNivel(nivel);
-        JsonObject nivelJson = dataJson.get(nivel-1).getAsJsonObject();
-        return new ConfigNivel(nivelJson, naveJugador);
+        return dataJson.get(nivel-1).getAsJsonArray();
     }
 
     private void verificarNivel(int nivel) throws IndexOutOfBoundsException{

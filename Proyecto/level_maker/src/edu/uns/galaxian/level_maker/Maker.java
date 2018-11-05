@@ -4,13 +4,11 @@ import com.badlogic.gdx.Game;
 import com.google.gson.*;
 import edu.uns.galaxian.entidades.enemigo.fabrica.FabricaEnemigos;
 import edu.uns.galaxian.entidades.enemigo.fabrica.FabricaEstandar;
-import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
-import edu.uns.galaxian.entidades.equipamiento.armas.ArmaComun;
-import edu.uns.galaxian.entidades.equipamiento.escudos.Escudo;
-import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
-import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparoJugador;
 import edu.uns.galaxian.juego.config.GameData;
-import edu.uns.galaxian.util.io.gson.GSONNonFieldTypeAdapter;
+import edu.uns.galaxian.servicios.FormacionEnemigo;
+import edu.uns.galaxian.servicios.GeneracionObstaculo;
+import edu.uns.galaxian.servicios.Oleada;
+import edu.uns.galaxian.util.io.gson.GSONClassSerializer;
 import edu.uns.galaxian.util.io.IOManager;
 
 import java.io.IOException;
@@ -18,34 +16,38 @@ import java.io.IOException;
 
 public class Maker extends Game {
 
-    private Arma<DisparoJugador> ARMA_JUGADOR;
-    private Escudo ESCUDO_JUGADOR;
     private FabricaEnemigos FABRICA_ENEMIGOS;
 
     public void create(){
-        ARMA_JUGADOR = new ArmaComun(new FabricaDisparoJugador());
-        ESCUDO_JUGADOR = new EscudoNulo();
         FABRICA_ENEMIGOS = new FabricaEstandar();
 
         IOManager io = IOManager.getInstance();
         Gson gson = getGson();
         JsonArray gameData = getGameData();
 
-        // A partir de aca las cosas se tienen que hacer para cada nivel
-        JsonObject nivelJson = new JsonObject();
-
-        // Creacion de EQUIPAMIENTO JSON
-        JsonObject equipamiento = new JsonObject();
-        equipamiento.add(GameData.ARMA, gson.toJsonTree(ARMA_JUGADOR));
-        equipamiento.add(GameData.ESCUDO, gson.toJsonTree(ESCUDO_JUGADOR));
-
         // Creacion de FABRICA JSON
         JsonElement fabricaEnemigo = gson.toJsonTree(FABRICA_ENEMIGOS);
 
-        nivelJson.add(GameData.EQUIPAMIENTO, equipamiento);
-        nivelJson.add(GameData.FABRICA_ENEMIGO, fabricaEnemigo);
-        gameData.add(nivelJson);
+        // A partir de aca las cosas se tienen que hacer para cada nivel
+        JsonArray nivelJson = new JsonArray();
+
+        // Oleada 1
+        JsonObject oleadaJson = new JsonObject();
+            // Oleada principal
+            oleadaJson.add(GameData.OLEADA, gson.toJsonTree(FormacionEnemigo.class, Oleada.class));
+            // Decorators
+            JsonArray oleadaDecorators = new JsonArray();
+            oleadaDecorators.add(gson.toJsonTree(GeneracionObstaculo.class, Oleada.class));
+            oleadaJson.add(GameData.DECORATORS, oleadaDecorators);
+            // Configuracion
+            JsonObject oleadaConfig = new JsonObject();
+            oleadaConfig.add(GameData.FABRICA, gson.toJsonTree(FabricaEstandar.class, FabricaEnemigos.class));
+            oleadaConfig.addProperty(GameData.FORMACION, "A partir de aca inserte un arreglo de arreglos con los tipos de enemigos que desea");
+            oleadaJson.add(GameData.CONFIG_OLEADA, oleadaConfig);
+        nivelJson.add(oleadaJson);
+
         try {
+            gameData.add(nivelJson);
             io.escribirArchivoComoString(GameData.DIR, gameData.toString(), false);
         } catch (IOException e) {
             e.printStackTrace();
@@ -55,7 +57,8 @@ public class Maker extends Game {
 
     private Gson getGson(){
         GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapterFactory(new GSONNonFieldTypeAdapter());
+        builder.registerTypeAdapter(Oleada.class, new GSONClassSerializer<>());
+        builder.registerTypeAdapter(FabricaEnemigos.class, new GSONClassSerializer<>());
         return builder.create();
     }
 

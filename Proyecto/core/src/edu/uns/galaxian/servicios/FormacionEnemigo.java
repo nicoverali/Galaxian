@@ -5,7 +5,6 @@ import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.entidades.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.enemigo.fabrica.FabricaEnemigos;
-import edu.uns.galaxian.ia.inteligencias.basica.InteligenciaFormacion;
 import edu.uns.galaxian.ia.inteligencias.enemigo.InteligenciaFormacionDinamica;
 import edu.uns.galaxian.observer.Observador;
 import edu.uns.galaxian.observer.livedata.LiveData;
@@ -13,7 +12,7 @@ import edu.uns.galaxian.util.enums.TipoEnemigo;
 
 import java.util.*;
 
-public class FormacionEnemigo implements Servicio {
+public class FormacionEnemigo implements Oleada {
 
     private static final int DISTANCIA = 35;
     private static final int MARGEN_SUPERIOR = 40;
@@ -23,66 +22,54 @@ public class FormacionEnemigo implements Servicio {
     private List<Enemigo> enemigosEliminados;
     private Map<Enemigo, Vector2> enemigosAtacando;
     private Controlador controlador;
-    private volatile boolean activado;
+    private volatile boolean iniciado;
 
-    public FormacionEnemigo(List<List<TipoEnemigo>> enemigos, FabricaEnemigos fabrica, Controlador controlador){
+    public FormacionEnemigo(List<List<Enemigo>> enemigos, Controlador controlador){
         this.enemigosEliminados = new ArrayList<>();
         this.enemigosAtacando = new HashMap<>();
         this.controlador = controlador;
-        this.enemigos = registrarEnemigos(enemigos, fabrica);
+        this.enemigos = enemigos;
+        registrarEnemigos(enemigos);
     }
 
-    public void activar() throws IllegalStateException {
-        if(activado) throw new IllegalStateException("El servicio no puede activarse si ya esta activo.");
-        activado = true;
+    public void iniciar() throws IllegalStateException {
+        if(iniciado) throw new IllegalStateException("La oleada no puede iniciado si ya esta iniciada.");
+        iniciado = true;
         new Thread(new RunnableFormacion()).start();
     }
 
-    public void desactivar() throws IllegalStateException{
-        if(!activado) throw new IllegalStateException("El servicio no puede desactivarse si no esta activo.");
-        activado = false;
+    public void pausar(){
+        if(!iniciado) throw new IllegalStateException("La oleada no puede pausarse si no esta iniciada.");
+    }
+
+    public void finalizar() throws IllegalStateException{
+        if(!iniciado) throw new IllegalStateException("La oleada no puede finalizar si no esta iniciada.");
+        iniciado = false;
     }
 
     /**
      * Registra a todos los enemigos en el controlador
      */
-    private List<List<Enemigo>> registrarEnemigos(List<List<TipoEnemigo>> enemigos, FabricaEnemigos fabrica){
-        List<List<Enemigo>> listaResultado = new ArrayList<>(enemigos.size());
-        int fila = 0;
-        for(List<TipoEnemigo> filaDeTipos : enemigos){
-            listaResultado.add(crearFilaEnemigo(filaDeTipos, fabrica, fila++));
-        }
-        return listaResultado;
-    }
-
-    /**
-     * Retorna una fila de enemigos concretos a partir
-     * de una fila de tipos de enemigos.
-     * @param enemigos Fila de tipos de enemigos
-     * @param fabrica Fabrica de enemigos
-     * @param numFila Numero de la fila que se va a crear
-     * @return Nueva fila de enemigos concretos
-     */
-    private List<Enemigo> crearFilaEnemigo(List<TipoEnemigo> enemigos, FabricaEnemigos fabrica, int numFila){
-        int columna = 0;
-        int cantEnFila = enemigos.size();
-        List<Enemigo> filaResultado = new ArrayList<>(cantEnFila);
-        for(TipoEnemigo tipoEnemigo : enemigos){
-            Vector2 posicionNuevoEnemigo = formarEnemigo(numFila, columna++, cantEnFila);
-            final Enemigo enemigoResultado = fabrica.crearEnemigo(tipoEnemigo, posicionNuevoEnemigo, controlador, controlador.getJugador());
-            enemigoResultado.setInteligencia(new InteligenciaFormacionDinamica<>(enemigoResultado, posicionNuevoEnemigo));
-            filaResultado.add(enemigoResultado);
-            controlador.agregarEntidad(enemigoResultado);
-            enemigoResultado.getVida().observar(new Observador<LiveData<Integer>>() {
-                public void notificar(LiveData<Integer> subject) {
-                    if(subject.getValor() == 0){
-                        subject.removerObservador(this);
-                        enemigosEliminados.add(enemigoResultado); // TODO Esto puede explotar si el run esta recorriendo la lista ?
+    private void registrarEnemigos(List<List<Enemigo>> enemigos){
+        for(int i = 0; i < enemigos.size(); i++){
+            List<Enemigo> fila = enemigos.get(i);
+            int cantEnFila = fila.size();
+            for(int j = 0; j < fila.size(); j++){
+                final Enemigo enemigo = fila.get(j);
+                Vector2 posicionFormacion = formarEnemigo(i, j, cantEnFila);
+                enemigo.setPosicion(posicionFormacion);
+                enemigo.setInteligencia(new InteligenciaFormacionDinamica<>(enemigo, posicionFormacion));
+                enemigo.getVida().observar(new Observador<LiveData<Integer>>() {
+                    public void notificar(LiveData<Integer> subject) {
+                        if(subject.getValor() == 0){
+                            subject.removerObservador(this);
+                            enemigosEliminados.add(enemigo);
+                        }
                     }
-                }
-            });
+                });
+                controlador.agregarEntidad(enemigo);
+            }
         }
-        return filaResultado;
     }
 
     /**
@@ -145,7 +132,7 @@ public class FormacionEnemigo implements Servicio {
     private class RunnableFormacion implements Runnable{
         public void run(){
             Random random = new Random();
-            while(activado && !enemigos.isEmpty()){
+            while(iniciado && !enemigos.isEmpty()){
                 // TODO Se deberia setear un estado de ataque normal
                 if(enemigosAtacando.size() <= LIMITE_ENEMIGOS_ATACANDO){
                     int cantFilas = enemigos.size();

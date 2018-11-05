@@ -7,23 +7,20 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.controlador.*;
-import edu.uns.galaxian.servicios.FormacionEnemigo;
-import edu.uns.galaxian.servicios.GeneracionObstaculo;
-import edu.uns.galaxian.servicios.ServicioDeDesarrollo;
-import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.entidades.jugador.Jugador;
+import edu.uns.galaxian.juego.config.DirectorNivel;
+import edu.uns.galaxian.servicios.*;
+import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.escenario.Background;
-import edu.uns.galaxian.juego.config.ConfigNivel;
-import edu.uns.galaxian.servicios.Servicio;
 import edu.uns.galaxian.util.enums.TipoEnemigo;
 import java.util.*;
 
-public class Nivel extends ScreenAdapter {
+public class Nivel extends ScreenAdapter{
 
-    private Juego juego;
+    private DirectorNivel director;
     private Background background;
     private Controlador controlador;
-    private List<Servicio> servicios;
+    private Oleada oleadaActual;
 
     private BitmapFont score;
     private BitmapFont time;
@@ -34,20 +31,14 @@ public class Nivel extends ScreenAdapter {
     private int min;
    
     
-    public Nivel(ConfigNivel config, Juego juego){
-        this.juego = juego;
+    public Nivel(DirectorNivel director){
+        this.director = director;
         background = new Background();
-        controlador = new Controlador(juego.getTextureAtlas());
-        Jugador jugador = new Jugador(new Vector2(Gdx.graphics.getWidth()/2, 50), config.getNaveJugador(), this, controlador);
+        controlador = director.getControladorEntidad();
+        Jugador jugador = new Jugador(new Vector2(Gdx.graphics.getWidth()/2, 50), director.getNaveJugador(), this, controlador);
         controlador.agregarJugador(jugador);
-        servicios = new LinkedList<>();
-        FormacionEnemigo formacion = new FormacionEnemigo(formacionRandom(), config.getFabricaEnemigos(), controlador);
-        GeneracionObstaculo obstaculos = new GeneracionObstaculo(controlador);
-        servicios.add(formacion);
-        servicios.add(obstaculos);
-        formacion.activar();
-        obstaculos.activar();
-        //new ServicioDeDesarrollo(controlador, config.getFabricaEnemigos()).activar();
+        oleadaActual = director.getProximaOleada();
+        oleadaActual.iniciar();
         //El marcador
         score= new BitmapFont();
         time= new BitmapFont();
@@ -72,7 +63,7 @@ public class Nivel extends ScreenAdapter {
         // Limpiar pantalla
         Gdx.gl.glClearColor(0, 0, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        EntidadBatch batch = juego.getBatch();
+        EntidadBatch batch = director.getEntidadBatch();
 
         background.draw();
         actualizarTiempo();
@@ -91,27 +82,7 @@ public class Nivel extends ScreenAdapter {
 
     }
 
-    /**
-     * Retorna una formacion enemiga. Metodo solo para desarrollo.
-     */
-    private List<List<TipoEnemigo>> formacionRandom(){
-        Random ran = new Random();
-        List<List<TipoEnemigo>> formacion = new ArrayList<>(4);
-        for(int i = 0; i < 5; i++){
-            int cant;
-            do{
-                cant = ran.nextInt(7)+2;
-            }while(cant % 2 == 0);
-            List<TipoEnemigo> tempFila = new ArrayList<>(cant);
-            for(int j = 0; j < cant; j++){
-                tempFila.add(TipoEnemigo.values()[ran.nextInt(cant) % 5]);
-            }
-            formacion.add(tempFila);
-        }
-        return  formacion;
-    }
-
 	public void gameOver() {
-		juego.pantallaGameOver(controlador.getPuntuacion());
+		//juego.pantallaGameOver(controlador.getPuntuacion());
 	}
 }

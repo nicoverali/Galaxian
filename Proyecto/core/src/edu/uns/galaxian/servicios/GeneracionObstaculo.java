@@ -10,7 +10,7 @@ import edu.uns.galaxian.ia.inteligencias.basica.InteligenciaDeOnda;
 import edu.uns.galaxian.observer.Observador;
 import edu.uns.galaxian.observer.livedata.LiveData;
 
-public class GeneracionObstaculo implements Servicio, Observador<LiveData<Integer>> {
+public class GeneracionObstaculo extends OleadaDecorator implements Observador<LiveData<Integer>> {
 	
 	private Controlador controlador;
 	private GeneracionObstaculo generador = this;
@@ -18,21 +18,24 @@ public class GeneracionObstaculo implements Servicio, Observador<LiveData<Intege
     private volatile int cantObstaculos;
     private static final int CANT_MAXIMA_OBSTACULOS = 8;
     
-    public GeneracionObstaculo(Controlador controlador){
-        this.controlador = controlador;
+    public GeneracionObstaculo(Oleada oleadaPrincipal, Controlador controlador){
+        super(oleadaPrincipal);
+    	this.controlador = controlador;
         activado = false;
         cantObstaculos = 0;
     }
 
-    public void activar() throws IllegalStateException {
+    public void iniciar() throws IllegalStateException {
         if(activado) throw new IllegalStateException("El servicio no puede activarse si ya esta activo.");
         activado = true;
         new Thread(new RunnableGeneracion()).start();
+        oleada.iniciar();
     }
 
-    public void desactivar() throws IllegalStateException{
+    public void finalizar() throws IllegalStateException{
         if(!activado) throw new IllegalStateException("El servicio no puede desactivarse si no esta activo.");
         activado = false;
+        oleada.finalizar();
     }
     
     private class RunnableGeneracion implements Runnable {
@@ -49,7 +52,7 @@ public class GeneracionObstaculo implements Servicio, Observador<LiveData<Intege
 							// Probabilidad de que el obstaculo tenga inteligencia de movimiento = 4/10
 							if(ran.nextInt(10)<3) {
 								nuevoObstaculo.setPosicion(0,posY-15);
-								nuevoObstaculo.setInteligencia(new InteligenciaDeOnda(nuevoObstaculo));
+								nuevoObstaculo.setInteligencia(new InteligenciaDeOnda<>(nuevoObstaculo));
 							}
 							controlador.agregarEntidad(nuevoObstaculo);
 							cantObstaculos++;

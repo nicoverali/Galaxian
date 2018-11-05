@@ -4,7 +4,8 @@ import com.google.gson.*;
 import edu.uns.galaxian.nave.NaveJugador;
 import edu.uns.galaxian.nave.jugador.NaveLiviana;
 import edu.uns.galaxian.util.enums.Color;
-import edu.uns.galaxian.util.io.gson.GSONNonFieldTypeAdapter;
+import edu.uns.galaxian.util.io.gson.GSONClassDeserializer;
+import edu.uns.galaxian.util.io.gson.GSONClassSerializer;
 import edu.uns.galaxian.util.io.IOManager;
 import edu.uns.galaxian.util.io.gson.GSONEnumTypeAdapter;
 
@@ -59,7 +60,7 @@ public class SaveData {
     public NaveJugador getNaveJugador(){
         Gson gson = getGson();
         Color naveColor = gson.fromJson(dataJson.get(NAVE_COLOR).getAsString(), Color.class);
-        gson = addNaveJugadorAdapterToGson(gson, naveColor);
+        gson = agregarNaveJugadorDeserializer(gson, naveColor);
         return gson.fromJson(dataJson.getAsJsonObject(NAVE_JUGADOR), NaveJugador.class);
     }
 
@@ -87,18 +88,15 @@ public class SaveData {
     }
 
     private Gson getGson(){
-        TypeAdapterFactory genericAdapter = new GSONNonFieldTypeAdapter();
-        TypeAdapterFactory enumsAdapter = new GSONEnumTypeAdapter();
         GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapterFactory(genericAdapter);
-        builder.registerTypeAdapterFactory(enumsAdapter);
+        builder.registerTypeAdapter(NaveJugador.class, new GSONClassSerializer<>());
+        builder.registerTypeAdapterFactory(new GSONEnumTypeAdapter());
         return builder.create();
     }
 
-    private Gson addNaveJugadorAdapterToGson(Gson gson, Color naveColor){
-        TypeAdapterFactory naveJugadorAdapter = new GSONNonFieldTypeAdapter(NaveJugador.class, new Class[]{Color.class}, new Object[]{naveColor});
+    private Gson agregarNaveJugadorDeserializer(Gson gson, Color naveColor){
         GsonBuilder builder = gson.newBuilder();
-        builder.registerTypeAdapterFactory(naveJugadorAdapter);
+        builder.registerTypeAdapter(NaveJugador.class, new GSONClassDeserializer<NaveJugador>(new Class[]{Color.class}, new Object[]{naveColor}));
         return builder.create();
     }
 
