@@ -2,6 +2,7 @@ package edu.uns.galaxian.juego;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import edu.uns.galaxian.juego.menus.Principal;
 import edu.uns.galaxian.juego.nivel.DirectorNivel;
 import edu.uns.galaxian.juego.nivel.Nivel;
 import edu.uns.galaxian.util.EntidadBatch;
@@ -19,7 +20,7 @@ public class Juego extends Game {
 	private EntidadBatch batch;
 	private GameData gameData;
 	private SaveData saveData;
-	private Menu menuPrincipal;
+	private Principal menuPrincipal;
 	private MenuGameOver menuG;
 
 	@Override
@@ -29,10 +30,10 @@ public class Juego extends Game {
 		saveData = new SaveData();
 		textureAtlas = new TextureAtlas(TEXTURE_ATLAS_DIR);
 
-		menuPrincipal= new MenuPrincipal(this);
+		menuPrincipal= new Principal(this);
 		setScreen(menuPrincipal);
 	}
-	
+
 	public void iniciarNivel(){
 		new DirectorNivel(this, gameData.getNivel(saveData.getNivelAlcanzado()), saveData.getNaveJugador());
 	}

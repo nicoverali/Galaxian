@@ -1,5 +1,7 @@
 package edu.uns.galaxian.escenario;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
 import edu.uns.galaxian.util.animator.ValueAnimator;
@@ -55,6 +57,8 @@ public class CampoEstrellas {
     }
 
     public void draw(float delta){
+        Gdx.gl.glEnable(GL20.GL_BLEND);
+        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         renderer.begin();
         renderer.set(ShapeRenderer.ShapeType.Filled);
         for(Estrella estrella : estrellas){
