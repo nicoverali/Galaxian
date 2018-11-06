@@ -1,5 +1,7 @@
 package edu.uns.galaxian.util.animator;
 
+import com.badlogic.gdx.utils.TimeUtils;
+
 public abstract class ValueAnimator<T extends Number> {
 
     protected T valorInicial;
@@ -17,7 +19,7 @@ public abstract class ValueAnimator<T extends Number> {
         this.valorInicial = valorInicial;
         this.valorFinal = valorFinal;
         this.duracion = duracion;
-        tiempoInicial = System.currentTimeMillis();
+        tiempoInicial = TimeUtils.millis();
     }
 
     /**
@@ -44,7 +46,7 @@ public abstract class ValueAnimator<T extends Number> {
      * @return Valor actual double de la animacion
      */
     public double getValorActualDouble(){
-        return (double) this.getValorActual();
+        return this.getValorActual();
     }
 
     /**
@@ -53,7 +55,7 @@ public abstract class ValueAnimator<T extends Number> {
      * @return Valor actual long de la animacion
      */
     public long getValorActualLong(){
-        return this.getValorActual();
+        return (long) this.getValorActual();
     }
 
     /**
@@ -62,14 +64,14 @@ public abstract class ValueAnimator<T extends Number> {
      * del valor
      * @return Valor actual de la animacion
      */
-    protected abstract long getValorActual();
+    protected abstract double getValorActual();
 
     /**
      * Verifica si la animacion finalizo
      * @return Verdadero si la animacion finalizo, falso en caso contrario
      */
     public boolean animacionFinalizada(){
-        return System.currentTimeMillis() - tiempoInicial >= duracion;
+        return TimeUtils.timeSinceMillis(tiempoInicial) >= duracion;
     }
 
     /**
@@ -79,8 +81,8 @@ public abstract class ValueAnimator<T extends Number> {
      * y la duracion de la misma
      * @return Valor entre 0 y 1
      */
-    protected long getTiempoActual(){
-        long tiempoActual = (System.currentTimeMillis() - tiempoInicial) / (tiempoInicial+duracion - tiempoInicial);
+    protected double getTiempoActual(){
+        double tiempoActual = ((double)TimeUtils.timeSinceMillis(tiempoInicial)) / (double)(tiempoInicial+duracion - tiempoInicial);
         return tiempoActual > 1 ? 1 : tiempoActual;
     }
 
