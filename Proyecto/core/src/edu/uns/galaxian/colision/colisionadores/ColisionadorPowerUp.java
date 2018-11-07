@@ -5,7 +5,7 @@ import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
 import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
-public class ColisionadorPowerUp extends ColisionadorAdapter<PowerUp> {
+public class ColisionadorPowerUp extends VisitorAdapter<PowerUp> {
 
 	private PowerUp objetoFuente;
 

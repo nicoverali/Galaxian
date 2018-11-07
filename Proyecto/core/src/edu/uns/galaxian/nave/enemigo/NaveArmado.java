@@ -1,6 +1,6 @@
 package edu.uns.galaxian.nave.enemigo;
 
-import edu.uns.galaxian.colision.colisionadores.Visitante;
+import edu.uns.galaxian.colision.colisionadores.Visitor;
 import edu.uns.galaxian.entidades.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 import edu.uns.galaxian.ia.InteligenciaArtificial;
@@ -20,7 +20,7 @@ public class NaveArmado extends NaveEnemigo {
 		return new InteligenciaArmado<>(autonomo, jugador);
 	}
 	
-	public void aceptarColision(Visitante colisionador) {
+	public void aceptarColision(Visitor colisionador) {
 		// TODO
 	}
 	

@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import edu.uns.galaxian.colision.hitbox.HBCirculo;
 import edu.uns.galaxian.colision.hitbox.HitBox;
-import edu.uns.galaxian.colision.colisionadores.Visitante;
+import edu.uns.galaxian.colision.colisionadores.Visitor;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorObstaculo;
 import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.util.EntidadBatch;
@@ -59,11 +59,11 @@ public abstract class Obstaculo extends EntidadViva implements Autonomo {
 		vida.setValor(VIDA_MAX);
 	}
 
-	public void aceptarColision(Visitante colisionador) {
+	public void aceptarVisitor(Visitor colisionador) {
 		colisionador.visitObstaculo(this);
 	}
 
-	public Visitante getColisionador() {
+	public Visitor getColisionador() {
 		return colisionador;
 	}
 

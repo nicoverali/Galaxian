@@ -55,7 +55,7 @@ public class Jugador extends EntidadConNave<NaveJugador, DisparoJugador> {
 		return colisionador;
 	}
 
-	public void aceptarColision(Visitante col){
+	public void aceptarVisitor(Visitor col){
 		col.visitJugador(this);
 	}
 

@@ -1,6 +1,6 @@
 package edu.uns.galaxian.nave;
 
-import edu.uns.galaxian.colision.colisionadores.Visitante;
+import edu.uns.galaxian.colision.colisionadores.Visitor;
 import edu.uns.galaxian.entidades.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 import edu.uns.galaxian.ia.InteligenciaArtificial;
@@ -36,7 +36,7 @@ public abstract class NaveEnemigo extends Nave<DisparoEnemigo> {
      * el colisionador del un colisionable para indicarle que accion realizar.
      * @param colisionador Colisionador de un colisionable participante en la colision producida
      */
-    public abstract void aceptarColision(Visitante colisionador);
+    public abstract void aceptarColision(Visitor colisionador);
 
     /**
      * Retorna la fuerza con la que colisiona la nave

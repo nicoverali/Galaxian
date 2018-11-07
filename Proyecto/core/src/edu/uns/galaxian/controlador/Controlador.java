@@ -1,7 +1,10 @@
 package edu.uns.galaxian.controlador;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import edu.uns.galaxian.colision.DetectorColision;
+import edu.uns.galaxian.colision.actualizadores.VisitorJuegoNormal;
+import edu.uns.galaxian.colision.colisionadores.Visitor;
 import edu.uns.galaxian.entidades.Entidad;
 import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.entidades.jugador.Jugador;
@@ -16,6 +19,7 @@ public class Controlador {
     private List<Jugador> jugadores;
     private DetectorColision detectorColision;
     private TextureAtlas textureAtlas;
+    private Visitor visitorActualizador;
 
     public Controlador(TextureAtlas atlas){
         textureAtlas = atlas;
@@ -24,6 +28,7 @@ public class Controlador {
         nuevasEntidades = new HashSet<>();
         entidadesEliminadas = new HashSet<>();
         jugadores = new ArrayList<>(3);
+        visitorActualizador = new VisitorJuegoNormal(Gdx.graphics.getDeltaTime());
     }
     
     /**
@@ -121,10 +126,10 @@ public class Controlador {
     public void actualizarEstado(float delta){
         detectorColision.resolverColisiones();
         for(Entidad entidad : entidades){
-            entidad.actualizar(delta);
+            entidad.aceptarVisitor(visitorActualizador);
         }
         for(Jugador jugador : jugadores){
-            jugador.actualizar(delta);
+            jugador.aceptarVisitor(visitorActualizador);
         }
         entidades.addAll(nuevasEntidades);
         entidades.removeAll(entidadesEliminadas);
@@ -161,5 +166,9 @@ public class Controlador {
         List<T> listaCopia = new ArrayList<>(listaOriginal.size());
         Collections.copy(listaCopia, listaOriginal);
         return listaCopia;
+    }
+    
+    public void setActualizacion(Visitor nuevoVisitor) {
+    	visitorActualizador = nuevoVisitor;
     }
 }

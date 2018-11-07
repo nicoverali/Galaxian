@@ -97,11 +97,11 @@ public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implem
     	return azar<3;
     }
 
-	public Visitante getColisionador(){
+	public Visitor getColisionador(){
 		return colisionador;
 	}
 
-	public void aceptarColision(Visitante colisionador) {
+	public void aceptarVisitor(Visitor colisionador) {
 		colisionador.visitEnemigo(this);
 		nave.aceptarColision(colisionador);
 	}

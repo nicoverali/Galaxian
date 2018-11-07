@@ -27,7 +27,7 @@ public class IdentificarEntorno extends Identificador {
 	public List<Entidad> realizarBusqueda() {
 		for(Entidad ent : entidades) {
 			if(boxEntorno.verificarInterseccion(ent.getHitBox())) {
-			   ent.aceptarColision(this);
+			   ent.aceptarVisitor(this);
 			}
 		}
 		return resultado;

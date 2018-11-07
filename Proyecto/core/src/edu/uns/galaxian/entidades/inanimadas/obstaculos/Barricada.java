@@ -1,6 +1,6 @@
 package edu.uns.galaxian.entidades.inanimadas.obstaculos;
 
-import edu.uns.galaxian.colision.colisionadores.Visitante;
+import edu.uns.galaxian.colision.colisionadores.Visitor;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorBarricada;
 import edu.uns.galaxian.controlador.Controlador;
 
@@ -13,7 +13,7 @@ public class Barricada extends Obstaculo {
 		colisionador = new ColisionadorBarricada(this);
 	}
 	
-	public void aceptarColision(Visitante colisionador) {
+	public void aceptarVisitor(Visitor colisionador) {
 		colisionador.visitBarricada(this);
 	}
 

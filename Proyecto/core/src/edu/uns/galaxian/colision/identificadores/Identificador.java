@@ -3,7 +3,7 @@ package edu.uns.galaxian.colision.identificadores;
 import java.util.LinkedList;
 import java.util.List;
 
-import edu.uns.galaxian.colision.colisionadores.ColisionadorAdapter;
+import edu.uns.galaxian.colision.colisionadores.VisitorAdapter;
 import edu.uns.galaxian.entidades.Entidad;
 import edu.uns.galaxian.entidades.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.equipamiento.escudos.Escudo;
@@ -14,7 +14,7 @@ import edu.uns.galaxian.entidades.inanimadas.obstaculos.Obstaculo;
 import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
-public abstract class Identificador extends ColisionadorAdapter {
+public abstract class Identificador extends VisitorAdapter {
 	
 	protected List<Entidad> entidades;
 	protected List<Entidad> resultado;
@@ -26,7 +26,7 @@ public abstract class Identificador extends ColisionadorAdapter {
 	
 	public List<Entidad> realizarBusqueda() {
 		for(Entidad ent : entidades) {
-			ent.aceptarColision(this);
+			ent.aceptarVisitor(this);
 		}
 		return resultado;
 	}
