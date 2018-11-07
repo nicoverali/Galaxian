@@ -1,8 +1,7 @@
 package edu.uns.galaxian.util;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 
 public class EntidadBatch extends SpriteBatch {
@@ -38,4 +37,19 @@ public class EntidadBatch extends SpriteBatch {
         float origenY = alto/2;
         this.draw(textura, posX, posY, origenX, origenY, ancho, alto, 1, 1, rotacion, 0, 0, (int)ancho, (int)alto, false, false);
     }
+
+    /**
+     * Dibuja en la posicion recibida, el GlyphLayout con
+     * la fuente dada
+     * @param glyphLayout GlyphLayout a dibujar
+     * @param font Fuente del GlyphLayout
+     * @param posicion Posicion donde se dibujara el GlyphLayout
+     */
+    public void draw(GlyphLayout glyphLayout, BitmapFont font, Vector2 posicion, float alpha){
+        this.enableBlending();
+        BitmapFontCache cache = font.newFontCache();
+        cache.addText(glyphLayout, posicion.x - glyphLayout.width/2, posicion.y - glyphLayout.height/2);
+        cache.draw(this, alpha);
+    }
 }
+

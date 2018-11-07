@@ -6,15 +6,17 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Vector2;
+import edu.uns.galaxian.animacion.animator.ciclos.CicloCircular;
+import edu.uns.galaxian.animacion.animator.ciclos.CicloUnico;
 import edu.uns.galaxian.escenario.CampoEstrellas;
 import edu.uns.galaxian.juego.Juego;
 import edu.uns.galaxian.util.EntidadBatch;
-import edu.uns.galaxian.util.EstadoAnimacion;
-import edu.uns.galaxian.util.animator.BezierAnimator;
-import edu.uns.galaxian.util.animator.ValueAnimator;
-import sun.font.TrueTypeFont;
+import edu.uns.galaxian.animacion.EstadoAnimacion;
+import edu.uns.galaxian.animacion.animator.interpolaciones.BezierAnimator;
+import edu.uns.galaxian.animacion.animator.ValueAnimator;
 
 public class Principal extends ScreenAdapter {
 
@@ -30,11 +32,12 @@ public class Principal extends ScreenAdapter {
         this.juego = juego;
         estrellas = new CampoEstrellas(CampoEstrellas.AFUERA, VELOCIDAD_INICIAL);
         logo = new Texture(Gdx.files.internal("menu/logo.png"));
+        estado = new EstadoIntroduccion();
+
         FreeTypeFontGenerator gen = new FreeTypeFontGenerator(Gdx.files.internal("fonts/PressStart2P.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter param = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        param.size = 28;
+        param.size = 16;
         font = gen.generateFont(param);
-        estado = new EstadoIntroduccion();
     }
 
     public void render(float delta) {
@@ -43,6 +46,8 @@ public class Principal extends ScreenAdapter {
         estado.accion(delta);
     }
 
+    // Clases internas de estado
+
     private class EstadoIntroduccion implements EstadoAnimacion {
         private static final float VELOCIDAD_FINAL = 400;
         private static final int DURACION = 3000;
@@ -50,7 +55,7 @@ public class Principal extends ScreenAdapter {
 
         public EstadoIntroduccion(){
             animator = new BezierAnimator<>();
-            animator.iniciarAnimacion(VELOCIDAD_INICIAL, VELOCIDAD_FINAL, DURACION);
+            animator.iniciarAnimacion(VELOCIDAD_INICIAL, VELOCIDAD_FINAL, DURACION, new CicloUnico());
         }
 
         public void accion(float delta) {
@@ -64,22 +69,29 @@ public class Principal extends ScreenAdapter {
         }
     }
     private class EstadoIntermedio implements EstadoAnimacion{
-        private static final long DURACION = 500;
+        private static final long DURACION_LOGO = 500;
+        private static final long DURACION_PRESS = 700;
         private EntidadBatch batch;
-        private ValueAnimator<Float> animator;
+        private ValueAnimator<Float> animatorLogo;
+        private ValueAnimator<Float> animatorPressStart;
+        private GlyphLayout glyph;
         public EstadoIntermedio(){
             batch = new EntidadBatch();
-            animator = new BezierAnimator<>();
-            animator.iniciarAnimacion(0f, 1f, DURACION);
+            animatorLogo = new BezierAnimator<>();
+            animatorPressStart = new BezierAnimator<>();
+            glyph = new GlyphLayout(font, "Press any button to start");
+            animatorLogo.iniciarAnimacion(0f, 1f, DURACION_LOGO, new CicloUnico());
+            animatorPressStart.iniciarAnimacion(0.3f, 1f, DURACION_PRESS, new CicloCircular());
         }
 
         public void accion(float delta) {
             estrellas.draw(delta);
-            Color c = batch.getColor();
-            batch.setColor(c.r, c.g, c.b, animator.getValorActualFloat());
             batch.begin();
-            font.draw(batch, "Press start", Gdx.graphics.getWidth()/2-200, Gdx.graphics.getHeight() - 300);
-            batch.draw(logo, new Vector2(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight() - 150), 0);
+            int mitadPantalla = Gdx.graphics.getWidth()/2;
+            int altoPantalla = Gdx.graphics.getHeight();
+            batch.draw(glyph, font, new Vector2(mitadPantalla, 100), animatorPressStart.getValorActualFloat());
+            batch.setColor(1, 1, 1, animatorLogo.getValorActualFloat());
+            batch.draw(logo, new Vector2(mitadPantalla, altoPantalla - 150), 0);
             batch.end();
         }
     }
@@ -89,4 +101,3 @@ public class Principal extends ScreenAdapter {
         }
     }
 }
-
