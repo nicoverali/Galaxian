@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
-import edu.uns.galaxian.util.animator.ValueAnimator;
+import edu.uns.galaxian.animacion.animator.ValueAnimator;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,13 +1,10 @@
-package edu.uns.galaxian.util.animator;
-
-import com.badlogic.gdx.utils.TimeUtils;
+package edu.uns.galaxian.animacion.animator;
 
 public abstract class ValueAnimator<T extends Number> {
 
     protected T valorInicial;
     protected T valorFinal;
-    protected long duracion;
-    protected long tiempoInicial;
+    private CicloAnimator ciclo;
 
     /**
      * Inicia una nueva animacion con los valores dados
@@ -15,11 +12,11 @@ public abstract class ValueAnimator<T extends Number> {
      * @param valorFinal Valor deseado al finalizar la animacion
      * @param duracion Duracion de la animacion
      */
-    public void iniciarAnimacion(T valorInicial, T valorFinal, long duracion){
+    public void iniciarAnimacion(T valorInicial, T valorFinal, long duracion, CicloAnimator ciclo){
         this.valorInicial = valorInicial;
         this.valorFinal = valorFinal;
-        this.duracion = duracion;
-        tiempoInicial = TimeUtils.millis();
+        this.ciclo = ciclo;
+        ciclo.iniciarCiclo(duracion);
     }
 
     /**
@@ -71,7 +68,7 @@ public abstract class ValueAnimator<T extends Number> {
      * @return Verdadero si la animacion finalizo, falso en caso contrario
      */
     public boolean animacionFinalizada(){
-        return TimeUtils.timeSinceMillis(tiempoInicial) >= duracion;
+        return ciclo.cicloFinalizado();
     }
 
     /**
@@ -82,8 +79,7 @@ public abstract class ValueAnimator<T extends Number> {
      * @return Valor entre 0 y 1
      */
     protected double getTiempoActual(){
-        double tiempoActual = ((double)TimeUtils.timeSinceMillis(tiempoInicial)) / (double)(tiempoInicial+duracion - tiempoInicial);
-        return tiempoActual > 1 ? 1 : tiempoActual;
+        return ciclo.getTiempoActual();
     }
 
 }

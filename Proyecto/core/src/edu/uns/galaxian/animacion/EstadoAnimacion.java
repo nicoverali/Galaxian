@@ -1,4 +1,4 @@
-package edu.uns.galaxian.util;
+package edu.uns.galaxian.animacion;
 
 public interface EstadoAnimacion {
     /**
