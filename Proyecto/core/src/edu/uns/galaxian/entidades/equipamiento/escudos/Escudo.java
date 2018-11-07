@@ -1,6 +1,6 @@
 package edu.uns.galaxian.entidades.equipamiento.escudos;
 
-import edu.uns.galaxian.colision.colisionadores.Colisionador;
+import edu.uns.galaxian.colision.colisionadores.Visitante;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorEscudo;
 import edu.uns.galaxian.colision.hitbox.HBCirculo;
 import edu.uns.galaxian.colision.hitbox.HitBox;
@@ -28,12 +28,12 @@ public class Escudo extends Entidad {
 		return hitbox;
 	}
 
-	public Colisionador getColisionador() {
+	public Visitante getColisionador() {
 		return colisionador;
 	}
 
-	public void aceptarColision(Colisionador colisionador) {
-		colisionador.colisionarConEscudo(this);
+	public void aceptarColision(Visitante colisionador) {
+		colisionador.visitEscudo(this);
 	}
 
 	public void dibujar(EntidadBatch batch) {

@@ -13,15 +13,15 @@ public class ColisionadorDisparoJugador extends ColisionadorAdapter<DisparoJugad
 		this.objetoFuente = objetoFuente;
 	}
 
-	public void colisionarConEnemigo(Enemigo enemigo) {
+	public void visitEnemigo(Enemigo enemigo) {
 		objetoFuente.eliminar();
 	}
 
-	public void colisionarConObstaculo(Obstaculo obstaculo) {
+	public void visitObstaculo(Obstaculo obstaculo) {
 		objetoFuente.eliminar();
 	}
 
-	public void colisionarConBarricada(Barricada obstaculoEnemigo) {
+	public void visitBarricada(Barricada obstaculoEnemigo) {
 		objetoFuente.eliminar();
 	}
 }

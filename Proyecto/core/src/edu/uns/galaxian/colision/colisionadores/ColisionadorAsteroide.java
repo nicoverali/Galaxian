@@ -13,12 +13,12 @@ public class ColisionadorAsteroide extends ColisionadorObstaculo {
 		this.asteroide = asteroide;
 	}
 	
-	public void colisionarConObstaculo(Obstaculo obstaculo) {
+	public void visitObstaculo(Obstaculo obstaculo) {
 		asteroide.restarVida(asteroide.getVida().getValor());
 		asteroide.fragmentar();
 	}
 
-	public void colisionarConBarricada(Barricada obstaculoEnemigo) {
+	public void visitBarricada(Barricada obstaculoEnemigo) {
 		asteroide.restarVida(asteroide.getVida().getValor());		
 		asteroide.fragmentar();
 	}

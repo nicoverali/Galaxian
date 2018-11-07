@@ -2,7 +2,6 @@ package edu.uns.galaxian.entidades.enemigo;
 
 import java.util.Random;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.entidades.EntidadConNave;
@@ -18,7 +17,6 @@ import edu.uns.galaxian.nave.NaveEnemigo;
 
 public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implements AutonomoDinamico {
 	
-	private static final int puntaje=10;
 	private Controlador controlador;
 	private InteligenciaArtificial inteligencia;
 	private ColisionadorEnemigo colisionador;
@@ -76,36 +74,35 @@ public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implem
     		PowerUp entidad = crearPower();
     		controlador.agregarEntidad(entidad);
     	}
-    	controlador.sumar(puntaje);
     }
 
     private PowerUp crearPower(){
-    	//Cuando esten todos los powers
     	Random ran= new Random();
-    	int n= ran.nextInt(4);
+    	int n= ran.nextInt(5);
     	switch(n){
     		case 0: return new PastillaVida(posicion,new Vector2 (0,-1),rotacion,controlador);
     		case 1: return new CampoDeProteccion(posicion,new Vector2 (0,-1),rotacion,controlador);
     		case 2: return new Misil(posicion,new Vector2 (0,-1),rotacion,controlador);
     		case 3: return new MejoraArma(posicion,new Vector2 (0,-1),rotacion,controlador);
     		case 4: return new CongelaTiempo(posicion,new Vector2 (0,-1),rotacion,controlador);
+    		case 5: return new SuperDisparo(posicion,new Vector2 (0,-1),rotacion,controlador);
     		default: return null;
     	}
     }
 
-    //Probabilidad de que se genere un power 3 de 10
 	private boolean decidirCrearPowerUp() {
+		//Probabilidad de que se genere un powerUp = 3/10
     	Random ran= new Random();
     	int azar = ran.nextInt(10);
     	return azar<3;
     }
 
-	public Colisionador getColisionador(){
+	public Visitante getColisionador(){
 		return colisionador;
 	}
 
-	public void aceptarColision(Colisionador colisionador) {
-		colisionador.colisionarConEnemigo(this);
+	public void aceptarColision(Visitante colisionador) {
+		colisionador.visitEnemigo(this);
 		nave.aceptarColision(colisionador);
 	}
 
@@ -115,5 +112,9 @@ public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implem
 
 	public float getSteeringMaximo() {
 		return nave.getSteeringMax();
+	}
+	
+	public int getBonus() {
+		return nave.getBonus();
 	}
 }

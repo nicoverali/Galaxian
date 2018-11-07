@@ -16,7 +16,6 @@ public class Controlador {
     private List<Jugador> jugadores;
     private DetectorColision detectorColision;
     private TextureAtlas textureAtlas;
-    private int puntuacion;
 
     public Controlador(TextureAtlas atlas){
         textureAtlas = atlas;
@@ -28,19 +27,11 @@ public class Controlador {
     }
     
     /**
-     * Suma a la puntuacion el valor a sumar
-     * @param aSumar valor a sumar
-     */
-    public void sumar(int aSumar){
-    	puntuacion+=aSumar;
-    }
-    
-    /**
      * Retorna la puntuacion
      * @return puntuacion
      */
     public int getPuntuacion(){
-    	return puntuacion;
+    	return (int) jugadores.get(0).getPuntaje();
     }
     
    

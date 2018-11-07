@@ -15,23 +15,26 @@ public class ColisionadorEnemigo extends ColisionadorAdapter<Enemigo> {
 		this.objetoFuente = objetoFuente;
 	}
 
-	public void colisionarConJugador(Jugador jugador) {
+	public void visitJugador(Jugador jugador) {
 		objetoFuente.restarVida(40);
 	}
 
-	public void colisionarConDisparoJugador(DisparoJugador disparo) {
+	public void visitDisparoJugador(DisparoJugador disparo) {
 		objetoFuente.restarVida(disparo.getFuerzaDeDisparo());
+		if(objetoFuente.getVida().getValor()<=0) {
+			disparo.sumarPuntajeJugador(objetoFuente.getBonus());
+		}
 	}
 
-	public void colisionarConObstaculo(Obstaculo obstaculo) {
+	public void visitObstaculo(Obstaculo obstaculo) {
 		objetoFuente.restarVida(obstaculo.getFuerzaDeColision());
 	}
 
-	public void colisionarConEscudo(Escudo escudo) {
+	public void visitEscudo(Escudo escudo) {
 		objetoFuente.restarVida(objetoFuente.getVida().getValor());
 	}
 
-	public void colisionarConBarricada(Barricada obstaculoEnemigo) {
+	public void visitBarricada(Barricada obstaculoEnemigo) {
 		objetoFuente.restarVida(obstaculoEnemigo.getFuerzaDeColision());
 	}
 	

@@ -11,7 +11,7 @@ public class IdentificarEnemigos extends Identificador {
 		super(ent);
 	}
 	
-	public void colisionarConEnemigo(Enemigo enemigo) {
+	public void visitEnemigo(Enemigo enemigo) {
 		resultado.add(enemigo);
 	}
 

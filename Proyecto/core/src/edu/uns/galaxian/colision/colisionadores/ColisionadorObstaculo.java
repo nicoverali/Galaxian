@@ -16,31 +16,31 @@ public class ColisionadorObstaculo extends ColisionadorAdapter<Obstaculo> {
 		objetoFuente = obstaculo;
 	}
 
-	public void colisionarConJugador(Jugador jugador) {
+	public void visitJugador(Jugador jugador) {
 		// TODO Falta ver si el obstaculo va a restarse vida.
 	}
 
-	public void colisionarConEnemigo(Enemigo enemigo) {
+	public void visitEnemigo(Enemigo enemigo) {
 		objetoFuente.restarVida(enemigo.getFuerzaDeColision());
 	}
 
-	public void colisionarConDisparoJugador(DisparoJugador disparo) {
+	public void visitDisparoJugador(DisparoJugador disparo) {
 		objetoFuente.restarVida(disparo.getFuerzaDeDisparo());
 	}
 
-	public void colisionarConDisparoEnemigo(DisparoEnemigo disparo) {
+	public void visitDisparoEnemigo(DisparoEnemigo disparo) {
 		objetoFuente.restarVida(disparo.getFuerzaDeDisparo());
 	}
 
-	public void colisionarConEscudo(Escudo escudo) {
+	public void visitEscudo(Escudo escudo) {
 		// TODO Falta ver si el escudo afecta a un obstaculo.
 	}
 	
-	public void colisionarConObstaculo(Obstaculo obstaculo) {
+	public void visitObstaculo(Obstaculo obstaculo) {
 		objetoFuente.restarVida(obstaculo.getFuerzaDeColision());
 	}
 
-	public void colisionarConBarricada(Barricada obstaculoEnemigo) {
+	public void visitBarricada(Barricada obstaculoEnemigo) {
 		objetoFuente.restarVida(obstaculoEnemigo.getFuerzaDeColision());
 	}
 

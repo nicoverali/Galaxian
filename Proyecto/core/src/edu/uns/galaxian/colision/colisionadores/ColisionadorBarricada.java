@@ -10,11 +10,11 @@ public class ColisionadorBarricada extends ColisionadorObstaculo {
 		objetoFuente = obstaculoEnemigo;
 	}
 	
-	public void colisionarConObstaculo(Obstaculo obstaculo) {
+	public void visitObstaculo(Obstaculo obstaculo) {
 		objetoFuente.restarVida(objetoFuente.getVida().getValor());
 	}
 
-	public void colisionarConBarricada(Barricada obstaculoEnemigo) {
+	public void visitBarricada(Barricada obstaculoEnemigo) {
 		// El obstaculo si afecta a una barricada, sin embargo las barricadas no se afectan entre sí.
 	}
 	

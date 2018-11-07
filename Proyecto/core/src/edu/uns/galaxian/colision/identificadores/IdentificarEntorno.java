@@ -33,27 +33,27 @@ public class IdentificarEntorno extends Identificador {
 		return resultado;
 	}
 	
-	public void colisionarConJugador(Jugador jugador) {
+	public void visitJugador(Jugador jugador) {
 		resultado.add(jugador);
 	}
 
-	public void colisionarConEnemigo(Enemigo enemigo) {
+	public void visitEnemigo(Enemigo enemigo) {
 		resultado.add(enemigo);
 	}
 
-	public void colisionarConDisparoJugador(DisparoJugador disparo) {
+	public void visitDisparoJugador(DisparoJugador disparo) {
 		resultado.add(disparo);
 	}
 
-	public void colisionarConDisparoEnemigo(DisparoEnemigo disparo) {
+	public void visitDisparoEnemigo(DisparoEnemigo disparo) {
 		resultado.add(disparo);
 	}
 
-	public void colisionarConObstaculo(Obstaculo obstaculo) {
+	public void visitObstaculo(Obstaculo obstaculo) {
 		resultado.add(obstaculo);
 	}
 
-	public void colisionarConBarricada(Barricada obstaculoEnemigo) {
+	public void visitBarricada(Barricada obstaculoEnemigo) {
 		resultado.add(obstaculoEnemigo);
 	}
 

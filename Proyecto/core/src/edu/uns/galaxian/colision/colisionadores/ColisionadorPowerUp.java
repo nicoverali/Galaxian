@@ -13,16 +13,16 @@ public class ColisionadorPowerUp extends ColisionadorAdapter<PowerUp> {
 		this.objetoFuente=powerUp;
 	}
 	
-	public void colisionarConJugador(Jugador jugador) {
+	public void visitJugador(Jugador jugador) {
 		objetoFuente.efectoJugador(jugador);
 		objetoFuente.eliminar();
 	}
 
-	public void colisionarConDisparoJugador(DisparoJugador disparo) {
+	public void visitDisparoJugador(DisparoJugador disparo) {
 		// TODO Decidir si un disparo jugador va a afectar al powerUp.
 	}
 
-	public void colisionarConDisparoEnemigo(DisparoEnemigo disparo) {
+	public void visitDisparoEnemigo(DisparoEnemigo disparo) {
 		// TODO Decidir si un disparo enemigo va a afectar al powerUp.
 	}
 

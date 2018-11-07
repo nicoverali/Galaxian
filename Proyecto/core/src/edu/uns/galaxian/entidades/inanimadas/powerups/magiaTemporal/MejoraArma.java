@@ -18,7 +18,7 @@ public class MejoraArma extends PowerUp{
 	}
 
 	public void efectoJugador(Jugador jugador) {
-		jugador.setArma(new ArmaDisparoDoble<>(new FabricaDisparoJugador()));
+		jugador.setArma(new ArmaDisparoDoble<>(new FabricaDisparoJugador(jugador)));
 	}
 
 }

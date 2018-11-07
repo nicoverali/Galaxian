@@ -9,22 +9,22 @@ import edu.uns.galaxian.entidades.inanimadas.obstaculos.Barricada;
 import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
-public abstract class ColisionadorAdapter<T> implements Colisionador<T>{
+public abstract class ColisionadorAdapter<T> implements Visitante<T>{
 
-	public void colisionarConJugador(Jugador jugador) {}
+	public void visitJugador(Jugador jugador) {}
 
-	public void colisionarConEnemigo(Enemigo enemigo) {}
+	public void visitEnemigo(Enemigo enemigo) {}
 
-	public void colisionarConDisparoJugador(DisparoJugador disparo) {}
+	public void visitDisparoJugador(DisparoJugador disparo) {}
 
-	public void colisionarConDisparoEnemigo(DisparoEnemigo disparo) {}
+	public void visitDisparoEnemigo(DisparoEnemigo disparo) {}
 
-	public void colisionarConObstaculo(Obstaculo obstaculo) {}
+	public void visitObstaculo(Obstaculo obstaculo) {}
 
-	public void colisionarConPowerUp(PowerUp powerUp) {}
+	public void visitPowerUp(PowerUp powerUp) {}
 
-	public void colisionarConEscudo(Escudo escudo) {}
+	public void visitEscudo(Escudo escudo) {}
 
-	public void colisionarConBarricada(Barricada obstaculoEnemigo) {}
+	public void visitBarricada(Barricada obstaculoEnemigo) {}
 
 }

@@ -39,7 +39,7 @@ public class ConfigNivel{
 
     private Gson getGson(){
         Class<?>[] armaClases = new Class[]{FabricaDisparo.class};
-        Object[] armaParametros = new Object[]{new FabricaDisparoJugador()};
+        Object[] armaParametros = new Object[]{new FabricaDisparoJugador(null)};
         return new GsonBuilder().registerTypeAdapterFactory(new GSONNonFieldTypeAdapter())
                 .registerTypeAdapterFactory(new GSONNonFieldTypeAdapter(Arma.class, armaClases, armaParametros))
                 .create();

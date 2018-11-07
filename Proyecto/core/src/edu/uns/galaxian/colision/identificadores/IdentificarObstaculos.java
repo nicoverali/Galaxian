@@ -12,11 +12,11 @@ public class IdentificarObstaculos extends Identificador {
 		super(ent);
 	}
 
-	public void colisionarConObstaculo(Obstaculo obstaculo) {
+	public void visitObstaculo(Obstaculo obstaculo) {
 		resultado.add(obstaculo);
 	}
 	
-	public void colisionarConBarricada(Barricada obstaculoEnemigo) {
+	public void visitBarricada(Barricada obstaculoEnemigo) {
 		resultado.add(obstaculoEnemigo);
 	}
 	

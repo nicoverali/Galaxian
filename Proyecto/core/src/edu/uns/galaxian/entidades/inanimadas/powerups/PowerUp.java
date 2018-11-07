@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 import edu.uns.galaxian.colision.hitbox.HitBox;
-import edu.uns.galaxian.colision.colisionadores.Colisionador;
+import edu.uns.galaxian.colision.colisionadores.Visitante;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorPowerUp;
 import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.entidades.Entidad;
@@ -27,11 +27,11 @@ public abstract class PowerUp extends Entidad {
 	
 	public abstract void efectoJugador(Jugador jugador);
 	
-	public void aceptarColision(Colisionador colisionador) {
-		colisionador.colisionarConPowerUp(this);
+	public void aceptarColision(Visitante colisionador) {
+		colisionador.visitPowerUp(this);
 	}
 
-	public Colisionador getColisionador() {
+	public Visitante getColisionador() {
 		return colisionador;
 	}
 

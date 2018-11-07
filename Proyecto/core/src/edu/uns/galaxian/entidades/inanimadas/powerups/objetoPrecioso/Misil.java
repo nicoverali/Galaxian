@@ -19,7 +19,7 @@ public class Misil extends PowerUp {
 	}
 
 	public void efectoJugador(Jugador jugador) {
-		jugador.setArma(new ArmaDisparoDoble<DisparoJugador>(new FabricaDisparoJugador()));
+		jugador.setArma(new ArmaDisparoDoble<DisparoJugador>(new FabricaDisparoJugador(jugador)));
 	}
 
 }

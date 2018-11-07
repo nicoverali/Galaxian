@@ -13,15 +13,15 @@ public class ColisionadorEscudo extends ColisionadorAdapter<Escudo> {
 		objetoFuente=escudo;
 	}
 
-	public void colisionarConEnemigo(Enemigo enemigo) {
+	public void visitEnemigo(Enemigo enemigo) {
 		objetoFuente.eliminar();
 	}
 
-	public void colisionarConDisparoEnemigo(DisparoEnemigo disparo) {
+	public void visitDisparoEnemigo(DisparoEnemigo disparo) {
 		// TODO falta decidir si el escudo deberia tener vida o algo por el estilo.
 	}
 
-	public void colisionarConObstaculo(Obstaculo obstaculo) {
+	public void visitObstaculo(Obstaculo obstaculo) {
 		// TODO falta decidir si el escudo deberia tener vida o algo por el estilo.
 	}
 

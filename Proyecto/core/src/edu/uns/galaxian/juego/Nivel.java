@@ -6,10 +6,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 import com.badlogic.gdx.math.Vector2;
+
 import edu.uns.galaxian.controlador.*;
 import edu.uns.galaxian.servicios.FormacionEnemigo;
 import edu.uns.galaxian.servicios.GeneracionObstaculo;
-import edu.uns.galaxian.servicios.ServicioDeDesarrollo;
 import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 import edu.uns.galaxian.escenario.Background;
@@ -28,10 +28,7 @@ public class Nivel extends ScreenAdapter {
     private BitmapFont score;
     private BitmapFont time;
     
-    private int contador;
-    private int mili;
-    private int seg;
-    private int min;
+    private Tiempo tiempo;
    
     
     public Nivel(ConfigNivel config, Juego juego){
@@ -51,42 +48,26 @@ public class Nivel extends ScreenAdapter {
         //El marcador
         score= new BitmapFont();
         time= new BitmapFont();
-    }
-    
-    private void actualizarTiempo(){
-    	contador=(int) Gdx.graphics.getDeltaTime();
-    	if(contador<=1) {mili++;}
-    	if(mili==59)
-    	{
-    		seg++;mili=0;
-    	}
-    	if(seg==59)
-    	{
-    		seg=0;
-    		min++;
-    	}  	
+        tiempo = new Tiempo();
+        tiempo.iniciar();
     }
 
-    @Override
     public void render(float delta) {
         // Limpiar pantalla
         Gdx.gl.glClearColor(0, 0, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         EntidadBatch batch = juego.getBatch();
-
         background.draw();
-        actualizarTiempo();
         // Inicializa proceso de dibujado de EntidadBatch
         batch.begin();
         controlador.actualizarEstado(delta);
         controlador.dibujar(batch);
         score.draw(batch,"Score= "+Integer.toString(controlador.getPuntuacion()),0,Gdx.graphics.getHeight()-5);
-        time.draw(batch, "Time= "+min+":"+seg+":"+mili,0,Gdx.graphics.getHeight()-20);
+        time.draw(batch, "Time= "+tiempo.getHora()+":"+tiempo.getMinutos()+":"+tiempo.getSegundos(),0,Gdx.graphics.getHeight()-20);
         // Finaliza proceso de dibujado
         batch.end();
     }
 
-    @Override
     public void dispose() {
 
     }
@@ -113,5 +94,9 @@ public class Nivel extends ScreenAdapter {
 
 	public void gameOver() {
 		juego.pantallaGameOver(controlador.getPuntuacion());
+	}
+	
+	public float getTiempoActual() {
+		return tiempo.getTiempoEnMinutos();
 	}
 }
