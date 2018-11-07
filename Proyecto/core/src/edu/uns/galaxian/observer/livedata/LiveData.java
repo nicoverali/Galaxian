@@ -9,10 +9,14 @@ public class LiveData<T> {
 
     protected T valor;
     protected Collection<Observador<LiveData<T>>> observadores;
+    protected Collection<Observador<LiveData<T>>> observadoresPendientes;
+    protected Collection<Observador<LiveData<T>>> observadoresEliminados;
 
     public LiveData(T valor){
         this.valor = valor;
-        this.observadores = new LinkedHashSet<>();
+        observadores = new LinkedHashSet<>();
+        observadoresPendientes = new LinkedHashSet<>();
+        observadoresEliminados = new LinkedHashSet<>();
     }
 
     /**
@@ -28,7 +32,7 @@ public class LiveData<T> {
      * @param observador Nuevo observador
      */
     public void observar(Observador<LiveData<T>> observador){
-        observadores.add(observador);
+        observadoresPendientes.add(observador);
     }
 
     /**
@@ -36,7 +40,7 @@ public class LiveData<T> {
      * @param observador Observador a remover
      */
     public void removerObservador(Observador<LiveData<T>> observador){
-        observadores.remove(observador);
+        observadoresEliminados.remove(observador);
     }
 
     /**
@@ -44,8 +48,17 @@ public class LiveData<T> {
      * valor almacenado.
      */
     public void notificarObservadores(){
+    	for(Observador<LiveData<T>> observador : observadoresPendientes){
+            observadores.add(observador);
+        }
+    	
+    	for(Observador<LiveData<T>> observador : observadoresEliminados){
+            observadores.remove(observador);
+        }
+    	
         for(Observador<LiveData<T>> observador : observadores){
             observador.notificar(this);
         }
     }
+    
 }

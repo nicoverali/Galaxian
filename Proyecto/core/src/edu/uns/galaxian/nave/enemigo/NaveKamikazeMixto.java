@@ -1,5 +1,6 @@
 package edu.uns.galaxian.nave.enemigo;
 
+
 import edu.uns.galaxian.colision.colisionadores.Visitante;
 import edu.uns.galaxian.entidades.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.jugador.Jugador;

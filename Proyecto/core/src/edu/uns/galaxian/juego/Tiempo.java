@@ -7,7 +7,7 @@ public class Tiempo {
 	private long tiempoInicial;
 	
 	public Tiempo() {
-		tiempoInicial = System.currentTimeMillis(); // Inicialización por defecto
+		tiempoInicial = System.currentTimeMillis(); // Inicializacion por defecto
 	}
 	
 	public void iniciar() {

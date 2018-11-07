@@ -15,7 +15,7 @@ public class ColisionadorBarricada extends ColisionadorObstaculo {
 	}
 
 	public void visitBarricada(Barricada obstaculoEnemigo) {
-		// El obstaculo si afecta a una barricada, sin embargo las barricadas no se afectan entre sí.
+		// El obstaculo si afecta a una barricada, sin embargo las barricadas no se afectan entre si.
 	}
 	
 }

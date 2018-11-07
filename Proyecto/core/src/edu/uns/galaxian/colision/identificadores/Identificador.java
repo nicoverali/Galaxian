@@ -32,35 +32,35 @@ public abstract class Identificador extends ColisionadorAdapter {
 	}
 
 	public void visitJugador(Jugador jugador) {
-		// El Identificador redefinirá solo los métodos que necesite.
+		// El Identificador redefinira solo los metodos que necesite.
 	}
 
 	public void visitEnemigo(Enemigo enemigo) {
-		// El Identificador redefinirá solo los métodos que necesite.
+		// El Identificador redefinira solo los metodos que necesite.
 	}
 
 	public void visitDisparoJugador(DisparoJugador disparo) {
-		// El Identificador redefinirá solo los métodos que necesite.
+		// El Identificador redefinira solo los metodos que necesite.
 	}
 
 	public void visitDisparoEnemigo(DisparoEnemigo disparo) {
-		// El Identificador redefinirá solo los métodos que necesite.
+		// El Identificador redefinira solo los metodos que necesite.
 	}
 
 	public void visitObstaculo(Obstaculo obstaculo) {
-		// El Identificador redefinirá solo los métodos que necesite.
+		// El Identificador redefinira solo los metodos que necesite.
 	}
 
 	public void visitPowerUp(PowerUp powerUp) {
-		// El Identificador redefinirá solo los métodos que necesite.
+		// El Identificador redefinira solo los metodos que necesite.
 	}
 
 	public void visitEscudo(Escudo escudo) {
-		// El Identificador redefinirá solo los métodos que necesite.
+		// El Identificador redefinira solo los metodos que necesite.
 	}
 
 	public void visitBarricada(Barricada obstaculoEnemigo) {
-		// El Identificador redefinirá solo los métodos que necesite.
+		// El Identificador redefinira solo los metodos que necesite.
 	}
 
 }
