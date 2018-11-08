@@ -19,7 +19,8 @@ public class Controlador {
     private List<Jugador> jugadores;
     private DetectorColision detectorColision;
     private TextureAtlas textureAtlas;
-    private Visitor visitorActualizador;
+    private Vigilante vigilante;
+    private Visitor visitorActual;
 
     public Controlador(TextureAtlas atlas){
         textureAtlas = atlas;
@@ -28,7 +29,8 @@ public class Controlador {
         nuevasEntidades = new HashSet<>();
         entidadesEliminadas = new HashSet<>();
         jugadores = new ArrayList<>(3);
-        visitorActualizador = new VisitorJuegoNormal(Gdx.graphics.getDeltaTime());
+        vigilante = new Vigilante();
+        visitorActual = new VisitorJuegoNormal(Gdx.graphics.getDeltaTime());
     }
     
     /**
@@ -126,10 +128,10 @@ public class Controlador {
     public void actualizarEstado(float delta){
         detectorColision.resolverColisiones();
         for(Entidad entidad : entidades){
-            entidad.aceptarVisitor(visitorActualizador);
+            entidad.aceptarVisitor(visitorActual);
         }
         for(Jugador jugador : jugadores){
-            jugador.aceptarVisitor(visitorActualizador);
+            jugador.aceptarVisitor(visitorActual);
         }
         entidades.addAll(nuevasEntidades);
         entidades.removeAll(entidadesEliminadas);
@@ -169,6 +171,13 @@ public class Controlador {
     }
     
     public void setActualizacion(Visitor nuevoVisitor) {
-    	visitorActualizador = nuevoVisitor;
+    	Memento estadoActual = new Memento(visitorActual);
+    	vigilante.guardarMemento(estadoActual);
+    	visitorActual = nuevoVisitor;
+    }
+    
+    public void restaurar() {
+    	Visitor anterior = vigilante.getUltimoMemento().getState();
+    	visitorActual = anterior;
     }
 }

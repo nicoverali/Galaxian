@@ -78,7 +78,8 @@ public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implem
 
     private PowerUp crearPower(){
     	Random ran= new Random();
-    	int n= ran.nextInt(5);
+    	//int n= ran.nextInt(5);
+    	int n = 4;
     	switch(n){
     		case 0: return new PastillaVida(posicion,new Vector2 (0,-1),rotacion,controlador);
     		case 1: return new CampoDeProteccion(posicion,new Vector2 (0,-1),rotacion,controlador);

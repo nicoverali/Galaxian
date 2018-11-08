@@ -24,7 +24,7 @@ public class EstadoMoribundo extends EstadoDibujar {
 	
 	public void dibujar(EntidadBatch batch) {
 		super.dibujar(batch);
-		// TODO cuando las texturas esten listas se debe habilitar el siguiente código
+		// TODO cuando las texturas esten listas se debe habilitar el siguiente codigo
 		/*
 		if(texturaMoribunda==null) {
 			texturaMoribunda = atlas.findRegion(TEXTURA_DIR);

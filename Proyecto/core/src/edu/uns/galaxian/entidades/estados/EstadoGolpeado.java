@@ -27,7 +27,7 @@ public class EstadoGolpeado extends EstadoDibujar {
 	
 	public void dibujar(EntidadBatch batch) {
 		super.dibujar(batch);
-		// TODO cuando las texturas esten listas se debe habilitar el siguiente código
+		// TODO cuando las texturas esten listas se debe habilitar el siguiente codigo
 		/* 
 		if(texturaGolpeada==null) {
 			texturaGolpeada = atlas.findRegion(TEXTURA_DIR);
