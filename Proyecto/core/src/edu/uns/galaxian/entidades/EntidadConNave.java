@@ -17,7 +17,6 @@ public abstract class EntidadConNave<T extends Nave<S>, S extends Disparo> exten
     protected T nave;
     protected TextureRegion textura;
     protected EstadoDibujar estado;
-    protected EstadoDibujar proximoEstado;
     protected HitBox hitbox;
 
     public EntidadConNave(Vector2 posicion, float rotacion, T nave, TextureAtlas atlas){
@@ -65,6 +64,6 @@ public abstract class EntidadConNave<T extends Nave<S>, S extends Disparo> exten
     }
 
 	public void cambiarEstado(EstadoDibujar nuevoEstado) {
-		proximoEstado = nuevoEstado;
+		estado = nuevoEstado;
 	}
 }

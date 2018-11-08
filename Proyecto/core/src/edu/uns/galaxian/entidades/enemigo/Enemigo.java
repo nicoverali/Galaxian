@@ -8,6 +8,8 @@ import edu.uns.galaxian.entidades.EntidadConNave;
 import edu.uns.galaxian.ia.autonomo.AutonomoDinamico;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
+import edu.uns.galaxian.entidades.inanimadas.powerups.fabricaPowerUp.FabricaPowerUp;
+import edu.uns.galaxian.entidades.inanimadas.powerups.fabricaPowerUp.FabricaPowerUpConvencional;
 import edu.uns.galaxian.entidades.inanimadas.powerups.magiaTemporal.*;
 import edu.uns.galaxian.entidades.inanimadas.powerups.objetoPrecioso.*;
 import edu.uns.galaxian.colision.colisionadores.*;
@@ -20,12 +22,13 @@ public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implem
 	private Controlador controlador;
 	private InteligenciaArtificial inteligencia;
 	private ColisionadorEnemigo colisionador;
+	private FabricaPowerUp fabricaPowerUp;
 
-	public Enemigo(Vector2 posicion, NaveEnemigo nave, Controlador controlador, InteligenciaArtificial iaIncial){
+	public Enemigo(Vector2 posicion, NaveEnemigo nave, Controlador controlador, FabricaPowerUp fPowerUp){
 		super(posicion, 270, nave, controlador.getTextureAtlas());
 		this.controlador = controlador;
-		inteligencia = iaIncial;
 		colisionador = new ColisionadorEnemigo(this);
+		fabricaPowerUp = fPowerUp;
 	}
 
 	public Enemigo(Vector2 posicion, NaveEnemigo nave, Controlador controlador){
@@ -33,6 +36,7 @@ public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implem
 		this.controlador = controlador;
 		inteligencia = new InteligenciaNula<>(this);
 		colisionador = new ColisionadorEnemigo(this);
+		fabricaPowerUp = new FabricaPowerUpConvencional();
 	}
 
 	/**
@@ -71,23 +75,8 @@ public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implem
     	controlador.eliminarEntidad(this);
     	//TODO cambiar el true por decidirCrearPowerUp()
     	if(true) {
-    		PowerUp entidad = crearPower();
+    		PowerUp entidad = fabricaPowerUp.getPowerUp(posicion, rotacion, controlador);
     		controlador.agregarEntidad(entidad);
-    	}
-    }
-
-    private PowerUp crearPower(){
-    	Random ran= new Random();
-    	//int n= ran.nextInt(5);
-    	int n = 4;
-    	switch(n){
-    		case 0: return new PastillaVida(posicion,new Vector2 (0,-1),rotacion,controlador);
-    		case 1: return new CampoDeProteccion(posicion,new Vector2 (0,-1),rotacion,controlador);
-    		case 2: return new Misil(posicion,new Vector2 (0,-1),rotacion,controlador);
-    		case 3: return new MejoraArma(posicion,new Vector2 (0,-1),rotacion,controlador);
-    		case 4: return new CongelaTiempo(posicion,new Vector2 (0,-1),rotacion,controlador);
-    		case 5: return new SuperDisparo(posicion,new Vector2 (0,-1),rotacion,controlador);
-    		default: return null;
     	}
     }
 
