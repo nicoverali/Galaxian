@@ -1,6 +1,7 @@
 package edu.uns.galaxian.juego.menus;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -9,14 +10,23 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import edu.uns.galaxian.animacion.animator.ciclos.CicloCircular;
 import edu.uns.galaxian.animacion.animator.ciclos.CicloUnico;
 import edu.uns.galaxian.escenario.CampoEstrellas;
 import edu.uns.galaxian.juego.Juego;
+import edu.uns.galaxian.juego.screen.menu.Menu;
 import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.animacion.EstadoAnimacion;
 import edu.uns.galaxian.animacion.animator.interpolaciones.BezierAnimator;
 import edu.uns.galaxian.animacion.animator.ValueAnimator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Principal extends ScreenAdapter {
 
@@ -93,11 +103,47 @@ public class Principal extends ScreenAdapter {
             batch.setColor(1, 1, 1, animatorLogo.getValorActualFloat());
             batch.draw(logo, new Vector2(mitadPantalla, altoPantalla - 150), 0);
             batch.end();
+            if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
+                estado = new EstadoMenu();
+            }
         }
     }
     private class EstadoMenu implements EstadoAnimacion{
-        public void accion(float delta) {
+        private Stage stage;
+        private Menu menu;
+        public EstadoMenu(){
+            stage = new Stage();
+            TextButton.TextButtonStyle style1 = new TextButton.TextButtonStyle();
+            style1.font = font;
+            TextButton.TextButtonStyle style2 = new TextButton.TextButtonStyle();
+            style2.font = font;
+            TextButton.TextButtonStyle style3 = new TextButton.TextButtonStyle();
+            style3.font = font;
+            List<TextButton> list = new ArrayList<>();
+            list.add(new TextButton("Nuevo juego", style1));
+            list.add(new TextButton("Opciones", style2));
+            list.add(new TextButton("Salir", style3));
+            menu = new Menu(list, 50, Color.YELLOW);
+            menu.setCenter(Gdx.graphics.getWidth()/2, 300);
+            stage.addListener(new InputListener(){
+                public boolean keyDown(InputEvent event, int keycode) {
+                    System.out.println("Pressss");
+                    return false;
+                }
+            });
+            stage.addActor(menu);
+            stage.setKeyboardFocus(menu);
+            Gdx.input.setInputProcessor(stage);
+        }
 
+        public void accion(float delta) {
+            EntidadBatch batch = juego.getBatch();
+            estrellas.draw(delta);
+            batch.begin();
+            batch.draw(logo, new Vector2(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight() - 150), 0);
+            batch.end();
+            stage.act(delta);
+            stage.draw();
         }
     }
 }
