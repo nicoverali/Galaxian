@@ -41,7 +41,7 @@ public class DetectorColision {
 		for(Colisionable referencia : colisionables){
 			for(Colisionable otroColisionable : colisionables){
 				if(referencia != otroColisionable && colisionaron(referencia, otroColisionable)){
-					referencia.aceptarColision(otroColisionable.getColisionador());
+					referencia.aceptarVisitor(otroColisionable.getColisionador());
 				}
 			}
 		}

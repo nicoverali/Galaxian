@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import edu.uns.galaxian.colision.hitbox.HBCirculo;
 import edu.uns.galaxian.colision.hitbox.HitBox;
-import edu.uns.galaxian.colision.colisionadores.Colisionador;
+import edu.uns.galaxian.colision.colisionadores.Visitor;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorObstaculo;
 import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.util.EntidadBatch;
@@ -15,33 +15,24 @@ import edu.uns.galaxian.ia.autonomo.Autonomo;
 import edu.uns.galaxian.ia.InteligenciaArtificial;
 import edu.uns.galaxian.ia.inteligencias.basica.InteligenciaNula;
 
-public class Obstaculo extends EntidadViva implements Autonomo {
+public abstract class Obstaculo extends EntidadViva implements Autonomo {
 	
-	private static final String TEXTURA_DIR = "obstaculo/meteoro1";
-	private static final int VIDA_MAX = 300;
+	private static final int VIDA_MAX = 500;
 
-	private TextureRegion textura;
-	private int fuerzaDeColision;
-	private Controlador controlador;
-	private HBCirculo box;
-	private InteligenciaArtificial<Obstaculo> inteligencia;
-	private ColisionadorObstaculo colisionador;
+	protected ColisionadorObstaculo colisionador;
+	protected TextureRegion textura;
+	protected Controlador controlador;
+	protected HBCirculo box;
+	protected InteligenciaArtificial<Obstaculo> inteligencia;
+	protected int fuerzaDeColision;
 
-	public Obstaculo(float xPos, float yPos, Controlador controlador) {
-		super(new Vector2(xPos, yPos), VIDA_MAX,0 );
+	public Obstaculo(float xPos, float yPos, String TEXTURA_DIR, Controlador controlador) {
+		super(new Vector2(xPos, yPos), VIDA_MAX,0);
 		this.controlador = controlador;
-		textura = controlador.getTextureAtlas().findRegion(TEXTURA_DIR);
-		colisionador = new ColisionadorObstaculo(this);
-		fuerzaDeColision = 300;
-		inteligencia = new InteligenciaNula(this);
-		box = new HBCirculo(this,textura.getRegionWidth()/2);
-	}
-	
-	public Obstaculo(float xPos, float yPos) {
-		super(new Vector2(xPos, yPos), VIDA_MAX, 0);
-		colisionador = new ColisionadorObstaculo(this);
 		fuerzaDeColision = 100;
-		inteligencia = new InteligenciaNula(this);
+		colisionador = new ColisionadorObstaculo(this);
+		inteligencia = new InteligenciaNula<Obstaculo>(this);
+		textura = controlador.getTextureAtlas().findRegion(TEXTURA_DIR);
 		box = new HBCirculo(this,textura.getRegionWidth()/2);
 	}
 	
@@ -68,11 +59,11 @@ public class Obstaculo extends EntidadViva implements Autonomo {
 		vida.setValor(VIDA_MAX);
 	}
 
-	public void aceptarColision(Colisionador colisionador) {
-		colisionador.colisionarConObstaculo(this);
+	public void aceptarVisitor(Visitor colisionador) {
+		colisionador.visitObstaculo(this);
 	}
 
-	public Colisionador getColisionador() {
+	public Visitor getColisionador() {
 		return colisionador;
 	}
 

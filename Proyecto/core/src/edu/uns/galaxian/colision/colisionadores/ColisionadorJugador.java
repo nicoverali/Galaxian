@@ -5,7 +5,7 @@ import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.obstaculos.Obstaculo;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
-public class ColisionadorJugador extends ColisionadorNulo<Jugador> {
+public class ColisionadorJugador extends VisitorAdapter<Jugador> {
 	
 	private Jugador objetoFuente;
 
@@ -13,15 +13,15 @@ public class ColisionadorJugador extends ColisionadorNulo<Jugador> {
 		this.objetoFuente = objetoFuente;
 	}
 
-	public void colisionarConEnemigo(Enemigo enemigo) {
+	public void visitEnemigo(Enemigo enemigo) {
 		objetoFuente.restarVida(enemigo.getFuerzaDeColision());
 	}
 
-	public void colisionarConDisparoEnemigo(DisparoEnemigo disparo) {
+	public void visitDisparoEnemigo(DisparoEnemigo disparo) {
 		objetoFuente.restarVida(disparo.getFuerzaDeDisparo());
 	}
 
-	public void colisionarConObstaculo(Obstaculo obstaculo) {
+	public void visitObstaculo(Obstaculo obstaculo) {
 		objetoFuente.restarVida(obstaculo.getFuerzaDeColision());
 	}
 	

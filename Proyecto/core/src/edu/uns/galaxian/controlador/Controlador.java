@@ -2,6 +2,8 @@ package edu.uns.galaxian.controlador;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import edu.uns.galaxian.colision.DetectorColision;
+import edu.uns.galaxian.colision.actualizadores.VisitorJuegoNormal;
+import edu.uns.galaxian.colision.colisionadores.Visitor;
 import edu.uns.galaxian.entidades.Entidad;
 import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.entidades.jugador.Jugador;
@@ -16,7 +18,8 @@ public class Controlador {
     private List<Jugador> jugadores;
     private DetectorColision detectorColision;
     private TextureAtlas textureAtlas;
-    private int puntuacion;
+    private Vigilante vigilante;
+    private Visitor visitorActual;
 
     public Controlador(TextureAtlas atlas){
         textureAtlas = atlas;
@@ -25,25 +28,10 @@ public class Controlador {
         nuevasEntidades = new HashSet<>();
         entidadesEliminadas = new HashSet<>();
         jugadores = new ArrayList<>(3);
+        vigilante = new Vigilante();
+        visitorActual = new VisitorJuegoNormal();
     }
-    
-    /**
-     * Suma a la puntuacion el valor a sumar
-     * @param aSumar valor a sumar
-     */
-    public void sumar(int aSumar){
-    	puntuacion+=aSumar;
-    }
-    
-    /**
-     * Retorna la puntuacion
-     * @return puntuacion
-     */
-    public int getPuntuacion(){
-    	return puntuacion;
-    }
-    
-   
+
     /**
      * Registra una nueva entidad en el controlador
      * @param entidad Nueva entidad
@@ -130,10 +118,10 @@ public class Controlador {
     public void actualizarEstado(float delta){
         detectorColision.resolverColisiones();
         for(Entidad entidad : entidades){
-            entidad.actualizar(delta);
+            entidad.aceptarVisitor(visitorActual);
         }
         for(Jugador jugador : jugadores){
-            jugador.actualizar(delta);
+            jugador.aceptarVisitor(visitorActual);
         }
         entidades.addAll(nuevasEntidades);
         entidades.removeAll(entidadesEliminadas);
@@ -170,5 +158,15 @@ public class Controlador {
         List<T> listaCopia = new ArrayList<>(listaOriginal.size());
         Collections.copy(listaCopia, listaOriginal);
         return listaCopia;
+    }
+    
+    public void setActualizacion(Visitor nuevoVisitor) {
+    	Memento estadoActual = new Memento(visitorActual);
+    	vigilante.guardarMemento(estadoActual);
+    	visitorActual = nuevoVisitor;
+    }
+    
+    public void restaurar() {
+    	visitorActual = vigilante.getUltimoMemento().getState();
     }
 }

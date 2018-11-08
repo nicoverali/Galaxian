@@ -113,6 +113,7 @@ public class OleadaFormacion implements Oleada {
             List<Enemigo> fila = filasIt.next();
             if(fila.contains(enemigo)){
                 fila.remove(enemigo);
+                enemigosAtacando.remove(enemigo);
                 if(fila.isEmpty()){
                     filasIt.remove();
                 }

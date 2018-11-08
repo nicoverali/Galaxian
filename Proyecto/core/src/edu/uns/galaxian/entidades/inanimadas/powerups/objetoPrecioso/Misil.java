@@ -3,6 +3,7 @@ package edu.uns.galaxian.entidades.inanimadas.powerups.objetoPrecioso;
 import com.badlogic.gdx.math.Vector2;
 
 import edu.uns.galaxian.colision.hitbox.HBRectangulo;
+import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
 import edu.uns.galaxian.entidades.equipamiento.armas.ArmaDisparoDoble;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
 import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparoJugador;
@@ -19,7 +20,20 @@ public class Misil extends PowerUp {
 	}
 
 	public void efectoJugador(Jugador jugador) {
-		jugador.setArma(new ArmaDisparoDoble<DisparoJugador>(new FabricaDisparoJugador()));
+		final Jugador player = jugador;
+		final Arma<DisparoJugador> anterior = jugador.getArma();
+		new Thread(new Runnable() {
+			public void run() {
+				player.setArma(new ArmaDisparoDoble<>(new FabricaDisparoJugador(player)));
+				try {
+					Thread.sleep(7000);
+				} catch (InterruptedException e) { 
+					System.out.println("Error en ejecucion de Thread de powerUp");
+					e.printStackTrace();
+				}
+				player.setArma(anterior);
+			}
+		}).start();
 	}
 
 }

@@ -1,6 +1,6 @@
 package edu.uns.galaxian.nave;
 
-import edu.uns.galaxian.colision.colisionadores.Colisionador;
+import edu.uns.galaxian.colision.colisionadores.Visitor;
 import edu.uns.galaxian.entidades.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 import edu.uns.galaxian.ia.InteligenciaArtificial;
@@ -14,13 +14,15 @@ public abstract class NaveEnemigo extends Nave<DisparoEnemigo> {
     private float velocidadMax;
     private float steeringMax;
     private int fuerzaColision;
+    private int bonus;
 
-    public NaveEnemigo(String texturaDir, int vidaMaxima, float velocidadMax, int fuerzaColision, float steeringMax){
+    public NaveEnemigo(String texturaDir, int vidaMaxima, float velocidadMax, int fuerzaColision, int bonus, float steeringMax){
         super(new ArmaComun<>(new FabricaDisparoEnemigo()), texturaDir);
         this.vidaMaxima = vidaMaxima;
         this.velocidadMax = velocidadMax;
         this.steeringMax = steeringMax;
         this.fuerzaColision = fuerzaColision;
+        this.bonus = bonus;
     }
 
     /**
@@ -34,7 +36,7 @@ public abstract class NaveEnemigo extends Nave<DisparoEnemigo> {
      * el colisionador del un colisionable para indicarle que accion realizar.
      * @param colisionador Colisionador de un colisionable participante en la colision producida
      */
-    public abstract void aceptarColision(Colisionador colisionador);
+    public abstract void aceptarColision(Visitor colisionador);
 
     /**
      * Retorna la fuerza con la que colisiona la nave
@@ -52,6 +54,15 @@ public abstract class NaveEnemigo extends Nave<DisparoEnemigo> {
         return steeringMax;
     }
 
+    /**
+     * Retorna el el puntaje bonus que consede eliminar
+     * a esta nave enemiga.
+     * @return Puntaje bonus por eliminar a la nave
+     */
+    public int getBonus() {
+        return bonus;
+    }
+
     public int getVidaMax() {
         return vidaMaxima;
     }
@@ -59,4 +70,5 @@ public abstract class NaveEnemigo extends Nave<DisparoEnemigo> {
     public float getVelocidadMax() {
         return velocidadMax;
     }
+
 }

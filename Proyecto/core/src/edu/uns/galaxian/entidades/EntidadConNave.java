@@ -6,6 +6,8 @@ import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.colision.hitbox.HBRectangulo;
 import edu.uns.galaxian.colision.hitbox.HitBox;
 import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
+import edu.uns.galaxian.entidades.estados.EstadoDibujar;
+import edu.uns.galaxian.entidades.estados.EstadoSano;
 import edu.uns.galaxian.entidades.inanimadas.disparos.Disparo;
 import edu.uns.galaxian.nave.Nave;
 import edu.uns.galaxian.util.EntidadBatch;
@@ -14,6 +16,7 @@ public abstract class EntidadConNave<T extends Nave<S>, S extends Disparo> exten
 
     protected T nave;
     protected TextureRegion textura;
+    protected EstadoDibujar estado;
     protected HitBox hitbox;
 
     public EntidadConNave(Vector2 posicion, float rotacion, T nave, TextureAtlas atlas){
@@ -21,6 +24,7 @@ public abstract class EntidadConNave<T extends Nave<S>, S extends Disparo> exten
         this.nave = nave;
         textura = atlas.findRegion(nave.getTexturaDir());
         hitbox = new HBRectangulo(this, textura.getRegionHeight(), textura.getRegionWidth());
+        estado = new EstadoSano(this,nave,atlas);
     }
 
     /**
@@ -51,12 +55,15 @@ public abstract class EntidadConNave<T extends Nave<S>, S extends Disparo> exten
 
     @Override
     public void dibujar(EntidadBatch batch) {
-        // TODO Puede ser que deba estar en Jugador y Enemigo. Tambien falta el metodo nave.dibujarEquipamiento, y utilizar EntidadBatch para dibujar
-        batch.draw(textura, posicion, rotacion);
+        estado.dibujar(batch);
     }
 
     @Override
     public HitBox getHitBox() {
         return hitbox;
     }
+
+	public void cambiarEstado(EstadoDibujar nuevoEstado) {
+		estado = nuevoEstado;
+	}
 }

@@ -76,6 +76,6 @@ public class DirectorNivel {
 
     // TODO Especificar si el nivel si gana o se pierde
     public void finalizarNivel(){
-        juego.pantallaGameOver(controladorEntidad.getPuntuacion());
+        //juego.pantallaGameOver(controladorEntidad.getPuntuacion()); El controlador ya no tiene mas el puntaje
     }
 }

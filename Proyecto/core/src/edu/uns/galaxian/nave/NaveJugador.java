@@ -10,7 +10,8 @@ public abstract class NaveJugador extends Nave<DisparoJugador> {
     protected Color colorNave;
 
     public NaveJugador(String texturaDir, Color colorNave){
-        super(new ArmaComun<>(new FabricaDisparoJugador()), texturaDir);
+        // TODO Revisar el null
+        super(new ArmaComun<>(new FabricaDisparoJugador(null)), texturaDir);
         this.colorNave = colorNave;
     }
 

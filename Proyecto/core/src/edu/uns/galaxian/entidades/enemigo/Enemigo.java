@@ -1,16 +1,14 @@
 package edu.uns.galaxian.entidades.enemigo;
 
-import java.util.Random;
-
-import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.entidades.EntidadConNave;
 import edu.uns.galaxian.ia.autonomo.AutonomoDinamico;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
-import edu.uns.galaxian.entidades.inanimadas.powerups.magiaTemporal.*;
-import edu.uns.galaxian.entidades.inanimadas.powerups.objetoPrecioso.*;
+import edu.uns.galaxian.entidades.inanimadas.powerups.fabricaPowerUp.FabricaPowerUp;
+import edu.uns.galaxian.entidades.inanimadas.powerups.fabricaPowerUp.FabricaPowerUpConvencional;
 import edu.uns.galaxian.colision.colisionadores.*;
 import edu.uns.galaxian.ia.InteligenciaArtificial;
 import edu.uns.galaxian.ia.inteligencias.basica.InteligenciaNula;
@@ -18,16 +16,16 @@ import edu.uns.galaxian.nave.NaveEnemigo;
 
 public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implements AutonomoDinamico {
 	
-	private static final int puntaje=10;
 	private Controlador controlador;
 	private InteligenciaArtificial inteligencia;
 	private ColisionadorEnemigo colisionador;
+	private FabricaPowerUp fabricaPowerUp;
 
-	public Enemigo(Vector2 posicion, NaveEnemigo nave, Controlador controlador, InteligenciaArtificial iaIncial){
+	public Enemigo(Vector2 posicion, NaveEnemigo nave, Controlador controlador, FabricaPowerUp fPowerUp){
 		super(posicion, 270, nave, controlador.getTextureAtlas());
 		this.controlador = controlador;
-		inteligencia = iaIncial;
 		colisionador = new ColisionadorEnemigo(this);
+		fabricaPowerUp = fPowerUp;
 	}
 
 	public Enemigo(Vector2 posicion, NaveEnemigo nave, Controlador controlador){
@@ -35,6 +33,7 @@ public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implem
 		this.controlador = controlador;
 		inteligencia = new InteligenciaNula<>(this);
 		colisionador = new ColisionadorEnemigo(this);
+		fabricaPowerUp = new FabricaPowerUpConvencional();
 	}
 
 	/**
@@ -45,6 +44,16 @@ public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implem
 	{
 		return nave.getFuerzaDeColision();
 	}
+
+	/**
+	 * Retorna el puntaje bonus que se
+	 * obtiene de este enemigo
+	 * @return Puntaje bonus obtenido de este enemigo
+	 */
+	public int getBonus() {
+		return nave.getBonus();
+	}
+
     public void disparar() {
 		nave.getArma().disparar(posicion.cpy(), rotacion, controlador);
 	}
@@ -71,41 +80,18 @@ public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implem
 
     public void eliminar() {
     	controlador.eliminarEntidad(this);
-    	//TODO cambiar el true por decidirCrearPowerUp()
-    	if(true) {
-    		PowerUp entidad = crearPower();
+    	if(MathUtils.randomBoolean(0.1f)) {
+    		PowerUp entidad = fabricaPowerUp.getPowerUp(posicion, rotacion, controlador);
     		controlador.agregarEntidad(entidad);
     	}
-    	controlador.sumar(puntaje);
     }
 
-    private PowerUp crearPower(){
-    	//Cuando esten todos los powers
-    	Random ran= new Random();
-    	int n= ran.nextInt(4);
-    	switch(n){
-    		case 0: return new PastillaVida(posicion,new Vector2 (0,-1),rotacion,controlador);
-    		case 1: return new CampoDeProteccion(posicion,new Vector2 (0,-1),rotacion,controlador);
-    		case 2: return new Misil(posicion,new Vector2 (0,-1),rotacion,controlador);
-    		case 3: return new MejoraArma(posicion,new Vector2 (0,-1),rotacion,controlador);
-    		case 4: return new CongelaTiempo(posicion,new Vector2 (0,-1),rotacion,controlador);
-    		default: return null;
-    	}
-    }
-
-    //Probabilidad de que se genere un power 3 de 10
-	private boolean decidirCrearPowerUp() {
-    	Random ran= new Random();
-    	int azar = ran.nextInt(10);
-    	return azar<3;
-    }
-
-	public Colisionador getColisionador(){
+	public Visitor getColisionador(){
 		return colisionador;
 	}
 
-	public void aceptarColision(Colisionador colisionador) {
-		colisionador.colisionarConEnemigo(this);
+	public void aceptarVisitor(Visitor colisionador) {
+		colisionador.visitEnemigo(this);
 		nave.aceptarColision(colisionador);
 	}
 

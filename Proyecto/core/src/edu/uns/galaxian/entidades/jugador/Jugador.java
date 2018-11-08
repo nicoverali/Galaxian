@@ -6,7 +6,9 @@ import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.colision.colisionadores.*;
 import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.entidades.EntidadConNave;
+import edu.uns.galaxian.entidades.equipamiento.armas.ArmaComun;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
+import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparoJugador;
 import edu.uns.galaxian.entidades.jugador.input.*;
 import edu.uns.galaxian.juego.nivel.Nivel;
 import edu.uns.galaxian.nave.NaveJugador;
@@ -18,6 +20,7 @@ public class Jugador extends EntidadConNave<NaveJugador, DisparoJugador> {
 	private Nivel nivel;
 	private ColisionadorJugador colisionador;
 	private Controlador controlador;
+	private int puntaje;
 	
 
 	public Jugador(Vector2 posicion, NaveJugador nave, Nivel nivel, Controlador controlador) {
@@ -26,6 +29,24 @@ public class Jugador extends EntidadConNave<NaveJugador, DisparoJugador> {
 		this.controlador = controlador;
 		colisionador = new ColisionadorJugador(this);
 		input = new InputKeyboard();
+		nave.setArma(new ArmaComun<>(new FabricaDisparoJugador(this)));
+	}
+
+	/**
+	 * Suma al puntaje actual del jugador, parte del bonus
+	 * recibido. La suma total dependera del tiempo actual del nivel
+	 * @param bonus Bonus que recibe el jugador
+	 */
+	public void sumarPuntaje(int bonus) {
+		puntaje += (Math.pow(Math.E,-(nivel.getTiempoActual()-0.7))+1)*bonus;
+	}
+
+	/**
+	 * Retorna el puntaje actual de jugador
+	 * @return Puntaje del jugador
+	 */
+	public int getPuntaje() {
+		return puntaje;
 	}
 
 	public void disparar() {
@@ -51,8 +72,8 @@ public class Jugador extends EntidadConNave<NaveJugador, DisparoJugador> {
 		return colisionador;
 	}
 
-	public void aceptarColision(Colisionador col){
-		col.colisionarConJugador(this);
+	public void aceptarVisitor(Visitor col){
+		col.visitJugador(this);
 	}
 
 	private boolean posicionDentroDePantalla(Vector2 posicion){
