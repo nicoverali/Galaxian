@@ -83,7 +83,7 @@ public class Controlador {
      * @throws IllegalArgumentException Si la entidad recibida no esta registrada en este controlador
      */
     public void eliminarEntidad(Entidad entidad) throws IllegalArgumentException{
-        if(!entidadesActualizadas.contains(entidad)){
+        if(!entidadesActualizadas.contains(entidad) && !nuevasEntidades.contains(entidad)){
             throw new IllegalArgumentException("La entidad recibida no se encuentra registrada.");
         }
         entidadesEliminadas.add(entidad);
@@ -96,7 +96,7 @@ public class Controlador {
      * @throws IllegalArgumentException Si la entidad recibida no esta registrada en este controlador
      */
     public void eliminarColisionable(Colisionable colisionable) throws IllegalArgumentException{
-        if(!entidadesColisionables.contains(colisionable)){
+        if(!entidadesColisionables.contains(colisionable) && !nuevosColisionables.contains(colisionable)){
             throw new IllegalArgumentException("La entidad recibida no se encuentra registrada.");
         }
         colisionablesEliminados.add(colisionable);

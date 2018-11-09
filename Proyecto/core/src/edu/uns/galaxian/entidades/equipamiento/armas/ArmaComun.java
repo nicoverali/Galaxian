@@ -7,7 +7,7 @@ import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.entidades.inanimadas.disparos.Disparo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparo;
 
-public class ArmaComun<T extends Disparo> implements Arma<T> {
+public class ArmaComun<T extends Disparo> extends ArmaInfinita<T> {
 
 	private static final long CADENCIA = 275;
 	private static final int FUERZA = 35;

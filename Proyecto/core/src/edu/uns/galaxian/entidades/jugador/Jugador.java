@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.colision.colisionadores.*;
 import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.entidades.EntidadConNave;
+import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
 import edu.uns.galaxian.entidades.equipamiento.armas.ArmaComun;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
 import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparoJugador;
@@ -51,7 +52,11 @@ public class Jugador extends EntidadConNave<NaveJugador, DisparoJugador> {
 	}
 
 	public void disparar() {
-		nave.getArma().disparar(posicion, rotacion, controlador);
+		if(!nave.getArma().quedaMunicion()) {
+			Arma<DisparoJugador> armaComun = new ArmaComun<DisparoJugador>(new FabricaDisparoJugador(this));
+			nave.setArma(armaComun);
+		}
+		nave.getArma().disparar(posicion.cpy(), rotacion, controlador);
 	}
 
 	public void actualizar(float delta){
@@ -61,7 +66,7 @@ public class Jugador extends EntidadConNave<NaveJugador, DisparoJugador> {
 			posicion = nuevaPosicion;
 		}
  		if(input.sePresionoDisparar()){
-			nave.getArma().disparar(posicion.cpy(), rotacion, controlador);
+			disparar();
 		}
  	}
 

@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.colision.hitbox.HBRectangulo;
 import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
-import edu.uns.galaxian.entidades.equipamiento.armas.ArmaDisparoLimitado;
+import edu.uns.galaxian.entidades.equipamiento.armas.ArmaDisparoUnico;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
 import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaEspecial;
 import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
@@ -21,7 +21,7 @@ public class PoderCosmico extends PowerUp {
 	}
 
 	public void efectoJugador(Jugador jugador) {
-		Arma<DisparoJugador> armaCosmica = new ArmaDisparoLimitado<DisparoJugador>(new FabricaEspecial(jugador),1);
+		Arma<DisparoJugador> armaCosmica = new ArmaDisparoUnico<DisparoJugador>(new FabricaEspecial(jugador));
 		jugador.setArma(armaCosmica);
 		eliminar();
 	}

@@ -49,11 +49,13 @@ public class OleadaBonus implements Oleada {
             int cantNuevosAtacantes = random.nextInt(4);
             for(int i = 0; i < cantNuevosAtacantes; i++){
                 Enemigo enemigoRandom = enemigos.get(random.nextInt(enemigos.size()));
-                enemigoRandom.setPosicion(getPosicionAleatoria());
-                controlador.agregarEntidad(enemigoRandom);
-                enemigoRandom.atacar();
-                enemigosAtacando.add(enemigoRandom);
-                temporizador.iniciar(2000 + random.nextInt(3000));
+                if(!enemigosAtacando.contains(enemigoRandom)) {
+	                enemigoRandom.setPosicion(getPosicionAleatoria());
+	                controlador.agregarEntidad(enemigoRandom);
+	                enemigosAtacando.add(enemigoRandom);
+	                temporizador.iniciar(2000 + random.nextInt(3000));
+	                enemigoRandom.atacar();
+                }
             }
         }
     }
@@ -69,7 +71,6 @@ public class OleadaBonus implements Oleada {
      */
     private void registrarEnemigos(List<Enemigo> enemigos){
         for(final Enemigo enemigo : enemigos){
-            enemigo.setPosicion(-500,-500);
             enemigo.setInteligencia(new InteligenciaNula<>(enemigo));
             enemigo.getVida().observar(new Observador<LiveData<Integer>>() {
                 public void notificar(LiveData<Integer> subject) {
@@ -102,11 +103,10 @@ public class OleadaBonus implements Oleada {
         while(enemigosIt.hasNext()){
             Enemigo enemigo = enemigosIt.next();
             if(enemigo.getPosicion().y < 0){
-                enemigo.setPosicion(enemigo.getPosicion().x, Gdx.graphics.getHeight()+50);
                 enemigo.transicionarInteligencia(new InteligenciaNula<>(enemigo));
                 enemigosIt.remove();
                 enemigos.remove(enemigo);
-                controlador.eliminarEntidad(enemigo);
+                enemigo.eliminar();
             }
         }
     }
