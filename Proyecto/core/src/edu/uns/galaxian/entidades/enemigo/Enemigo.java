@@ -18,13 +18,14 @@ import edu.uns.galaxian.nave.NaveEnemigo;
 public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implements AutonomoDinamico {
 	
 	private Controlador controlador;
-	private InteligenciaArtificial inteligencia;
+	private InteligenciaArtificial<Enemigo> inteligencia;
 	private ColisionadorEnemigo colisionador;
 	private FabricaPowerUp fabricaPowerUp;
 
 	public Enemigo(Vector2 posicion, NaveEnemigo nave, Controlador controlador, FabricaPowerUp fPowerUp){
 		super(posicion, 270, nave, controlador.getTextureAtlas(Juego.ATLAS_NAVES));
 		this.controlador = controlador;
+		inteligencia = new InteligenciaNula<>(this);
 		colisionador = new ColisionadorEnemigo(this);
 		fabricaPowerUp = fPowerUp;
 	}

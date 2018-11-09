@@ -16,7 +16,8 @@ public class GameData {
     public static final String CONFIG_OLEADA = "configuracion";
     public static final String FORMACION = "formacion";
     public static final String FABRICA = "fabricaEnemigos";
-    public static final String CANT_ENEMIGOS = "cantidadEnemigos";
+    public static final String LISTA_ENEMIGOS = "listaEnemigos";
+    public static final String CANT_KAMIKAZE = "cantidadKamikaze";
     public static final String DECORATORS = "decoratorsOleada";
 
     private JsonArray dataJson;

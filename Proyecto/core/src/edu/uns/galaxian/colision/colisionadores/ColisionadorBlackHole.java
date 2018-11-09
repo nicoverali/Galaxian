@@ -10,7 +10,7 @@ public class ColisionadorBlackHole extends ColisionadorObstaculo {
 		super(obstaculo);
 	}
 
-	// TODO los siguientes métodos deberian setear una inteligencia que los guie al centro del agujero negro.
+	// TODO los siguientes metodos deberian setear una inteligencia que los guie al centro del agujero negro.
 	
 	public void visitEnemigo(Enemigo enemigo) {
 		objetoFuente.restarVida(enemigo.getFuerzaDeColision());

@@ -1,10 +1,6 @@
 package edu.uns.galaxian.oleada;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
@@ -21,18 +17,18 @@ public class OleadaBonus implements Oleada {
 
     private static final int LIMITE_ENEMIGOS_ATACANDO = 4;
 
-    private List<List<Enemigo>> enemigos;
-    private Map<Enemigo, Vector2> enemigosAtacando;
+    protected List<Enemigo> enemigos;
+    private Set<Enemigo> enemigosAtacando;
     private Temporizador temporizador;
     private Controlador controlador;
     private boolean iniciado;
     private Nivel nivel;
 
-    public OleadaBonus(List<List<Enemigo>> enemigos, Controlador controlador, Nivel nivel){
+    public OleadaBonus(List<Enemigo> enemigos, Controlador controlador, Nivel nivel){
         this.controlador = controlador;
         this.enemigos = enemigos;
         this.nivel = nivel;
-        enemigosAtacando = new HashMap<>();
+        enemigosAtacando = new HashSet<>();
         temporizador = new Temporizador();
         registrarEnemigos(enemigos);
     }
@@ -50,14 +46,15 @@ public class OleadaBonus implements Oleada {
         }
         else if(enemigosAtacando.size() <= LIMITE_ENEMIGOS_ATACANDO && temporizador.tiempoCumplido()){
             Random random = new Random();
-            int cantFilas = enemigos.size();
-            List<Enemigo> filaRandom = enemigos.get(random.nextInt(cantFilas));
-            Enemigo enemigoRandom = filaRandom.get(random.nextInt(filaRandom.size()));
-            enemigoRandom.setPosicion(getPosicionAleatoria());
-            controlador.agregarEntidad(enemigoRandom);
-            enemigoRandom.atacar();
-            enemigosAtacando.put(enemigoRandom, enemigoRandom.getPosicion());
-            temporizador.iniciar(2000 + random.nextInt(3000));
+            int cantNuevosAtacantes = random.nextInt(4);
+            for(int i = 0; i < cantNuevosAtacantes; i++){
+                Enemigo enemigoRandom = enemigos.get(random.nextInt(enemigos.size()));
+                enemigoRandom.setPosicion(getPosicionAleatoria());
+                controlador.agregarEntidad(enemigoRandom);
+                enemigoRandom.atacar();
+                enemigosAtacando.add(enemigoRandom);
+                temporizador.iniciar(2000 + random.nextInt(3000));
+            }
         }
     }
 
@@ -70,22 +67,18 @@ public class OleadaBonus implements Oleada {
     /**
      * Registra a todos los enemigos sin ponerlos en el controlador.
      */
-    private void registrarEnemigos(List<List<Enemigo>> enemigos){
-        for(int i = 0; i < enemigos.size(); i++){
-            List<Enemigo> fila = enemigos.get(i);
-            for(int j = 0; j < fila.size(); j++){
-                final Enemigo enemigo = fila.get(j);
-                enemigo.setPosicion(0,0);
-                enemigo.setInteligencia(new InteligenciaNula<Enemigo>(enemigo));
-                enemigo.getVida().observar(new Observador<LiveData<Integer>>() {
-                    public void notificar(LiveData<Integer> subject) {
-                        if(subject.getValor() == 0){
-                            subject.removerObservador(this);
-                            eliminarEnemigo(enemigo);
-                        }
+    private void registrarEnemigos(List<Enemigo> enemigos){
+        for(final Enemigo enemigo : enemigos){
+            enemigo.setPosicion(-500,-500);
+            enemigo.setInteligencia(new InteligenciaNula<>(enemigo));
+            enemigo.getVida().observar(new Observador<LiveData<Integer>>() {
+                public void notificar(LiveData<Integer> subject) {
+                    if(subject.getValor() == 0){
+                        subject.removerObservador(this);
+                        eliminarEnemigo(enemigo);
                     }
-                });
-            }
+                }
+            });
         }
     }
 
@@ -94,18 +87,8 @@ public class OleadaBonus implements Oleada {
      * @param enemigo Enemigo a eliminar
      */
     private void eliminarEnemigo(Enemigo enemigo){
-        Iterator<List<Enemigo>> filasIt = enemigos.iterator();
-        while(filasIt.hasNext()){
-            List<Enemigo> fila = filasIt.next();
-            if(fila.contains(enemigo)){
-                fila.remove(enemigo);
-                enemigosAtacando.remove(enemigo);
-                if(fila.isEmpty()){
-                    filasIt.remove();
-                }
-                break;
-            }
-        }
+        enemigos.remove(enemigo);
+        enemigosAtacando.remove(enemigo);
     }
 
     /**
@@ -115,13 +98,14 @@ public class OleadaBonus implements Oleada {
      * formacion
      */
     private void verificarEnemigosEnPantalla(){
-        Iterator<Enemigo> enemigosIt = enemigosAtacando.keySet().iterator();
+        Iterator<Enemigo> enemigosIt = enemigosAtacando.iterator();
         while(enemigosIt.hasNext()){
             Enemigo enemigo = enemigosIt.next();
             if(enemigo.getPosicion().y < 0){
                 enemigo.setPosicion(enemigo.getPosicion().x, Gdx.graphics.getHeight()+50);
-                enemigo.transicionarInteligencia(new InteligenciaNula<Enemigo>(enemigo));
+                enemigo.transicionarInteligencia(new InteligenciaNula<>(enemigo));
                 enemigosIt.remove();
+                enemigos.remove(enemigo);
                 controlador.eliminarEntidad(enemigo);
             }
         }
@@ -133,11 +117,10 @@ public class OleadaBonus implements Oleada {
      */
     private Vector2 getPosicionAleatoria() {
     	Random ran = new Random();
-    	int ANCHO_PANTALLA = Gdx.graphics.getWidth();
-    	float posX = ran.nextInt(ANCHO_PANTALLA);
-    	float posY = Gdx.graphics.getHeight();
-    	Vector2 pos = new Vector2(posX,posY);
-    	return pos;
+    	int anchoPermitido = Gdx.graphics.getWidth()/3;
+    	float posX = ran.nextInt(anchoPermitido) + anchoPermitido;
+    	float posY = Gdx.graphics.getHeight() + 200;
+        return new Vector2(posX,posY);
     }
     
 }
