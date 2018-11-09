@@ -9,6 +9,7 @@ import edu.uns.galaxian.colision.hitbox.HitBox;
 import edu.uns.galaxian.colision.colisionadores.Visitor;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorObstaculo;
 import edu.uns.galaxian.controlador.Controlador;
+import edu.uns.galaxian.juego.Juego;
 import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.entidades.EntidadViva;
 import edu.uns.galaxian.ia.autonomo.Autonomo;
@@ -32,7 +33,7 @@ public abstract class Obstaculo extends EntidadViva implements Autonomo {
 		fuerzaDeColision = 100;
 		colisionador = new ColisionadorObstaculo(this);
 		inteligencia = new InteligenciaNula<Obstaculo>(this);
-		textura = controlador.getTextureAtlas().findRegion(TEXTURA_DIR);
+		textura = controlador.getTextureAtlas(Juego.ATLAS_OBSTACULOS).findRegion(TEXTURA_DIR);
 		box = new HBCirculo(this,textura.getRegionWidth()/2);
 	}
 	

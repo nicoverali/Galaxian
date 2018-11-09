@@ -21,7 +21,7 @@ public class DirectorNivel {
         this.juego = juego;
         this.nivelJson = nivelJson;
         this.naveJugador = naveJugador;
-        controladorEntidad = new Controlador(juego.getTextureAtlas());
+        controladorEntidad = new Controlador(juego.getAssetManager());
         cargador = new CargadorOleada();
         proximaOleada = 0;
 

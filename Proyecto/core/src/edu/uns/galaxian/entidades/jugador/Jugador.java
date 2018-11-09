@@ -10,6 +10,7 @@ import edu.uns.galaxian.entidades.equipamiento.armas.ArmaComun;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
 import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparoJugador;
 import edu.uns.galaxian.entidades.jugador.input.*;
+import edu.uns.galaxian.juego.Juego;
 import edu.uns.galaxian.juego.nivel.Nivel;
 import edu.uns.galaxian.nave.NaveJugador;
 
@@ -24,7 +25,7 @@ public class Jugador extends EntidadConNave<NaveJugador, DisparoJugador> {
 	
 
 	public Jugador(Vector2 posicion, NaveJugador nave, Nivel nivel, Controlador controlador) {
-		super(posicion, 90, nave, controlador.getTextureAtlas());
+		super(posicion, 90, nave, controlador.getTextureAtlas(Juego.ATLAS_NAVES));
 		this.nivel = nivel;
 		this.controlador = controlador;
 		colisionador = new ColisionadorJugador(this);

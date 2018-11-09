@@ -1,0 +1,41 @@
+
+obstaculos.png
+size: 180,40
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+obstaculo/blackhole
+  rotate: false
+  xy: 44, 2
+  size: 34, 36
+  orig: 42, 42
+  offset: 4, 3
+  index: -1
+obstaculo/meteoro1
+  rotate: false
+  xy: 114, 10
+  size: 33, 28
+  orig: 33, 28
+  offset: 0, 0
+  index: -1
+obstaculo/meteoro2
+  rotate: false
+  xy: 2, 6
+  size: 40, 32
+  orig: 40, 32
+  offset: 0, 0
+  index: -1
+obstaculo/meteoro3
+  rotate: false
+  xy: 149, 11
+  size: 29, 27
+  orig: 29, 27
+  offset: 0, 0
+  index: -1
+obstaculo/meteoro4
+  rotate: false
+  xy: 80, 6
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1

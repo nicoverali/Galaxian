@@ -17,8 +17,7 @@ public class FabricaPowerUpConvencional implements FabricaPowerUp {
 
 	public PowerUp getPowerUp(Vector2 posicion, float rotacion, Controlador controlador) {
 		Random ran= new Random();
-    	//int n = ran.nextInt(5);
-		int n = 5;
+    	int n = ran.nextInt(6);
     	switch(n){
     		case 0: return new PastillaVida(posicion,new Vector2 (0,-1),rotacion,controlador);
     		case 1: return new CampoDeProteccion(posicion,new Vector2 (0,-1),rotacion,controlador);

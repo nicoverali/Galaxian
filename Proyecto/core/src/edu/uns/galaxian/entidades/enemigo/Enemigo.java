@@ -12,6 +12,7 @@ import edu.uns.galaxian.entidades.inanimadas.powerups.fabricaPowerUp.FabricaPowe
 import edu.uns.galaxian.colision.colisionadores.*;
 import edu.uns.galaxian.ia.InteligenciaArtificial;
 import edu.uns.galaxian.ia.inteligencias.basica.InteligenciaNula;
+import edu.uns.galaxian.juego.Juego;
 import edu.uns.galaxian.nave.NaveEnemigo;
 
 public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implements AutonomoDinamico {
@@ -22,14 +23,14 @@ public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implem
 	private FabricaPowerUp fabricaPowerUp;
 
 	public Enemigo(Vector2 posicion, NaveEnemigo nave, Controlador controlador, FabricaPowerUp fPowerUp){
-		super(posicion, 270, nave, controlador.getTextureAtlas());
+		super(posicion, 270, nave, controlador.getTextureAtlas(Juego.ATLAS_NAVES));
 		this.controlador = controlador;
 		colisionador = new ColisionadorEnemigo(this);
 		fabricaPowerUp = fPowerUp;
 	}
 
 	public Enemigo(Vector2 posicion, NaveEnemigo nave, Controlador controlador){
-		super(posicion, 270, nave, controlador.getTextureAtlas());
+		super(posicion, 270, nave, controlador.getTextureAtlas(Juego.ATLAS_NAVES));
 		this.controlador = controlador;
 		inteligencia = new InteligenciaNula<>(this);
 		colisionador = new ColisionadorEnemigo(this);
@@ -80,7 +81,7 @@ public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implem
 
     public void eliminar() {
     	controlador.eliminarEntidad(this);
-    	if(MathUtils.randomBoolean(1f)) {
+    	if(MathUtils.randomBoolean(0.2f)) {
     		PowerUp entidad = fabricaPowerUp.getPowerUp(posicion, rotacion, controlador);
     		controlador.agregarEntidad(entidad);
     	}

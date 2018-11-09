@@ -1,5 +1,6 @@
 package edu.uns.galaxian.controlador;
 
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 import edu.uns.galaxian.colision.Colisionable;
@@ -17,7 +18,7 @@ public class Controlador {
 
     private List<Jugador> jugadores;
     private DetectorColision detectorColision;
-    private TextureAtlas textureAtlas;
+    private AssetManager assets;
     private Vigilante vigilante;
     private Visitor visitorActual;
     
@@ -28,8 +29,8 @@ public class Controlador {
     private Set<Colisionable> nuevosColisionables;
     private Set<Colisionable> colisionablesEliminados;
 
-    public Controlador(TextureAtlas atlas){
-        textureAtlas = atlas;
+    public Controlador(AssetManager assetManager){
+        assets = assetManager;
         detectorColision = new DetectorColision();
         entidadesActualizadas = new ArrayList<>();
         nuevasEntidades = new HashSet<>();
@@ -138,8 +139,8 @@ public class Controlador {
         return jugadores.get(random.nextInt(jugadores.size()));
     }
 
-    public TextureAtlas getTextureAtlas(){
-        return textureAtlas;
+    public TextureAtlas getTextureAtlas(String atlasName){
+        return assets.get(atlasName);
     }
 
     /**

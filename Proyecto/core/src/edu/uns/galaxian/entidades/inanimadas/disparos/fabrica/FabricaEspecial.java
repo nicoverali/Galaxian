@@ -14,8 +14,7 @@ public class FabricaEspecial extends FabricaDisparoJugador {
 	}
 	
     public DisparoJugador crearDisparo(Vector2 posicion, Vector2 velocidad, float rotacion, int fuerzaDeDisparo, String texturaDir, Controlador controlador) {
-    	DisparoEspecial disparo = new DisparoEspecial(posicion, velocidad, rotacion, fuerzaDeDisparo, texturaDir, controlador, jugador);
-        return disparo;
+        return new DisparoEspecial(posicion, velocidad, rotacion, fuerzaDeDisparo, texturaDir, controlador, jugador);
     }
 
 }

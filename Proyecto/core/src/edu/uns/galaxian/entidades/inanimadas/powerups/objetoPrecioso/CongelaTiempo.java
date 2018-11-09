@@ -8,14 +8,11 @@ import edu.uns.galaxian.colision.colisionadores.Visitor;
 import edu.uns.galaxian.colision.hitbox.HBRectangulo;
 import edu.uns.galaxian.controlador.Caller;
 import edu.uns.galaxian.controlador.Controlador;
-import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
-import edu.uns.galaxian.entidades.equipamiento.armas.ArmaDisparoDoble;
-import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
-import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparoJugador;
 import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.util.temporizador.TemporizadorManual;
+import edu.uns.galaxian.juego.Juego;
 
 public class CongelaTiempo extends PowerUp implements Caller {
 	
@@ -24,7 +21,7 @@ public class CongelaTiempo extends PowerUp implements Caller {
 
 	public CongelaTiempo(Vector2 posicion, Vector2 velocidad, float rotacion, Controlador controlador) {
 		super(posicion, velocidad, rotacion, controlador);
-		this.textura = controlador.getTextureAtlas().findRegion("powerup/congelaTiempo");
+		this.textura = controlador.getTextureAtlas(Juego.ATLAS_POWERUP).findRegion("powerup/congelaTiempo");
 		box = new HBRectangulo(this,textura.getRegionHeight(),textura.getRegionWidth());
 	}
 

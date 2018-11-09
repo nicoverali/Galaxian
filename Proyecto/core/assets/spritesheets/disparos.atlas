@@ -1,0 +1,41 @@
+
+disparos.png
+size: 32,16
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+disparo/jugador/AZUL
+  rotate: false
+  xy: 16, 7
+  size: 12, 3
+  orig: 12, 3
+  offset: 0, 0
+  index: -1
+disparo/jugador/BORDO
+  rotate: false
+  xy: 2, 7
+  size: 12, 3
+  orig: 12, 3
+  offset: 0, 0
+  index: -1
+disparo/enemigo/comun
+  rotate: false
+  xy: 2, 7
+  size: 12, 3
+  orig: 12, 3
+  offset: 0, 0
+  index: -1
+disparo/jugador/ROJO
+  rotate: false
+  xy: 2, 7
+  size: 12, 3
+  orig: 12, 3
+  offset: 0, 0
+  index: -1
+disparo/jugador/VERDE
+  rotate: false
+  xy: 2, 2
+  size: 12, 3
+  orig: 12, 3
+  offset: 0, 0
+  index: -1
