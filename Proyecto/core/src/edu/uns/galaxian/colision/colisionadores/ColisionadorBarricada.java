@@ -14,7 +14,7 @@ public class ColisionadorBarricada extends ColisionadorObstaculo {
 		objetoFuente.restarVida(objetoFuente.getVida().getValor());
 	}
 
-	public void colisionarConBarricada(Barricada obstaculoEnemigo) {
+	public void visitBarricada(Barricada barricada) {
 		// El obstaculo si afecta a una barricada, sin embargo las barricadas no se afectan entre si.
 	}
 	

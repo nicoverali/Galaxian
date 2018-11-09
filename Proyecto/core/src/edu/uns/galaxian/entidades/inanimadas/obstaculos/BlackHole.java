@@ -15,10 +15,11 @@ public class BlackHole extends Obstaculo {
 		super(xPos, yPos, TEXTURA_DIR, controlador);
 		textura = new Texture(Gdx.files.internal("obstaculos/supernova2.png"));
 		fuerzaDeColision = 0;
+		vida.setValor(700);
 	}
 	
 	public void dibujar(EntidadBatch batch) {
-		batch.draw(textura, posicion.x, posicion.y, 40, 40);
+		batch.draw(textura, posicion.x, posicion.y, 50, 45);
 	}
 
 }

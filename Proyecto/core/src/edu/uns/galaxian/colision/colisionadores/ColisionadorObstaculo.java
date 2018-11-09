@@ -40,8 +40,8 @@ public class ColisionadorObstaculo extends Colisionador<Obstaculo> {
 		objetoFuente.restarVida(obstaculo.getFuerzaDeColision());
 	}
 
-	public void visitBarricada(Barricada obstaculoEnemigo) {
-		objetoFuente.restarVida(obstaculoEnemigo.getFuerzaDeColision());
+	public void visitBarricada(Barricada barricada) {
+		objetoFuente.restarVida(barricada.getFuerzaDeColision());
 	}
 
 }

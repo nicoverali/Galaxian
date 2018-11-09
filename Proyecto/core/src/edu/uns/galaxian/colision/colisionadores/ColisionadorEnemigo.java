@@ -34,8 +34,8 @@ public class ColisionadorEnemigo extends Colisionador<Enemigo> {
 		objetoFuente.restarVida(objetoFuente.getVida().getValor());
 	}
 
-	public void visitBarricada(Barricada obstaculoEnemigo) {
-		objetoFuente.restarVida(obstaculoEnemigo.getFuerzaDeColision());
+	public void visitBarricada(Barricada barricada) {
+		objetoFuente.restarVida(barricada.getFuerzaDeColision());
 	}
 	
 }

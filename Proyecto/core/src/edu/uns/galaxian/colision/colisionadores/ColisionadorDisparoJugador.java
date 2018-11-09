@@ -21,7 +21,7 @@ public class ColisionadorDisparoJugador extends Colisionador<DisparoJugador> {
 		objetoFuente.eliminar();
 	}
 
-	public void visitBarricada(Barricada obstaculoEnemigo) {
+	public void visitBarricada(Barricada barricada) {
 		objetoFuente.eliminar();
 	}
 }

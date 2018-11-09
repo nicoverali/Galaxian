@@ -1,6 +1,6 @@
 package edu.uns.galaxian.colision.colisionadores;
 
-import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEnemigo;
+import edu.uns.galaxian.entidades.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEspecial;
 import edu.uns.galaxian.entidades.inanimadas.obstaculos.Barricada;
 import edu.uns.galaxian.entidades.inanimadas.obstaculos.Obstaculo;
@@ -14,7 +14,7 @@ public class ColisionadorDisparoEspecial extends ColisionadorDisparoJugador {
 		objeto = objetoFuente;
 	}
 	
-	public void colisionarConEnemigo(DisparoEnemigo disparo) {
+	public void visitEnemigo(Enemigo disparo) {
 		objeto.efecto();
 		objeto.eliminar();
 	}
@@ -24,7 +24,7 @@ public class ColisionadorDisparoEspecial extends ColisionadorDisparoJugador {
 		objeto.eliminar();
 	}
 
-	public void visitBarricada(Barricada obstaculoEnemigo) {
+	public void visitBarricada(Barricada barricada) {
 		objeto.efecto();
 		objeto.eliminar();
 	}

@@ -18,7 +18,7 @@ public class ColisionadorAsteroide extends ColisionadorObstaculo {
 		asteroide.fragmentar();
 	}
 
-	public void visitBarricada(Barricada obstaculoEnemigo) {
+	public void visitBarricada(Barricada barricada) {
 		asteroide.restarVida(asteroide.getVida().getValor());		
 		asteroide.fragmentar();
 	}
