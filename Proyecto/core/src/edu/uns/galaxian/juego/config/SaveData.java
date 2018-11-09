@@ -34,6 +34,7 @@ public class SaveData {
 
     /**
      * Retorna el maximo nivel alcanzado por el usuario.
+     * Los niveles comienzan desde el nivel 1
      * @return Maximo nivel alcanzado por el usuario
      */
     public int getNivelAlcanzado(){

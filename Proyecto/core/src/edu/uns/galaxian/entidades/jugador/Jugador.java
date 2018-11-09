@@ -66,7 +66,7 @@ public class Jugador extends EntidadConNave<NaveJugador, DisparoJugador> {
  	}
 
 	public void eliminar(){
-		//nivel.gameOver();
+		nivel.perderNivel();
 	}
 
 	public ColisionadorJugador getColisionador(){

@@ -13,12 +13,11 @@ public class BotonRestart extends Boton {
 	public BotonRestart(int x, int y, Menu menu) {
 		super(x, y, menu);
 		textura= new Texture(Gdx.files.internal("menu/restart2.png"));
-		this.finalScore=finalScore;
 	}
 
 	@Override
 	public void funcionamiento() {
-		menu.getJuego().iniciarNivel();
+		menu.getJuego().iniciarNivelActual();
 	}
 
 
