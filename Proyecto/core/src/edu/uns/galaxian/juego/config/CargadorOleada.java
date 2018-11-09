@@ -38,6 +38,15 @@ public class CargadorOleada {
             Class<?>[] tiposArgumentos = new Class[]{List.class, Controlador.class, Nivel.class};
             Object[] argumentos = new Object[]{leerFormacion(oleadaConfig.getAsJsonArray(FORMACION), fabrica, controlador), controlador, nivel};
             builder.registerTypeAdapter(Oleada.class, new GSONClassDeserializer<>(tiposArgumentos, argumentos));
+        }else if(oleadaConfig.has(LISTA_ENEMIGOS)){
+            Class<?>[] tiposArgumentos = new Class[]{List.class, Controlador.class, Nivel.class};
+            Object[] argumentos = new Object[]{leerListaEnemigo(oleadaConfig.getAsJsonArray(LISTA_ENEMIGOS) , fabrica, controlador), controlador, nivel};
+            builder.registerTypeAdapter(Oleada.class, new GSONClassDeserializer<>(tiposArgumentos, argumentos));
+        }else if(oleadaConfig.has(CANT_KAMIKAZE)){
+            Class<?>[] tiposArgumentos = new Class[]{int.class, FabricaEnemigos.class, Controlador.class, Nivel.class};
+            Object[] argumentos = new Object[]{oleadaConfig.get(CANT_KAMIKAZE).getAsInt(), fabrica, controlador, nivel};
+            builder.registerTypeAdapter(Oleada.class, new GSONClassDeserializer<>(tiposArgumentos, argumentos));
+
         }
         return builder.create();
     }
@@ -46,6 +55,17 @@ public class CargadorOleada {
         GSONOleadaDecoratorDeserializer typeAdapter = new GSONOleadaDecoratorDeserializer(oleadaPrincipal, controlador);
         Gson gson = new GsonBuilder().registerTypeAdapter(OleadaDecorator.class, typeAdapter).create();
         return gson.fromJson(decorators, OleadaDecorator.class);
+    }
+
+    private List<Enemigo> leerListaEnemigo(JsonArray lista, FabricaEnemigos fabrica, Controlador controlador){
+        final Vector2 DEFAULT_POS = new Vector2(0,0);
+        List<Enemigo> resultado = new ArrayList<>(lista.size());
+        for(int i = 0; i < lista.size(); i++){
+            TipoEnemigo tipoEnemigo = globalGson.fromJson(lista.get(i), TipoEnemigo.class);
+            Enemigo enemigo = fabrica.crearEnemigo(tipoEnemigo, DEFAULT_POS, controlador, controlador.getJugador());
+            resultado.add(enemigo);
+        }
+        return resultado;
     }
 
     private List<List<Enemigo>> leerFormacion(JsonArray formacion, FabricaEnemigos fabrica, Controlador controlador){

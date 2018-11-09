@@ -5,11 +5,9 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import edu.uns.galaxian.juego.menus.MenuPrincipal;
 import edu.uns.galaxian.juego.nivel.DirectorNivel;
-import edu.uns.galaxian.juego.nivel.Nivel;
 import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.juego.config.GameData;
 import edu.uns.galaxian.juego.config.SaveData;
-import edu.uns.galaxian.juego.menus.MenuGameOver;
 
 public class Juego extends Game {
 
@@ -22,36 +20,56 @@ public class Juego extends Game {
 	private EntidadBatch batch;
 	private GameData gameData;
 	private SaveData saveData;
+	private int nivelActual;
 	private MenuPrincipal menuPrincipal;
-	private MenuGameOver menuG;
 
 	@Override
 	public void create () {
 		batch = new EntidadBatch();
 		gameData = new GameData();
 		saveData = new SaveData();
+		nivelActual = saveData.getNivelAlcanzado();
 		cargarAssets();
 
 		menuPrincipal= new MenuPrincipal(this);
 		setScreen(menuPrincipal);
 	}
 
-	public void iniciarNivel(){
-		new DirectorNivel(this, gameData.getNivel(saveData.getNivelAlcanzado()), saveData.getNaveJugador());
-	}
-	
-	//TODO para el boton restart, por ahora hacer que se inicie nuevamente el nivel, esta mal
-	// haces 3 veces restart y te anda todo lento
-	public void reiniciarNivel(){
-		
+	/**
+	 * Finaliza el juego luego de haber completado
+	 * todos los niveles
+	 */
+	public void finalizarJuego(){
+		// TODO Mostrar alguna pantalla de finalizacion
 	}
 
-	@Override
-	public void render () {
-		super.render();
+	/**
+	 * Verifica si el nivel actual es el ultimo del
+	 * juego, en cuyo caso retorna verdadero.
+	 * @return Verdadero si el nivel actual es el ultimo
+	 */
+	public boolean seAlcanzoUltimoNivel(){
+		return nivelActual == gameData.getCantidadNiveles();
 	}
-	
-	@Override
+
+	/**
+	 * Carga el nivel siguiente al actual.
+	 * @throws IllegalStateException Si no hay mas nivel
+	 */
+	public void cargarSiguienteNivel() throws IllegalStateException{
+		if(nivelActual == gameData.getCantidadNiveles()){
+			throw new IllegalStateException("No hay mas niveles para cargar.");
+		}
+		new DirectorNivel(this, gameData.getNivel(nivelActual), saveData.getNaveJugador());
+	}
+
+	/**
+	 * Inicia el nivel actual.
+	 */
+	public void iniciarNivelActual(){
+		new DirectorNivel(this, gameData.getNivel(nivelActual), saveData.getNaveJugador());
+	}
+
 	public void dispose () {
 		batch.dispose();
 	}
@@ -70,22 +88,6 @@ public class Juego extends Game {
 	 */
 	public AssetManager getAssetManager(){
 		return assetManager;
-	}
-
-	/**
-	 * Carga el nivel siguiente al actual.
-	 * @param nivelActual Nivel actual
-	 */
-	public void cargarSiguienteNivel(Nivel nivelActual){
-		// TODO Implementar metodo
-	}
-	
-	/**
-	 * Muestra la pantalla cuando el jugador pierde
-	 */
-	public void pantallaGameOver(int score){
-		menuG = new MenuGameOver(this, score);
-		setScreen(menuG);
 	}
 
 	private void cargarAssets(){

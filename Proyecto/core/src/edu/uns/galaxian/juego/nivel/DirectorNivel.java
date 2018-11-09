@@ -4,6 +4,7 @@ import com.google.gson.*;
 import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.juego.Juego;
 import edu.uns.galaxian.juego.config.CargadorOleada;
+import edu.uns.galaxian.juego.menus.MenuGameOver;
 import edu.uns.galaxian.nave.NaveJugador;
 import edu.uns.galaxian.oleada.*;
 import edu.uns.galaxian.util.EntidadBatch;
@@ -69,13 +70,25 @@ public class DirectorNivel {
      * @return Proxima oleada
      */
     public Oleada getProximaOleada(Nivel nivel){
-        CargadorOleada cargador = new CargadorOleada();
         JsonObject oleadaJson = nivelJson.get(proximaOleada++).getAsJsonObject();
         return cargador.cargarOleada(oleadaJson, controladorEntidad, nivel);
     }
 
-    // TODO Especificar si el nivel si gana o se pierde
-    public void finalizarNivel(){
-        //juego.pantallaGameOver(controladorEntidad.getPuntuacion()); El controlador ya no tiene mas el puntaje
+    /**
+     * Muestra la pantalla de nivel ganado
+     * con el puntaje final
+     * @param puntaje Puntaje final del nivel
+     */
+    public void ganarNivel(int puntaje){
+        juego.setScreen(new MenuGameOver(juego, puntaje));
+    }
+
+    /**
+     * Muestra la pantalla de nivel perdido con el
+     * puntaje final del jugador
+     * @param puntaje Puntaje final del jugador
+     */
+    public void perderNivel(int puntaje){
+        juego.setScreen(new MenuGameOver(juego, puntaje));
     }
 }

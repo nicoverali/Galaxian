@@ -29,7 +29,7 @@ public abstract class NaveEnemigo extends Nave<DisparoEnemigo> {
      * Retorna la inteligencia de ataque de la nave
      * @return Inteligencia de ataque
      */
-    public abstract InteligenciaArtificial getInteligenciaAtaque(Enemigo enemigo, Jugador jugador);
+    public abstract InteligenciaArtificial<Enemigo> getInteligenciaAtaque(Enemigo enemigo, Jugador jugador);
 
     /**
      * La nave acepta entrar en un estado de colision. Recibe

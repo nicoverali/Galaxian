@@ -64,21 +64,37 @@ public class Nivel extends ScreenAdapter{
 
     }
 
-    public void oleadaFinalizada() throws IllegalArgumentException{
+    /**
+     * Se llama cuando la oleada actual del nivel finalizo,
+     * el nivel elimina la oleada actual y verifica si hay mas
+     * oleadas para continuar el nivel, en caso de que no haya
+     * el nivel se determina como ganado
+     */
+    public void oleadaFinalizada(){
         oleadaActual.finalizar();
         if(director.hayMasOleadas()){
             oleadaActual = director.getProximaOleada(this);
             oleadaActual.iniciar();
         }
         else{
-            director.finalizarNivel();
+            director.ganarNivel(jugador.getPuntaje());
         }
     }
 
-	public void gameOver() {
-		//juego.pantallaGameOver(controlador.getPuntuacion());
-	}
+    /**
+     * Se llama cuando el jugador muere y
+     * se pierde el nivel. El nivel avisa a su
+     * director que debe finalizar.
+     */
+	public void perderNivel(){
+        director.perderNivel(jugador.getPuntaje());
+    }
 
+    /**
+     * Retorna el tiempo transcurrido desde que inicio el
+     * nivel en minutos
+     * @return Tiempo transcurrido en minutos
+     */
     public float getTiempoActual() {
         return tiempo.getTiempoEnMinutos();
     }

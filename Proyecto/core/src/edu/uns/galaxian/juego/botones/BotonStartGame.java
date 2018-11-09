@@ -15,7 +15,7 @@ public class BotonStartGame extends Boton {
 	
 	@Override
 	public void funcionamiento() {
-		menu.getJuego().iniciarNivel();
+		menu.getJuego().iniciarNivelActual();
 	}
 
 }
