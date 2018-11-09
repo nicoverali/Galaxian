@@ -19,7 +19,7 @@ public class Juego extends Game {
 	private EntidadBatch batch;
 	private GameData gameData;
 	private SaveData saveData;
-	private MenuPrincipal menuPrincipal;
+	private Principal menuPrincipal;
 	private MenuGameOver menuG;
 
 	@Override
@@ -29,7 +29,7 @@ public class Juego extends Game {
 		saveData = new SaveData();
 		textureAtlas = new TextureAtlas(TEXTURE_ATLAS_DIR);
 
-		menuPrincipal= new MenuPrincipal(this);
+		menuPrincipal= new Principal(this);
 		setScreen(menuPrincipal);
 	}
 
