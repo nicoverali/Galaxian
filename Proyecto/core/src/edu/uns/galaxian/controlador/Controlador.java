@@ -8,7 +8,6 @@ import edu.uns.galaxian.colision.actualizadores.VisitorJuegoNormal;
 import edu.uns.galaxian.colision.actualizadores.VisitorJuegoPausa;
 import edu.uns.galaxian.colision.colisionadores.Visitor;
 import edu.uns.galaxian.entidades.Entidad;
-import edu.uns.galaxian.entidades.inanimadas.powerups.objetoPrecioso.CongelaTiempo;
 import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
@@ -16,27 +15,31 @@ import java.util.*;
 
 public class Controlador {
 
-    private List<Entidad> entidades;
-    private Set<Entidad> nuevasEntidades;
-    private Set<Entidad> entidadesEliminadas;
-    private List<Entidad> entidadesActualizadas;
-    private List<Colisionable> entidadesLibres;
     private List<Jugador> jugadores;
     private DetectorColision detectorColision;
     private TextureAtlas textureAtlas;
     private Vigilante vigilante;
     private Visitor visitorActual;
+    
+    private List<Entidad> entidadesActualizadas;
+    private Set<Entidad> nuevasEntidades;
+    private Set<Entidad> entidadesEliminadas;
+    private List<Colisionable> entidadesColisionables;
+    private Set<Colisionable> nuevosColisionables;
+    private Set<Colisionable> colisionablesEliminados;
 
     public Controlador(TextureAtlas atlas){
         textureAtlas = atlas;
         detectorColision = new DetectorColision();
-        entidades = new ArrayList<>();
+        entidadesActualizadas = new ArrayList<>();
         nuevasEntidades = new HashSet<>();
         entidadesEliminadas = new HashSet<>();
+        entidadesColisionables = new ArrayList<>();
+        nuevosColisionables = new HashSet<>();
+        colisionablesEliminados = new HashSet<>();
         jugadores = new ArrayList<>(3);
         vigilante = new Vigilante();
         visitorActual = new VisitorJuegoNormal();
-        entidadesLibres = new ArrayList<>();
     }
 
     /**
@@ -54,6 +57,14 @@ public class Controlador {
     public <T extends Entidad> void agregarEntidades(Collection<T> entidades){
         nuevasEntidades.addAll(entidades);
     }
+    
+    /**
+     * Registra una nueva entidad colisionable en el detector de colisiones.
+     * @param entidad Nueva entidad que podra ser colisionable.
+     */
+    public void agregarColisionable(Colisionable nuevoColisionable){
+        nuevosColisionables.add(nuevoColisionable);
+    }
 
     /**
      * Registra un nuevo jugador en el controlador
@@ -61,7 +72,7 @@ public class Controlador {
      */
     public void agregarJugador(Jugador jugador){
         jugadores.add(jugador);
-        detectorColision.registrarColisionable(jugador);
+        entidadesColisionables.add(jugador);
     }
 
     /**
@@ -71,10 +82,23 @@ public class Controlador {
      * @throws IllegalArgumentException Si la entidad recibida no esta registrada en este controlador
      */
     public void eliminarEntidad(Entidad entidad) throws IllegalArgumentException{
-        if(!entidades.contains(entidad)){
+        if(!entidadesActualizadas.contains(entidad)){
             throw new IllegalArgumentException("La entidad recibida no se encuentra registrada.");
         }
         entidadesEliminadas.add(entidad);
+    }
+    
+    /**
+     * Si la entidad recibida esta registrada en este controlador
+     * entonces es eliminada.
+     * @param entidad Entidad a eliminar
+     * @throws IllegalArgumentException Si la entidad recibida no esta registrada en este controlador
+     */
+    public void eliminarColisionable(Colisionable colisionable) throws IllegalArgumentException{
+        if(!entidadesColisionables.contains(colisionable)){
+            throw new IllegalArgumentException("La entidad recibida no se encuentra registrada.");
+        }
+        colisionablesEliminados.add(colisionable);
     }
 
     public void eliminarJugador(Jugador jugador) throws IllegalArgumentException{
@@ -82,7 +106,7 @@ public class Controlador {
             throw new IllegalArgumentException("El jugador recibido no se encuentra registrado.");
         }
         jugadores.remove(jugador);
-        detectorColision.eliminarColisionable(jugador);
+        eliminarColisionable(jugador);
     }
 
     /**
@@ -90,7 +114,7 @@ public class Controlador {
      * @return Coleccion de entidades registradas
      */
     public Collection<Entidad> getEntidades(){
-        return copiarLista(entidades);
+        return copiarLista(entidadesActualizadas);
     }
 
     /**
@@ -123,26 +147,26 @@ public class Controlador {
      * @param delta Tiempo transcurrido desde el ultimo frame
      */
     public void actualizarEstado(float delta){
-    	for(Colisionable col : entidadesLibres) {
-    		detectorColision.eliminarColisionable(col);
-    	}
-        detectorColision.resolverColisiones();
-        for(Entidad entidad : entidades){
+    	entidadesColisionables.addAll(nuevosColisionables);
+    	entidadesColisionables.removeAll(colisionablesEliminados);
+        detectorColision.resolverColisiones(entidadesColisionables);
+        nuevosColisionables.clear();
+        colisionablesEliminados.clear();
+        
+        entidadesActualizadas.addAll(nuevasEntidades);
+        entidadesActualizadas.removeAll(entidadesEliminadas);
+        entidadesColisionables.addAll(nuevasEntidades);
+        entidadesColisionables.removeAll(entidadesEliminadas);
+        nuevasEntidades.clear();
+        entidadesEliminadas.clear();
+        
+        for(Entidad entidad : entidadesActualizadas){
             entidad.aceptarVisitor(visitorActual);
         }
+        
         for(Jugador jugador : jugadores){
             jugador.aceptarVisitor(visitorActual);
         }
-        entidades.addAll(nuevasEntidades);
-        entidades.removeAll(entidadesEliminadas);
-        for(Entidad nuevaEntidad : nuevasEntidades){
-            detectorColision.registrarColisionable(nuevaEntidad);
-        }
-        for(Entidad eliminada : entidadesEliminadas){
-            detectorColision.eliminarColisionable(eliminada);
-        }
-        nuevasEntidades.clear();
-        entidadesEliminadas.clear();
     }
 
     /**
@@ -151,7 +175,7 @@ public class Controlador {
      * @param batch EntidadBatch utilizado para dibujar las entidades registradas
      */
     public void dibujar(EntidadBatch batch){
-        for(Entidad entidad : entidades){
+        for(Entidad entidad : entidadesActualizadas){
             entidad.dibujar(batch);
         }
         for(Jugador jugador : jugadores){
@@ -192,7 +216,4 @@ public class Controlador {
     	visitorActual = vigilante.getUltimoMemento().getVisitor();
     }
 
-	public void eliminarColisionable(Entidad col) {
-		entidadesLibres.add(col);
-	}
 }
