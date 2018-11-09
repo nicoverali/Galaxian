@@ -16,6 +16,10 @@ public class Memento {
 		visitorGuardado = visitor;
 	}
 	
+	public Memento(Caller caller) {
+		this.caller = caller;
+	}
+	
 	public Visitor getVisitor() {
 		return visitorGuardado;
 	}

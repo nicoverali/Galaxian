@@ -1,6 +1,7 @@
 package edu.uns.galaxian.controlador;
 
 import edu.uns.galaxian.colision.actualizadores.VisitorJuegoNormal;
+import edu.uns.galaxian.colision.colisionadores.Visitor;
 
 public class Vigilante {
 	
@@ -24,6 +25,10 @@ public class Vigilante {
 	
 	public void guardarMemento(Memento memento) {
 		ultimoMemento = memento;
+	}
+
+	public Visitor getVisitorRestaurado() {
+		return mementoPorDefecto.getVisitor();
 	}
 	
 }

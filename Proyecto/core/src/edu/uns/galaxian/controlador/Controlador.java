@@ -150,9 +150,9 @@ public class Controlador {
     public void actualizarEstado(float delta){
     	entidadesColisionables.addAll(nuevosColisionables);
     	entidadesColisionables.removeAll(colisionablesEliminados);
-        detectorColision.resolverColisiones(entidadesColisionables);
         nuevosColisionables.clear();
         colisionablesEliminados.clear();
+        detectorColision.resolverColisiones(entidadesColisionables);
         
         entidadesActualizadas.addAll(nuevasEntidades);
         entidadesActualizadas.removeAll(entidadesEliminadas);
@@ -196,14 +196,14 @@ public class Controlador {
     }
     
     public void setActualizacion(Visitor nuevoVisitor, Caller caller) {
-    	Memento estadoActual = new Memento(visitorActual,caller);
+    	Memento estadoActual = new Memento(caller);
     	vigilante.guardarMemento(estadoActual);
     	visitorActual = nuevoVisitor;
     }
     
     public void restaurar(Caller caller) {
     	if(vigilante.getUltimoMemento().getCaller()==caller) {
-    		visitorActual = vigilante.getUltimoMemento().getVisitor();
+    		visitorActual = vigilante.getVisitorRestaurado();
     	}
     }
     
