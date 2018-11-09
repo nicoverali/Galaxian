@@ -1,5 +1,5 @@
 package edu.uns.galaxian.colision.actualizadores;
 
-import edu.uns.galaxian.colision.colisionadores.VisitorAdapter;
+import edu.uns.galaxian.colision.colisionadores.Colisionador;
 
-public class VisitorJuegoPausa extends VisitorAdapter {}
+public class VisitorJuegoPausa extends Colisionador {}

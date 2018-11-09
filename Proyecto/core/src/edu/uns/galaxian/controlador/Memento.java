@@ -5,13 +5,23 @@ import edu.uns.galaxian.colision.colisionadores.Visitor;
 public class Memento {
 
 	protected Visitor visitorGuardado;
+	protected Caller caller;
+	
+	public Memento(Visitor visitor, Caller caller) {
+		visitorGuardado = visitor;
+		this.caller = caller;
+	}
 	
 	public Memento(Visitor visitor) {
 		visitorGuardado = visitor;
 	}
 	
-	public Visitor getState() {
+	public Visitor getVisitor() {
 		return visitorGuardado;
+	}
+	
+	public Caller getCaller() {
+		return caller;
 	}
 	
 }

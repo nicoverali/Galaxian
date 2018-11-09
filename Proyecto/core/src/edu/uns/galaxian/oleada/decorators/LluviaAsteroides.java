@@ -11,7 +11,7 @@ import edu.uns.galaxian.ia.inteligencias.basica.InteligenciaDeOnda;
 import edu.uns.galaxian.observer.Observador;
 import edu.uns.galaxian.observer.livedata.LiveData;
 import edu.uns.galaxian.oleada.*;
-import edu.uns.galaxian.util.Temporizador;
+import edu.uns.galaxian.util.temporizador.Temporizador;
 
 public class LluviaAsteroides extends OleadaDecorator implements Observador<LiveData<Integer>> {
 

@@ -5,7 +5,7 @@ import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.obstaculos.Obstaculo;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
-public class ColisionadorJugador extends VisitorAdapter<Jugador> {
+public class ColisionadorJugador extends Colisionador<Jugador> {
 	
 	private Jugador objetoFuente;
 

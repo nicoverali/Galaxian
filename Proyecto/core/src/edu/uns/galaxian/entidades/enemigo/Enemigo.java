@@ -80,7 +80,7 @@ public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implem
 
     public void eliminar() {
     	controlador.eliminarEntidad(this);
-    	if(MathUtils.randomBoolean(0.1f)) {
+    	if(MathUtils.randomBoolean(1f)) {
     		PowerUp entidad = fabricaPowerUp.getPowerUp(posicion, rotacion, controlador);
     		controlador.agregarEntidad(entidad);
     	}

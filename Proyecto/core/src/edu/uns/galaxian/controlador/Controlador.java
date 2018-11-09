@@ -1,10 +1,14 @@
 package edu.uns.galaxian.controlador;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+
+import edu.uns.galaxian.colision.Colisionable;
 import edu.uns.galaxian.colision.DetectorColision;
 import edu.uns.galaxian.colision.actualizadores.VisitorJuegoNormal;
+import edu.uns.galaxian.colision.actualizadores.VisitorJuegoPausa;
 import edu.uns.galaxian.colision.colisionadores.Visitor;
 import edu.uns.galaxian.entidades.Entidad;
+import edu.uns.galaxian.entidades.inanimadas.powerups.objetoPrecioso.CongelaTiempo;
 import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
@@ -15,6 +19,8 @@ public class Controlador {
     private List<Entidad> entidades;
     private Set<Entidad> nuevasEntidades;
     private Set<Entidad> entidadesEliminadas;
+    private List<Entidad> entidadesActualizadas;
+    private List<Colisionable> entidadesLibres;
     private List<Jugador> jugadores;
     private DetectorColision detectorColision;
     private TextureAtlas textureAtlas;
@@ -30,6 +36,7 @@ public class Controlador {
         jugadores = new ArrayList<>(3);
         vigilante = new Vigilante();
         visitorActual = new VisitorJuegoNormal();
+        entidadesLibres = new ArrayList<>();
     }
 
     /**
@@ -116,6 +123,9 @@ public class Controlador {
      * @param delta Tiempo transcurrido desde el ultimo frame
      */
     public void actualizarEstado(float delta){
+    	for(Colisionable col : entidadesLibres) {
+    		detectorColision.eliminarColisionable(col);
+    	}
         detectorColision.resolverColisiones();
         for(Entidad entidad : entidades){
             entidad.aceptarVisitor(visitorActual);
@@ -160,13 +170,29 @@ public class Controlador {
         return listaCopia;
     }
     
-    public void setActualizacion(Visitor nuevoVisitor) {
-    	Memento estadoActual = new Memento(visitorActual);
+    public void setActualizacion(Visitor nuevoVisitor, Caller caller) {
+    	Memento estadoActual = new Memento(visitorActual,caller);
     	vigilante.guardarMemento(estadoActual);
     	visitorActual = nuevoVisitor;
     }
     
-    public void restaurar() {
-    	visitorActual = vigilante.getUltimoMemento().getState();
+    public void restaurar(Caller caller) {
+    	if(vigilante.getUltimoMemento().getCaller()==caller) {
+    		visitorActual = vigilante.getUltimoMemento().getVisitor();
+    	}
     }
+    
+    public void pausar() {
+    	Memento estadoActual = new Memento(visitorActual);
+    	vigilante.guardarMemento(estadoActual);
+    	visitorActual = new VisitorJuegoPausa();
+    }
+    
+    public void reanudar() {
+    	visitorActual = vigilante.getUltimoMemento().getVisitor();
+    }
+
+	public void eliminarColisionable(Entidad col) {
+		entidadesLibres.add(col);
+	}
 }

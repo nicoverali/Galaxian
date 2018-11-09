@@ -6,11 +6,21 @@ import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.colision.actualizadores.VisitorJuegoCongelado;
 import edu.uns.galaxian.colision.colisionadores.Visitor;
 import edu.uns.galaxian.colision.hitbox.HBRectangulo;
+import edu.uns.galaxian.controlador.Caller;
 import edu.uns.galaxian.controlador.Controlador;
+import edu.uns.galaxian.entidades.equipamiento.armas.Arma;
+import edu.uns.galaxian.entidades.equipamiento.armas.ArmaDisparoDoble;
+import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
+import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparoJugador;
 import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
 import edu.uns.galaxian.entidades.jugador.Jugador;
+import edu.uns.galaxian.util.EntidadBatch;
+import edu.uns.galaxian.util.temporizador.TemporizadorManual;
 
-public class CongelaTiempo extends PowerUp {
+public class CongelaTiempo extends PowerUp implements Caller {
+	
+	private static float TIEMPO_EFECTO = 4;
+	private TemporizadorManual temporizador;
 
 	public CongelaTiempo(Vector2 posicion, Vector2 velocidad, float rotacion, Controlador controlador) {
 		super(posicion, velocidad, rotacion, controlador);
@@ -19,20 +29,31 @@ public class CongelaTiempo extends PowerUp {
 	}
 
 	public void efectoJugador(Jugador jugador) {
-		final Controlador ctrl = controlador;
-		new Thread(new Runnable() {
-			public void run() {
-				Visitor congelador = new VisitorJuegoCongelado();
-				ctrl.setActualizacion(congelador);
-				try {
-					Thread.sleep(4000);
-				} catch (InterruptedException e) { 
-					System.out.println("Error en ejecucion de Thread de powerUp");
-					e.printStackTrace();
-				}
-				ctrl.restaurar();
+		setVelocidad(new Vector2(0,0));
+		controlador.eliminarColisionable(this);
+		temporizador = new TemporizadorManual(TIEMPO_EFECTO);
+		Visitor congelador = new VisitorJuegoCongelado();
+		controlador.setActualizacion(congelador,this);
+	}
+	
+	public void actualizar(float delta) {
+		posicion.add(velocidad);
+		if((posicion.y > Gdx.graphics.getHeight()) || (posicion.y<0) || posicion.x<0 || posicion.x>Gdx.graphics.getWidth()) {
+			eliminar();
+		}
+		if(temporizador!=null) {
+			temporizador.contarTiempo(delta);
+			if(temporizador.tiempoCumplido()) {
+				controlador.restaurar(this);
+				eliminar();
 			}
-		}).start();
+		}
+	}
+	
+	public void dibujar(EntidadBatch batch) {
+		if(temporizador==null) {
+			super.dibujar(batch);
+		}
 	}
 
 }

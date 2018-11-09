@@ -1,4 +1,4 @@
-package edu.uns.galaxian.util;
+package edu.uns.galaxian.util.temporizador;
 
 import com.badlogic.gdx.utils.TimeUtils;
 

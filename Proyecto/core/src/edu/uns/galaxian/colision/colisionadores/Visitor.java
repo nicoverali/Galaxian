@@ -9,7 +9,7 @@ import edu.uns.galaxian.entidades.inanimadas.obstaculos.Barricada;
 import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
-public interface Visitor<T> {
+public interface Visitor {
 
 	/**
 	 * Comportamiento al momento de visitar un Jugador.

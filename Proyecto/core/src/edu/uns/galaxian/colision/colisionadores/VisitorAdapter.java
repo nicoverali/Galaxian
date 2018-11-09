@@ -9,7 +9,7 @@ import edu.uns.galaxian.entidades.inanimadas.obstaculos.Barricada;
 import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
-public abstract class VisitorAdapter<T> implements Visitor<T>{
+public abstract class VisitorAdapter implements Visitor {
 
 	public void visitJugador(Jugador jugador) {}
 

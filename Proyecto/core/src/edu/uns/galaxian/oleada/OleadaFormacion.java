@@ -8,7 +8,7 @@ import edu.uns.galaxian.ia.inteligencias.enemigo.InteligenciaFormacionDinamica;
 import edu.uns.galaxian.juego.nivel.Nivel;
 import edu.uns.galaxian.observer.Observador;
 import edu.uns.galaxian.observer.livedata.LiveData;
-import edu.uns.galaxian.util.Temporizador;
+import edu.uns.galaxian.util.temporizador.Temporizador;
 
 import java.util.*;
 

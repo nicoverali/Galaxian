@@ -8,7 +8,7 @@ import edu.uns.galaxian.entidades.inanimadas.obstaculos.Obstaculo;
 import edu.uns.galaxian.entidades.inanimadas.obstaculos.Barricada;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 
-public class ColisionadorObstaculo extends VisitorAdapter<Obstaculo> {
+public class ColisionadorObstaculo extends Colisionador<Obstaculo> {
 	
 	protected Obstaculo objetoFuente;
 	
