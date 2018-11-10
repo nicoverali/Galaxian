@@ -19,12 +19,12 @@ public class FabricaPowerUpConvencional implements FabricaPowerUp {
 		Random ran= new Random();
     	int n = ran.nextInt(6);
     	switch(n){
-    		case 0: return new PastillaVida(posicion,new Vector2 (0,-1),rotacion,controlador);
-    		case 1: return new CampoDeProteccion(posicion,new Vector2 (0,-1),rotacion,controlador);
-    		case 2: return new Misil(posicion,new Vector2 (0,-1),rotacion,controlador);
-    		case 3: return new MejoraArma(posicion,new Vector2 (0,-1),rotacion,controlador);
-    		case 4: return new CongelaTiempo(posicion,new Vector2 (0,-1),rotacion,controlador);
-    		case 5: return new PoderCosmico(posicion,new Vector2 (0,-1),rotacion,controlador);
+    		case 0: return new PastillaVida(posicion,new Vector2 (0,-2),rotacion,controlador);
+    		case 1: return new CampoDeProteccion(posicion,new Vector2 (0,-2),rotacion,controlador);
+    		case 2: return new Misil(posicion,new Vector2 (0,-2),rotacion,controlador);
+    		case 3: return new MejoraArma(posicion,new Vector2 (0,-2),rotacion,controlador);
+    		case 4: return new CongelaTiempo(posicion,new Vector2 (0,-2),rotacion,controlador);
+    		case 5: return new PoderCosmico(posicion,new Vector2 (0,-2),rotacion,controlador);
     		default: return null;
     	}
 	}
