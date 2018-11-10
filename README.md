@@ -2,6 +2,9 @@
 Juego shooter en 2D realizado como proyecto de Tecnologías de Programación en la Universidad Nacional del Sur.
 Se inspira en el clasico juego Galaxian, intendando darle un cambio moderno.
 
+## Para docentes
+Hacer clone de la branch feature-oleada (Es la branch por defecto/principal del respositorio)
+
 ### Integrantes 
 * Nicolás Zuccala
 * Carlos Canavides
