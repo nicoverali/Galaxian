@@ -16,13 +16,4 @@ public class ColisionadorPowerUp extends Colisionador<PowerUp> {
 	public void visitJugador(Jugador jugador) {
 		objetoFuente.efectoJugador(jugador);
 	}
-
-	public void visitDisparoJugador(DisparoJugador disparo) {
-		// TODO Decidir si un disparo jugador va a afectar al powerUp.
-	}
-
-	public void visitDisparoEnemigo(DisparoEnemigo disparo) {
-		// TODO Decidir si un disparo enemigo va a afectar al powerUp.
-	}
-
 }

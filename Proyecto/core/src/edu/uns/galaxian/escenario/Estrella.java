@@ -31,7 +31,6 @@ public class Estrella {
         alpha = 1;
     }
 
-    // TODO Antes el vector direccion normalizaba al del parametro, en realidad se debe verificar que todas las componentes sean 1, 0 o -1
     public void mover(Vector3 direccion, float velocidad, float delta){
         posicionAnterior.set(posicion.x, posicion.y);
         posicion.add(direccion.x * velocidad/posicion.z * delta, direccion.y * velocidad/posicion.z * delta, 0);
@@ -82,7 +81,6 @@ public class Estrella {
         final float TOLERANCIA = 0.1f;
         if (posicion.z < 1 + TOLERANCIA) {
             Vector2 xyRandom = generarPosicionRandom();
-            // TODO Arreglar eso de ahi
             posicion.set(xyRandom.x, xyRandom.y, ran.nextInt(10) + LIMITE_Z-10);
             posicionAnterior = xyRandom;
         }

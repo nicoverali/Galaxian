@@ -17,12 +17,4 @@ public class ColisionadorEscudo extends Colisionador<Escudo> {
 		objetoFuente.eliminar();
 	}
 
-	public void visitDisparoEnemigo(DisparoEnemigo disparo) {
-		// TODO falta decidir si el escudo deberia tener vida o algo por el estilo.
-	}
-
-	public void visitObstaculo(Obstaculo obstaculo) {
-		// TODO falta decidir si el escudo deberia tener vida o algo por el estilo.
-	}
-
 }

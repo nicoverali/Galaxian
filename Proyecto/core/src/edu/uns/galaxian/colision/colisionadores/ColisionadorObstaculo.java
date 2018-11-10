@@ -16,10 +16,6 @@ public class ColisionadorObstaculo extends Colisionador<Obstaculo> {
 		objetoFuente = obstaculo;
 	}
 
-	public void visitJugador(Jugador jugador) {
-		// TODO Falta ver si el obstaculo va a restarse vida.
-	}
-
 	public void visitEnemigo(Enemigo enemigo) {
 		objetoFuente.restarVida(enemigo.getFuerzaDeColision());
 	}
@@ -32,10 +28,6 @@ public class ColisionadorObstaculo extends Colisionador<Obstaculo> {
 		objetoFuente.restarVida(disparo.getFuerzaDeDisparo());
 	}
 
-	public void visitEscudo(Escudo escudo) {
-		// TODO Falta ver si el escudo afecta a un obstaculo.
-	}
-	
 	public void visitObstaculo(Obstaculo obstaculo) {
 		objetoFuente.restarVida(obstaculo.getFuerzaDeColision());
 	}
