@@ -18,6 +18,7 @@ public class PastillaVida extends PowerUp{
 
 	public void efectoJugador(Jugador jugador) {
 		jugador.setVidaAlMaximo();
+		this.eliminar();
 	}
 
 }

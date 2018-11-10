@@ -3,30 +3,21 @@ package edu.uns.galaxian.juego.menus;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import edu.uns.galaxian.animacion.animator.ciclos.CicloCircular;
 import edu.uns.galaxian.animacion.animator.ciclos.CicloUnico;
 import edu.uns.galaxian.escenario.CampoEstrellas;
 import edu.uns.galaxian.juego.Juego;
-import edu.uns.galaxian.juego.screen.menu.Menu;
 import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.animacion.EstadoAnimacion;
 import edu.uns.galaxian.animacion.animator.interpolaciones.BezierAnimator;
 import edu.uns.galaxian.animacion.animator.ValueAnimator;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Principal extends ScreenAdapter {
 
@@ -112,7 +103,7 @@ public class Principal extends ScreenAdapter {
         private Stage stage;
         private Menu menu;
         public EstadoMenu(){
-            stage = new Stage();
+            /*stage = new Stage();
             TextButton.TextButtonStyle style1 = new TextButton.TextButtonStyle();
             style1.font = font;
             TextButton.TextButtonStyle style2 = new TextButton.TextButtonStyle();
@@ -133,7 +124,7 @@ public class Principal extends ScreenAdapter {
             });
             stage.addActor(menu);
             stage.setKeyboardFocus(menu);
-            Gdx.input.setInputProcessor(stage);
+            Gdx.input.setInputProcessor(stage);*/
         }
 
         public void accion(float delta) {

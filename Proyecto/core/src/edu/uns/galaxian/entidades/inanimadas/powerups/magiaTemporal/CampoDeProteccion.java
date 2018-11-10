@@ -20,6 +20,7 @@ public class CampoDeProteccion extends PowerUp {
 	public void efectoJugador(Jugador jugador) {
 		Escudo escudo = new Escudo(jugador,controlador);
 		controlador.agregarEntidad(escudo);
+		this.eliminar();
 	}
 
 }
