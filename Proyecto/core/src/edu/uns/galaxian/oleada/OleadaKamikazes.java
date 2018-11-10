@@ -10,11 +10,8 @@ import edu.uns.galaxian.juego.nivel.Nivel;
 
 public class OleadaKamikazes extends OleadaBonus {
 
-	private FabricaEnemigos fabrica;
-
 	public OleadaKamikazes(int cantKamikazes, FabricaEnemigos fabrica, Controlador controlador, Nivel nivel) {
 		super(new ArrayList<Enemigo>(), controlador, nivel);
-		this.fabrica = fabrica;
 		for(int i = 0; i < cantKamikazes; i++) {
 			enemigos.add(fabrica.getKamikaze(Vector2.Zero.cpy(), controlador, controlador.getJugador()));
 		}

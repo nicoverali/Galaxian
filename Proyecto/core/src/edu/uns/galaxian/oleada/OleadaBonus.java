@@ -15,7 +15,7 @@ import edu.uns.galaxian.util.temporizador.Temporizador;
 
 public class OleadaBonus implements Oleada {
 
-    private static final int LIMITE_ENEMIGOS_ATACANDO = 4;
+    private static final int LIMITE_ENEMIGOS_ATACANDO = 3;
 
     protected List<Enemigo> enemigos;
     private Set<Enemigo> enemigosAtacando;
@@ -102,8 +102,7 @@ public class OleadaBonus implements Oleada {
         Iterator<Enemigo> enemigosIt = enemigosAtacando.iterator();
         while(enemigosIt.hasNext()){
             Enemigo enemigo = enemigosIt.next();
-            if(enemigo.getPosicion().y < 0){
-                enemigo.setPosicion(enemigo.getPosicion().x, Gdx.graphics.getHeight()+50);
+            if(enemigo.getPosicion().y < -100){
                 enemigo.setTareaInteligencia(new TareaNula<>());
                 enemigosIt.remove();
                 enemigos.remove(enemigo);

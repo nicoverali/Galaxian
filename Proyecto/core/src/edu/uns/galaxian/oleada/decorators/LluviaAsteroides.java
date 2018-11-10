@@ -7,6 +7,8 @@ import com.badlogic.gdx.Gdx;
 import edu.uns.galaxian.entidades.inanimadas.obstaculos.Asteroide;
 import edu.uns.galaxian.entidades.inanimadas.obstaculos.Obstaculo;
 import edu.uns.galaxian.controlador.Controlador;
+import edu.uns.galaxian.ia.Blackboard;
+import edu.uns.galaxian.ia.tareas.inteligencia.basica.InteligenciaDeOnda;
 import edu.uns.galaxian.observer.Observador;
 import edu.uns.galaxian.observer.livedata.LiveData;
 import edu.uns.galaxian.oleada.*;
@@ -33,7 +35,7 @@ public class LluviaAsteroides extends OleadaDecorator implements Observador<Live
 			final Random ran = new Random();
 			int posY  = ran.nextInt(200) + Gdx.graphics.getHeight() / 3;
 			Obstaculo nuevoObstaculo = new Asteroide(0 , posY, controlador);
-			// TODO nuevoObstaculo.setTareaInteligencia(new InteligenciaDeOnda<>(nuevoObstaculo));
+			nuevoObstaculo.setTareaInteligencia(new InteligenciaDeOnda<>(new Blackboard<>(nuevoObstaculo)));
 			controlador.agregarEntidad(nuevoObstaculo);
 			nuevoObstaculo.getVida().observar(this);
 			cantObstaculos++;
