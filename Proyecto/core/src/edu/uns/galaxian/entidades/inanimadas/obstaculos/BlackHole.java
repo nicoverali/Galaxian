@@ -10,7 +10,7 @@ public class BlackHole extends Obstaculo {
 
 	public BlackHole(float xPos, float yPos, Controlador controlador) {
 		super(xPos, yPos, TEXTURA_DIR, controlador);
-		fuerzaDeColision = 75;
+		fuerzaDeColision = 10;
 		vida.setValor(900);
 		colisionador = new ColisionadorBlackHole(this);
 		box = new HBRectangulo(this,textura.getRegionHeight()+40,textura.getRegionWidth()+40);
