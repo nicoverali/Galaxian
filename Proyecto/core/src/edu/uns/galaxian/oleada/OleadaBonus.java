@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.entidades.enemigo.Enemigo;
-import edu.uns.galaxian.ia.inteligencias.basica.InteligenciaNula;
+import edu.uns.galaxian.ia.TareaNula;
 import edu.uns.galaxian.juego.nivel.Nivel;
 import edu.uns.galaxian.observer.Observador;
 import edu.uns.galaxian.observer.livedata.LiveData;
@@ -71,7 +71,7 @@ public class OleadaBonus implements Oleada {
      */
     private void registrarEnemigos(List<Enemigo> enemigos){
         for(final Enemigo enemigo : enemigos){
-            enemigo.setInteligencia(new InteligenciaNula<>(enemigo));
+            enemigo.setPosicion(-500,-500);
             enemigo.getVida().observar(new Observador<LiveData<Integer>>() {
                 public void notificar(LiveData<Integer> subject) {
                     if(subject.getValor() == 0){
@@ -103,7 +103,8 @@ public class OleadaBonus implements Oleada {
         while(enemigosIt.hasNext()){
             Enemigo enemigo = enemigosIt.next();
             if(enemigo.getPosicion().y < 0){
-                enemigo.transicionarInteligencia(new InteligenciaNula<>(enemigo));
+                enemigo.setPosicion(enemigo.getPosicion().x, Gdx.graphics.getHeight()+50);
+                enemigo.setTareaInteligencia(new TareaNula<>());
                 enemigosIt.remove();
                 enemigos.remove(enemigo);
                 enemigo.eliminar();

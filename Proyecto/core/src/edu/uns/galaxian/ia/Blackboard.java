@@ -1,6 +1,5 @@
 package edu.uns.galaxian.ia;
 
-import edu.uns.galaxian.ia.autonomo.Autonomo;
 import edu.uns.galaxian.juego.GameObject;
 import edu.uns.galaxian.ia.utils.SteeringManager;
 
@@ -27,6 +26,15 @@ public class Blackboard<T extends Autonomo> {
      */
     public T getAutonomo(){
         return autonomo;
+    }
+
+    /**
+     * Verifica si hay un objetivo registrado en el
+     * blackboard
+     * @return Verdadero si hay un objetivo registrado
+     */
+    public boolean hayObjetivo(){
+        return this.objetivo != null;
     }
 
     /**

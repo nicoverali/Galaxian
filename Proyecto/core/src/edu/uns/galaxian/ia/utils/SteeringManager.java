@@ -1,7 +1,8 @@
 package edu.uns.galaxian.ia.utils;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import edu.uns.galaxian.ia.autonomo.AutonomoDinamico;
+import edu.uns.galaxian.ia.AutonomoDinamico;
 import edu.uns.galaxian.juego.GameObject;
 import edu.uns.galaxian.util.camino.CaminoSimple;
 
@@ -26,7 +27,8 @@ public class SteeringManager {
      * @return Fuerza para dirigirse hacia la posicion objetivo
      */
     public Vector2 seek(AutonomoDinamico autonomo, Vector2 position){
-        Vector2 steering = position.cpy().sub(autonomo.getPosicion());
+        Vector2 direccionDeseada = position.cpy().sub(autonomo.getPosicion()).setLength(autonomo.getVelocidadMaxima());
+        Vector2 steering = direccionDeseada.sub(autonomo.getVelocidad());
         return steering.limit(autonomo.getSteeringMaximo());
     }
 
@@ -97,14 +99,14 @@ public class SteeringManager {
      * @return Fuerza para perseguir al objetivo
      */
     public Vector2 perseguir(AutonomoDinamico autonomo, GameObject objetivo){
-        final float PREDICCION = 5;
+        final float PREDICCION = 20;
         float distanciaAlObjetivo = autonomo.getPosicion().dst(objetivo.getPosicion());
         float velocidadActual = autonomo.getVelocidad().len();
         float magnitudPrediccion = velocidadActual <= distanciaAlObjetivo/PREDICCION ?
                 PREDICCION :
                 distanciaAlObjetivo / velocidadActual;
         Vector2 posicionFuturaDelObjetivo = objetivo.getPosicion().add(objetivo.getVelocidad().scl(magnitudPrediccion));
-        return seek(autonomo, posicionFuturaDelObjetivo);
+        return arrive(autonomo, posicionFuturaDelObjetivo, 50);
     }
 
     /**
@@ -126,39 +128,26 @@ public class SteeringManager {
      * @return Fuerza angular para alinear las rotaciones
      */
     public float alinear(AutonomoDinamico autonomo, float rotacionObjetivo){
-        final int RADIO_DESACELERACION = 20;
+        System.out.println(autonomo.getRotacion());
+        final int RADIO_DESACELERACION = 30;
         final float TOLERANCIA = 1f;
+        final float CONSTANTE_STEERING = 0.13f;
         float rotacionDeseada = rotacionObjetivo - autonomo.getRotacion();
         // Girar para el lado mas cercano
-        rotacionDeseada = rotacionDeseada > 180 ?
-                360 - rotacionDeseada:
+        rotacionDeseada = Math.abs(rotacionDeseada) > 180 ?
+                (rotacionDeseada % 180) * -1:
                 rotacionDeseada;
-
         float magnitudRotacion = Math.abs(rotacionDeseada);
         if(magnitudRotacion < TOLERANCIA){
             return 0;
         }
         float rotacionFinal = magnitudRotacion > RADIO_DESACELERACION ?
-                autonomo.getSteeringMaximo()*50 :
-                autonomo.getSteeringMaximo()*50*magnitudRotacion/RADIO_DESACELERACION;
+                autonomo.getSteeringMaximo()*CONSTANTE_STEERING :
+                autonomo.getSteeringMaximo()*CONSTANTE_STEERING*magnitudRotacion/RADIO_DESACELERACION;
 
         float steeringAngular = rotacionFinal * rotacionDeseada / magnitudRotacion;
+        steeringAngular *= autonomo.getSteeringMaximo()*CONSTANTE_STEERING;
         return steeringAngular;
-    }
-
-    /**
-     * Retorna la fuerza angular necesaria para
-     * que el autonomo mire hacia la ubicacion del objetivo.
-     * @param autonomo Autonomo huesped
-     * @param objetivo Objetivo del autonomo
-     * @return Fuerza necesaria para mirar hacia la ubicaciond el objetivo
-     */
-    public float mirarA(AutonomoDinamico autonomo, GameObject objetivo){
-        Vector2 direccion = objetivo.getPosicion().sub(autonomo.getPosicion());
-        if(direccion.len() == 0){
-            return 0;
-        }
-        return alinear(autonomo, direccion.angle());
     }
 
     public Vector2 followPath(AutonomoDinamico autonomo, CaminoSimple camino, float radioDeLlegada){

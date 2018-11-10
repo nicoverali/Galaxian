@@ -3,8 +3,10 @@ package edu.uns.galaxian.nave.enemigo;
 import edu.uns.galaxian.colision.colisionadores.Visitor;
 import edu.uns.galaxian.entidades.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.jugador.Jugador;
-import edu.uns.galaxian.ia.InteligenciaArtificial;
-import edu.uns.galaxian.ia.inteligencias.enemigo.InteligenciaKamikazeMixto;
+import edu.uns.galaxian.ia.Blackboard;
+import edu.uns.galaxian.ia.Tarea;
+import edu.uns.galaxian.ia.tareas.inteligencia.enemigo.InteligenciaKamikaze;
+import edu.uns.galaxian.ia.tareas.inteligencia.enemigo.InteligenciaKamikazeMixto;
 import edu.uns.galaxian.nave.NaveEnemigo;
 
 public class NaveKamikazeMixto extends NaveEnemigo {
@@ -16,8 +18,9 @@ public class NaveKamikazeMixto extends NaveEnemigo {
 		super(TEXTURA_DIR, vidaMax, velocidadMax, fuerzaColision, BONUS, steeringMax);
 	}
 
-	public InteligenciaArtificial getInteligenciaAtaque(Enemigo autonomo, Jugador jugador) {
-		return new InteligenciaKamikazeMixto<>(autonomo, jugador);
+	public Tarea<Enemigo> getTareaAtaque(Enemigo enemigo, Jugador jugador) {
+		Blackboard<Enemigo> blackboard = new Blackboard<>(enemigo, jugador);
+		return new InteligenciaKamikazeMixto<>(blackboard);
 	}
 
 	public void aceptarColision(Visitor colisionador) {

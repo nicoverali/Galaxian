@@ -48,6 +48,4 @@ public abstract class Nave<T extends Disparo> {
 	public void setArma(Arma<T> nuevaArma){
 		arma = nuevaArma;
 	}
-
-	// TODO public void dibujarEquipamiento(EntidadBatch batch);
 }

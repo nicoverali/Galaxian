@@ -5,6 +5,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import edu.uns.galaxian.juego.menus.MenuPrincipal;
 import edu.uns.galaxian.juego.nivel.DirectorNivel;
+import edu.uns.galaxian.juego.nivel.NivelDesarrollo;
 import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.juego.config.GameData;
 import edu.uns.galaxian.juego.config.SaveData;

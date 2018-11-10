@@ -3,8 +3,9 @@ package edu.uns.galaxian.nave.enemigo;
 import edu.uns.galaxian.colision.colisionadores.Visitor;
 import edu.uns.galaxian.entidades.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.jugador.Jugador;
-import edu.uns.galaxian.ia.InteligenciaArtificial;
-import edu.uns.galaxian.ia.inteligencias.enemigo.InteligenciaArmado;
+import edu.uns.galaxian.ia.Blackboard;
+import edu.uns.galaxian.ia.Tarea;
+import edu.uns.galaxian.ia.tareas.inteligencia.enemigo.InteligenciaArmado;
 import edu.uns.galaxian.nave.NaveEnemigo;
 
 public class NaveArmadoDebil extends NaveEnemigo {
@@ -16,8 +17,9 @@ public class NaveArmadoDebil extends NaveEnemigo {
 		super(TEXTURA_DIR, vidaMax, velocidadMax, fuerzaColision, BONUS, steeringMax);
 	}
 
-	public InteligenciaArtificial getInteligenciaAtaque(Enemigo autonomo, Jugador jugador) {
-		return new InteligenciaArmado<>(autonomo, jugador);
+	public Tarea<Enemigo> getTareaAtaque(Enemigo autonomo, Jugador jugador) {
+		Blackboard<Enemigo> blackboard = new Blackboard<>(autonomo, jugador);
+		return new InteligenciaArmado<>(blackboard);
 	}
 	
 	public void aceptarColision(Visitor colisionador) {

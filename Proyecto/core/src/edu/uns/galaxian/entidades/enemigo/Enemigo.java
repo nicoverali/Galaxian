@@ -4,28 +4,28 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.entidades.EntidadConNave;
-import edu.uns.galaxian.ia.autonomo.AutonomoDinamico;
+import edu.uns.galaxian.ia.AutonomoDinamico;
 import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEnemigo;
 import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
 import edu.uns.galaxian.entidades.inanimadas.powerups.fabricaPowerUp.FabricaPowerUp;
 import edu.uns.galaxian.entidades.inanimadas.powerups.fabricaPowerUp.FabricaPowerUpConvencional;
 import edu.uns.galaxian.colision.colisionadores.*;
-import edu.uns.galaxian.ia.InteligenciaArtificial;
-import edu.uns.galaxian.ia.inteligencias.basica.InteligenciaNula;
+import edu.uns.galaxian.ia.Tarea;
+import edu.uns.galaxian.ia.TareaNula;
 import edu.uns.galaxian.juego.Juego;
 import edu.uns.galaxian.nave.NaveEnemigo;
 
 public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implements AutonomoDinamico {
 	
 	private Controlador controlador;
-	private InteligenciaArtificial<Enemigo> inteligencia;
+	private Tarea<Enemigo> inteligencia;
 	private ColisionadorEnemigo colisionador;
 	private FabricaPowerUp fabricaPowerUp;
 
 	public Enemigo(Vector2 posicion, NaveEnemigo nave, Controlador controlador, FabricaPowerUp fPowerUp){
 		super(posicion, 270, nave, controlador.getTextureAtlas(Juego.ATLAS_NAVES));
 		this.controlador = controlador;
-		inteligencia = new InteligenciaNula<>(this);
+		inteligencia = new TareaNula<>();
 		colisionador = new ColisionadorEnemigo(this);
 		fabricaPowerUp = fPowerUp;
 	}
@@ -33,7 +33,7 @@ public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implem
 	public Enemigo(Vector2 posicion, NaveEnemigo nave, Controlador controlador){
 		super(posicion, 270, nave, controlador.getTextureAtlas(Juego.ATLAS_NAVES));
 		this.controlador = controlador;
-		inteligencia = new InteligenciaNula<>(this);
+		inteligencia = new TareaNula<>();
 		colisionador = new ColisionadorEnemigo(this);
 		fabricaPowerUp = new FabricaPowerUpConvencional();
 	}
@@ -61,23 +61,15 @@ public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implem
 	}
 
 	public void atacar() {
-		inteligencia.transicionar(nave.getInteligenciaAtaque(this, controlador.getJugador()));
+		inteligencia = nave.getTareaAtaque(this, controlador.getJugador());
 	}
 
-	public InteligenciaArtificial getInteligencia() {
-		return inteligencia;
-	}
-
-	public void setInteligencia(InteligenciaArtificial ia) {
-		inteligencia = ia;
-	}
-
-	public void transicionarInteligencia(InteligenciaArtificial ia) {
-		inteligencia.transicionar(ia);
+	public void setTareaInteligencia(Tarea TareaIA) {
+		inteligencia = TareaIA;
 	}
 
 	public void actualizar(float delta) {
-		inteligencia.pensar(delta);
+		inteligencia.realizar(delta);
 	}
 
     public void eliminar() {

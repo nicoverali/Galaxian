@@ -9,12 +9,12 @@ import edu.uns.galaxian.colision.hitbox.HitBox;
 import edu.uns.galaxian.colision.colisionadores.Visitor;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorObstaculo;
 import edu.uns.galaxian.controlador.Controlador;
+import edu.uns.galaxian.ia.Tarea;
+import edu.uns.galaxian.ia.TareaNula;
 import edu.uns.galaxian.juego.Juego;
 import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.entidades.EntidadViva;
-import edu.uns.galaxian.ia.autonomo.Autonomo;
-import edu.uns.galaxian.ia.InteligenciaArtificial;
-import edu.uns.galaxian.ia.inteligencias.basica.InteligenciaNula;
+import edu.uns.galaxian.ia.Autonomo;
 
 public abstract class Obstaculo extends EntidadViva implements Autonomo {
 	
@@ -24,7 +24,7 @@ public abstract class Obstaculo extends EntidadViva implements Autonomo {
 	protected TextureRegion textura;
 	protected Controlador controlador;
 	protected HBCirculo box;
-	protected InteligenciaArtificial<Obstaculo> inteligencia;
+	protected Tarea<Obstaculo> inteligencia;
 	protected int fuerzaDeColision;
 
 	public Obstaculo(float xPos, float yPos, String TEXTURA_DIR, Controlador controlador) {
@@ -32,7 +32,7 @@ public abstract class Obstaculo extends EntidadViva implements Autonomo {
 		this.controlador = controlador;
 		fuerzaDeColision = 100;
 		colisionador = new ColisionadorObstaculo(this);
-		inteligencia = new InteligenciaNula<Obstaculo>(this);
+		inteligencia = new TareaNula<>();
 		textura = controlador.getTextureAtlas(Juego.ATLAS_OBSTACULOS).findRegion(TEXTURA_DIR);
 		box = new HBCirculo(this,textura.getRegionWidth()/2);
 	}
@@ -49,7 +49,7 @@ public abstract class Obstaculo extends EntidadViva implements Autonomo {
 		if((posicion.y > Gdx.graphics.getHeight()) || (posicion.y<0) || posicion.x<0 || posicion.x>Gdx.graphics.getWidth()) {
 			restarVida(getVida().getValor());
 		}
-		inteligencia.pensar(d);
+		inteligencia.realizar(d);
 	}
 
 	public void eliminar() {
@@ -68,16 +68,8 @@ public abstract class Obstaculo extends EntidadViva implements Autonomo {
 		return colisionador;
 	}
 
-	public InteligenciaArtificial getInteligencia() {
-		return inteligencia;
-	}
-
-	public void setInteligencia(InteligenciaArtificial i) {
+	public void setTareaInteligencia(Tarea i) {
 		inteligencia = i;
-	}
-
-	public void transicionarInteligencia(InteligenciaArtificial ia) {
-		inteligencia.transicionar(ia);
 	}
 
 	public HitBox getHitBox() {

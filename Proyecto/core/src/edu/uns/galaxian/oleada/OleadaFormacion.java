@@ -4,7 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.entidades.enemigo.Enemigo;
-import edu.uns.galaxian.ia.inteligencias.enemigo.InteligenciaFormacionDinamica;
+import edu.uns.galaxian.ia.Blackboard;
+import edu.uns.galaxian.ia.tareas.inteligencia.enemigo.InteligenciaFormacionDinamica;
 import edu.uns.galaxian.juego.nivel.Nivel;
 import edu.uns.galaxian.observer.Observador;
 import edu.uns.galaxian.observer.livedata.LiveData;
@@ -73,7 +74,7 @@ public class OleadaFormacion implements Oleada {
                 final Enemigo enemigo = fila.get(j);
                 Vector2 posicionFormacion = formarEnemigo(i, j, cantEnFila);
                 enemigo.setPosicion(posicionFormacion);
-                enemigo.setInteligencia(new InteligenciaFormacionDinamica<>(enemigo, posicionFormacion));
+                enemigo.setTareaInteligencia(new InteligenciaFormacionDinamica<>(new Blackboard<>(enemigo), posicionFormacion));
                 enemigo.getVida().observar(new Observador<LiveData<Integer>>() {
                     public void notificar(LiveData<Integer> subject) {
                         if(subject.getValor() == 0){
@@ -133,8 +134,8 @@ public class OleadaFormacion implements Oleada {
         while(enemigosIt.hasNext()){
             Enemigo enemigo = enemigosIt.next();
             if(enemigo.getPosicion().y < 0){
-                enemigo.setPosicion(enemigo.getPosicion().x, Gdx.graphics.getHeight()+50);
-                enemigo.transicionarInteligencia(new InteligenciaFormacionDinamica<>(enemigo, enemigosAtacando.get(enemigo)));
+                enemigo.setPosicion(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()+500);
+                enemigo.setTareaInteligencia(new InteligenciaFormacionDinamica<>(new Blackboard<>(enemigo), enemigosAtacando.get(enemigo)));
                 enemigosIt.remove();
             }
         }

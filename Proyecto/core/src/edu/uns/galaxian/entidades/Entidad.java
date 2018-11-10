@@ -58,6 +58,8 @@ public abstract class Entidad implements Colisionable, GameObject
 		rotacion = nuevaRotacion;
 		if(rotacion > 360){
 			rotacion -= 360;
+		}else if(rotacion < 0){
+			rotacion += 360;
 		}
 	}
 
