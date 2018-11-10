@@ -39,8 +39,6 @@ public class OleadaBonus implements Oleada {
     }
 
     public void actualizar(float delta) throws IllegalStateException{
-        System.out.println("Enemigos en juego " + enemigos.size());
-        System.out.println("Enemigos atacando " + enemigosAtacando.size());
         if(!iniciado) throw new IllegalStateException("La oleada no puede actualizarse si no esta iniciada.");
         verificarEnemigosEnPantalla();
         if(enemigos.isEmpty()){
