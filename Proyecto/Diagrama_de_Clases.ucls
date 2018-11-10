@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="edu.uns.galaxian.entidades.inanimadas.disparos.Disparo" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/inanimadas/disparos/Disparo.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="243" width="278" x="2424" y="446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEnemigo" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/inanimadas/disparos/DisparoEnemigo.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="318" x="1767" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEspecial" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/inanimadas/disparos/DisparoEspecial.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="359" x="2424" y="1210"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/inanimadas/disparos/DisparoJugador.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="358" x="2424" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="5" language="java" name="edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparo" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/inanimadas/disparos/fabrica/FabricaDisparo.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="304" x="982" y="1210"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="6" language="java" name="edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparoEnemigo" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/inanimadas/disparos/fabrica/FabricaDisparoEnemigo.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="384" x="42" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparoJugador" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/inanimadas/disparos/fabrica/FabricaDisparoJugador.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="383" x="3109" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaEspecial" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/inanimadas/disparos/fabrica/FabricaEspecial.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="383" x="3125" y="1210"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="edu.uns.galaxian.entidades.inanimadas.obstaculos.Obstaculo" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/inanimadas/obstaculos/Obstaculo.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="405" width="259" x="2125" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="edu.uns.galaxian.entidades.inanimadas.obstaculos.Barricada" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/inanimadas/obstaculos/Barricada.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="117" width="221" x="1641" y="1210"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="edu.uns.galaxian.entidades.inanimadas.obstaculos.BlackHole" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/inanimadas/obstaculos/BlackHole.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="99" width="221" x="2163" y="1210"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="edu.uns.galaxian.entidades.inanimadas.obstaculos.Fragmento" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/inanimadas/obstaculos/Fragmento.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="117" width="223" x="1641" y="1565"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="edu.uns.galaxian.entidades.inanimadas.obstaculos.Asteroide" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/inanimadas/obstaculos/Asteroide.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="153" width="221" x="1902" y="1210"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/inanimadas/powerups/PowerUp.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="279" width="241" x="4171" y="446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="edu.uns.galaxian.entidades.inanimadas.powerups.magiaTemporal.CampoDeProteccion" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/inanimadas/powerups/magiaTemporal/CampoDeProteccion.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="293" x="4171" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="edu.uns.galaxian.entidades.inanimadas.powerups.magiaTemporal.MejoraArma" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/inanimadas/powerups/magiaTemporal/MejoraArma.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="280" x="4823" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="edu.uns.galaxian.entidades.inanimadas.powerups.magiaTemporal.PastillaVida" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/inanimadas/powerups/magiaTemporal/PastillaVida.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="280" x="3851" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="edu.uns.galaxian.entidades.inanimadas.powerups.objetoPrecioso.CongelaTiempo" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/inanimadas/powerups/objetoPrecioso/CongelaTiempo.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="279" x="4504" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="edu.uns.galaxian.entidades.inanimadas.powerups.objetoPrecioso.Misil" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/inanimadas/powerups/objetoPrecioso/Misil.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="279" x="3532" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="edu.uns.galaxian.entidades.inanimadas.powerups.objetoPrecioso.PoderCosmico" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/inanimadas/powerups/objetoPrecioso/PoderCosmico.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="279" x="5143" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="21" language="java" name="edu.uns.galaxian.entidades.inanimadas.powerups.fabricaPowerUp.FabricaPowerUp" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/inanimadas/powerups/fabricaPowerUp/FabricaPowerUp.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="284" x="532" y="446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="22" language="java" 
+    name="edu.uns.galaxian.entidades.inanimadas.powerups.fabricaPowerUp.FabricaPowerUpConvencional" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/inanimadas/powerups/fabricaPowerUp/FabricaPowerUpConvencional.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="284" x="532" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="edu.uns.galaxian.entidades.Entidad" project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/Entidad.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="369" width="172" x="2822" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="edu.uns.galaxian.entidades.EntidadConNave" project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/EntidadConNave.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="279" width="247" x="2822" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="edu.uns.galaxian.entidades.EntidadViva" project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/EntidadViva.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="208" x="2822" y="446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="edu.uns.galaxian.entidades.jugador.Jugador" project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/jugador/Jugador.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="315" width="262" x="2823" y="1210"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="27" language="java" name="edu.uns.galaxian.entidades.equipamiento.armas.Arma" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/equipamiento/armas/Arma.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="99" width="218" x="1251" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="28" language="java" name="edu.uns.galaxian.entidades.equipamiento.armas.ArmaComun" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/equipamiento/armas/ArmaComun.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="189" width="218" x="1509" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="edu.uns.galaxian.entidades.equipamiento.armas.ArmaDisparoDoble" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/equipamiento/armas/ArmaDisparoDoble.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="229" x="982" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="edu.uns.galaxian.entidades.equipamiento.armas.ArmaDisparoUnico" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/equipamiento/armas/ArmaDisparoUnico.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="218" x="724" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="edu.uns.galaxian.entidades.equipamiento.armas.ArmaInfinita" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/equipamiento/armas/ArmaInfinita.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="99" width="210" x="1380" y="446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="edu.uns.galaxian.entidades.equipamiento.armas.ArmaNula" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/equipamiento/armas/ArmaNula.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="99" width="218" x="466" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="edu.uns.galaxian.entidades.equipamiento.armas.ArmaTemporal" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/equipamiento/armas/ArmaTemporal.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="117" width="210" x="856" y="446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="edu.uns.galaxian.entidades.enemigo.Enemigo" project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/enemigo/Enemigo.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="387" width="322" x="4956" y="906"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="edu.uns.galaxian.entidades.enemigo.fabrica.FabricaEnemigos" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/enemigo/fabrica/FabricaEnemigos.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="189" width="364" x="4509" y="1135"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="edu.uns.galaxian.entidades.enemigo.fabrica.FabricaEstandar" 
+    project="GalaxianRemastered-core" 
+    file="/GalaxianRemastered-core/src/edu/uns/galaxian/entidades/enemigo/fabrica/FabricaEstandar.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4684" y="1443"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <realization id="37">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="27"/>  
+  </realization>  
+  <generalization id="38">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <association id="39">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="40" name="fabrica"/>      
+      <multiplicity id="41" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="42">    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="35"/>  
+  </generalization>  
+  <generalization id="43">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <generalization id="44">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <generalization id="45">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="25"/>  
+  </generalization>  
+  <generalization id="46">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <realization id="47">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <association id="48">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="49" name="fabricaPowerUp"/>      
+      <multiplicity id="50" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="51">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="27"/>  
+  </realization>  
+  <generalization id="52">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="31"/>  
+  </generalization>  
+  <generalization id="53">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <generalization id="54">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="9"/>  
+  </generalization>  
+  <generalization id="55">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="9"/>  
+  </generalization>  
+  <generalization id="56">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <generalization id="57">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="9"/>  
+  </generalization>  
+  <generalization id="58">    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="24"/>  
+  </generalization>  
+  <association id="59">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="60" name="jugador"/>      
+      <multiplicity id="61" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="62">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
+  <generalization id="63">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="33"/>  
+  </generalization>  
+  <association id="64">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="65" name="fabrica"/>      
+      <multiplicity id="66" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="67">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <generalization id="68">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <generalization id="69">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="33"/>  
+  </generalization>  
+  <generalization id="70">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="33"/>  
+  </generalization>  
+  <association id="71">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="72" name="jugador"/>      
+      <multiplicity id="73" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="74">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <generalization id="75">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="24"/>  
+  </generalization>  
+  <realization id="76">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="21"/>  
+  </realization>  
+  <generalization id="77">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <generalization id="78">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <association id="79">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="80" name="fabrica"/>      
+      <multiplicity id="81" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="82">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <association id="83">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="84" name="fabricaPowerUp"/>      
+      <multiplicity id="85" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="86">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <generalization id="87">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <generalization id="88">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="25"/>  
+  </generalization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

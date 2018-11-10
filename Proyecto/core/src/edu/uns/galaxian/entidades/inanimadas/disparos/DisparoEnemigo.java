@@ -3,6 +3,7 @@ package edu.uns.galaxian.entidades.inanimadas.disparos;
 import com.badlogic.gdx.math.Vector2;
 
 import edu.uns.galaxian.colision.colisionadores.Visitor;
+import edu.uns.galaxian.colision.colisionadores.Colisionador;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorDisparoEnemigo;
 import edu.uns.galaxian.controlador.Controlador;
 
@@ -18,7 +19,7 @@ public class DisparoEnemigo extends Disparo {
 		col.visitDisparoEnemigo(this);
 	}
 	
-	public ColisionadorDisparoEnemigo getColisionador() {
+	public Colisionador getColisionador() {
 		return colisionador;
 	}
 	

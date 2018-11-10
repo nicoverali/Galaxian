@@ -6,7 +6,6 @@ import edu.uns.galaxian.colision.colisionadores.ColisionadorDisparoEspecial;
 import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.entidades.inanimadas.obstaculos.BlackHole;
 import edu.uns.galaxian.entidades.jugador.Jugador;
-import edu.uns.galaxian.util.EntidadBatch;
 
 public class DisparoEspecial extends DisparoJugador{
 
@@ -20,10 +19,6 @@ public class DisparoEspecial extends DisparoJugador{
 	public void efecto() {
 		BlackHole blackHole = new BlackHole(posicion.x,posicion.y,controlador);
 		controlador.agregarEntidad(blackHole);
-	}
-	
-	public void dibujar(EntidadBatch batch) {
-		batch.draw(textura, posicion, rotacion);
 	}
 	
 }
