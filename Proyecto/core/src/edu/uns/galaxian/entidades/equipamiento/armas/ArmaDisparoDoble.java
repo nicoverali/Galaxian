@@ -12,7 +12,7 @@ public class ArmaDisparoDoble<T extends Disparo> extends ArmaTemporal<T> {
 	private static final long CADENCIA = 300;
 	private static final int VELOCIDAD_MAXIMA = 150;
 	private static final int FUERZA = 35;
-	private static final String TEXTURA_DIR = "disparo/enemigo/comun";
+	private static final String TEXTURA_DIR = "disparo/jugador/VERDE";
 	private FabricaDisparo<T> fabrica;
 	private long ultimoDisparo;
 
