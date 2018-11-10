@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.controlador.*;
 import edu.uns.galaxian.entidades.jugador.Jugador;
+import edu.uns.galaxian.escenario.CampoEstrellas;
 import edu.uns.galaxian.juego.Tiempo;
 import edu.uns.galaxian.oleada.*;
 import edu.uns.galaxian.util.EntidadBatch;
@@ -16,7 +17,7 @@ import edu.uns.galaxian.escenario.Background;
 public class Nivel extends ScreenAdapter{
 
     private DirectorNivel director;
-    private Background background;
+    private CampoEstrellas estrellas;
     private Jugador jugador;
     private Controlador controlador;
     private Oleada oleadaActual;
@@ -29,7 +30,7 @@ public class Nivel extends ScreenAdapter{
     
     public Nivel(DirectorNivel director){
         this.director = director;
-        background = new Background();
+        estrellas = new CampoEstrellas(CampoEstrellas.ABAJO, 500);
         controlador = director.getControladorEntidad();
         jugador = new Jugador(new Vector2(Gdx.graphics.getWidth()/2, 50), director.getNaveJugador(), this, controlador);
         controlador.agregarJugador(jugador);
@@ -49,7 +50,7 @@ public class Nivel extends ScreenAdapter{
         EntidadBatch batch = director.getEntidadBatch();
 
         oleadaActual.actualizar(delta);
-        background.draw();
+        estrellas.draw(delta);
         // Inicializa proceso de dibujado de EntidadBatch
         batch.begin();
         controlador.actualizarEstado(delta);
