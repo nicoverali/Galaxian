@@ -23,7 +23,7 @@ public abstract class Obstaculo extends EntidadViva implements Autonomo {
 	protected ColisionadorObstaculo colisionador;
 	protected TextureRegion textura;
 	protected Controlador controlador;
-	protected HBCirculo box;
+	protected HitBox box;
 	protected Tarea<Obstaculo> inteligencia;
 	protected int fuerzaDeColision;
 

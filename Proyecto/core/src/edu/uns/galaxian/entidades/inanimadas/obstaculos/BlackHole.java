@@ -1,5 +1,7 @@
 package edu.uns.galaxian.entidades.inanimadas.obstaculos;
 
+import edu.uns.galaxian.colision.colisionadores.ColisionadorBlackHole;
+import edu.uns.galaxian.colision.hitbox.HBRectangulo;
 import edu.uns.galaxian.controlador.Controlador;
 
 public class BlackHole extends Obstaculo {
@@ -8,7 +10,9 @@ public class BlackHole extends Obstaculo {
 
 	public BlackHole(float xPos, float yPos, Controlador controlador) {
 		super(xPos, yPos, TEXTURA_DIR, controlador);
-		fuerzaDeColision = 0;
-		vida.setValor(700);
+		fuerzaDeColision = 75;
+		vida.setValor(900);
+		colisionador = new ColisionadorBlackHole(this);
+		box = new HBRectangulo(this,textura.getRegionHeight()+40,textura.getRegionWidth()+40);
 	}
 }

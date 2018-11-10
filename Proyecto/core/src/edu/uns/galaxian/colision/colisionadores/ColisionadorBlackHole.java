@@ -1,27 +1,31 @@
 package edu.uns.galaxian.colision.colisionadores;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import edu.uns.galaxian.entidades.enemigo.Enemigo;
-import edu.uns.galaxian.entidades.inanimadas.obstaculos.Barricada;
-import edu.uns.galaxian.entidades.inanimadas.obstaculos.Obstaculo;
+import edu.uns.galaxian.entidades.inanimadas.obstaculos.BlackHole;
+import edu.uns.galaxian.ia.Blackboard;
+import edu.uns.galaxian.ia.tareas.acciones.ArrivePosicion;
 
 public class ColisionadorBlackHole extends ColisionadorObstaculo {
+	
+	private Set<Enemigo>  absorbidos;
 
-	public ColisionadorBlackHole(Obstaculo obstaculo) {
+	public ColisionadorBlackHole(BlackHole obstaculo) {
 		super(obstaculo);
+		absorbidos = new HashSet<>();
 	}
-
-	// TODO los siguientes metodos deberian setear una inteligencia que los guie al centro del agujero negro.
 	
 	public void visitEnemigo(Enemigo enemigo) {
-		objetoFuente.restarVida(enemigo.getFuerzaDeColision());
-	}
-	
-	public void visitObstaculo(Obstaculo obstaculo) {
-		objetoFuente.restarVida(obstaculo.getFuerzaDeColision());
-	}
-
-	public void visitBarricada(Barricada barricada) {
-		objetoFuente.restarVida(barricada.getFuerzaDeColision());
+		if(absorbidos.size()<4) {
+			if(!absorbidos.contains(enemigo)) {
+				enemigo.setTareaInteligencia(new ArrivePosicion<>(new Blackboard<>(enemigo),objetoFuente.getPosicion()));
+			}
+		}
+		else {
+			objetoFuente.restarVida(objetoFuente.getVida().getValor());
+		}
 	}
 
 }
