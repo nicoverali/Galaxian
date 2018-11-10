@@ -5,7 +5,7 @@ import edu.uns.galaxian.util.enums.Color;
 
 public class NavePesada extends NaveJugador {
 
-	private static final int VIDA_MAXIMA = 250;
+	private static final int VIDA_MAXIMA = 400;
 	private static final int VELOCIDAD_MAXIMA = 250;
 	private static final String TEXTURA_DIR = "jugador/%s/navePesada";
 

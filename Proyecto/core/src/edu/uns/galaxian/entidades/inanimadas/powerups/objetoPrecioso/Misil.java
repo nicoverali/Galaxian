@@ -22,7 +22,7 @@ public class Misil extends PowerUp {
 
 	public void efectoJugador(Jugador jugador) {
 		controlador.eliminarColisionable(this);
-		Arma<DisparoJugador> armaMejorada = new ArmaDisparoDoble<DisparoJugador>(new FabricaDisparoJugador(jugador),7);
+		Arma<DisparoJugador> armaMejorada = new ArmaDisparoDoble<DisparoJugador>(new FabricaDisparoJugador(jugador),20);
 		jugador.setArma(armaMejorada);
 		eliminar();
 	}
