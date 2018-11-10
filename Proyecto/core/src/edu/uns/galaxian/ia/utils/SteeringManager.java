@@ -128,7 +128,6 @@ public class SteeringManager {
      * @return Fuerza angular para alinear las rotaciones
      */
     public float alinear(AutonomoDinamico autonomo, float rotacionObjetivo){
-        System.out.println(autonomo.getRotacion());
         final int RADIO_DESACELERACION = 30;
         final float TOLERANCIA = 1f;
         final float CONSTANTE_STEERING = 0.13f;

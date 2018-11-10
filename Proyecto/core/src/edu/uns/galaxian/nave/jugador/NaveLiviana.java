@@ -14,7 +14,7 @@ public class NaveLiviana extends NaveJugador {
 	}
 
 	public int getVidaMax() {
-		return VIDA_MAXIMA;
+		return Integer.MAX_VALUE;
 	}
 
 	public float getVelocidadMax() {

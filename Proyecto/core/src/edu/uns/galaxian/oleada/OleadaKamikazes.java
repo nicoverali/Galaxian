@@ -13,7 +13,9 @@ public class OleadaKamikazes extends OleadaBonus {
 	public OleadaKamikazes(int cantKamikazes, FabricaEnemigos fabrica, Controlador controlador, Nivel nivel) {
 		super(new ArrayList<Enemigo>(), controlador, nivel);
 		for(int i = 0; i < cantKamikazes; i++) {
-			enemigos.add(fabrica.getKamikaze(Vector2.Zero.cpy(), controlador, controlador.getJugador()));
+			Enemigo nuevoEnemigo = fabrica.getKamikaze(Vector2.Zero.cpy(), controlador, controlador.getJugador());
+			enemigos.add(nuevoEnemigo);
 		}
+		registrarEnemigos(enemigos);
 	}
 }
