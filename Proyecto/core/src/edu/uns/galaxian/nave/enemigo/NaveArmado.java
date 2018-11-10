@@ -21,9 +21,4 @@ public class NaveArmado extends NaveEnemigo {
 		Blackboard<Enemigo> blackboard = new Blackboard<>(autonomo, jugador);
 		return new InteligenciaArmado<>(blackboard);
 	}
-	
-	public void aceptarColision(Visitor colisionador) {
-		// TODO
-	}
-	
 }

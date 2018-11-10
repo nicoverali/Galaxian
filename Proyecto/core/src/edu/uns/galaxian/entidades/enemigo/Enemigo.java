@@ -86,7 +86,6 @@ public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implem
 
 	public void aceptarVisitor(Visitor colisionador) {
 		colisionador.visitEnemigo(this);
-		nave.aceptarColision(colisionador);
 	}
 
 	public float getVelocidadMaxima() {

@@ -32,13 +32,6 @@ public abstract class NaveEnemigo extends Nave<DisparoEnemigo> {
     public abstract Tarea<Enemigo> getTareaAtaque(Enemigo enemigo, Jugador jugador);
 
     /**
-     * La nave acepta entrar en un estado de colision. Recibe
-     * el colisionador del un colisionable para indicarle que accion realizar.
-     * @param colisionador Colisionador de un colisionable participante en la colision producida
-     */
-    public abstract void aceptarColision(Visitor colisionador);
-
-    /**
      * Retorna la fuerza con la que colisiona la nave
      * @return Fuerza con que colisiona la nave
      */

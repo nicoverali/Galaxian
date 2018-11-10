@@ -22,11 +22,6 @@ public class NaveKamikazeMixto extends NaveEnemigo {
 		Blackboard<Enemigo> blackboard = new Blackboard<>(enemigo, jugador);
 		return new InteligenciaKamikazeMixto<>(blackboard);
 	}
-
-	public void aceptarColision(Visitor colisionador) {
-		// TODO Llamar al metodo correspondiente
-	}
-	
 }
 
 
