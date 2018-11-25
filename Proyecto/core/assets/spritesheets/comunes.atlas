@@ -1,181 +1,209 @@
-naves.png
-size: 181,181
+
+comunes.png
+size: 534,534
 format: RGBA8888
 filter: Linear,Linear
 repeat: xy
 enemigo/armado/estandar
   rotate: false
-  xy: 56, 145
-  size: 28, 34
-  orig: 28, 34
+  xy: 2, 2
+  size: 84, 104
+  orig: 84, 104
   offset: 0, 0
   index: -1
 enemigo/armadoDebil/estandar
   rotate: false
-  xy: 86, 148
-  size: 28, 31
-  orig: 28, 31
+  xy: 102, 339
+  size: 84, 93
+  orig: 84, 93
   offset: 0, 0
   index: -1
 enemigo/kamikaze/estandar
   rotate: false
-  xy: 56, 111
-  size: 28, 32
-  orig: 28, 32
+  xy: 265, 357
+  size: 84, 97
+  orig: 84, 97
   offset: 0, 0
   index: -1
 enemigo/kamikazeAleatorio/estandar
   rotate: false
-  xy: 151, 123
-  size: 28, 27
-  orig: 28, 27
+  xy: 397, 83
+  size: 84, 82
+  orig: 84, 82
   offset: 0, 0
   index: -1
 enemigo/kamikazeMixto/estandar
   rotate: false
-  xy: 151, 152
-  size: 28, 27
-  orig: 28, 27
+  xy: 388, 167
+  size: 84, 82
+  orig: 84, 82
   offset: 0, 0
   index: -1
 jugador/AZUL/naveIntermedia
   rotate: false
-  xy: 29, 142
-  size: 25, 37
-  orig: 25, 37
+  xy: 80, 108
+  size: 75, 112
+  orig: 75, 112
   offset: 0, 0
   index: -1
 jugador/AZUL/naveLiviana
   rotate: false
-  xy: 86, 113
-  size: 25, 33
-  orig: 25, 33
+  xy: 188, 347
+  size: 75, 99
+  orig: 75, 99
   offset: 0, 0
   index: -1
 jugador/AZUL/naveLiviana-golpeada
   rotate: false
-  xy: 116, 127
-  size: 33, 25
-  orig: 33, 25
+  xy: 329, 456
+  size: 99, 76
+  orig: 99, 76
   offset: 0, 0
   index: -1
 jugador/AZUL/naveLiviana-moribunda
   rotate: false
-  xy: 116, 154
-  size: 33, 25
-  orig: 33, 25
+  xy: 227, 456
+  size: 100, 76
+  orig: 100, 76
   offset: 0, 0
   index: -1
 jugador/AZUL/navePesada
   rotate: false
-  xy: 113, 93
-  size: 25, 32
-  orig: 25, 32
+  xy: 311, 156
+  size: 75, 98
+  orig: 75, 98
   offset: 0, 0
   index: -1
 jugador/BORDO/naveIntermedia
   rotate: false
-  xy: 2, 25
-  size: 25, 37
-  orig: 25, 37
+  xy: 157, 111
+  size: 75, 112
+  orig: 75, 112
   offset: 0, 0
   index: -1
 jugador/BORDO/naveLiviana
   rotate: false
-  xy: 29, 33
-  size: 25, 33
-  orig: 25, 33
+  xy: 234, 246
+  size: 75, 99
+  orig: 75, 99
   offset: 0, 0
   index: -1
 jugador/BORDO/navePesada
   rotate: false
-  xy: 110, 25
-  size: 25, 32
-  orig: 25, 32
+  xy: 389, 251
+  size: 75, 98
+  orig: 75, 98
   offset: 0, 0
   index: -1
 jugador/ROJO/naveIntermedia
   rotate: false
-  xy: 29, 103
-  size: 25, 37
-  orig: 25, 37
+  xy: 157, 225
+  size: 75, 112
+  orig: 75, 112
   offset: 0, 0
   index: -1
 jugador/ROJO/naveLiviana
   rotate: false
-  xy: 56, 41
-  size: 25, 33
-  orig: 25, 33
+  xy: 234, 145
+  size: 75, 99
+  orig: 75, 99
   offset: 0, 0
   index: -1
 jugador/ROJO/navePesada
   rotate: false
-  xy: 113, 59
-  size: 25, 32
-  orig: 25, 32
+  xy: 320, 56
+  size: 75, 98
+  orig: 75, 98
   offset: 0, 0
   index: -1
 jugador/VERDE/naveIntermedia
   rotate: false
-  xy: 2, 142
-  size: 25, 37
-  orig: 25, 37
+  xy: 80, 222
+  size: 75, 112
+  orig: 75, 112
   offset: 0, 0
   index: -1
 jugador/VERDE/naveLiviana
   rotate: false
-  xy: 56, 76
-  size: 25, 33
-  orig: 25, 33
+  xy: 166, 10
+  size: 75, 99
+  orig: 75, 99
   offset: 0, 0
   index: -1
 jugador/VERDE/navePesada
   rotate: false
-  xy: 86, 79
-  size: 25, 32
-  orig: 25, 32
+  xy: 243, 45
+  size: 75, 98
+  orig: 75, 98
   offset: 0, 0
   index: -1
 jugador/naveIntermedia-golpeada
   rotate: false
-  xy: 2, 103
-  size: 25, 37
-  orig: 25, 37
+  xy: 2, 222
+  size: 76, 112
+  orig: 76, 112
   offset: 0, 0
   index: -1
 jugador/naveIntermedia-moribunda
   rotate: false
-  xy: 2, 64
-  size: 25, 37
-  orig: 25, 37
+  xy: 2, 108
+  size: 76, 112
+  orig: 76, 112
   offset: 0, 0
   index: -1
 jugador/naveLiviana-golpeada
   rotate: false
-  xy: 83, 44
-  size: 25, 33
-  orig: 25, 33
+  xy: 311, 256
+  size: 76, 99
+  orig: 76, 99
   offset: 0, 0
   index: -1
 jugador/naveLiviana-moribunda
   rotate: false
-  xy: 29, 68
-  size: 25, 33
-  orig: 25, 33
+  xy: 88, 6
+  size: 76, 100
+  orig: 76, 100
   offset: 0, 0
   index: -1
 jugador/navePesada-golpeada
   rotate: false
-  xy: 140, 55
-  size: 25, 32
-  orig: 25, 32
+  xy: 429, 351
+  size: 76, 97
+  orig: 76, 97
   offset: 0, 0
   index: -1
 jugador/navePesada-moribunda
   rotate: false
-  xy: 140, 89
-  size: 25, 32
-  orig: 25, 32
+  xy: 351, 357
+  size: 76, 97
+  orig: 76, 97
   offset: 0, 0
   index: -1
-
+obstaculo/meteoro1
+  rotate: false
+  xy: 124, 448
+  size: 101, 84
+  orig: 101, 84
+  offset: 0, 0
+  index: -1
+obstaculo/meteoro2
+  rotate: false
+  xy: 2, 434
+  size: 120, 98
+  orig: 120, 98
+  offset: 0, 0
+  index: -1
+obstaculo/meteoro3
+  rotate: false
+  xy: 430, 450
+  size: 89, 82
+  orig: 89, 82
+  offset: 0, 0
+  index: -1
+obstaculo/meteoro4
+  rotate: false
+  xy: 2, 336
+  size: 98, 96
+  orig: 98, 96
+  offset: 0, 0
+  index: -1

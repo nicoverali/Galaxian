@@ -9,7 +9,7 @@ public class Temporizador {
 
     public Temporizador(){
         tiempoDeInicio = System.currentTimeMillis();
-        objetivo = (int) tiempoDeInicio;
+        objetivo = 0;
     }
 
     /**

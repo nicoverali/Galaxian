@@ -2,10 +2,19 @@ package edu.uns.galaxian.juego;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.FileHandleResolver;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import edu.uns.galaxian.juego.menus.MenuPrincipal;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
+import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
+import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader.*;
 import edu.uns.galaxian.juego.nivel.DirectorNivel;
-import edu.uns.galaxian.juego.nivel.NivelDesarrollo;
+import edu.uns.galaxian.juego.screen.principal.Principal;
 import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.juego.config.GameData;
 import edu.uns.galaxian.juego.config.SaveData;
@@ -16,13 +25,14 @@ public class Juego extends Game {
 	public static final String ATLAS_NAVES = "spritesheets/naves.atlas";
 	public static final String ATLAS_DISPAROS = "spritesheets/disparos.atlas";
 	public static final String ATLAS_POWERUP = "spritesheets/powerups.atlas";
+	public static final String ATLAS_UI = "spritesheets/ui.atlas";
 
 	private AssetManager assetManager;
 	private EntidadBatch batch;
 	private GameData gameData;
 	private SaveData saveData;
 	private int nivelActual;
-	private MenuPrincipal menuPrincipal;
+	private Principal menuPrincipal;
 
 	@Override
 	public void create () {
@@ -32,7 +42,7 @@ public class Juego extends Game {
 		nivelActual = saveData.getNivelAlcanzado();
 		cargarAssets();
 
-		menuPrincipal= new MenuPrincipal(this);
+		menuPrincipal= new Principal(this);
 		setScreen(menuPrincipal);
 	}
 
@@ -93,10 +103,28 @@ public class Juego extends Game {
 
 	private void cargarAssets(){
 		assetManager = new AssetManager();
+
+		// Carga de texturas
 		assetManager.load(ATLAS_NAVES, TextureAtlas.class);
 		assetManager.load(ATLAS_OBSTACULOS, TextureAtlas.class);
 		assetManager.load(ATLAS_DISPAROS, TextureAtlas.class);
 		assetManager.load(ATLAS_POWERUP, TextureAtlas.class);
+		assetManager.load(ATLAS_UI, TextureAtlas.class);
+		assetManager.load("menu/logo.png", Texture.class);
+
+		// Carga de fuentes
+		FileHandleResolver resolver = new InternalFileHandleResolver();
+		assetManager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(resolver));
+		assetManager.setLoader(BitmapFont.class, ".ttf", new FreetypeFontLoader(resolver));
+		FreeTypeFontLoaderParameter normalFont = new FreeTypeFontLoaderParameter();
+		normalFont.fontFileName = "fonts/PressStart2P.ttf";
+		normalFont.fontParameters.size = 16;
+		assetManager.load("fonts/PressStart2P.ttf", BitmapFont.class, normalFont);
+
+		// Carga de audio
+		assetManager.load("audio/start.wav", Sound.class);
+		assetManager.load("audio/menuFocus.wav", Sound.class);
+		assetManager.load("audio/mainTheme.mp3", Music.class);
 		assetManager.finishLoading();
 	}
 }
