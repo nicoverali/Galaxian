@@ -7,24 +7,24 @@ import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 import edu.uns.galaxian.escenario.CampoEstrellas;
 import edu.uns.galaxian.juego.Tiempo;
-import edu.uns.galaxian.oleada.Oleada;
 import edu.uns.galaxian.util.EntidadBatch;
 
 class EstadoNivelNormal implements EstadoAnimacion {
 
     private Controlador controlador;
+    private Nivel nivel;
     private Jugador jugador;
-    private Oleada oleada;
     private CampoEstrellas estrellas;
     private EntidadBatch batch;
+
 
     private BitmapFont score;
     private BitmapFont time;
     private Tiempo tiempo;
 
     public EstadoNivelNormal(Nivel nivel){
+        this.nivel = nivel;
         controlador = nivel.getControlador();
-        oleada = nivel.getOleadaActual();
         estrellas = nivel.getCampoEstrellas();
         batch = nivel.getBatch();
         jugador = nivel.getJugador();
@@ -36,7 +36,7 @@ class EstadoNivelNormal implements EstadoAnimacion {
 
 
     public void accion(float delta) {
-        oleada.actualizar(delta);
+        nivel.getOleadaActual().actualizar(delta);
         estrellas.draw(delta);
         // Inicializa proceso de dibujado de EntidadBatch
         batch.begin();
