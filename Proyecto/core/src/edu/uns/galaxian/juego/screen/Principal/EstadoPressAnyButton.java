@@ -14,6 +14,7 @@ import edu.uns.galaxian.animacion.animator.ciclos.CicloUnico;
 import edu.uns.galaxian.animacion.animator.interpolaciones.BezierAnimator;
 import edu.uns.galaxian.escenario.CampoEstrellas;
 import edu.uns.galaxian.util.EntidadBatch;
+import edu.uns.galaxian.util.enums.Asset;
 
 public class EstadoPressAnyButton implements EstadoAnimacion {
 
@@ -32,14 +33,14 @@ public class EstadoPressAnyButton implements EstadoAnimacion {
     public EstadoPressAnyButton(Principal principal){
         this.principal = principal;
         estrellas = principal.getEstrellas();
-        font = principal.getFont();
+        font = principal.getAssetManager().get(Asset.FONT_16.valor());
         logo = principal.getLogo();
         batch = new EntidadBatch();
         startSound = principal.getAssetManager().get("audio/start.wav");
 
         animatorLogo = new BezierAnimator<>();
         animatorPressStart = new BezierAnimator<>();
-        glyph = new GlyphLayout(principal.getFont(), "Press any button to start");
+        glyph = new GlyphLayout(font, "Press any button to start");
         animatorLogo.iniciarAnimacion(0f, 1f, DURACION_LOGO, new CicloUnico());
         animatorPressStart.iniciarAnimacion(0.3f, 1f, DURACION_PRESS, new CicloCircular());
     }

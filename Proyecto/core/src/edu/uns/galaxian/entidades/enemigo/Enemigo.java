@@ -14,6 +14,7 @@ import edu.uns.galaxian.ia.Tarea;
 import edu.uns.galaxian.ia.TareaNula;
 import edu.uns.galaxian.juego.Juego;
 import edu.uns.galaxian.nave.NaveEnemigo;
+import edu.uns.galaxian.util.enums.Asset;
 
 public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implements AutonomoDinamico {
 	
@@ -23,7 +24,7 @@ public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implem
 	private FabricaPowerUp fabricaPowerUp;
 
 	public Enemigo(Vector2 posicion, NaveEnemigo nave, Controlador controlador, FabricaPowerUp fPowerUp){
-		super(posicion, 270, nave, controlador.getTextureAtlas(Juego.ATLAS_NAVES));
+		super(posicion, 270, nave, controlador.getTextureAtlas(Asset.ATLAS_NAVES.valor()));
 		this.controlador = controlador;
 		inteligencia = new TareaNula<>();
 		colisionador = new ColisionadorEnemigo(this);
@@ -31,7 +32,7 @@ public  class Enemigo extends EntidadConNave<NaveEnemigo, DisparoEnemigo> implem
 	}
 
 	public Enemigo(Vector2 posicion, NaveEnemigo nave, Controlador controlador){
-		super(posicion, 270, nave, controlador.getTextureAtlas(Juego.ATLAS_NAVES));
+		super(posicion, 270, nave, controlador.getTextureAtlas(Asset.ATLAS_NAVES.valor()));
 		this.controlador = controlador;
 		inteligencia = new TareaNula<>();
 		colisionador = new ColisionadorEnemigo(this);

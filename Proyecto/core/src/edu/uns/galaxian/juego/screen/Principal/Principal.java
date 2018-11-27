@@ -13,6 +13,7 @@ import edu.uns.galaxian.animacion.animator.interpolaciones.BezierAnimator;
 import edu.uns.galaxian.escenario.CampoEstrellas;
 import edu.uns.galaxian.juego.Juego;
 import edu.uns.galaxian.animacion.EstadoAnimacion;
+import edu.uns.galaxian.util.enums.Asset;
 
 public class Principal extends ScreenAdapter {
 
@@ -21,7 +22,6 @@ public class Principal extends ScreenAdapter {
     private Juego juego;
     private CampoEstrellas estrellas;
     private Texture logo;
-    private BitmapFont font;
     private EstadoAnimacion estado;
     private AssetManager assetManager;
     private Music screenMusic;
@@ -30,13 +30,12 @@ public class Principal extends ScreenAdapter {
     public Principal(Juego juego){
         this.juego = juego;
         assetManager = juego.getAssetManager();
-        font = assetManager.get("fonts/PressStart2P.ttf", BitmapFont.class);
-        logo = assetManager.get("menu/logo.png");
+        logo = assetManager.get(Asset.LOGO_TEXTURE.valor());
 
         estrellas = new CampoEstrellas(CampoEstrellas.AFUERA, VELOCIDAD_INICIAL);
         estado = new EstadoIntroduccion(this);
 
-        screenMusic = assetManager.get("audio/mainTheme.mp3");
+        screenMusic = assetManager.get(Asset.MAIN_THEME.valor());
         musicAnimator = new BezierAnimator<>();
         musicAnimator.iniciarAnimacion(0f, 0.5f, 3500, new CicloUnico());
         screenMusic.setLooping(true);
@@ -75,15 +74,6 @@ public class Principal extends ScreenAdapter {
      */
     Texture getLogo(){
         return logo;
-    }
-
-    /**
-     * Retorna el BitmapFont que se debe utilizar
-     * para dibujar los textos de la pantalla
-     * @return BitmapFont para los textos
-     */
-    BitmapFont getFont(){
-        return font;
     }
 
     /**

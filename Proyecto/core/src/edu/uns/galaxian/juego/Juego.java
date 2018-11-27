@@ -18,14 +18,9 @@ import edu.uns.galaxian.juego.screen.Principal.Principal;
 import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.juego.config.GameData;
 import edu.uns.galaxian.juego.config.SaveData;
+import static edu.uns.galaxian.util.enums.Asset.*;
 
 public class Juego extends Game {
-
-	public static final String ATLAS_OBSTACULOS = "spritesheets/obstaculos.atlas";
-	public static final String ATLAS_NAVES = "spritesheets/naves.atlas";
-	public static final String ATLAS_DISPAROS = "spritesheets/disparos.atlas";
-	public static final String ATLAS_POWERUP = "spritesheets/powerups.atlas";
-	public static final String ATLAS_UI = "spritesheets/ui.atlas";
 
 	private AssetManager assetManager;
 	private EntidadBatch batch;
@@ -62,6 +57,14 @@ public class Juego extends Game {
 	}
 
 	/**
+	 * Verifica si el jugador supero el primer nivel del juego
+	 * @return Verdadero si el jugador supero el primer nivel
+	 */
+	public boolean seSuperoElPrimerNivel(){
+		return nivelActual > 1;
+	}
+
+	/**
 	 * Carga el nivel siguiente al actual.
 	 * @throws IllegalStateException Si no hay mas nivel
 	 */
@@ -78,6 +81,15 @@ public class Juego extends Game {
 	 * Inicia el nivel actual.
 	 */
 	public void iniciarNivelActual(){
+		new DirectorNivel(this, gameData.getNivel(nivelActual), saveData.getNaveJugador());
+	}
+
+	/**
+	 * Inicia el primer nivel del juego
+	 */
+	public void iniciarPrimerNivel(){
+		nivelActual = 1;
+		saveData.setNivelAlcanzado(nivelActual);
 		new DirectorNivel(this, gameData.getNivel(nivelActual), saveData.getNaveJugador());
 	}
 
@@ -113,26 +125,30 @@ public class Juego extends Game {
 		assetManager = new AssetManager();
 
 		// Carga de texturas
-		assetManager.load(ATLAS_NAVES, TextureAtlas.class);
-		assetManager.load(ATLAS_OBSTACULOS, TextureAtlas.class);
-		assetManager.load(ATLAS_DISPAROS, TextureAtlas.class);
-		assetManager.load(ATLAS_POWERUP, TextureAtlas.class);
-		assetManager.load(ATLAS_UI, TextureAtlas.class);
-		assetManager.load("menu/logo.png", Texture.class);
+		assetManager.load(ATLAS_NAVES.valor(), TextureAtlas.class);
+		assetManager.load(ATLAS_OBSTACULOS.valor(), TextureAtlas.class);
+		assetManager.load(ATLAS_DISPAROS.valor(), TextureAtlas.class);
+		assetManager.load(ATLAS_POWERUP.valor(), TextureAtlas.class);
+		assetManager.load(ATLAS_UI.valor(), TextureAtlas.class);
+		assetManager.load(LOGO_TEXTURE.valor(), Texture.class);
 
 		// Carga de fuentes
 		FileHandleResolver resolver = new InternalFileHandleResolver();
 		assetManager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(resolver));
 		assetManager.setLoader(BitmapFont.class, ".ttf", new FreetypeFontLoader(resolver));
 		FreeTypeFontLoaderParameter normalFont = new FreeTypeFontLoaderParameter();
-		normalFont.fontFileName = "fonts/PressStart2P.ttf";
+		normalFont.fontFileName = FONT_16.valor();
 		normalFont.fontParameters.size = 16;
-		assetManager.load("fonts/PressStart2P.ttf", BitmapFont.class, normalFont);
+		assetManager.load(FONT_16.valor(), BitmapFont.class, normalFont);
+		FreeTypeFontLoaderParameter biggerFont = new FreeTypeFontLoaderParameter();
+		biggerFont.fontFileName = FONT_24.valor();
+		biggerFont.fontParameters.size = 24;
+		assetManager.load(FONT_24.valor(), BitmapFont.class, biggerFont);
 
 		// Carga de audio
-		assetManager.load("audio/start.wav", Sound.class);
-		assetManager.load("audio/menuFocus.wav", Sound.class);
-		assetManager.load("audio/mainTheme.mp3", Music.class);
+		assetManager.load(AUDIO_START.valor(), Sound.class);
+		assetManager.load(AUDIO_FOCUS.valor(), Sound.class);
+		assetManager.load(MAIN_THEME.valor(), Music.class);
 		assetManager.finishLoading();
 	}
 }

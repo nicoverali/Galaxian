@@ -14,6 +14,7 @@ import edu.uns.galaxian.entidades.jugador.input.*;
 import edu.uns.galaxian.juego.Juego;
 import edu.uns.galaxian.juego.screen.nivel.Nivel;
 import edu.uns.galaxian.nave.NaveJugador;
+import edu.uns.galaxian.util.enums.Asset;
 
 
 public class Jugador extends EntidadConNave<NaveJugador, DisparoJugador> {
@@ -26,7 +27,7 @@ public class Jugador extends EntidadConNave<NaveJugador, DisparoJugador> {
 	
 
 	public Jugador(Vector2 posicion, NaveJugador nave, Nivel nivel, Controlador controlador) {
-		super(posicion, 90, nave, controlador.getTextureAtlas(Juego.ATLAS_NAVES));
+		super(posicion, 90, nave, controlador.getTextureAtlas(Asset.ATLAS_NAVES.valor()));
 		this.nivel = nivel;
 		this.controlador = controlador;
 		colisionador = new ColisionadorJugador(this);

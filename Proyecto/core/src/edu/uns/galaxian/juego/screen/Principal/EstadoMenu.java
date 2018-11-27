@@ -15,6 +15,7 @@ import edu.uns.galaxian.escenario.CampoEstrellas;
 import edu.uns.galaxian.juego.screen.util.BotonSalir;
 import edu.uns.galaxian.juego.screen.util.Menu;
 import edu.uns.galaxian.util.EntidadBatch;
+import edu.uns.galaxian.util.enums.Asset;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,13 +33,13 @@ public class EstadoMenu implements EstadoAnimacion {
     public EstadoMenu(Principal principal){
         this.principal = principal;
         estrellas = principal.getEstrellas();
-        font = principal.getFont();
+        font = principal.getAssetManager().get(Asset.FONT_16.valor());
         logo = principal.getLogo();
         batch = new EntidadBatch();
         stage = new Stage();
         menu = new Menu(prepararBotones(), 50, Color.YELLOW);
         menu.setCenter(Gdx.graphics.getWidth()/2, 300);
-        menu.setFocusSound(principal.getAssetManager().<Sound>get("audio/menuFocus.wav"));
+        menu.setFocusSound(principal.getAssetManager().<Sound>get(Asset.AUDIO_FOCUS.valor()));
         stage.addActor(menu);
         stage.setKeyboardFocus(menu);
         Gdx.input.setInputProcessor(stage);
@@ -66,12 +67,27 @@ public class EstadoMenu implements EstadoAnimacion {
         nuevoJuegoBoton.addListener(new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
-                principal.getJuego().iniciarNivelActual();
+                principal.getJuego().iniciarPrimerNivel();
                 menu.removerListener();
                 return true;
             }
         });
         TextButton salirBoton = new BotonSalir(style2);
+
+        if(principal.getJuego().seSuperoElPrimerNivel()){
+            TextButton.TextButtonStyle style4 = new TextButton.TextButtonStyle();
+            style4.font = font;
+            TextButton reanudarJuegoBoton = new TextButton("Reanudar Juego", style4);
+            reanudarJuegoBoton.addListener(new InputListener(){
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    super.touchDown(event, x, y, pointer, button);
+                    principal.getJuego().iniciarNivelActual();
+                    menu.removerListener();
+                    return true;
+                }
+            });
+            botones.add(reanudarJuegoBoton);
+        }
 
         botones.add(nuevoJuegoBoton);
         botones.add(salirBoton);

@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorBarricada;
 import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.juego.Juego;
+import edu.uns.galaxian.util.enums.Asset;
 
 public class Fragmento extends Barricada {
 	
@@ -16,7 +17,7 @@ public class Fragmento extends Barricada {
 		velocidad = direccion;
 		vida.setValor(200);
 		colisionador = new ColisionadorBarricada(this);
-		textura = controlador.getTextureAtlas(Juego.ATLAS_OBSTACULOS).findRegion(TEXTURA_DIR);
+		textura = controlador.getTextureAtlas(Asset.ATLAS_OBSTACULOS.valor()).findRegion(TEXTURA_DIR);
 		fuerzaDeColision = 20;
 	}
 	

@@ -10,6 +10,7 @@ import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.entidades.Entidad;
 import edu.uns.galaxian.juego.Juego;
 import edu.uns.galaxian.util.EntidadBatch;
+import edu.uns.galaxian.util.enums.Asset;
 
 public abstract class Disparo extends Entidad {
 
@@ -21,7 +22,7 @@ public abstract class Disparo extends Entidad {
 	public Disparo(Vector2 posicion, Vector2 velocidad, float rotacion, int fuerzaDeDisparo, String texturaDir, Controlador controlador) {
 		super(posicion, velocidad, rotacion);
 		this.fuerzaDeDisparo = fuerzaDeDisparo;
-		this.textura = controlador.getTextureAtlas(Juego.ATLAS_DISPAROS).findRegion(texturaDir);
+		this.textura = controlador.getTextureAtlas(Asset.ATLAS_DISPAROS.valor()).findRegion(texturaDir);
 		this.controlador = controlador;
 		box = new HBRectangulo(this,textura.getRegionHeight(),textura.getRegionWidth());
 	}
