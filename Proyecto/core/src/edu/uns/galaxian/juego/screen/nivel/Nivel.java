@@ -37,7 +37,8 @@ public class Nivel extends ScreenAdapter{
         oleadaActual.iniciar();
         tiempo = new Tiempo();
         tiempo.iniciar();
-        estadoNivel = new EstadoNivelGanado(this, director);
+        estadoNivel = new EstadoNivelNormal(this);
+        Gdx.input.setInputProcessor(null);
     }
 
     public void render(float delta) {
@@ -97,6 +98,14 @@ public class Nivel extends ScreenAdapter{
      */
     public Tiempo getTiempoNivel(){
         return tiempo;
+    }
+
+    /**
+     * Modifica el estado actual del nivel
+     * @param estadoNivel Nuevo estado del nivel
+     */
+    public void setEstadoNivel(EstadoAnimacion estadoNivel){
+        this.estadoNivel = estadoNivel;
     }
 
     /**

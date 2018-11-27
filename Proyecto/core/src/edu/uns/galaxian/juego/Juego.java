@@ -69,6 +69,8 @@ public class Juego extends Game {
 		if(nivelActual == gameData.getCantidadNiveles()){
 			throw new IllegalStateException("No hay mas niveles para cargar.");
 		}
+		nivelActual++;
+		saveData.setNivelAlcanzado(nivelActual);
 		new DirectorNivel(this, gameData.getNivel(nivelActual), saveData.getNaveJugador());
 	}
 

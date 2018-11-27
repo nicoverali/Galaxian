@@ -14,6 +14,7 @@ public class DirectorNivel {
 
     private Juego juego;
     private JsonArray nivelJson;
+    private Nivel nivel;
     private NaveJugador naveJugador;
     private CargadorOleada cargador;
     private Controlador controladorEntidad;
@@ -27,7 +28,8 @@ public class DirectorNivel {
         cargador = new CargadorOleada();
         proximaOleada = 0;
 
-        juego.setScreen(new Nivel(this));
+        nivel = new Nivel(this);
+        juego.setScreen(nivel);
     }
 
     /**
@@ -97,7 +99,7 @@ public class DirectorNivel {
      * @param puntaje Puntaje final del nivel
      */
     public void ganarNivel(int puntaje){
-        juego.setScreen(new MenuGameOver(juego, puntaje));
+        nivel.setEstadoNivel(new EstadoNivelGanado(nivel, this));
     }
 
     /**
@@ -106,6 +108,6 @@ public class DirectorNivel {
      * @param puntaje Puntaje final del jugador
      */
     public void perderNivel(int puntaje){
-        juego.setScreen(new MenuGameOver(juego, puntaje));
+        nivel.setEstadoNivel(new EstadoNivelPerdido(nivel, this));
     }
 }
