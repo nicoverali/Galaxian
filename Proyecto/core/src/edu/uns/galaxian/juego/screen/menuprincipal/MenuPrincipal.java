@@ -1,4 +1,4 @@
-package edu.uns.galaxian.juego.screen.Principal;
+package edu.uns.galaxian.juego.screen.menuprincipal;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
@@ -6,7 +6,6 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import edu.uns.galaxian.animacion.animator.ValueAnimator;
 import edu.uns.galaxian.animacion.animator.ciclos.CicloUnico;
 import edu.uns.galaxian.animacion.animator.interpolaciones.BezierAnimator;
@@ -15,7 +14,7 @@ import edu.uns.galaxian.juego.Juego;
 import edu.uns.galaxian.animacion.EstadoAnimacion;
 import edu.uns.galaxian.util.enums.Asset;
 
-public class Principal extends ScreenAdapter {
+public class MenuPrincipal extends ScreenAdapter {
 
     static final float VELOCIDAD_INICIAL = 3000;
 
@@ -27,7 +26,7 @@ public class Principal extends ScreenAdapter {
     private Music screenMusic;
     private ValueAnimator<Float> musicAnimator;
 
-    public Principal(Juego juego){
+    public MenuPrincipal(Juego juego){
         this.juego = juego;
         assetManager = juego.getAssetManager();
         logo = assetManager.get(Asset.LOGO_TEXTURE.valor());

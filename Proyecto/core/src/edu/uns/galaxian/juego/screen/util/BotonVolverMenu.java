@@ -8,7 +8,7 @@ import edu.uns.galaxian.juego.Juego;
 
 public class BotonVolverMenu extends TextButton {
 
-    private static final String TEXTO = "Volver Al Menu Principal";
+    private static final String TEXTO = "Volver Al Menu MenuPrincipal";
     private Juego juego;
 
     public BotonVolverMenu(Skin skin, Juego juego){

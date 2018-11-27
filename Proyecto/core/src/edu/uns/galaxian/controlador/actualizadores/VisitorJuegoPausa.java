@@ -1,4 +1,4 @@
-package edu.uns.galaxian.colision.actualizadores;
+package edu.uns.galaxian.controlador.actualizadores;
 
 import edu.uns.galaxian.colision.colisionadores.VisitorAdapter;
 

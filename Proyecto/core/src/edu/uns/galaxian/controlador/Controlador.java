@@ -5,8 +5,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 import edu.uns.galaxian.colision.Colisionable;
 import edu.uns.galaxian.colision.DetectorColision;
-import edu.uns.galaxian.colision.actualizadores.VisitorJuegoNormal;
-import edu.uns.galaxian.colision.actualizadores.VisitorJuegoPausa;
+import edu.uns.galaxian.controlador.actualizadores.VisitorJuegoNormal;
+import edu.uns.galaxian.controlador.actualizadores.VisitorJuegoPausa;
 import edu.uns.galaxian.colision.colisionadores.Visitor;
 import edu.uns.galaxian.entidades.Entidad;
 import edu.uns.galaxian.util.EntidadBatch;

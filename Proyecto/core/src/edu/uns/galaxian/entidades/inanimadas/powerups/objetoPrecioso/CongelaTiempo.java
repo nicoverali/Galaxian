@@ -3,7 +3,7 @@ package edu.uns.galaxian.entidades.inanimadas.powerups.objetoPrecioso;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
-import edu.uns.galaxian.colision.actualizadores.VisitorJuegoCongelado;
+import edu.uns.galaxian.controlador.actualizadores.VisitorJuegoCongelado;
 import edu.uns.galaxian.colision.colisionadores.Visitor;
 import edu.uns.galaxian.colision.hitbox.HBRectangulo;
 import edu.uns.galaxian.controlador.Caller;
@@ -13,7 +13,6 @@ import edu.uns.galaxian.entidades.jugador.Jugador;
 import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.util.enums.Asset;
 import edu.uns.galaxian.util.temporizador.TemporizadorManual;
-import edu.uns.galaxian.juego.Juego;
 
 public class CongelaTiempo extends PowerUp implements Caller {
 	

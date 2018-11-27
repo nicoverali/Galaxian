@@ -1,4 +1,4 @@
-package edu.uns.galaxian.juego.screen.Principal;
+package edu.uns.galaxian.juego.screen.menuprincipal;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -20,7 +20,7 @@ public class EstadoPressAnyButton implements EstadoAnimacion {
 
     private static final long DURACION_LOGO = 500;
     private static final long DURACION_PRESS = 700;
-    private Principal principal;
+    private MenuPrincipal menuPrincipal;
     private BitmapFont font;
     private Texture logo;
     private EntidadBatch batch;
@@ -30,13 +30,13 @@ public class EstadoPressAnyButton implements EstadoAnimacion {
     private GlyphLayout glyph;
     private CampoEstrellas estrellas;
 
-    public EstadoPressAnyButton(Principal principal){
-        this.principal = principal;
-        estrellas = principal.getEstrellas();
-        font = principal.getAssetManager().get(Asset.FONT_16.valor());
-        logo = principal.getLogo();
+    public EstadoPressAnyButton(MenuPrincipal menuPrincipal){
+        this.menuPrincipal = menuPrincipal;
+        estrellas = menuPrincipal.getEstrellas();
+        font = menuPrincipal.getAssetManager().get(Asset.FONT_16.valor());
+        logo = menuPrincipal.getLogo();
         batch = new EntidadBatch();
-        startSound = principal.getAssetManager().get("audio/start.wav");
+        startSound = menuPrincipal.getAssetManager().get("audio/start.wav");
 
         animatorLogo = new BezierAnimator<>();
         animatorPressStart = new BezierAnimator<>();
@@ -56,7 +56,7 @@ public class EstadoPressAnyButton implements EstadoAnimacion {
         batch.end();
         if(Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)){
             startSound.play();
-            principal.setEstadoAnimacion(new EstadoMenu(principal));
+            menuPrincipal.setEstadoAnimacion(new EstadoMenu(menuPrincipal));
         }
     }
 

@@ -5,7 +5,6 @@ import com.google.gson.*;
 import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.juego.Juego;
 import edu.uns.galaxian.juego.config.CargadorOleada;
-import edu.uns.galaxian.juego.menus.MenuGameOver;
 import edu.uns.galaxian.nave.NaveJugador;
 import edu.uns.galaxian.oleada.*;
 import edu.uns.galaxian.util.EntidadBatch;

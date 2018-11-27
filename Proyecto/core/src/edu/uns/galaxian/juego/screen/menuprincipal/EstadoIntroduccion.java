@@ -1,4 +1,4 @@
-package edu.uns.galaxian.juego.screen.Principal;
+package edu.uns.galaxian.juego.screen.menuprincipal;
 
 import edu.uns.galaxian.animacion.EstadoAnimacion;
 import edu.uns.galaxian.animacion.animator.ValueAnimator;
@@ -12,18 +12,18 @@ public class EstadoIntroduccion implements EstadoAnimacion {
     private static final int DURACION = 3000;
     private ValueAnimator<Float> animator;
     private CampoEstrellas estrellas;
-    private Principal principal;
+    private MenuPrincipal menuPrincipal;
 
-    public EstadoIntroduccion(Principal principal){
-        this.principal = principal;
-        estrellas = principal.getEstrellas();
+    public EstadoIntroduccion(MenuPrincipal menuPrincipal){
+        this.menuPrincipal = menuPrincipal;
+        estrellas = menuPrincipal.getEstrellas();
         animator = new BezierAnimator<>();
-        animator.iniciarAnimacion(Principal.VELOCIDAD_INICIAL, VELOCIDAD_FINAL, DURACION, new CicloUnico());
+        animator.iniciarAnimacion(MenuPrincipal.VELOCIDAD_INICIAL, VELOCIDAD_FINAL, DURACION, new CicloUnico());
     }
 
     public void accion(float delta) {
         if(animator.animacionFinalizada()){
-            principal.setEstadoAnimacion(new EstadoPressAnyButton(principal));
+            menuPrincipal.setEstadoAnimacion(new EstadoPressAnyButton(menuPrincipal));
         }
         else{
             estrellas.setVelocidad(animator.getValorActualFloat());

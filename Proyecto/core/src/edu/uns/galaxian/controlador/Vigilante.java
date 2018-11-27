@@ -1,6 +1,6 @@
 package edu.uns.galaxian.controlador;
 
-import edu.uns.galaxian.colision.actualizadores.VisitorJuegoNormal;
+import edu.uns.galaxian.controlador.actualizadores.VisitorJuegoNormal;
 import edu.uns.galaxian.colision.colisionadores.Visitor;
 
 public class Vigilante {
