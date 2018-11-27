@@ -5,7 +5,8 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import edu.uns.galaxian.animacion.animator.ValueAnimator;
 import edu.uns.galaxian.animacion.animator.ciclos.CicloUnico;
 import edu.uns.galaxian.animacion.animator.interpolaciones.BezierAnimator;
@@ -20,7 +21,7 @@ public class MenuPrincipal extends ScreenAdapter {
 
     private Juego juego;
     private CampoEstrellas estrellas;
-    private Texture logo;
+    private TextureRegion logo;
     private EstadoAnimacion estado;
     private AssetManager assetManager;
     private Music screenMusic;
@@ -29,7 +30,7 @@ public class MenuPrincipal extends ScreenAdapter {
     public MenuPrincipal(Juego juego){
         this.juego = juego;
         assetManager = juego.getAssetManager();
-        logo = assetManager.get(Asset.LOGO_TEXTURE.valor());
+        logo = assetManager.<TextureAtlas>get(Asset.ATLAS_MISC.valor()).findRegion("logo");
 
         estrellas = new CampoEstrellas(CampoEstrellas.AFUERA, VELOCIDAD_INICIAL);
         estado = new EstadoIntroduccion(this);
@@ -71,7 +72,7 @@ public class MenuPrincipal extends ScreenAdapter {
      * Retorna el logo del juego
      * @return Logo del juego
      */
-    Texture getLogo(){
+    TextureRegion getLogo(){
         return logo;
     }
 

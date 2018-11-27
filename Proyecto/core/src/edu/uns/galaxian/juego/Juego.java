@@ -130,7 +130,7 @@ public class Juego extends Game {
 		assetManager.load(ATLAS_DISPAROS.valor(), TextureAtlas.class);
 		assetManager.load(ATLAS_POWERUP.valor(), TextureAtlas.class);
 		assetManager.load(ATLAS_UI.valor(), TextureAtlas.class);
-		assetManager.load(LOGO_TEXTURE.valor(), Texture.class);
+		assetManager.load(ATLAS_MISC.valor(), TextureAtlas.class);
 
 		// Carga de fuentes
 		FileHandleResolver resolver = new InternalFileHandleResolver();
@@ -149,6 +149,7 @@ public class Juego extends Game {
 		assetManager.load(AUDIO_START.valor(), Sound.class);
 		assetManager.load(AUDIO_FOCUS.valor(), Sound.class);
 		assetManager.load(MAIN_THEME.valor(), Music.class);
+
 		assetManager.finishLoading();
 	}
 }

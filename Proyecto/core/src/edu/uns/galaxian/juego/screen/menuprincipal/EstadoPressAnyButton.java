@@ -6,6 +6,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.animacion.EstadoAnimacion;
 import edu.uns.galaxian.animacion.animator.ValueAnimator;
@@ -22,7 +23,7 @@ public class EstadoPressAnyButton implements EstadoAnimacion {
     private static final long DURACION_PRESS = 700;
     private MenuPrincipal menuPrincipal;
     private BitmapFont font;
-    private Texture logo;
+    private TextureRegion logo;
     private EntidadBatch batch;
     private Sound startSound;
     private ValueAnimator<Float> animatorLogo;

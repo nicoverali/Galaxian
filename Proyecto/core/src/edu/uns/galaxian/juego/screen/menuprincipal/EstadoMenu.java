@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -26,7 +27,7 @@ public class EstadoMenu implements EstadoAnimacion {
     private CampoEstrellas estrellas;
     private EntidadBatch batch;
     private BitmapFont font;
-    private Texture logo;
+    private TextureRegion logo;
     private Stage stage;
     private Menu menu;
 

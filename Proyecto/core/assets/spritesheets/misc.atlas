@@ -1,0 +1,20 @@
+
+misc.png
+size: 709,278
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+escudo
+  rotate: false
+  xy: 429, 2
+  size: 278, 274
+  orig: 278, 274
+  offset: 0, 0
+  index: -1
+logo
+  rotate: false
+  xy: 2, 122
+  size: 425, 154
+  orig: 425, 154
+  offset: 0, 0
+  index: -1
