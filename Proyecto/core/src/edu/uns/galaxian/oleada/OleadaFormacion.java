@@ -6,7 +6,7 @@ import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.entidades.enemigo.Enemigo;
 import edu.uns.galaxian.ia.Blackboard;
 import edu.uns.galaxian.ia.tareas.inteligencia.enemigo.InteligenciaFormacionDinamica;
-import edu.uns.galaxian.juego.nivel.Nivel;
+import edu.uns.galaxian.juego.screen.nivel.Nivel;
 import edu.uns.galaxian.observer.Observador;
 import edu.uns.galaxian.observer.livedata.LiveData;
 import edu.uns.galaxian.util.temporizador.Temporizador;

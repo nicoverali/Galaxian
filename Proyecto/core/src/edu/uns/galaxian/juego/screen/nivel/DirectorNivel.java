@@ -1,5 +1,6 @@
-package edu.uns.galaxian.juego.nivel;
+package edu.uns.galaxian.juego.screen.nivel;
 
+import com.badlogic.gdx.assets.AssetManager;
 import com.google.gson.*;
 import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.juego.Juego;
@@ -72,6 +73,22 @@ public class DirectorNivel {
     public Oleada getProximaOleada(Nivel nivel){
         JsonObject oleadaJson = nivelJson.get(proximaOleada++).getAsJsonObject();
         return cargador.cargarOleada(oleadaJson, controladorEntidad, nivel);
+    }
+
+    /**
+     * Retorna el AssetManager del juego
+     * @return AssetManager del juego
+     */
+    public AssetManager getAssetManager(){
+        return juego.getAssetManager();
+    }
+
+    /**
+     * Retorna a el juego
+     * @return Juego
+     */
+    public Juego getJuego(){
+        return juego;
     }
 
     /**

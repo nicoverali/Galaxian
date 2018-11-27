@@ -1,4 +1,4 @@
-package edu.uns.galaxian.juego.nivel;
+package edu.uns.galaxian.juego.screen.nivel;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;

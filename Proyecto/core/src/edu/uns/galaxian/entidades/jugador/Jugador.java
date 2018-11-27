@@ -12,7 +12,7 @@ import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
 import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparoJugador;
 import edu.uns.galaxian.entidades.jugador.input.*;
 import edu.uns.galaxian.juego.Juego;
-import edu.uns.galaxian.juego.nivel.Nivel;
+import edu.uns.galaxian.juego.screen.nivel.Nivel;
 import edu.uns.galaxian.nave.NaveJugador;
 
 

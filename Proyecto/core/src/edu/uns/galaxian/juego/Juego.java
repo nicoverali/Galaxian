@@ -13,8 +13,8 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader.*;
-import edu.uns.galaxian.juego.nivel.DirectorNivel;
-import edu.uns.galaxian.juego.screen.principal.Principal;
+import edu.uns.galaxian.juego.screen.nivel.DirectorNivel;
+import edu.uns.galaxian.juego.screen.Principal.Principal;
 import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.juego.config.GameData;
 import edu.uns.galaxian.juego.config.SaveData;
@@ -32,7 +32,6 @@ public class Juego extends Game {
 	private GameData gameData;
 	private SaveData saveData;
 	private int nivelActual;
-	private Principal menuPrincipal;
 
 	@Override
 	public void create () {
@@ -42,8 +41,7 @@ public class Juego extends Game {
 		nivelActual = saveData.getNivelAlcanzado();
 		cargarAssets();
 
-		menuPrincipal= new Principal(this);
-		setScreen(menuPrincipal);
+		setScreen(new Principal(this));
 	}
 
 	/**
@@ -81,8 +79,16 @@ public class Juego extends Game {
 		new DirectorNivel(this, gameData.getNivel(nivelActual), saveData.getNaveJugador());
 	}
 
+	/**
+	 * Vuelve al menu principal del juego
+	 */
+	public void volverAlMenuPrincipal(){
+		setScreen(new Principal(this));
+	}
+
 	public void dispose () {
 		batch.dispose();
+		assetManager.dispose();
 	}
 
 	/**

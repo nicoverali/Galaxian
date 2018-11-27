@@ -1,4 +1,4 @@
-package edu.uns.galaxian.juego.screen.principal;
+package edu.uns.galaxian.juego.screen.Principal;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
@@ -42,6 +42,8 @@ public class Principal extends ScreenAdapter {
         screenMusic.setLooping(true);
         screenMusic.setVolume(musicAnimator.getValorActualFloat());
         screenMusic.play();
+
+        Gdx.input.setInputProcessor(null);
     }
 
     public void render(float delta) {

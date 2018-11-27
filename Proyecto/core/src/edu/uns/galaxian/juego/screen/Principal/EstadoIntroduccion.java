@@ -1,4 +1,4 @@
-package edu.uns.galaxian.juego.screen.principal;
+package edu.uns.galaxian.juego.screen.Principal;
 
 import edu.uns.galaxian.animacion.EstadoAnimacion;
 import edu.uns.galaxian.animacion.animator.ValueAnimator;

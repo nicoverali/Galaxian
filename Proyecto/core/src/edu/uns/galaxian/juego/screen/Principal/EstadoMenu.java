@@ -1,4 +1,4 @@
-package edu.uns.galaxian.juego.screen.principal;
+package edu.uns.galaxian.juego.screen.Principal;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;

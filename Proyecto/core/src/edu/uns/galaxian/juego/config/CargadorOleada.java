@@ -5,7 +5,7 @@ import com.google.gson.*;
 import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.entidades.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.enemigo.fabrica.FabricaEnemigos;
-import edu.uns.galaxian.juego.nivel.Nivel;
+import edu.uns.galaxian.juego.screen.nivel.Nivel;
 import edu.uns.galaxian.oleada.*;
 import edu.uns.galaxian.util.enums.TipoEnemigo;
 import edu.uns.galaxian.util.io.gson.*;
