@@ -1,6 +1,7 @@
 package edu.uns.galaxian.juego.screen.nivel;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -38,7 +39,7 @@ public class Nivel extends ScreenAdapter{
         tiempo = new Tiempo();
         tiempo.iniciar();
         estadoNivel = new EstadoNivelNormal(this);
-        Gdx.input.setInputProcessor(null);
+        Gdx.input.setInputProcessor(new InputAdapter());
     }
 
     public void render(float delta) {

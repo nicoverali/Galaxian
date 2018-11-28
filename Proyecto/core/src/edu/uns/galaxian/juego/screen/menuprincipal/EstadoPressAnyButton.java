@@ -17,7 +17,7 @@ import edu.uns.galaxian.escenario.CampoEstrellas;
 import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.util.enums.Asset;
 
-public class EstadoPressAnyButton implements EstadoAnimacion {
+class EstadoPressAnyButton implements EstadoAnimacion {
 
     private static final long DURACION_LOGO = 500;
     private static final long DURACION_PRESS = 700;

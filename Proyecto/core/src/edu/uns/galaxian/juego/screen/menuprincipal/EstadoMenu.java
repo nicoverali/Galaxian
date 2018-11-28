@@ -21,7 +21,7 @@ import edu.uns.galaxian.util.enums.Asset;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EstadoMenu implements EstadoAnimacion {
+class EstadoMenu implements EstadoAnimacion {
 
     private MenuPrincipal menuPrincipal;
     private CampoEstrellas estrellas;

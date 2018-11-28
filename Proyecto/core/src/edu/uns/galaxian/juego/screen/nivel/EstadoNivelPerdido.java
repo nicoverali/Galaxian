@@ -16,7 +16,7 @@ import edu.uns.galaxian.util.enums.Asset;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EstadoNivelPerdido extends EstadoFinNivel {
+class EstadoNivelPerdido extends EstadoFinNivel {
 
     public EstadoNivelPerdido(Nivel nivel, DirectorNivel director) {
         super(nivel, director);

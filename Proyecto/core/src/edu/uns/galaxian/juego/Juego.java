@@ -6,13 +6,13 @@ import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader.*;
+import edu.uns.galaxian.juego.screen.menufinal.ScreenFinal;
 import edu.uns.galaxian.juego.screen.nivel.DirectorNivel;
 import edu.uns.galaxian.juego.screen.menuprincipal.MenuPrincipal;
 import edu.uns.galaxian.util.EntidadBatch;
@@ -36,7 +36,7 @@ public class Juego extends Game {
 		nivelActual = saveData.getNivelAlcanzado();
 		cargarAssets();
 
-		setScreen(new MenuPrincipal(this));
+		setScreen(new ScreenFinal(this));
 	}
 
 	/**
@@ -44,16 +44,9 @@ public class Juego extends Game {
 	 * todos los niveles
 	 */
 	public void finalizarJuego(){
-		// TODO Mostrar alguna pantalla de finalizacion
-	}
-
-	/**
-	 * Verifica si el nivel actual es el ultimo del
-	 * juego, en cuyo caso retorna verdadero.
-	 * @return Verdadero si el nivel actual es el ultimo
-	 */
-	public boolean seAlcanzoUltimoNivel(){
-		return nivelActual == gameData.getCantidadNiveles();
+		nivelActual = 1;
+		saveData.setNivelAlcanzado(nivelActual);
+		setScreen(new ScreenFinal(this));
 	}
 
 	/**
@@ -70,7 +63,8 @@ public class Juego extends Game {
 	 */
 	public void cargarSiguienteNivel() throws IllegalStateException{
 		if(nivelActual == gameData.getCantidadNiveles()){
-			throw new IllegalStateException("No hay mas niveles para cargar.");
+			finalizarJuego();
+			return;
 		}
 		nivelActual++;
 		saveData.setNivelAlcanzado(nivelActual);

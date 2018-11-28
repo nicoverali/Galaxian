@@ -5,6 +5,6 @@ public enum Direccion {
     ARRIBA,
     DERECHA,
     IZQUIERDA,
-    ABAJO;
+    ABAJO
 
 }

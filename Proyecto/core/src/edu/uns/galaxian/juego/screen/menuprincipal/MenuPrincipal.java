@@ -1,6 +1,7 @@
 package edu.uns.galaxian.juego.screen.menuprincipal;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
@@ -42,7 +43,7 @@ public class MenuPrincipal extends ScreenAdapter {
         screenMusic.setVolume(musicAnimator.getValorActualFloat());
         screenMusic.play();
 
-        Gdx.input.setInputProcessor(null);
+        Gdx.input.setInputProcessor(new InputAdapter());
     }
 
     public void render(float delta) {

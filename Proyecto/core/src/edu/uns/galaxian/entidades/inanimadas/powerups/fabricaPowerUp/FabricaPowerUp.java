@@ -7,6 +7,6 @@ import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
 
 public interface FabricaPowerUp {
 
-	public PowerUp getPowerUp(Vector2 posicion, float rotacion, Controlador controlador);
+	PowerUp getPowerUp(Vector2 posicion, float rotacion, Controlador controlador);
 	
 }

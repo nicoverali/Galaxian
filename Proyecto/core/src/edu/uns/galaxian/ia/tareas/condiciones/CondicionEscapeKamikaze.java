@@ -32,9 +32,7 @@ public class CondicionEscapeKamikaze<T extends Enemigo> extends Tarea<T> {
                 return true;
             }
             if(distanciaVertical < CERCANIA_VERT_OBLIGATORIA){
-                if(distanciaHorizontal > CERCANIA_HORI_OBLIGATORIA){
-                    return true;
-                }
+                return distanciaHorizontal > CERCANIA_HORI_OBLIGATORIA;
             }
         }
         return false;

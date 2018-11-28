@@ -6,7 +6,7 @@ import edu.uns.galaxian.animacion.animator.ciclos.CicloUnico;
 import edu.uns.galaxian.animacion.animator.interpolaciones.BezierAnimator;
 import edu.uns.galaxian.escenario.CampoEstrellas;
 
-public class EstadoIntroduccion implements EstadoAnimacion {
+class EstadoIntroduccion implements EstadoAnimacion {
 
     private static final float VELOCIDAD_FINAL = 400;
     private static final int DURACION = 3000;

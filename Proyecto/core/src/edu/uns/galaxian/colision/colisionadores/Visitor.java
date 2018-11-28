@@ -15,47 +15,47 @@ public interface Visitor {
 	 * Comportamiento al momento de visitar un Jugador.
 	 * @param jugador Jugador que se visita.
 	 */
-	public void visitJugador(Jugador jugador);
+    void visitJugador(Jugador jugador);
 
 	/**
 	 * Comportamiento al momento de visitar un Enemigo.
 	 * @param enemigo Enemigo que se visita.
 	 */
-	public void visitEnemigo(Enemigo enemigo);
+    void visitEnemigo(Enemigo enemigo);
 
 	/**
 	 * Comportamiento al momento de visitar un DisparoJugador.
 	 * @param disparo DisparoJugador que se visita.
 	 */
-	public void visitDisparoJugador(DisparoJugador disparo);
+    void visitDisparoJugador(DisparoJugador disparo);
 	
 	/**
 	 * Comportamiento al momento de visitar un DisparoEnemigo.
 	 * @param disparo DisparoEnemigo que se visita.
 	 */
-	public void visitDisparoEnemigo(DisparoEnemigo disparo);
+    void visitDisparoEnemigo(DisparoEnemigo disparo);
 	
 	/**
 	 * Comportamiento al momento de visitar un Obstaculo.
 	 * @param obstaculo Obstaculo que se visita.
 	 */
-	public void visitObstaculo(Obstaculo obstaculo);
+    void visitObstaculo(Obstaculo obstaculo);
 	
 	/**
 	 * Comportamiento al momento de visitar un PowerUp.
 	 * @param powerUp PowerUp que se visita.
 	 */
-	public void visitPowerUp(PowerUp powerUp);
+    void visitPowerUp(PowerUp powerUp);
 	
 	/**
 	 * Comportamiento al momento de visitar un escudo.
 	 * @param escudo Escudo que se visita.
 	 */
-	public void visitEscudo(Escudo escudo);
+    void visitEscudo(Escudo escudo);
 	
 	/**
 	 * Comportamiento al momento de visitar una Barricada.
 	 * @param barricada Barricada que se visita.
 	 */
-	public void visitBarricada(Barricada barricada);
+    void visitBarricada(Barricada barricada);
 }

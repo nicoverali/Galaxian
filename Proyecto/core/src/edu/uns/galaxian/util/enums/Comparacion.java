@@ -7,6 +7,6 @@ public enum Comparacion {
     MENOR,
     MAYORIGUAL,
     MENORIGUAL,
-    DISTINTO;
+    DISTINTO
 
 }

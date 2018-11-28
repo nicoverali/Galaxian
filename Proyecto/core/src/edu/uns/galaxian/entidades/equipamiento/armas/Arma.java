@@ -15,12 +15,12 @@ public interface Arma<T extends Disparo> {
 	 * @param controlador Controlador al cual perteneceran los disparos creados
 	 * @throws IllegalStateException Si el arma no tiene un disparo modelo
 	 */
-	public void disparar(Vector2 posicion, float anguloDeDisparo, Controlador controlador) throws IllegalStateException;
+    void disparar(Vector2 posicion, float anguloDeDisparo, Controlador controlador) throws IllegalStateException;
 	
 	/**
 	 * Verifica que el arma tiene municion para seguir dsiparando.
 	 * @return true si el arma tiene municion, false en caso contrario.
 	 */
-	public boolean quedaMunicion();
+    boolean quedaMunicion();
 	
 }
