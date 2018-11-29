@@ -21,6 +21,7 @@ public class ColisionadorBlackHole extends ColisionadorObstaculo {
 		if(absorbidos.size()<4) {
 			if(!absorbidos.contains(enemigo)) {
 				enemigo.setTareaInteligencia(new ArrivePosicion<>(new Blackboard<>(enemigo),objetoFuente.getPosicion()));
+				absorbidos.add(enemigo);
 			}
 		}
 		else {

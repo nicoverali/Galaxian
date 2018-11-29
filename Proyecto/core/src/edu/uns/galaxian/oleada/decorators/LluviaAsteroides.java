@@ -33,13 +33,13 @@ public class LluviaAsteroides extends OleadaDecorator implements Observador<Live
     	super.actualizar(delta);
 		if(cantObstaculos < CANT_MAXIMA_OBSTACULOS && temporizador.tiempoCumplido()){
 			final Random ran = new Random();
-			int posY  = ran.nextInt(200) + Gdx.graphics.getHeight() / 3;
+			int posY  = ran.nextInt(200) + Gdx.graphics.getHeight() / 4;
 			Obstaculo nuevoObstaculo = new Asteroide(0 , posY, controlador);
 			nuevoObstaculo.setTareaInteligencia(new InteligenciaDeOnda<>(new Blackboard<>(nuevoObstaculo)));
 			controlador.agregarEntidad(nuevoObstaculo);
 			nuevoObstaculo.getVida().observar(this);
 			cantObstaculos++;
-			temporizador.iniciar(ran.nextInt(6000) + 2000);
+			temporizador.iniciar(ran.nextInt(6000) + 2500);
 		}
 	}
 
@@ -48,4 +48,5 @@ public class LluviaAsteroides extends OleadaDecorator implements Observador<Live
 			cantObstaculos--;
 		}
 	}
+	
 }
