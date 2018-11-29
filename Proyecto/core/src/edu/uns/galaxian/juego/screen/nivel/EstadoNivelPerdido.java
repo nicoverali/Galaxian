@@ -53,7 +53,7 @@ class EstadoNivelPerdido extends EstadoFinNivel {
         TextButton botonReiniciar = new TextButton("Reiniciar Nivel", style1);
         botonReiniciar.addListener(new ClickListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                director.getJuego().iniciarNivelActual();
+                director.getJuego().iniciarNivelAlcanzado();
                 return true;
             }
         });

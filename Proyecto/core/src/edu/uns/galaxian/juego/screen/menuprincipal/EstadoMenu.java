@@ -81,7 +81,7 @@ class EstadoMenu implements EstadoAnimacion {
             reanudarJuegoBoton.addListener(new InputListener(){
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     super.touchDown(event, x, y, pointer, button);
-                    menuPrincipal.getJuego().iniciarNivelActual();
+                    menuPrincipal.getJuego().iniciarNivelAlcanzado();
                     menu.removerListener();
                     return true;
                 }

@@ -20,6 +20,7 @@ class EstadoNivelGanado extends EstadoFinNivel {
 
     public EstadoNivelGanado(Nivel nivel, DirectorNivel director){
         super(nivel, director);
+        director.getJuego().incrementarNivelAlcanzado();
     }
 
     protected List<Label> prepararLabels(int puntaje){
@@ -53,7 +54,7 @@ class EstadoNivelGanado extends EstadoFinNivel {
         TextButton botonSiguiente = new TextButton("Siguiente Nivel", style1);
         botonSiguiente.addListener(new ClickListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                director.getJuego().cargarSiguienteNivel();
+                director.getJuego().iniciarNivelAlcanzado();
                 return true;
             }
         });

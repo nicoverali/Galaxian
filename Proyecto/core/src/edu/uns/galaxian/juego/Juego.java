@@ -26,16 +26,16 @@ public class Juego extends Game {
 	private EntidadBatch batch;
 	private GameData gameData;
 	private SaveData saveData;
-	private int nivelActual;
+	private int nivelAlcanzado;
 
 	public void create () {
 		batch = new EntidadBatch();
 		gameData = new GameData();
 		saveData = new SaveData();
-		nivelActual = saveData.getNivelAlcanzado();
+		nivelAlcanzado = saveData.getNivelAlcanzado();
 		cargarAssets();
 
-		setScreen(new ScreenFinal(this));
+		setScreen(new MenuPrincipal(this));
 	}
 
 	/**
@@ -43,8 +43,8 @@ public class Juego extends Game {
 	 * todos los niveles
 	 */
 	public void finalizarJuego(){
-		nivelActual = 1;
-		saveData.setNivelAlcanzado(nivelActual);
+		nivelAlcanzado = 1;
+		saveData.setNivelAlcanzado(nivelAlcanzado);
 		setScreen(new ScreenFinal(this));
 	}
 
@@ -53,37 +53,38 @@ public class Juego extends Game {
 	 * @return Verdadero si el jugador supero el primer nivel
 	 */
 	public boolean seSuperoElPrimerNivel(){
-		return nivelActual > 1;
+		return nivelAlcanzado > 1;
 	}
 
 	/**
 	 * Carga el nivel siguiente al actual.
 	 * @throws IllegalStateException Si no hay mas nivel
 	 */
-	public void cargarSiguienteNivel() throws IllegalStateException{
-		if(nivelActual == gameData.getCantidadNiveles()){
-			finalizarJuego();
-			return;
+	public void incrementarNivelAlcanzado() throws IllegalStateException{
+		if(nivelAlcanzado <= gameData.getCantidadNiveles()){
+			nivelAlcanzado++;
 		}
-		nivelActual++;
-		saveData.setNivelAlcanzado(nivelActual);
-		new DirectorNivel(this, gameData.getNivel(nivelActual), saveData.getNaveJugador());
 	}
 
 	/**
 	 * Inicia el nivel actual.
 	 */
-	public void iniciarNivelActual(){
-		new DirectorNivel(this, gameData.getNivel(nivelActual), saveData.getNaveJugador());
+	public void iniciarNivelAlcanzado(){
+		if(nivelAlcanzado <= gameData.getCantidadNiveles()){
+			new DirectorNivel(this, gameData.getNivel(nivelAlcanzado), saveData.getNaveJugador());
+		}
+		else{
+			finalizarJuego();
+		}
 	}
 
 	/**
 	 * Inicia el primer nivel del juego
 	 */
 	public void iniciarPrimerNivel(){
-		nivelActual = 1;
-		saveData.setNivelAlcanzado(nivelActual);
-		new DirectorNivel(this, gameData.getNivel(nivelActual), saveData.getNaveJugador());
+		nivelAlcanzado = 1;
+		saveData.setNivelAlcanzado(nivelAlcanzado);
+		new DirectorNivel(this, gameData.getNivel(nivelAlcanzado), saveData.getNaveJugador());
 	}
 
 	/**
