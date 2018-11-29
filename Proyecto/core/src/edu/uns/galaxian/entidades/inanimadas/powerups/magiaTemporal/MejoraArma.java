@@ -10,7 +10,6 @@ import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
 import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaDisparoJugador;
 import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
 import edu.uns.galaxian.entidades.jugador.Jugador;
-import edu.uns.galaxian.juego.Juego;
 import edu.uns.galaxian.util.enums.Asset;
 
 public class MejoraArma extends PowerUp {
@@ -23,9 +22,10 @@ public class MejoraArma extends PowerUp {
 
 	public void efectoJugador(Jugador jugador) {
 		controlador.eliminarColisionable(this);
-		Arma<DisparoJugador> armaMejorada = new ArmaDisparoDoble<DisparoJugador>(new FabricaDisparoJugador(jugador),15);
+		int municion = 40;
+		Arma<DisparoJugador> armaMejorada = new ArmaDisparoDoble<DisparoJugador>(new FabricaDisparoJugador(jugador),municion);
 		jugador.setArma(armaMejorada);
-		eliminar();
+		this.eliminar();
 	}
 
 }

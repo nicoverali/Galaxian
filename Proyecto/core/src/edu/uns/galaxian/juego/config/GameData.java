@@ -1,10 +1,8 @@
 package edu.uns.galaxian.juego.config;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import edu.uns.galaxian.juego.exceptions.NonExistentGameDataException;
-import edu.uns.galaxian.nave.NaveJugador;
 import edu.uns.galaxian.util.io.IOManager;
 
 import java.io.IOException;

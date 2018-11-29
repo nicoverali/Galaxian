@@ -28,8 +28,4 @@ public abstract class Tarea<T extends Autonomo> {
      */
     public abstract boolean realizar(float delta);
 
-
-
-
-
 }

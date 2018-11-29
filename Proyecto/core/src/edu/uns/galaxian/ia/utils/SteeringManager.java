@@ -1,6 +1,5 @@
 package edu.uns.galaxian.ia.utils;
 
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.ia.AutonomoDinamico;
 import edu.uns.galaxian.juego.GameObject;

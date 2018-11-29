@@ -1,6 +1,6 @@
 package edu.uns.galaxian.observer;
 
-public interface Subject{
+public interface Subject {
 
     /**
      * Notifica a todos sus observadores de algun cambio producido

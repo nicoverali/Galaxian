@@ -28,7 +28,6 @@ public class Juego extends Game {
 	private SaveData saveData;
 	private int nivelActual;
 
-	@Override
 	public void create () {
 		batch = new EntidadBatch();
 		gameData = new GameData();

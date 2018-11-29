@@ -1,6 +1,5 @@
 package edu.uns.galaxian.nave.enemigo;
 
-import edu.uns.galaxian.colision.colisionadores.Visitor;
 import edu.uns.galaxian.entidades.enemigo.Enemigo;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 import edu.uns.galaxian.ia.Blackboard;
@@ -22,8 +21,3 @@ public class NaveKamikaze extends NaveEnemigo {
 		return new InteligenciaKamikaze<>(blackboard);
 	}
 }
-	
-
-
-
-

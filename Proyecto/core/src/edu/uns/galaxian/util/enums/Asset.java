@@ -25,6 +25,4 @@ public enum Asset {
         return valor;
     }
 
-
-
 }

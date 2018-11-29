@@ -21,4 +21,5 @@ public class CicloUnico implements CicloAnimator {
         double tiempoActual = ((double)TimeUtils.timeSinceMillis(tiempoInicial)) / (double)(tiempoInicial+duracion - tiempoInicial);
         return tiempoActual > 1 ? 1 : tiempoActual;
     }
+    
 }

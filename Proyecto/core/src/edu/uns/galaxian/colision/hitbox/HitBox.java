@@ -32,4 +32,5 @@ public interface HitBox {
 	 * @return Verdadero si se produjo una interseccion
 	 */
 	boolean insersectarConCirculo(HBCirculo circulo);
+	
 }

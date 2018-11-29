@@ -49,4 +49,5 @@ public class CicloCircular implements CicloAnimator {
         }
         return Math.abs(-Math.abs((double)tiempoTranscurrido-duracion)+duracion) / (double)duracion;
     }
+    
 }

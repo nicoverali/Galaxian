@@ -8,9 +8,9 @@ import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
 import edu.uns.galaxian.entidades.inanimadas.powerups.magiaTemporal.CampoDeProteccion;
 import edu.uns.galaxian.entidades.inanimadas.powerups.magiaTemporal.MejoraArma;
+import edu.uns.galaxian.entidades.inanimadas.powerups.magiaTemporal.Misil;
 import edu.uns.galaxian.entidades.inanimadas.powerups.magiaTemporal.PastillaVida;
 import edu.uns.galaxian.entidades.inanimadas.powerups.objetoPrecioso.CongelaTiempo;
-import edu.uns.galaxian.entidades.inanimadas.powerups.objetoPrecioso.Misil;
 import edu.uns.galaxian.entidades.inanimadas.powerups.objetoPrecioso.PoderCosmico;
 
 public class FabricaPowerUpConvencional implements FabricaPowerUp {

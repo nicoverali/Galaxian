@@ -47,4 +47,5 @@ public class HBRectangulo implements HitBox {
 	public boolean insersectarConCirculo(HBCirculo circulo) {
 		return Intersector.interseccionRectCirculo(this, circulo);
 	}
+	
 }

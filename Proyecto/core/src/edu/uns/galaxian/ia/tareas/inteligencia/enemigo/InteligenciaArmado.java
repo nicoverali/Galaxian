@@ -11,11 +11,8 @@ import edu.uns.galaxian.ia.tareas.composiciones.Secuencia;
 import edu.uns.galaxian.ia.tareas.composiciones.Selector;
 import edu.uns.galaxian.ia.tareas.condiciones.CondicionEscapeArmado;
 import edu.uns.galaxian.ia.tareas.decorators.HastaCondicion;
-import edu.uns.galaxian.juego.GameObject;
 import edu.uns.galaxian.util.camino.simple.CaminoAleatorio;
 import edu.uns.galaxian.util.enums.Direccion;
-
-import java.util.Arrays;
 
 public class InteligenciaArmado<T extends Enemigo> extends Tarea<T> {
 

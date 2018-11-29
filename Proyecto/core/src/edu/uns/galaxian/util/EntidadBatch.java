@@ -52,4 +52,3 @@ public class EntidadBatch extends SpriteBatch {
         cache.draw(this, alpha);
     }
 }
-

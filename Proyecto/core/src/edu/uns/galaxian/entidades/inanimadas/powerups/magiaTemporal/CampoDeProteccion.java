@@ -7,7 +7,6 @@ import edu.uns.galaxian.entidades.equipamiento.escudos.Escudo;
 import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
 import edu.uns.galaxian.entidades.jugador.Jugador;
-import edu.uns.galaxian.juego.Juego;
 import edu.uns.galaxian.util.enums.Asset;
 
 public class CampoDeProteccion extends PowerUp {

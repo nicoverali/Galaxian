@@ -48,4 +48,5 @@ public abstract class Nave<T extends Disparo> {
 	public void setArma(Arma<T> nuevaArma){
 		arma = nuevaArma;
 	}
+	
 }

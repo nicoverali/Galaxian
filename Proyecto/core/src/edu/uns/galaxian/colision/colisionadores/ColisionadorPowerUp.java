@@ -1,7 +1,5 @@
 package edu.uns.galaxian.colision.colisionadores;
 
-import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoEnemigo;
-import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
 import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
 import edu.uns.galaxian.entidades.jugador.Jugador;
 

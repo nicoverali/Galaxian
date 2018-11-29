@@ -23,4 +23,5 @@ public interface Colisionable {
 	 * @param colisionador Colisionador del otro colisionable participante en la colision producida
 	 */
 	void aceptarVisitor(Visitor colisionador);
+	
 }

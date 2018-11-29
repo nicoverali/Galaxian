@@ -22,7 +22,6 @@ class EstadoNivelPerdido extends EstadoFinNivel {
         super(nivel, director);
     }
 
-    @Override
     protected List<Label> prepararLabels(int puntaje) {
         List<Label> labels = new ArrayList<>();
         Label.LabelStyle stylePerdiste = new Label.LabelStyle();
@@ -42,7 +41,6 @@ class EstadoNivelPerdido extends EstadoFinNivel {
         return labels;
     }
 
-    @Override
     protected Menu prepararMenu() {
         BitmapFont font = director.getAssetManager().get(Asset.FONT_16.valor(), BitmapFont.class);
         TextButton.TextButtonStyle style1 = new TextButton.TextButtonStyle();

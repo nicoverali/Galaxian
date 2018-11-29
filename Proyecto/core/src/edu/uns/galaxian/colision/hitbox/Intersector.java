@@ -58,4 +58,5 @@ public class Intersector {
         return (Math.abs(coordenada.x - x)<=(rectA.getAncho() + rectB.getAncho())/2
                 && Math.abs(coordenada.y - y)<=(rectA.getAlto() + rectB.getAlto())/2);
     }
+    
 }

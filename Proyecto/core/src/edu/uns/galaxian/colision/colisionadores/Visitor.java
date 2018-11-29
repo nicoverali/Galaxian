@@ -58,4 +58,5 @@ public interface Visitor {
 	 * @param barricada Barricada que se visita.
 	 */
     void visitBarricada(Barricada barricada);
+    
 }

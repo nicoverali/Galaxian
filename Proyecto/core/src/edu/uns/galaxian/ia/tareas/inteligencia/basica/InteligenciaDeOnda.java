@@ -12,9 +12,6 @@ public class InteligenciaDeOnda<T extends Autonomo> extends Tarea<T> {
 		super(blackboard);
 	}
 
-	public InteligenciaDeOnda() {
-	}
-
 	public boolean realizar(float delta) {
 		T autonomo = blackboard.getAutonomo();
 		float posX = autonomo.getPosicion().x + 1 ;

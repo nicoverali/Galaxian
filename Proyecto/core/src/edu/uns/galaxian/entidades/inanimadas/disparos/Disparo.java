@@ -8,7 +8,6 @@ import edu.uns.galaxian.colision.hitbox.HBRectangulo;
 import edu.uns.galaxian.colision.hitbox.HitBox;
 import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.entidades.Entidad;
-import edu.uns.galaxian.juego.Juego;
 import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.util.enums.Asset;
 

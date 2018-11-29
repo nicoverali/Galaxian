@@ -13,7 +13,6 @@ import edu.uns.galaxian.util.io.gson.*;
 import java.util.*;
 import static edu.uns.galaxian.juego.config.GameData.*;
 
-
 public class CargadorOleada {
 
     private Gson globalGson;

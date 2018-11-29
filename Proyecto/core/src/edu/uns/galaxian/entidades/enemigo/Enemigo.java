@@ -12,7 +12,6 @@ import edu.uns.galaxian.entidades.inanimadas.powerups.fabricaPowerUp.FabricaPowe
 import edu.uns.galaxian.colision.colisionadores.*;
 import edu.uns.galaxian.ia.Tarea;
 import edu.uns.galaxian.ia.TareaNula;
-import edu.uns.galaxian.juego.Juego;
 import edu.uns.galaxian.nave.NaveEnemigo;
 import edu.uns.galaxian.util.enums.Asset;
 

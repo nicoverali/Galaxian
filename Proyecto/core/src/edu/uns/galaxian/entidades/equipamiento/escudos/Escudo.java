@@ -1,6 +1,5 @@
 package edu.uns.galaxian.entidades.equipamiento.escudos;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import edu.uns.galaxian.colision.colisionadores.Visitor;
 import edu.uns.galaxian.colision.colisionadores.ColisionadorEscudo;

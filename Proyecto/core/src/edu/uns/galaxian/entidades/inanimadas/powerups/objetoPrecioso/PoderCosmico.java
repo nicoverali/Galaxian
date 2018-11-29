@@ -10,7 +10,6 @@ import edu.uns.galaxian.entidades.inanimadas.disparos.DisparoJugador;
 import edu.uns.galaxian.entidades.inanimadas.disparos.fabrica.FabricaEspecial;
 import edu.uns.galaxian.entidades.inanimadas.powerups.PowerUp;
 import edu.uns.galaxian.entidades.jugador.Jugador;
-import edu.uns.galaxian.juego.Juego;
 import edu.uns.galaxian.util.enums.Asset;
 
 public class PoderCosmico extends PowerUp {
@@ -24,7 +23,7 @@ public class PoderCosmico extends PowerUp {
 	public void efectoJugador(Jugador jugador) {
 		Arma<DisparoJugador> armaCosmica = new ArmaDisparoUnico<DisparoJugador>(new FabricaEspecial(jugador));
 		jugador.setArma(armaCosmica);
-		eliminar();
+		this.eliminar();
 	}
 
 }

@@ -50,12 +50,6 @@ public class CampoEstrellas {
         this.velocidad = velocidad;
     }
 
-    private void animarVelocidad(float velocidadFinal, float velocidadAnimacion) throws IllegalArgumentException{
-        if(velocidadFinal < 0) throw new IllegalArgumentException("La velocidad final no puede ser negativa.");
-        if(velocidadAnimacion < 1) throw new IllegalArgumentException("La velocidad de la animacion debe ser mayor a 0.");
-
-    }
-
     public void draw(float delta){
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);

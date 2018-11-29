@@ -11,7 +11,6 @@ import edu.uns.galaxian.colision.colisionadores.ColisionadorObstaculo;
 import edu.uns.galaxian.controlador.Controlador;
 import edu.uns.galaxian.ia.Tarea;
 import edu.uns.galaxian.ia.TareaNula;
-import edu.uns.galaxian.juego.Juego;
 import edu.uns.galaxian.util.EntidadBatch;
 import edu.uns.galaxian.entidades.EntidadViva;
 import edu.uns.galaxian.ia.Autonomo;

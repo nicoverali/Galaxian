@@ -14,8 +14,6 @@ import edu.uns.galaxian.ia.tareas.decorators.HastaCondicion;
 import edu.uns.galaxian.util.camino.simple.CaminoAleatorio;
 import edu.uns.galaxian.util.enums.Direccion;
 
-import java.util.Arrays;
-
 public class InteligenciaKamikazeAleatoria<T extends Enemigo> extends Tarea<T> {
 
     private Tarea<T> enemigoTarea;

@@ -3,8 +3,6 @@ package edu.uns.galaxian.ia.tareas.acciones;
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.ia.AutonomoDinamico;
 import edu.uns.galaxian.ia.Blackboard;
-import edu.uns.galaxian.ia.Tarea;
-import edu.uns.galaxian.ia.utils.SteeringManager;
 import edu.uns.galaxian.juego.GameObject;
 
 public class Seek<T extends AutonomoDinamico> extends SteeringVelocidad<T> {

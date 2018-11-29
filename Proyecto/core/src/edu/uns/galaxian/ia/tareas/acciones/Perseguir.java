@@ -11,9 +11,6 @@ public class Perseguir<T extends AutonomoDinamico> extends SteeringVelocidad<T> 
         super(blackboard);
     }
 
-    public Perseguir() {
-    }
-
     protected Vector2 getSteeringVector() {
         AutonomoDinamico autonomo = blackboard.getAutonomo();
         GameObject objetivo = blackboard.getObjetivo();

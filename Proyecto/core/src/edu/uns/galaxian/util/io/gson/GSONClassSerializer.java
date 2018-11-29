@@ -7,7 +7,6 @@ import com.google.gson.JsonSerializer;
 
 import java.lang.reflect.Type;
 
-
 public class GSONClassSerializer<T> implements JsonSerializer<Class<T>> {
 
     private static final String CLASS_NAME = "className";
