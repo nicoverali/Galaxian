@@ -69,7 +69,7 @@ public class SaveData {
         JsonObject nuevosDatos = new JsonObject();
         Gson gson = getGson();
         Color colorNave = Color.VERDE;
-        JsonElement naveJugadorJson = gson.toJsonTree(new NaveLiviana(colorNave), NaveLiviana.class);
+        JsonElement naveJugadorJson = gson.toJsonTree(new NaveLiviana(colorNave), NaveJugador.class);
         JsonElement colorJson = gson.toJsonTree(colorNave, Color.class);
         nuevosDatos.addProperty(NIVEL_ALCANZADO, 1);
         nuevosDatos.add(NAVE_JUGADOR, naveJugadorJson);

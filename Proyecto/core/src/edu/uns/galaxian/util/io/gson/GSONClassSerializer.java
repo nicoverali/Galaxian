@@ -7,13 +7,13 @@ import com.google.gson.JsonSerializer;
 
 import java.lang.reflect.Type;
 
-public class GSONClassSerializer<T> implements JsonSerializer<Class<T>> {
+public class GSONClassSerializer<T> implements JsonSerializer<T> {
 
     private static final String CLASS_NAME = "className";
 
-    public JsonElement serialize(Class<T> src, Type typeOfSrc, JsonSerializationContext context) {
+    public JsonElement serialize(T src, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject resultado = new JsonObject();
-        resultado.addProperty(CLASS_NAME, src.getCanonicalName());
+        resultado.addProperty(CLASS_NAME, src.getClass().getCanonicalName());
         return resultado;
     }
 }

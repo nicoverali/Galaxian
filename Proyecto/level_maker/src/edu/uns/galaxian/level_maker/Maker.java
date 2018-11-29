@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.google.gson.*;
 import edu.uns.galaxian.entidades.enemigo.fabrica.FabricaEnemigos;
 import edu.uns.galaxian.entidades.enemigo.fabrica.FabricaEstandar;
+import edu.uns.galaxian.entidades.inanimadas.obstaculos.Barricada;
 import edu.uns.galaxian.juego.config.GameData;
 import edu.uns.galaxian.oleada.OleadaBonus;
 import edu.uns.galaxian.oleada.OleadaFormacion;
@@ -40,7 +41,6 @@ public class Maker extends Game {
             oleadaJson.add(GameData.OLEADA, gson.toJsonTree(OleadaFormacion.class, Oleada.class));
             // Decorators
             JsonArray oleadaDecorators = new JsonArray();
-            oleadaDecorators.add(gson.toJsonTree(LluviaAsteroides.class, Oleada.class));
             oleadaJson.add(GameData.DECORATORS, oleadaDecorators);
             // Configuracion
             JsonObject oleadaConfig = new JsonObject();
@@ -75,7 +75,6 @@ public class Maker extends Game {
             oleadaJson.add(GameData.OLEADA, gson.toJsonTree(OleadaKamikazes.class, Oleada.class));
             // Decorators
             JsonArray oleadaDecorators = new JsonArray();
-            oleadaDecorators.add(gson.toJsonTree(LluviaAsteroides.class, Oleada.class));
             oleadaJson.add(GameData.DECORATORS, oleadaDecorators);
             // Configuracion
             JsonObject oleadaConfig = new JsonObject();

@@ -67,13 +67,15 @@ public class OleadaFormacion implements Oleada {
      * Registra a todos los enemigos en el controlador
      */
     private void registrarEnemigos(List<List<Enemigo>> enemigos){
+        Random ran = new Random();
         for(int i = 0; i < enemigos.size(); i++){
             List<Enemigo> fila = enemigos.get(i);
             int cantEnFila = fila.size();
             for(int j = 0; j < fila.size(); j++){
                 final Enemigo enemigo = fila.get(j);
                 Vector2 posicionFormacion = formarEnemigo(i, j, cantEnFila);
-                enemigo.setPosicion(posicionFormacion);
+                Vector2 posicionInicialAleatoria = new Vector2(ran.nextInt(Gdx.graphics.getWidth()), Gdx.graphics.getHeight()+300);
+                enemigo.setPosicion(posicionInicialAleatoria);
                 enemigo.setTareaInteligencia(new InteligenciaFormacionDinamica<>(new Blackboard<>(enemigo), posicionFormacion));
                 enemigo.getVida().observar(new Observador<LiveData<Integer>>() {
                     public void notificar(LiveData<Integer> subject) {

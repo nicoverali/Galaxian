@@ -52,8 +52,8 @@ public class CargadorOleada {
 
     private Oleada crearOleadaDecorators(Oleada oleadaPrincipal, JsonArray decorators, Controlador controlador){
         GSONOleadaDecoratorDeserializer typeAdapter = new GSONOleadaDecoratorDeserializer(oleadaPrincipal, controlador);
-        Gson gson = new GsonBuilder().registerTypeAdapter(OleadaDecorator.class, typeAdapter).create();
-        return gson.fromJson(decorators, OleadaDecorator.class);
+        Gson gson = new GsonBuilder().registerTypeAdapter(Oleada.class, typeAdapter).create();
+        return gson.fromJson(decorators, Oleada.class);
     }
 
     private List<Enemigo> leerListaEnemigo(JsonArray lista, FabricaEnemigos fabrica, Controlador controlador){
