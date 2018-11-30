@@ -5,6 +5,7 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Vector2;
 import edu.uns.galaxian.animacion.EstadoAnimacion;
 import edu.uns.galaxian.controlador.*;
@@ -13,6 +14,7 @@ import edu.uns.galaxian.escenario.CampoEstrellas;
 import edu.uns.galaxian.juego.Tiempo;
 import edu.uns.galaxian.oleada.*;
 import edu.uns.galaxian.util.EntidadBatch;
+import edu.uns.galaxian.util.enums.Asset;
 
 public class Nivel extends ScreenAdapter{
 
@@ -20,6 +22,7 @@ public class Nivel extends ScreenAdapter{
     private CampoEstrellas estrellas;
     private Jugador jugador;
     private Controlador controlador;
+    private BitmapFont nivelFont;
     private Oleada oleadaActual;
     private EstadoAnimacion estadoNivel;
 
@@ -35,6 +38,7 @@ public class Nivel extends ScreenAdapter{
         controlador.agregarJugador(jugador);
         oleadaActual = director.getProximaOleada(this);
         oleadaActual.iniciar();
+        nivelFont = director.getAssetManager().get(Asset.FONT_16.valor());
         tiempo = new Tiempo();
         tiempo.iniciar();
         estadoNivel = new EstadoNivelNormal(this);
@@ -98,6 +102,14 @@ public class Nivel extends ScreenAdapter{
      */
     public Tiempo getTiempoNivel(){
         return tiempo;
+    }
+
+    /**
+     * Retorna la fuente del nivel
+     * @return Fuente del nivel
+     */
+    public BitmapFont getNivelFont(){
+        return nivelFont;
     }
 
     /**

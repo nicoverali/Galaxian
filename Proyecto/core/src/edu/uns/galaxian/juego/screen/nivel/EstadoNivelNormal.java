@@ -18,8 +18,6 @@ class EstadoNivelNormal implements EstadoAnimacion {
     private EntidadBatch batch;
 
 
-    private BitmapFont score;
-    private BitmapFont time;
     private Tiempo tiempo;
 
     public EstadoNivelNormal(Nivel nivel){
@@ -28,9 +26,6 @@ class EstadoNivelNormal implements EstadoAnimacion {
         estrellas = nivel.getCampoEstrellas();
         batch = nivel.getBatch();
         jugador = nivel.getJugador();
-
-        score= new BitmapFont();
-        time= new BitmapFont();
         tiempo = nivel.getTiempoNivel();
     }
 
@@ -42,8 +37,9 @@ class EstadoNivelNormal implements EstadoAnimacion {
         batch.begin();
         controlador.actualizarEstado(delta);
         controlador.dibujar(batch);
-        score.draw(batch,"Score= "+Integer.toString(jugador.getPuntaje()),0,Gdx.graphics.getHeight()-5);
-        time.draw(batch, "Time= "+tiempo.getHora()+":"+tiempo.getMinutos()+":"+tiempo.getSegundos(),0,Gdx.graphics.getHeight()-20);
+        nivel.getNivelFont().draw(batch,"Score= "+Integer.toString(jugador.getPuntaje()),0,Gdx.graphics.getHeight()-5);
+        nivel.getNivelFont().draw(batch, "Time= "+tiempo.getHora()+":"+tiempo.getMinutos()+":"+tiempo.getSegundos(),0,Gdx.graphics.getHeight()-20);
+        nivel.getNivelFont().draw(batch, "Vida= "+jugador.getVida().getValor(),0,Gdx.graphics.getHeight()-35);
         // Finaliza proceso de dibujado
         batch.end();
     }
