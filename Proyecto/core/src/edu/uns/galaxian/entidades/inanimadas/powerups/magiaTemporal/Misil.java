@@ -16,7 +16,7 @@ public class Misil extends PowerUp {
 
 	public Misil(Vector2 posicion, Vector2 velocidad, float rotacion, Controlador controlador) {
 		super(posicion, velocidad, rotacion, controlador);
-		this.textura = controlador.getTextureAtlas(Asset.ATLAS_POWERUP.valor()).findRegion("powerup/mejoraArma");
+		this.textura = controlador.getTextureAtlas(Asset.ATLAS_POWERUP.valor()).findRegion("powerup/misil");
 		box = new HBRectangulo(this,textura.getRegionHeight(),textura.getRegionWidth());
 	}
 

@@ -1,11 +1,12 @@
+
 powerups.png
-size: 42,42
+size: 62,42
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 powerup/campoProteccion
   rotate: false
-  xy: 23, 23
+  xy: 43, 23
   size: 17, 17
   orig: 17, 17
   offset: 0, 0
@@ -24,9 +25,23 @@ powerup/mejoraArma
   orig: 18, 18
   offset: 0, 0
   index: -1
+powerup/misil
+  rotate: false
+  xy: 23, 22
+  size: 18, 18
+  orig: 18, 18
+  offset: 0, 0
+  index: -1
+powerup/poderCosmico
+  rotate: false
+  xy: 22, 2
+  size: 18, 18
+  orig: 18, 18
+  offset: 0, 0
+  index: -1
 powerup/recuperaVida
   rotate: false
-  xy: 22, 8
+  xy: 43, 9
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
