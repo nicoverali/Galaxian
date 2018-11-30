@@ -63,7 +63,9 @@ public class Juego extends Game {
 	public void incrementarNivelAlcanzado() throws IllegalStateException{
 		if(nivelAlcanzado <= gameData.getCantidadNiveles()){
 			nivelAlcanzado++;
-			saveData.setNivelAlcanzado(nivelAlcanzado);
+			if(nivelAlcanzado < gameData.getCantidadNiveles()){
+				saveData.setNivelAlcanzado(nivelAlcanzado);
+			}
 		}
 	}
 
