@@ -37,9 +37,9 @@ class EstadoNivelNormal implements EstadoAnimacion {
         batch.begin();
         controlador.actualizarEstado(delta);
         controlador.dibujar(batch);
-        nivel.getNivelFont().draw(batch,"Score= "+Integer.toString(jugador.getPuntaje()),0,Gdx.graphics.getHeight()-5);
-        nivel.getNivelFont().draw(batch, "Time= "+tiempo.getHora()+":"+tiempo.getMinutos()+":"+tiempo.getSegundos(),0,Gdx.graphics.getHeight()-20);
-        nivel.getNivelFont().draw(batch, "Vida= "+jugador.getVida().getValor(),0,Gdx.graphics.getHeight()-35);
+        nivel.getNivelFont().draw(batch,"Score : "+Integer.toString(jugador.getPuntaje()),0,Gdx.graphics.getHeight()-5);
+        nivel.getNivelFont().draw(batch, "Time : "+tiempo.getHora()+":"+tiempo.getMinutos()+":"+tiempo.getSegundos(),0,Gdx.graphics.getHeight()-30);
+        nivel.getNivelFont().draw(batch, "Vida : "+jugador.getVida().getValor(),0,Gdx.graphics.getHeight()-55);
         // Finaliza proceso de dibujado
         batch.end();
     }
