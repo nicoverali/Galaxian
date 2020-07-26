@@ -5,8 +5,8 @@ Se inspira en el clasico juego Galaxian, intendando darle un cambio moderno.
 
 <img src="https://media.giphy.com/media/Kbqq4TaGyafyo89BON/giphy.gif" />
 <p align="center">
-<img width="473"src="https://media.giphy.com/media/j6ZXUFt3lImraUmxAy/giphy.gif" />
-<img width="473" src="https://media.giphy.com/media/ZbfrBYM7AckYjlNsJW/giphy.gif" />
+<img width="49%"src="https://media.giphy.com/media/j6ZXUFt3lImraUmxAy/giphy.gif" />
+<img width="49%" src="https://media.giphy.com/media/ZbfrBYM7AckYjlNsJW/giphy.gif" />
 </p>
 
 ## Para docentes
