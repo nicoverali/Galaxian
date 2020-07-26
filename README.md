@@ -1,13 +1,20 @@
-# Galaxian
+# Galaxian 🚀🎮
+
 Juego shooter en 2D realizado como proyecto de Tecnologías de Programación en la Universidad Nacional del Sur.
 Se inspira en el clasico juego Galaxian, intendando darle un cambio moderno.
+
+<img src="https://media.giphy.com/media/Kbqq4TaGyafyo89BON/giphy.gif" />
+<p align="center">
+<img width="473"src="https://media.giphy.com/media/j6ZXUFt3lImraUmxAy/giphy.gif" />
+<img width="473" src="https://media.giphy.com/media/ZbfrBYM7AckYjlNsJW/giphy.gif" />
+</p>
 
 ## Para docentes
 Hacer clone de la branch feature-oleada (Es la branch por defecto/principal del respositorio)
 
 ### Integrantes 
-* Nicolás Zuccala
-* Carlos Canavides
+* [Nicolás Zuccala](https://github.com/NicolasZuccala)
+* [Carlos Canavides](https://github.com/CarlosCanavides)
 * Nicolás Vera
 
 ## Guia de inicio
